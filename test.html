@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Javascript INC/DEC QTY</title>
+</head>
+<body>
+    <h1>
+        INCREMENT & DECREMENT FOR
+        <br>
+        MULTIPLE FIELDS 
+    </h1>
+    <div class="box">
+        <label for="name">MALES :</label>
+        <div class="dec button">-</div>
+        <input type="text" name="qty" id="1" value="0" class="input-filed">
+        <div class="inc button">+</div>
+    </div>
+    <div class="box">
+        <label for="name">FEMALES :</label>
+        <div class="dec button">-</div>
+        <input type="text" name="qty" id="1" value="0" class="input-filed">
+        <div class="inc button">+</div>
+    </div>
+    <div class="box">
+        <label for="name">CHIDRENS :</label>
+        <div class="dec button">-</div>
+        <input type="text" name="qty" id="1" value="0" class="input-filed">
+        <div class="inc button">+</div>
+    </div>
+    <div class="box">
+        <label for="name">INFANTS :</label>
+        <div class="dec button">-</div>
+        <input type="text" name="qty" id="1" value="0" class="input-filed">
+        <div class="inc button">+</div>
+    </div>
+    
+    <script>
+        var increButton = document.getElementsByClassName('inc');
+        var decrementButton = document.getElementsByClassName('dec');
+        for (let i = 0; i < increButton.length; i++) {
+            var button = increButton[i];
+            button.addEventListener('click', function(event){
+
+                var buttonClicked = event.target;
+                var input = buttonClicked.parentElement.children[2];
+                // console.log(input);
+                var inputValue = input.value;
+                // console.log(inputValue);
+                var newValue = parseInt(inputValue)+1;
+                console.log(newValue);
+                input.value = newValue
+            })
+            
+        }
+        // decrement
+        for (let i = 0; i < decrementButton.length; i++) {
+            var button = decrementButton[i];
+            button.addEventListener('click', function(event){
+
+                var buttonClicked = event.target;
+                var input = buttonClicked.parentElement.children[2];
+                // console.log(input);
+                var inputValue = input.value;
+                // console.log(inputValue);
+                var newValue = parseInt(inputValue) - 1;
+                console.log(newValue);
+                input.value = newValue
+            })
+            
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Shopping Cart Example</title>
+</head>
+<body>
+  <h1>Shopping Cart Example</h1>
+
+  <div>
+    <h2>Available Items</h2>
+    <ul>
+      <li>Shirt - $20 <button onclick="addItem({name: 'Shirt', price: 20})">Add to Cart</button></li>
+      <li>Pants - $30 <button onclick="addItem({name: 'Pants', price: 30})">Add to Cart</button></li>
+    </ul>
+  </div>
+
+  <div>
+    <h2>Shopping Cart</h2>
+    <p>Items: <span id="item-count"></span></p>
+    <p>Total: $<span id="total"></span></p>
+  </div>
+
+  <script>
+    var cart = [];
+
+    function addItem(item) {
+      cart.push(item);
+      updateCart();
+    }
+
+    function removeItem(item) {
+      var index = cart.indexOf(item);
+      if (index !== -1) {
+        cart.splice(index, 1);
+        updateCart();
+      }
+    }
+
+    function getItemCount() {
+      return cart.length;
+    }
+
+    function getTotal() {
+      var total = 0;
+      for (var i = 0; i < cart.length; i++) {
+        total += cart[i].price;
+      }
+      return total;
+    }
+
+    function updateCart() {
+      document.getElementById("item-count").innerHTML = getItemCount();
+      document.getElementById("total").innerHTML = getTotal();
+    }
+  </script>
+</body>
+</html>

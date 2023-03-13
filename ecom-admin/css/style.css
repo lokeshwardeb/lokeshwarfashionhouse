@@ -1,0 +1,148 @@
+*{
+    margin: 0;
+    padding: 0;
+    /* overflow-x: auto;
+    overflow-y: hidden; */
+}
+
+
+
+
+
+
+
+:root {
+    --primary-color: black !important;
+    --secondary-color: white !important;
+    --box-color-default: #D9D9D9;
+    --box-color: #9D185F;
+    /* --box-color:#D9D9D9; */
+    ;
+    --body-back: white;
+    --body-color: black;
+    --text-color-white: white;
+    --text-color-black: black;
+    --custom-text-color: white;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    background-color: var(--body-back);
+    color: var(--body-color);
+}
+
+.dark-theme {
+    --primary-color: black;
+    --secondary-color: white;
+    --box-color: white;
+    --body-back: black;
+    --body-color: white;
+    --text-color-white: white;
+    --text-color-black: black;
+    --custom-text-color: black;
+    --box-color-default: #D9D9D9;
+    --box-color: #9D185F;
+}
+
+.light-theme{
+    --primary-color: white;
+    --secondary-color: black;
+    --box-color: black;
+    --body-back: white;
+    --body-color: black;
+    --text-color-white: black;
+    --text-color-black: white;
+    --custom-text-color: white;
+    --box-color-default: #D9D9D9;
+    --box-color: #9D185F;
+}
+
+
+.new-theme {
+    background-color: white !important;
+    color: black !important;
+}
+
+.main-section {
+    margin-top: 15px;
+    width: 500px;
+    height: 500px;
+    background-color: var(--box-color);
+    color: var(--primary-color);
+    border-radius: 10px !important;
+}
+
+.custom-box-bg-color {
+    background-color: var(--box-color);
+    color: var(--custom-text-color);
+
+}
+
+.custom-default-box-bg-color {
+    background-color: var(--box-color-default);
+}
+
+.custom-box-height {
+    height: 250px !important;
+}
+
+.hover-table {
+    /* transform: ease-in .50s; */
+    transition: 500ms linear ;
+
+}
+
+.hover-table:hover {
+    /* transform: ease-in .50s; */
+    background-color: #0D6EFD;
+    color: white !important;
+   
+}
+.full-width{
+    width: 77vw !important;
+}
+
+
+#preloader{
+    background: #ddd url(../img/preloader_un.gif) no-repeat center center;
+    height: 100vh !important;
+    width: 100vw !important;
+    position: fixed !important;
+    z-index: 100 !important;
+}
+input{
+    background-color: var(--box-color-default) !important;
+}
+textarea{
+    background-color: var(--box-color-default) !important;
+}
+form span{
+    background-color: var(--box-color-default) !important;
+}
+.form-floating span {
+    background: none !important;
+}
+
+#closedBtn{
+    cursor: pointer;
+}
+
+.no-disp{
+    display: none !important;
+}
+
+@media print{
+    /* body * {
+        display: none;
+    } */
+    #mainContent * {
+        display: block;
+        /* color: green; */
+    }
+    .big-link *{
+        display: none;
+        visibility: hidden;
+    }
+    
+}
