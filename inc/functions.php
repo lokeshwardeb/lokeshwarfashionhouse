@@ -1,4 +1,5 @@
 <?php 
+include("conn.php");
 // if(!isset($_SESSION['username'])){
 //     echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">
 //                     <strong>Error !</strong> You should login so that you can access the page .
@@ -130,6 +131,30 @@ function preloader_include(){
 
 date_default_timezone_set("Asia/Dhaka");
 
+function product_currency_bdt(){
+include("conn.php");
+
+  $sql_currency = "SELECT * FROM `settings`";
+  $result_currency = mysqli_query($conn, $sql_currency);
+  if($result_currency){
+    // echo '৳';?
+    if(mysqli_num_rows($result_currency)>0){
+      while($row = mysqli_fetch_assoc($result_currency)){
+        $product_currency = $row['product_currency'];
+        if($product_currency == 'bdt'){
+          echo '৳';
+        }
+        if($product_currency == 'usd'){
+          echo '$';
+
+        }
+      }
+
+    }
+  }else{
+    echo '$';
+  }
+}
 
 
 

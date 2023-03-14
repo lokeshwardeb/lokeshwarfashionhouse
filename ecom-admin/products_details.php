@@ -52,6 +52,7 @@ if (!isset($_SESSION['username'])) {
                     $product_img = $row['product_img'];
                     $product_price = $row['product_price'];
                     $product_status = $row['product_status'];
+                    $product_featured_status = $row['make_as_featured'];
                     $product_added_datetime = $row['product_added_datetime'];
                 }
 
@@ -321,6 +322,26 @@ if (!isset($_SESSION['username'])) {
 
 
                                                         ?>"><?php echo '' . $product_status . ' </span> </div> <br>
+    
+   <div class = "fs-5" id="featuredProductStatusId"> Product Featured Status: '; ?><span class="<?php
+                                                        if ($product_featured_status == "featured_product") {
+                                                            echo 'bg-dark text-warning';
+                                                        }
+                                                        if ($product_featured_status == "not_featured_product") {
+                                                            echo 'bg-dark text-danger';
+                                                        }
+
+
+                                                        ?>"><?php
+                                                        if ($product_featured_status == "featured_product") {
+                                                            echo 'Featured Product';
+                                                        }
+                                                        if ($product_featured_status == "not_featured_product") {
+                                                            echo 'Not Featured Product';
+                                                        }
+                                                        echo '' .
+                                                        
+                                                         ' </span> </div> <br>
     Product Added Datetime: ' . $product_added_datetime . ' <br>
 
 </div>
@@ -388,10 +409,19 @@ if (!isset($_SESSION['username'])) {
 
                                 <div class="checkbox mb-3">
                                     <label>
-                                        <input type="checkbox" value="<?php echo $time_now ?>" name="make_as_featured"> Add as featured product
+                                        <input type="checkbox" onchange="setFeaturedProduct()"<?php
+                                        if($product_featured_status == 'featured_product'){
+                                           echo 'checked';
+                                            
+                                        }
+                                        if($product_featured_status == 'not_featured_product'){
+                                            echo '';
+                                        }
+                                        
+                                        ?> value="<?php echo $product_featured_status ?>" id="featuredInput" name="make_as_featured"> <span style="background: none !important;" id="featuredSpan">Add as featured product </span>
                                     </label>
                                 </div>
-                                <div class="form-text">Note: If you want to add custom time date then you can write on the box. If the box is blank then current time and date will be added as last checked in datetime. </div>
+                                <div class="form-text">Note: If you want to add as featured product then check the box. If the box is not checked then the product is not added as featured product and will be not added as featured product.  </div>
 
                             </div>
 

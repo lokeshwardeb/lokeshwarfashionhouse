@@ -293,6 +293,37 @@ function littleLink() {
 
 }
 
+function setFeaturedProduct(){
+  let featuredInput = document.getElementById('featuredInput');
+  let featuredCheckedStatus = featuredInput.checked;
+  if(featuredCheckedStatus){
+    document.getElementById('featuredSpan').innerText = 'Added as featured product';
+  }else{
+    document.getElementById('featuredSpan').innerText = 'Add as featured product';
+
+  }
+}
+let featuredInput = document.getElementById('featuredInput');
+
+let featuredCheckedStatus = featuredInput.checked;
+
+if(featuredCheckedStatus){
+  document.getElementById('featuredSpan').innerText = 'Added as featured product';
+}else{
+  document.getElementById('featuredSpan').innerText = 'Add as featured product';
+
+}
+
+  let featuredProductStatusId = document.getElementById("featuredProductStatusId");
+  let featuredInnertext = featuredProductStatusId.innerText;
+  if(featuredInnertext == 'Product Featured Status: Featured Product'){
+    featuredProductStatusId.classList.remove('no-disp');
+
+  }
+  if(featuredInnertext == 'Product Featured Status: Not Featured Product'){
+    featuredProductStatusId.classList.add('no-disp');
+
+  }
 
 
 

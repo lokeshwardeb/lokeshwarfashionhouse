@@ -55,6 +55,8 @@ if (!isset($_SESSION['username'])) {
                     $website_name = $row['website_name'];
                     $website_description = $row['website_description'];
                     $website_slogan = $row['website_slogan'];
+                    $product_currency = $row['product_currency'];
+                    
                     $aurthors_name = $row['authors_name'];
                     $authors_email = $row['authors_email'];
                     $company_name = $row['company_name'];
@@ -67,6 +69,7 @@ if (!isset($_SESSION['username'])) {
                 $website_name = '';
                 $website_description = '';
                 $website_slogan = '';
+                $product_currency = '';
                 $aurthors_name = '';
                 $authors_email = '';
                 $company_name = '';
@@ -81,7 +84,8 @@ if (!isset($_SESSION['username'])) {
         if (isset($_POST['save_changes'])) {
             $website_name = htmlspecialchars(mysqli_real_escape_string($conn, $_POST['website_name']), ENT_QUOTES);
             $website_description = htmlspecialchars(mysqli_real_escape_string($conn, $_POST['website_description']), ENT_QUOTES);
-            $website_slogan = htmlspecialchars(mysqli_real_escape_string($conn, $_POST['website_slogan']), ENT_QUOTES);
+            $websizte_slogan = htmlspecialchars(mysqli_real_escape_string($conn, $_POST['website_slogan']), ENT_QUOTES);
+            $product_currency = $_POST['product_currency'];
             $aurthors_name = htmlspecialchars(mysqli_real_escape_string($conn, $_POST['authors_name']), ENT_QUOTES);
             $authors_email = htmlspecialchars(mysqli_real_escape_string($conn, $_POST['authors_email']), ENT_QUOTES);
             $company_name = htmlspecialchars(mysqli_real_escape_string($conn, $_POST['company_name']), ENT_QUOTES);
@@ -134,7 +138,7 @@ if (!isset($_SESSION['username'])) {
 
             // if the database is empty then insert the data into the table
             if (mysqli_num_rows($result) == 0) {
-                $sql = "INSERT INTO `settings` (`website_name`, `website_description`, website_slogan,`logo_img_upload`, `authors_name`, `authors_email`, `company_name`, `phone_no`, `datetime`) VALUES ('$website_name', '$website_description', $website_slogan, '$logo_name', '$aurthors_name', '$authors_email', '$company_name', '$company_phone_no', current_timestamp());";
+                $sql = "INSERT INTO `settings` (`website_name`, `website_description`, `website_slogan`, `product_currency`, `logo_img_upload`, `authors_name`, `authors_email`, `company_name`, `phone_no`, `datetime`) VALUES ('$website_name', '$website_description', $website_slogan, '$product_currency', '$logo_name', '$aurthors_name', '$authors_email', '$company_name', '$company_phone_no', current_timestamp());";
 
                 $result = mysqli_query($conn, $sql);
 
@@ -165,7 +169,7 @@ if (!isset($_SESSION['username'])) {
             } else {
 
                 if ($logo_name == '') {
-                    $sql = "UPDATE `settings` SET `website_name` = '$website_name', `website_description` = '$website_description', `website_slogan`= '$website_slogan', `authors_name` = '$aurthors_name', `authors_email` = '$authors_email', `company_name` = '$company_name', `phone_no` = '$company_phone_no' WHERE `settings`.`id` = $id;;";
+                    $sql = "UPDATE `settings` SET `website_name` = '$website_name', `website_description` = '$website_description', `website_slogan`= '$website_slogan', `product_currency` = '$product_currency', `authors_name` = '$aurthors_name', `authors_email` = '$authors_email', `company_name` = '$company_name', `phone_no` = '$company_phone_no' WHERE `settings`.`id` = $id;;";
                     $result = mysqli_query($conn, $sql);
                     if ($result) {
                         // echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
@@ -183,7 +187,7 @@ if (!isset($_SESSION['username'])) {
                     }
                 } elseif ($logo_name !== '') {
                     // if the database is not empty then update the table with the new data
-                    $sql = "UPDATE `settings` SET `website_name` = '$website_name', `website_description` = '$website_description', `website_slogan`= '$website_slogan', `logo_img_upload` = '$logo_name', `authors_name` = '$aurthors_name', `authors_email` = '$authors_email', `company_name` = '$company_name', `phone_no` = '$company_phone_no' WHERE `settings`.`id` = $id;";
+                    $sql = "UPDATE `settings` SET `website_name` = '$website_name', `website_description` = '$website_description', `website_slogan`= '$website_slogan', `product_currency` = '$product_currency',`logo_img_upload` = '$logo_name', `authors_name` = '$aurthors_name', `authors_email` = '$authors_email', `company_name` = '$company_name', `phone_no` = '$company_phone_no' WHERE `settings`.`id` = $id;";
 
                     $result = mysqli_query($conn, $sql);
 
@@ -217,7 +221,7 @@ if (!isset($_SESSION['username'])) {
 
 
                 if ($login_name == '') {
-                    $sql = "UPDATE `settings` SET `website_name` = '$website_name', `website_description` = '$website_description', `website_slogan`= '$website_slogan', `authors_name` = '$aurthors_name', `authors_email` = '$authors_email', `company_name` = '$company_name', `phone_no` = '$company_phone_no' WHERE `settings`.`id` = $id;;";
+                    $sql = "UPDATE `settings` SET `website_name` = '$website_name', `website_description` = '$website_description', `website_slogan`= '$website_slogan',`product_currency` = '$product_currency', `authors_name` = '$aurthors_name', `authors_email` = '$authors_email', `company_name` = '$company_name', `phone_no` = '$company_phone_no' WHERE `settings`.`id` = $id;;";
                     $result = mysqli_query($conn, $sql);
                     if ($result) {
                         // echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
@@ -235,7 +239,7 @@ if (!isset($_SESSION['username'])) {
                         update_error_message();
                     }
                 } elseif ($login_name !== '') {
-                    $sql = "UPDATE `settings` SET `website_name` = '$website_name', `website_description` = '$website_description', `website_slogan`= '$website_slogan', `login_img` = '$login_name', `authors_name` = '$aurthors_name', `authors_email` = '$authors_email', `company_name` = '$company_name', `phone_no` = '$company_phone_no' WHERE `settings`.`id` = $id;";
+                    $sql = "UPDATE `settings` SET `website_name` = '$website_name', `website_description` = '$website_description', `website_slogan`= '$website_slogan',`product_currency` = '$product_currency', `login_img` = '$login_name', `authors_name` = '$aurthors_name', `authors_email` = '$authors_email', `company_name` = '$company_name', `phone_no` = '$company_phone_no' WHERE `settings`.`id` = $id;";
 
                     $result = mysqli_query($conn, $sql);
 
@@ -374,6 +378,40 @@ if (!isset($_SESSION['username'])) {
                 </div>
                 <div class="form-text">Example help text goes outside the input group.</div>
             </div>
+            <div class="mb-3">
+                                <label for="basic-url" class="form-label">Product currency</label>
+                                <div class="input-group">
+                                    <span class="input-group-text" id="basic-addon3">@</span>
+
+
+                                    <select class="form-select" name="product_currency" id="inputGroupSelect04" aria-label="Example select with button addon">
+                                        <!-- <option selected value="In-stock">Choose...</option> -->
+
+                                        <option <?php
+
+                                                if ($product_currency == 'usd') {
+                                                    echo 'selected';
+                                                }
+
+
+                                                ?> value="usd">USD - US DOLLAR</option>
+                                        <option <?php
+
+                                                if ($product_currency == 'bdt') {
+                                                    echo 'selected';
+                                                }
+
+
+                                                ?> value="bdt">BDT - BANGLADESHI TAKA</option>
+                                        <!-- <option value="3">Three</option> -->
+                                    </select>
+                                    <!-- <button class="btn btn-outline-secondary" type="button">Button</button> -->
+
+
+
+                                </div>
+                                <div class="form-text">Example help text goes outside the input group.</div>
+                            </div>
             <div class="mb-3">
                 <label for="basic-url" class="form-label">Company name</label>
                 <div class="input-group">
