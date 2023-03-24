@@ -25,7 +25,7 @@ include "_company_info.php";
   <!-- <link rel="stylesheet" href="css/all.min.css"> -->
   <!-- Bootstrap core CSS -->
   <link href="css/bootstrap.min.css" rel="stylesheet">
-  <link href="css/signin.css" rel="stylesheet">
+  
   <link href="css/style.css" rel="stylesheet">
   <link rel="stylesheet" href="css/all.min.css">
   <link rel="stylesheet" href="css/utilities.css">

@@ -1,4 +1,5 @@
 <?php 
+include 'inc/_error_reporting.php';
 
 // session_start();
 
@@ -6,12 +7,13 @@ include 'conn.php';
 
 $sql = 'SELECT * FROM `settings`';
 
-$result = mysqli_query($conn, $sql);
+
+$result = @@mysqli_query($conn, $sql);
 
 
 
 if ($result) {
-    if (mysqli_num_rows($result) > 0) {
+    if (@mysqli_num_rows($result) > 0) {
         while ($row = mysqli_fetch_assoc($result)) {
             $id = $row['id'];
             $website_name = $row['website_name'];
@@ -47,7 +49,7 @@ if(isset($_SESSION['username'])){
 
 
     $info_sql = "SELECT * FROM `admin_users` WHERE `username` = '$check_username';";
-$info_result = mysqli_query($conn, $info_sql);
+$info_result = @mysqli_query($conn, $info_sql);
 
 if ($info_result) {
     while ($row = mysqli_fetch_assoc($info_result)) {

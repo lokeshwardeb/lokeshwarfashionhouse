@@ -16,7 +16,7 @@
             <ul class="navbar-nav me-auto mb-2 mb-lg-0 m-auto">
               <li class="nav-item">
                 <a class="nav-link custom-light text-center active m-auto me-4" aria-current="page"
-                  href="index.html">Home</a>
+                  href="index.php">Home</a>
               </li>
               <li class="nav-item">
                 <a class="nav-link custom-light m-auto me-4" href="about-us.html">About Us</a>

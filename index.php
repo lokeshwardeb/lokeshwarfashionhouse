@@ -1,5 +1,5 @@
 <?php
-
+include 'inc/_error_reporting.php';
 $active_class = 'home';
 // $website_slogan = 'feel the shopping';
 
@@ -28,6 +28,8 @@ if ($featured_product_result) {
       $featured_product_img = $row['product_img'];
     }
   }
+}else{
+  echo 'featured not runs';
 }
 
 
@@ -132,6 +134,8 @@ if ($featured_product_result) {
 
           </div>';
           }
+        }else{
+          echo 'featured not runs';
         }
       }
 

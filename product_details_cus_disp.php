@@ -2,16 +2,6 @@
 include "inc/conn.php";
 $active_class = 'products';
 include "inc/_header.php";
-if (!isset($_SESSION['username'])) {
-    header("location: index.php");
-    die('<div class="alert alert-danger alert-dismissible fade show" role="alert">
-  <strong>Error !</strong> You should login so that you can access the page .
-  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-</div>');
-
-    // exit;
-
-} elseif (isset($_SESSION['username'])) {
 
 
     include "inc/_navbar.php";
@@ -181,6 +171,6 @@ if (!isset($_SESSION['username'])) {
 
 <?php
     include "inc/_footer.php";
-}
+
 
 ?>
