@@ -1,7 +1,11 @@
 <?php
+include('inc/conn.php');
+
 include 'inc/_error_reporting.php';
 include 'inc/install_functions.php';
 
+if(!$conn){
+  
 
 ?>
 <!DOCTYPE html>
@@ -774,3 +778,11 @@ $result_sql_run = mysqli_query($conn, $sql_run);
 </body>
 
 </html>
+
+<?php 
+
+}else{
+  header("location: index.php");
+}
+
+?>

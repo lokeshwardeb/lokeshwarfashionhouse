@@ -46,7 +46,15 @@
               </button>
               <!-- checkout button model ends here -->
 
+<!-- search button model starts here -->
+              <!-- Button trigger modal -->
+              <button type="button" class="btn btn-outline-light me-4 " data-bs-toggle="modal"
+                data-bs-target="#searchModal">
+                Search
+              </button>
+              <!-- search button model ends here -->
               <!-- buy now button in navbar starts here -->
+             
               <form class="d-flex" role="search">
 
                 <button class="btn btn-dark" type="submit">Buy now</button>
@@ -60,3 +68,97 @@
 
 
     <!-- navbar ends here -->
+
+      <!-- cart model starts here -->
+
+
+  <!-- Modal -->
+  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalLabel">Cart Items</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+         
+        
+        <table class="table">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col"></th>
+      <th scope="col">Products</th>
+      <th scope="col">Price</th>
+      <th scope="col">Quantity</th>
+      <th scope="col">Action</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th scope="row">1</th>
+      <td><img src="img/front-self.jpg" class="img-fluid" alt="" srcset=""></td>
+      <td>The new brang dkkm imagjkre ndjnje nejn</td>
+      <td>@dfdafdmknkn thkjenmnk eikek ekjkekmkrj </td>
+      <td><input type="number" class="input-group" min="1" max="10" ></td>
+    </tr>
+    <tr>
+      <th scope="row">2</th>
+      <td>Jacob</td>
+      <td>Thornton</td>
+      <td>@fat</td>
+      <td>@fat</td>
+    </tr>
+    <tr>
+      <th scope="row">3</th>
+      <td colspan="2">Larry the Bird</td>
+      <td>@twitter</td>
+      <td>@twitter</td>
+    </tr>
+  </tbody>
+</table>
+
+
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary">Save changes</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- cart model ends here -->
+
+
+    <!-- search model starts here -->
+
+
+  <!-- Modal -->
+  <div class="modal fade" id="searchModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalLabel">Search Products ...</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+         <?php 
+         $search_class = 'products';
+         ?>
+        <form class="d-flex" role="search" action="./cus_disp_search_exe.php" method="get ">
+        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="search_text">
+        <input class="form-control me-2 visually-hidden" type="search" placeholder="Search" aria-label="Search" name="search_class" value="<?php echo $search_class ?>">
+       
+        <button class="btn btn-outline-success" type="submit">Search</button>
+      </form>
+
+
+        </div>
+        <div class="modal-footer">
+      
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- search model ends here -->
+
