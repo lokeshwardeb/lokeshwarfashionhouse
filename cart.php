@@ -19,7 +19,13 @@ include("inc/_navbar.php");
 <div class="container-fluid pt-4 pb-5 mb-5">
   <div class="row">
     <div class="col-8">
-      <table class="table">
+      <table class="table <?php 
+      if($_SESSION['cart'][0] == ''){
+        echo 'd-none';
+      }
+      
+      
+      ?>">
         <thead>
           <tr>
             <th scope="col">#</th>
@@ -34,19 +40,21 @@ include("inc/_navbar.php");
     
           <?php
 
-         
+if($_SESSION['cart'][0] == ''){
+  echo '<div class="text-center fs-4">The cart is empty</div>';
+}
           
 
           // displaying the cart items
           $total = 0;
        
-            
+            $no = 1;
           foreach ($_SESSION['cart'] as $key => $value) {
             $total = $total + $value["product_price"];
             echo '
  <tr>
-      <th scope="row">1</th>
-      <td><img src="' . $value["product_image_show"] . '"  class="img-fluid" alt="" srcset=""></td>
+      <th scope="row">'.$no.'</th>
+      <td><img src="' . $value["product_image"] . '"  class="img-fluid" alt="" srcset=""></td>
       <td>' . $value["product_name"] . '</td>
       <td>' . $value["product_price"] . '</td>
       <td><input type="number" class="input-group form-control" min="1" max="10" value="' . $value["product_qty"] . '"></td>
@@ -58,6 +66,7 @@ include("inc/_navbar.php");
     </tr>
  
  ';
+ $no++;
           }
     
         
@@ -86,7 +95,7 @@ include("inc/_navbar.php");
 
       </div>
 
-      <button type="submit" class="btn btn-primary mt-4">Checkout</button>
+   <a href="checkout.php"><button type="submit" class="btn btn-primary mt-4">Checkout</button></a>
 
     </div>
   </div>

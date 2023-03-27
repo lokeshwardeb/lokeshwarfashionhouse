@@ -142,10 +142,10 @@ include("conn.php");
       while($row = mysqli_fetch_assoc($result_currency)){
         $product_currency = $row['product_currency'];
         if($product_currency == 'bdt'){
-          echo '৳';
+          return '৳';
         }
         if($product_currency == 'usd'){
-          echo '$';
+          return  '$';
 
         }
       }

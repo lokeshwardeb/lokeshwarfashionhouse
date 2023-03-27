@@ -314,6 +314,27 @@ if(featuredCheckedStatus){
 
 }
 
+function add_promo_code(){
+  let promoInput = document.getElementById('promoInput');
+  let promoInputCheckedStatus = promoInput.checked;
+  if(promoInputCheckedStatus){
+    document.getElementById('promoSpan').innerText = 'Promo code activated (automatically)';
+  }else{
+    document.getElementById('promoSpan').innerText = 'Active promo code on this product (automatically) ';
+
+  }
+}
+let promoInput = document.getElementById('promoInput');
+
+let promoInputCheckedStatus = promoInput.checked;
+
+if(promoInputCheckedStatus){
+  document.getElementById('promoSpan').innerText = 'Promo code activated (automatically)';
+}else{
+  document.getElementById('promoSpan').innerText = 'Active promo code on this product (automatically) ';
+
+}
+
   let featuredProductStatusId = document.getElementById("featuredProductStatusId");
   let featuredInnertext = featuredProductStatusId.innerText;
   if(featuredInnertext == 'Product Featured Status: Featured Product'){
@@ -326,4 +347,35 @@ if(featuredCheckedStatus){
   }
 
 
+
+  function add_custom_promo_code(){
+    let cusPromoCodeInput = document.getElementById('cusPromoCodeInput');
+    let cusPromoInputCheckedStatus = cusPromoCodeInput.checked;
+    if(cusPromoInputCheckedStatus){
+      document.getElementById('cuspromoSpan').innerText = 'Custom Promo code activated';
+    let cuspromoBoxInput =   document.getElementById('cuspromoBoxInput');
+    cuspromoBoxInput.classList.remove('no-disp');
+    }else{
+      document.getElementById('cuspromoSpan').innerText = 'Activate custom promo code';
+      let cuspromoBoxInput =   document.getElementById('cuspromoBoxInput');
+      cuspromoBoxInput.classList.add('no-disp');
+
+  
+    }
+  }
+  let cusPromoCodeInput = document.getElementById('cusPromoCodeInput');
+  
+  let cusPromoInputCheckedStatus = cusPromoCodeInput.checked;
+  
+  if(cusPromoInputCheckedStatus){
+    document.getElementById('cuspromoSpan').innerText = 'Custom Promo code activated';
+    let cuspromoBoxInput =   document.getElementById('cuspromoBoxInput');
+    cuspromoBoxInput.classList.remove('no-disp');
+  }else{
+    document.getElementById('cuspromoSpan').innerText = 'Activate custom promo code';
+    let cuspromoBoxInput =   document.getElementById('cuspromoBoxInput');
+    cuspromoBoxInput.classList.add('no-disp');
+  
+  }
+  
 

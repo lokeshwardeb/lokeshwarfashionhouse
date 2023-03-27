@@ -1,4 +1,5 @@
 <?php
+// error_reporting(0);
 include "inc/conn.php";
 $active_class = 'products';
 include "inc/_header.php";
@@ -40,7 +41,7 @@ if (!isset($_SESSION['username'])) {
         $get_id = htmlspecialchars(mysqli_real_escape_string($conn, $_GET['id']), ENT_QUOTES);
         // echo $get_id;
 
-
+// $auto_promo_code_activated = 0;
         $sql = "SELECT * FROM `products` WHERE `product_id` = '$get_id'";
         $result = mysqli_query($conn, $sql);
         if ($result) {
@@ -51,6 +52,8 @@ if (!isset($_SESSION['username'])) {
                     $product_desc = $row['product_desc'];
                     $product_img = $row['product_img'];
                     $product_price = $row['product_price'];
+                    $promo_code = $row['promo_code'];
+                    $promo_code_discount_show = $row['promo_code_discount'];
                     $product_status = $row['product_status'];
                     $product_featured_status = $row['make_as_featured'];
                     $product_added_datetime = $row['product_added_datetime'];
@@ -63,9 +66,14 @@ if (!isset($_SESSION['username'])) {
 
                 if (isset($_POST['save_changes'])) {
                     // $id = $row['id'];
+                    $auto_promo_code = 0;
+                    $custom_promo_code = 0;
                     $product_name = htmlspecialchars(mysqli_real_escape_string($conn,  $_POST['product_name']), ENT_QUOTES);
                     $product_description = htmlspecialchars(mysqli_real_escape_string($conn, $_POST['product_description']), ENT_QUOTES);
                     $product_price = htmlspecialchars(mysqli_real_escape_string($conn, $_POST['product_price']), ENT_QUOTES);
+
+                    $promo_code_discount = htmlspecialchars(mysqli_real_escape_string($conn, $_POST['promo_code_discount']), ENT_QUOTES);
+                    $custom_promo_code_input = htmlspecialchars(mysqli_real_escape_string($conn, $_POST['custom_promo_code_input']), ENT_QUOTES);
 
 
 
@@ -87,22 +95,71 @@ if (!isset($_SESSION['username'])) {
                     // $make_as_featured = $_POST['make_as_featured'];
 
 
-                    $sql = "SELECT * FROM `products`";
-
+                    $sql_products = "SELECT * FROM `products`";
+                    
 
                     // if the database is empty then insert the data into the table
 
-                    $result = mysqli_query($conn, $sql);
+                    $query = mysqli_query($conn, $sql_products);
 
                     // check if the password and cpassword are same
-                    if ($result) {
+                    if ($query) {
+                 
+
+                        if ($promo_code !== '') {
+                            if (!filter_has_var(INPUT_POST, 'active_promo_code')) {
+                               
+                                $_SESSION['auto_promo_code'] = 0;
+
+
+
+
+                                $sql = "UPDATE `products` SET `promo_code` = '', `promo_code_discount` = '' WHERE `products`.`product_id` = '$product_id';";
+
+                                $result = mysqli_query($conn, $sql);
+                              
+                            }
+                        } else {
+                            if (filter_has_var(INPUT_POST, 'active_promo_code')) {
+                                $rand_no = rand(1111, 9999);
+                               $_SESSION['auto_promo_code'] = 1;
+
+                                
+
+                                $new_promo_code = "LOKFASHOU" . $product_id . $rand_no;
+                                $sql = "UPDATE `products` SET `promo_code` = '$new_promo_code', `promo_code_discount` = '$promo_code_discount' WHERE `products`.`product_id` = '$product_id'";
+                                $result = mysqli_query($conn, $sql);
+
+                               
+                            }
+                        }
+
+                        if(filter_has_var(INPUT_POST, 'active_custom_promo_code')){
+                            $rand_no = rand(1111, 9999);
+                            $_SESSION['custom_promo_code'] = 1;
+
+
+                            $new_promo_code = "LOKFASHOU" . $product_id . $rand_no;
+                            $sql = "UPDATE `products` SET `promo_code` = '$custom_promo_code_input', `promo_code_discount` = '$promo_code_discount' WHERE `products`.`product_id` = '$product_id'";
+                            $result = mysqli_query($conn, $sql);
+
+                            
+                        }else{
+                            $_SESSION['custom_promo_code'] = 0;
+
+                        }
+
+
+
+
                         // if there any data contains on the db
-                        if (mysqli_num_rows($result) > 0) {
+                        if (mysqli_num_rows($query) > 0) {
 
                             // check if there already the submitted email contains on db
 
 
                             if (filter_has_var(INPUT_POST, 'make_as_featured')) {
+
                                 if ($img_name == '') {
 
 
@@ -171,7 +228,7 @@ if (!isset($_SESSION['username'])) {
                                 }
                             }
                         }
-                        if (mysqli_num_rows($result) == 0) {
+                        if (mysqli_num_rows($query) == 0) {
                             if (filter_has_var(INPUT_POST, 'make_as_featured')) {
 
 
@@ -224,7 +281,7 @@ if (!isset($_SESSION['username'])) {
                                 }
                             }
                         } else {
-                            if (mysqli_num_rows($result) == 0) {
+                            if (mysqli_num_rows($query) == 0) {
 
 
                                 //  else if the email is unique and does not contains on the db then add the admin user to the system and the db
@@ -311,6 +368,7 @@ if (!isset($_SESSION['username'])) {
     Product Name : ' . $product_name . ' <br>
     Product Description: ' . $product_desc . ' <br>
     Product Price: ' . $product_price . ' <br>
+    Product Promo Code: ' . $promo_code . ' <br>
     
    <div class = ""> Product Status: '; ?><span class="<?php
                                                         if ($product_status == "In-stock") {
@@ -324,24 +382,24 @@ if (!isset($_SESSION['username'])) {
                                                         ?>"><?php echo '' . $product_status . ' </span> </div> <br>
     
    <div class = "fs-5" id="featuredProductStatusId"> Product Featured Status: '; ?><span class="<?php
-                                                        if ($product_featured_status == "featured_product") {
-                                                            echo 'bg-dark text-warning';
-                                                        }
-                                                        if ($product_featured_status == "not_featured_product") {
-                                                            echo 'bg-dark text-danger';
-                                                        }
+                                                                                                if ($product_featured_status == "featured_product") {
+                                                                                                    echo 'bg-dark text-warning';
+                                                                                                }
+                                                                                                if ($product_featured_status == "not_featured_product") {
+                                                                                                    echo 'bg-dark text-danger';
+                                                                                                }
 
 
-                                                        ?>"><?php
-                                                        if ($product_featured_status == "featured_product") {
-                                                            echo 'Featured Product';
-                                                        }
-                                                        if ($product_featured_status == "not_featured_product") {
-                                                            echo 'Not Featured Product';
-                                                        }
-                                                        echo '' .
-                                                        
-                                                         ' </span> </div> <br>
+                                                                                                ?>"><?php
+                                                                                                    if ($product_featured_status == "featured_product") {
+                                                                                                        echo 'Featured Product';
+                                                                                                    }
+                                                                                                    if ($product_featured_status == "not_featured_product") {
+                                                                                                        echo 'Not Featured Product';
+                                                                                                    }
+                                                                                                    echo '' .
+
+                                                                                                        ' </span> </div> <br>
     Product Added Datetime: ' . $product_added_datetime . ' <br>
 
 </div>
@@ -355,143 +413,198 @@ if (!isset($_SESSION['username'])) {
 
 
 
-                                                            ?>
+                                                                                                    ?>
 
-                    <div class="row">
-                        <div class="col-2">
-                            <button class="btn btn-dark mb-4" onclick="productEdit()">Edit</button><br>
+                        <div class="row">
+                            <div class="col-2">
+                                <button class="btn btn-dark mb-4" onclick="productEdit()">Edit</button><br>
 
+                            </div>
+
+
+                            <div class="col-10">
+                                <form action="<?php $_SERVER['PHP_SELF'] ?>" method="post">
+                                    <button class="btn btn-danger mb-4" name="product_delete">Delete</button><br>
+
+                                </form>
+                                <?php
+
+
+
+                                ?>
+                            </div>
                         </div>
 
+                        <div id="productEdit" class="no-disp">
 
-                        <div class="col-10">
-                            <form action="<?php $_SERVER['PHP_SELF'] ?>" method="post">
-                                <button class="btn btn-danger mb-4" name="product_delete">Delete</button><br>
 
+                            <div class="container full-width">
+
+                            </div>
+                            <form action="<?php $_SERVER['PHP_SELF']; ?>" method="post" class="mt-5" enctype="multipart/form-data">
+                                <div class="mb-3">
+                                    <label for="basic-url" class="form-label">Product Name</label>
+                                    <div class="input-group">
+                                        <input type="hidden" value="">
+                                        <span class="input-group-text" id="basic-addon3">@</span>
+                                        <input type="text" class="form-control" placeholder="Product Name" id="basic-url" aria-describedby="basic-addon3" name="product_name" value="<?php echo $product_name; ?>" required>
+                                    </div>
+                                    <div class="form-text">Example help text goes outside the input group.</div>
+
+                                </div>
+
+
+
+                                <div class="mb-3">
+                                    <label for="basic-url" class="form-label">Product Description</label>
+                                    <div class="input-group">
+                                        <span class="input-group-text">@</span>
+                                        <textarea class="form-control" aria-label="With textarea" placeholder="Product Description" name="product_description"><?php echo $product_desc; ?></textarea>
+                                    </div>
+                                </div>
+
+                                <div class="mb-3">
+
+                                    <div class="checkbox mb-3">
+                                        <label>
+                                            <input type="checkbox" onchange="setFeaturedProduct()" <?php
+                                                                                                    if ($product_featured_status == 'featured_product') {
+                                                                                                        echo 'checked';
+                                                                                                    }
+                                                                                                    if ($product_featured_status == 'not_featured_product') {
+                                                                                                        echo '';
+                                                                                                    }
+
+                                                                                                    ?> value="<?php echo $product_featured_status ?>" id="featuredInput" name="make_as_featured"> <span style="background: none !important;" id="featuredSpan">Add as featured product </span>
+                                        </label>
+                                    </div>
+                                    <div class="form-text">Note: If you want to add as featured product then check the box. If the box is not checked then the product is not added as featured product and will be not added as featured product. </div>
+
+                                </div>
+<?php 
+
+?>
+                                <div class="mb-3">
+
+                                    <div class="checkbox mb-3">
+                                        <label>
+                                            <input type="checkbox" onchange="add_promo_code()" <?php
+                               
+                               if ($promo_code && $_SESSION['auto_promo_code'] == 1 ) {
+                                                                                                    echo 'checked';
+                                                                                                } else {
+                                                                                                    echo '';
+                                                                                                }
+
+                                                                                                ?> value="<?php echo $promo_code ?>" id="promoInput" name="active_promo_code"> <span style="background: none !important;" id="promoSpan">Active promo code on this product (automatically) </span>
+
+                                        </label>
+                                    </div>
+                                    <div class="form-text">Note: If you want to add a promo code on this product then check the box. If the box is not checked then the product is not added with a promo code. </div>
+
+                                </div>
+                                <div class="mb-3">
+
+
+                                    <div class="checkbox mb-3">
+                                        <label>
+                                            <input type="checkbox" onchange="add_custom_promo_code()" <?php
+                                                                                                if ($promo_code && $_SESSION['custom_promo_code'] == 1) {
+                                                                                                    echo 'checked';
+                                                                                                } else {
+                                                                                                    echo '';
+                                                                                                }
+
+                                                                                                ?> value="<?php echo $promo_code ?>" id="cusPromoCodeInput" name="active_custom_promo_code"> <span style="background: none !important;" id="cuspromoSpan">Active custom promo code on this product </span>
+
+                                        </label>
+                                    </div>
+                                    <div class="form-text">Note: If you want to add a promo code on this product then check the box. If the box is not checked then the product is not added with a promo code. </div>
+
+                                </div>
+                                <div class="mb-3" id="cuspromoBoxInput">
+                                    <label for="basic-url" class="form-label">Product Custom Promo Code </label>
+                                    <div class="input-group" >
+                                        <span class="input-group-text" id="basic-addon3">@</span>
+                                        <input type="text" value="<?php echo $promo_code ?>" class="form-control" placeholder="Product Promo Code Discount Price" name="custom_promo_code_input" id="basic-url" aria-describedby="basic-addon3">
+                                    </div>
+                                    <div class="form-text">Example help text goes outside the input group.</div>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="basic-url" class="form-label">Product Promo Code discount Price</label>
+                                    <div class="input-group">
+                                        <span class="input-group-text" id="basic-addon3">@</span>
+                                        <input type="number" min="0" max="" value="<?php echo $promo_code_discount_show ?>" class="form-control" placeholder="Product Promo Code Discount Price" name="promo_code_discount" id="basic-url" aria-describedby="basic-addon3">
+                                    </div>
+                                    <div class="form-text">Example help text goes outside the input group.</div>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="basic-url" class="form-label">Product Price</label>
+                                    <div class="input-group">
+                                        <span class="input-group-text" id="basic-addon3">@</span>
+                                        <input type="number" min="0" max="" value="<?php echo $product_price ?>" class="form-control" placeholder="Product Price" name="product_price" id="basic-url" aria-describedby="basic-addon3" required>
+                                    </div>
+                                    <div class="form-text">Example help text goes outside the input group.</div>
+                                </div>
+
+
+                                <div class="mb-3">
+                                    <label for="basic-url" class="form-label">Product photo</label>
+                                    <input type="file" class="form-control" aria-label="file example" name="product_photo">
+                                    <div class="invalid-feedback">Example invalid form file feedback</div>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="basic-url" class="form-label">Product Status</label>
+                                    <div class="input-group">
+                                        <span class="input-group-text" id="basic-addon3">@</span>
+
+
+                                        <select class="form-select" name="product_status" id="inputGroupSelect04" aria-label="Example select with button addon">
+                                            <!-- <option selected value="In-stock">Choose...</option> -->
+
+                                            <option <?php
+
+                                                    if ($product_status == 'In-stock') {
+                                                        echo 'selected';
+                                                    }
+
+
+                                                    ?> value="In-stock">In-stock</option>
+                                            <option <?php
+
+                                                    if ($product_status == 'Out-stock') {
+                                                        echo 'selected';
+                                                    }
+
+
+                                                    ?> value="Out-stock">Out-stock</option>
+                                            <!-- <option value="3">Three</option> -->
+                                        </select>
+                                        <!-- <button class="btn btn-outline-secondary" type="button">Button</button> -->
+
+
+
+                                    </div>
+                                    <div class="form-text">Example help text goes outside the input group.</div>
+                                </div>
+
+
+
+
+
+
+
+
+
+
+                                <button type="submit" class="btn btn-primary float-end mt-4 mb-5" name="save_changes"> Save changes</button><br><br>
+                                <label for="" class="mb-5"></label>
                             </form>
-                            <?php
-
-
-
-                            ?>
                         </div>
-                    </div>
-
-                    <div id="productEdit" class="no-disp">
-
-
-                        <div class="container full-width">
-
-                        </div>
-                        <form action="<?php $_SERVER['PHP_SELF']; ?>" method="post" class="mt-5" enctype="multipart/form-data">
-                            <div class="mb-3">
-                                <label for="basic-url" class="form-label">Product Name</label>
-                                <div class="input-group">
-                                    <input type="hidden" value="">
-                                    <span class="input-group-text" id="basic-addon3">@</span>
-                                    <input type="text" class="form-control" placeholder="Product Name" id="basic-url" aria-describedby="basic-addon3" name="product_name" value="<?php echo $product_name; ?>" required>
-                                </div>
-                                <div class="form-text">Example help text goes outside the input group.</div>
-
-                            </div>
 
 
 
-                            <div class="mb-3">
-                                <label for="basic-url" class="form-label">Product Description</label>
-                                <div class="input-group">
-                                    <span class="input-group-text">@</span>
-                                    <textarea class="form-control" aria-label="With textarea" placeholder="Product Description" name="product_description"><?php echo $product_desc; ?></textarea>
-                                </div>
-                            </div>
-
-                            <div class="mb-3">
-
-                                <div class="checkbox mb-3">
-                                    <label>
-                                        <input type="checkbox" onchange="setFeaturedProduct()"<?php
-                                        if($product_featured_status == 'featured_product'){
-                                           echo 'checked';
-                                            
-                                        }
-                                        if($product_featured_status == 'not_featured_product'){
-                                            echo '';
-                                        }
-                                        
-                                        ?> value="<?php echo $product_featured_status ?>" id="featuredInput" name="make_as_featured"> <span style="background: none !important;" id="featuredSpan">Add as featured product </span>
-                                    </label>
-                                </div>
-                                <div class="form-text">Note: If you want to add as featured product then check the box. If the box is not checked then the product is not added as featured product and will be not added as featured product.  </div>
-
-                            </div>
-
-                            <div class="mb-3">
-                                <label for="basic-url" class="form-label">Product Price</label>
-                                <div class="input-group">
-                                    <span class="input-group-text" id="basic-addon3">@</span>
-                                    <input type="number" min="0" max="" value="<?php echo $product_price ?>" class="form-control" placeholder="Product Price" name="product_price" id="basic-url" aria-describedby="basic-addon3" required>
-                                </div>
-                                <div class="form-text">Example help text goes outside the input group.</div>
-                            </div>
-
-
-                            <div class="mb-3">
-                                <label for="basic-url" class="form-label">Product photo</label>
-                                <input type="file" class="form-control" aria-label="file example" name="product_photo">
-                                <div class="invalid-feedback">Example invalid form file feedback</div>
-                            </div>
-                            <div class="mb-3">
-                                <label for="basic-url" class="form-label">Product Status</label>
-                                <div class="input-group">
-                                    <span class="input-group-text" id="basic-addon3">@</span>
-
-
-                                    <select class="form-select" name="product_status" id="inputGroupSelect04" aria-label="Example select with button addon">
-                                        <!-- <option selected value="In-stock">Choose...</option> -->
-
-                                        <option <?php
-
-                                                if ($product_status == 'In-stock') {
-                                                    echo 'selected';
-                                                }
-
-
-                                                ?> value="In-stock">In-stock</option>
-                                        <option <?php
-
-                                                if ($product_status == 'Out-stock') {
-                                                    echo 'selected';
-                                                }
-
-
-                                                ?> value="Out-stock">Out-stock</option>
-                                        <!-- <option value="3">Three</option> -->
-                                    </select>
-                                    <!-- <button class="btn btn-outline-secondary" type="button">Button</button> -->
-
-
-
-                                </div>
-                                <div class="form-text">Example help text goes outside the input group.</div>
-                            </div>
-
-
-
-
-
-
-
-
-
-
-                            <button type="submit" class="btn btn-primary float-end mt-4 mb-5" name="save_changes"> Save changes</button><br><br>
-                            <label for="" class="mb-5"></label>
-                        </form>
-                    </div>
-
-
-
-            <?php
+                <?php
 
             } else {
                 echo '<div class = "custom-default-box-bg-color pt-4 mt-4 fs-4" style="height:200px !important;">
@@ -505,7 +618,7 @@ if (!isset($_SESSION['username'])) {
 
 
 
-            ?>
+                ?>
 
 
 

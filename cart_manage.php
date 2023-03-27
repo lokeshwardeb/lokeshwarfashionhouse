@@ -20,9 +20,10 @@ include("inc/_navbar.php");
 // session_destroy();
 if (isset($_POST['add_cart'])) {
   $product_name = $_POST['product_name'];
+  $product_desc = $_POST['product_desc'];
   $product_price = $_POST['product_price'];
   $product_qty = $_POST['product_qty'];
-  $product_imgage_show = $_POST['product_image'];
+  $product_image = $_POST['product_image'];
 
 
 
@@ -40,9 +41,10 @@ if (isset($_POST['add_cart'])) {
       $count = count($_SESSION['cart']);
       $_SESSION['cart'][$count] =  array(
         "product_name" => $product_name,
+        "product_desc" => $product_desc,
         "product_price" => $product_price,
         "product_qty" => $product_qty,
-        "product_image_show" => $product_imgage_show
+        "product_image" => $product_image
       );
       echo '
       <script>
@@ -61,9 +63,10 @@ if (isset($_POST['add_cart'])) {
   } else {
     $_SESSION['cart'][0] = array(
       "product_name" => $product_name,
+      "product_desc" => $product_desc,
       "product_price" => $product_price,
       "product_qty" => $product_qty,
-      "product_image_show" => $product_imgage_show
+      "product_image" => $product_image
     );
 
     echo '
@@ -91,7 +94,7 @@ foreach ($_SESSION['cart'] as $key => $value) {
     $_SESSION['cart'] = array_values($_SESSION['cart']);
     echo '<script>
 alert("Item Removed")   
-    window.location.href= "cart.php"
+    window.location.href= "index.php"
     
     </script>';
   }else{
@@ -100,6 +103,9 @@ alert("Item Removed")
 }
 }
 
+if(isset($_POST['checkout'])){
+
+}
 // displaying the value
 
 

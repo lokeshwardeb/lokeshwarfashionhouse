@@ -147,3 +147,10 @@ var increButton = document.getElementsByClassName('inc');
               //  console.log(productValues);
 
               }
+
+              function showPromoCode(){
+
+                let showPromoCodeSection =  document.getElementById("showPromoCode");
+
+                showPromoCodeSection.classList.remove("d-none");
+              }

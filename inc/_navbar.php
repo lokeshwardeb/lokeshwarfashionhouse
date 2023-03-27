@@ -22,7 +22,7 @@
                 <a class="nav-link custom-light m-auto me-4" href="about-us.html">About Us</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link custom-light m-auto me-4" href="#">Shop</a>
+                <a class="nav-link custom-light m-auto me-4" href="shop.php">Shop</a>
               </li>
               <li class="nav-item">
                 <a class="nav-link custom-light m-auto me-4" href="privacy-policy.html">Privacy Policy</a>
@@ -83,7 +83,7 @@
         <div class="modal-body">
          
         
-        <table class="table">
+        <!-- <table class="table">
   <thead>
     <tr>
       <th scope="col">#</th>
@@ -116,13 +116,75 @@
       <td>@twitter</td>
     </tr>
   </tbody>
-</table>
+</table> -->
+<table class="table <?php
+ if($_SESSION['cart'][0] == ''){
+  echo 'd-none';
+ }
+
+
+?>">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col"></th>
+            <th scope="col">Products</th>
+            <th scope="col">Price</th>
+            <th scope="col">Quantity</th>
+            <th scope="col">Action</th>
+          </tr>
+        </thead>
+        <tbody>
+    
+          <?php
+
+         if($_SESSION['cart'][0] == ''){
+          echo 'the cart is empty';
+         }
+          
+
+          // displaying the cart items
+          $total = 0;
+       $no = 1;
+            
+          foreach ($_SESSION['cart'] as $key => $value) {
+            // $total = $total + $value["product_price"];
+            echo '
+ <tr>
+      <th scope="row">'.$no.'</th>
+      <td><img src="' . $value["product_image_show"] . '"  class="img-fluid" alt="" srcset=""></td>
+      <td>' . $value["product_name"] . '</td>
+      <td>' . $value["product_price"] . '</td>
+      <td><input type="number" class="input-group form-control" min="1" max="10" value="' . $value["product_qty"] . '"></td>
+      <form action="cart_manage.php" method="post">
+      <input type = "hidden" value="' . $value["product_name"] . '" name="product_name">
+      <td><button type="submit" class="input-group from-control btn btn-danger btn-sm" name="remove_cart">Remove</button></td>
+
+      </form>
+    </tr>
+
+    
+ 
+ ';
+
+ $no++;
+          }
+    
+          
+
+          ?>
+
+      
+
+        </tbody>
+      
+      </table>
 
 
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary">Save changes</button>
+         <a href="checkout.php"><button type="button" class="btn btn-primary">Checkout</button></a>
         </div>
       </div>
     </div>

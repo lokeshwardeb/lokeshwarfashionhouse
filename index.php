@@ -126,6 +126,7 @@ if ($featured_product_result) {
                     </div><br>
                     
                     <input type = "hidden" value="' . $row['product_price'] . '" name="product_price">
+                    <input type = "hidden" value="' . $row['product_desc'] . '" name="product_desc">
       
         
                   </div>
@@ -254,6 +255,7 @@ if ($featured_product_result) {
                   </div><br>
                   
                   <input type = "hidden" value="' . $row['product_price'] . '" name="product_price">
+                  <input type = "hidden" value="' . $row['product_desc'] . '" name="product_desc">
     
       
                 </div>
