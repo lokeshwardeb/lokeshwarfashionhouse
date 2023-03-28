@@ -137,12 +137,12 @@
         <tbody>
     
           <?php
-
+// include("functions.php");
          if($_SESSION['cart'][0] == ''){
           echo 'the cart is empty';
          }
           
-
+include_once("inc/functions.php");
           // displaying the cart items
           $total = 0;
        $no = 1;
@@ -154,7 +154,7 @@
       <th scope="row">'.$no.'</th>
       <td><img src="' . $value["product_image_show"] . '"  class="img-fluid" alt="" srcset=""></td>
       <td>' . $value["product_name"] . '</td>
-      <td>' . $value["product_price"] . '</td>
+      <td>' . product_currency_bdt() . $value["product_price"] . '</td>
       <td><input type="number" class="input-group form-control" min="1" max="10" value="' . $value["product_qty"] . '"></td>
       <form action="cart_manage.php" method="post">
       <input type = "hidden" value="' . $value["product_name"] . '" name="product_name">

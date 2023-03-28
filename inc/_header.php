@@ -4,6 +4,8 @@ session_start();
 
 include "_company_info.php";
 
+// include("functions.php");
+
 
 
 ?>

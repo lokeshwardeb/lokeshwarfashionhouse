@@ -2,9 +2,9 @@
 $active_class = 'checkout';
 include("inc/_header.php");
 
+include("inc/functions.php");
 include("inc/_navbar.php");
 
-include("inc/functions.php");
 include("inc/conn.php");
 include("inc/_company_info.php");
 
