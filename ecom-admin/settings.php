@@ -270,6 +270,45 @@ if (!isset($_SESSION['username'])) {
                     }
                 }
 
+                // users login image functionality
+
+                $users_login_upload = $_FILES['users_login_upload'];
+                $user_login_image = $_FILES['users_login_upload']['name'];
+                $user_login_image_tmp = $_FILES['users_login_upload']['tmp_name'];
+
+                $user_login_image_upload = "uploaded_img/users_login_upload/" . $user_login_image;
+
+                if($user_login_image != '' && $login_name !==''){
+                    $sql = "UPDATE `settings` SET `website_name` = '$website_name', `website_description` = '$website_description', `website_slogan`= '$website_slogan',`product_currency` = '$product_currency', `login_img` = '$login_name', `users_login_img` = '$user_login_image',`authors_name` = '$aurthors_name', `authors_email` = '$authors_email', `company_name` = '$company_name', `phone_no` = '$company_phone_no' WHERE `settings`.`id` = $id;";
+
+                    $result = mysqli_query($conn, $sql);
+
+
+                    if($result){
+                        if(move_uploaded_file($user_login_image_tmp, $user_login_image_upload)){
+                            update_success_message();
+                        }else{
+                            update_error_message();
+                        }
+                    }
+
+                }
+                if($user_login_image != '' && $login_name ==''){
+                    $sql = "UPDATE `settings` SET `website_name` = '$website_name', `website_description` = '$website_description', `website_slogan`= '$website_slogan',`product_currency` = '$product_currency', `users_login_img` = '$user_login_image',`authors_name` = '$aurthors_name', `authors_email` = '$authors_email', `company_name` = '$company_name', `phone_no` = '$company_phone_no' WHERE `settings`.`id` = $id;";
+
+                    $result = mysqli_query($conn, $sql);
+
+
+                    if($result){
+                        if(move_uploaded_file($user_login_image_tmp, $user_login_image_upload)){
+                            update_success_message();
+                        }else{
+                            update_error_message();
+                        }
+                    }
+
+                }
+                
 
 
 
@@ -359,6 +398,11 @@ if (!isset($_SESSION['username'])) {
             <div class="mb-3">
                 <label for="basic-url" class="form-label">Login page image</label>
                 <input type="file" class="form-control" aria-label="file example" name="login_upload">
+                <div class="invalid-feedback">Example invalid form file feedback</div>
+            </div>
+            <div class="mb-3">
+                <label for="basic-url" class="form-label">Users Login page image</label>
+                <input type="file" class="form-control" aria-label="file example" name="users_login_upload">
                 <div class="invalid-feedback">Example invalid form file feedback</div>
             </div>
 

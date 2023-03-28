@@ -35,10 +35,10 @@ include "inc/_header.php";
 
 
 
+include("inc/functions.php");
 include "inc/_navbar.php";
 
 include("inc/const.php");
-include("inc/functions.php");
 ?>
 
 
@@ -202,7 +202,7 @@ $search = htmlspecialchars(mysqli_real_escape_string($conn, $_GET['search_text']
                ' . $row['product_desc'] . '
               </div>
             </a>
-            <div class="box ms-2 ps-5 d-flex">
+            <div class="box ms-2 ps-5 d-flex text-center">
               <label for="name"></label>
               <button class="dec button pe-4 btn">-</button>
               <input type="text" name="qty" id="1" value="1" class="numInp" disabled>
@@ -210,9 +210,9 @@ $search = htmlspecialchars(mysqli_real_escape_string($conn, $_GET['search_text']
             </div>
             <div class="price d-inline-flex">
               <div class="price_symbol">';
-          product_currency_bdt();
+          
           echo '</div>
-              <div class="price_amount" name="product-price">' . $row['product_price'] . '</div>
+              <div class="price_amount" name="product-price">' . product_currency_bdt() .  $row['product_price'] . '</div>
             </div><br>
     
     

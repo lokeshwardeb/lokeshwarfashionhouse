@@ -117,6 +117,7 @@ include  "inc/functions.php";
       <main class="form-signin">
         <form action="<?php $_SERVER['PHP_SELF'] ?>" method="post">
           <img class="mb-4 " src="<?php echo 'uploaded_img/' . $website_logo ?>" alt="" width="100vw" height="100vh">
+          <h1 class="h3 mb-3 fw-normal">ADMIN PANEL</h1>
           <h1 class="h3 mb-3 fw-normal">Please sign in</h1>
 
           <div class="form-floating">

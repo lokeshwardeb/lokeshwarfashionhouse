@@ -30,10 +30,14 @@
               <li class="nav-item">
                 <a class="nav-link custom-light m-auto me-4" href="termsofservice.html">Terms of service</a>
               </li>
-              <li class="nav-item">
+              <!-- <li class="nav-item">
                 <a class="nav-link custom-light m-auto me-4" href="returnandrefundpolicy.html">Return and refund
                   policy</a>
+              </li> -->
+              <li class="nav-item">
               </li>
+              <a class="nav-link custom-light m-auto me-4" href="login.php">Login/Signup</a>
+
               <li class="nav-item">
                 <a class="nav-link custom-light m-auto me-4" href="#">Contract Us</a>
               </li>
@@ -57,9 +61,11 @@
              
               <form class="d-flex" role="search">
 
-                <button class="btn btn-dark" type="submit">Buy now</button>
+              <a href="shop.php">  <button class="btn btn-dark" type="button">Buy now</button></a>
               </form>
               <!-- buy now button in navbar ends here -->
+
+         
 
           </div>
         </div>

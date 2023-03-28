@@ -154,3 +154,8 @@ var increButton = document.getElementsByClassName('inc');
 
                 showPromoCodeSection.classList.remove("d-none");
               }
+              var loader = document.getElementById("preloader");
+              window.addEventListener("load", function () {
+                // this is to add the loading animation and function
+                loader.style.display = "none";
+              })

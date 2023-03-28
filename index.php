@@ -12,7 +12,13 @@ include("inc/functions.php");
 
 <?php
 include("inc/_navbar.php");
+// <?php
+if(isset($_SESSION['cus_username'])){
+  // echo '<div class="text-light mt-2">'.$_SESSION["cus_username"].'</div>' ;
+}
 
+include("inc/_heading_header.php")
+ 
 
 
 ?>

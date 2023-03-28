@@ -25,6 +25,7 @@ if ($result) {
             $company_phone_no = $row['phone_no'];
             $website_logo = $row['logo_img_upload'];
             $login_page = $row['login_img'];
+            $users_login_upload = $row['users_login_img'];
 
        
             // echo 'the website name is' . $website_name;

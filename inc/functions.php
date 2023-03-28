@@ -129,6 +129,37 @@ function preloader_include(){
                   ';
 }
 
+function signup_password_not_matched(){
+ return '<div class="alert alert-danger alert-dismissible fade show" role="alert">
+                  <strong>Error ! Password does not match..</strong> You should give correct password to login .
+                  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>';
+}
+function signup_defficulties_error(){
+  return '<div class="alert alert-danger alert-dismissible fade show" role="alert">
+           <strong>Error !</strong>We have some dificulties so that you can sign up at this time. Please try again later .
+           <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+         </div>';
+ }
+ function signup_success(){
+  return '<div class="alert alert-success alert-dismissible fade show" role="alert">
+  <strong>Sign up succefully !</strong> You should refresh the page to  check in on some of those fields below.
+  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>';
+}
+ function signup_error(){
+  return '<div class="alert alert-danger alert-dismissible fade show" role="alert">
+  <strong>Error !</strong> Cannot sign up successfully.
+  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>';
+}
+ function signup_username_exist_error(){
+  return '<div class="alert alert-danger alert-dismissible fade show" role="alert">
+  <strong>Error ! Username already exists.</strong> Login with your username.
+  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>';
+}
+
 date_default_timezone_set("Asia/Dhaka");
 
 function product_currency_bdt(){
