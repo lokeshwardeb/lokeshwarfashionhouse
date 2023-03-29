@@ -87,9 +87,9 @@ include "inc/_header.php";
 
           $hash_verify = password_verify($pass, $hash);
 
-          if (mysqli_num_rows($result) == 1 ) {
+          if (mysqli_num_rows($result) == 1) {
 
-           echo signup_username_exist_error();
+            echo signup_username_exist_error();
 
 
 
@@ -103,31 +103,62 @@ include "inc/_header.php";
               $result = mysqli_query($conn, $sql);
 
               if ($result) {
-                if(move_uploaded_file($cus_photo_tmp, $cus_photo_upload)){
+                if (move_uploaded_file($cus_photo_tmp, $cus_photo_upload)) {
 
-                  echo signup_success();
-                }else{
-                  echo 'cannot uploaded teh img';
+                  $sql_for_id = "SELECT * FROM `cus_users` WHERE `cus_username` = '$cus_username'";
+                  $result_for_id = mysqli_query($conn, $sql_for_id);
+                  if ($result_for_id) {
+                    if (mysqli_num_rows($result_for_id) > 0) {
+                      while ($row = mysqli_fetch_assoc($result_for_id)) {
+                        $cus_id_check_no_is = $row['cus_id'];
+                      }
+                    }
+                  }
+
+                  $sql_cus_customer_info = "INSERT INTO `customers` (`customer_id`, `cus_id`, `customer_name`, `customer_email`, `customer_phone_no`, `customer_address`, `join_datetime`) VALUES (NULL, '$cus_id_check_no_is', '$cus_username', '$cus_email', '$cus_phone_no', '$cus_address', current_timestamp());";
+
+                  $result_cus_customer_info = mysqli_query($conn, $sql_cus_customer_info);
+                  if($result_cus_customer_info){
+                    echo signup_success();
+                  }
+
+                  
+                } else {
+                  // echo 'cannot uploaded teh img';
+                  $sql_for_id = "SELECT * FROM `cus_users` WHERE `cus_username` = '$cus_username'";
+                  $result_for_id = mysqli_query($conn, $sql_for_id);
+                  if ($result_for_id) {
+                    if (mysqli_num_rows($result_for_id) > 0) {
+                      while ($row = mysqli_fetch_assoc($result_for_id)) {
+                        $cus_id_check_no_is = $row['cus_id'];
+                      }
+                    }
+                  }
+
+                  $sql_cus_customer_info = "INSERT INTO `customers` (`customer_id`, `cus_id`, `customer_name`, `customer_email`, `customer_phone_no`, `customer_address`, `join_datetime`) VALUES (NULL, '$cus_id_check_no_is', '$cus_username', '$cus_email', '$cus_phone_no', '$cus_address', current_timestamp());";
+
+                  $result_cus_customer_info = mysqli_query($conn, $sql_cus_customer_info);
+                  if($result_cus_customer_info){
+                    echo signup_success();
+                  }
+
                 }
               } else {
-              echo signup_error();
+                echo signup_error();
               }
-            } elseif($cus_pass == '') {
+            } elseif ($cus_pass == '') {
 
               preloader_include();
 
               echo (login_user_password_blank());
               // exit();
-            }
-
-            else{
+            } else {
               preloader_include();
               echo (signup_defficulties_error());
             }
-            
           }
-        }else{
-         echo signup_password_not_matched();
+        } else {
+          echo signup_password_not_matched();
         }
       }
 
@@ -186,7 +217,7 @@ include "inc/_header.php";
             <label for="forgotPassword"></label>
             <span>Forgot you password ?<a href="forgot_pass.php" id="forgotPassword"> Click here</a> to restore your account.</span> <br>
             <span>Already have a account ?<a href="login.php" id="forgotPassword"> Log in with your account </a> to restore your account.</span>
-            <span><a href="index.php" id="forgotPassword"> <input type="button" value="Go home" class="btn btn-primary">  </a></span>
+            <span><a href="index.php" id="forgotPassword"> <input type="button" value="Go home" class="btn btn-primary"> </a></span>
           </div>
           <!-- <div class="form-floating mb-3 mt-4">
             <label for="forgotPassword"></label>

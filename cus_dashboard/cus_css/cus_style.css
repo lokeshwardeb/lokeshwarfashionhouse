@@ -1,0 +1,16 @@
+.custom-box-bg-color{
+    background-color: #9D185F;
+    color: white;
+}
+.hover-table {
+    /* transform: ease-in .50s; */
+    transition: 500ms linear ;
+
+}
+
+.hover-table:hover {
+    /* transform: ease-in .50s; */
+    background-color: #0D6EFD;
+    color: white !important;
+   
+}

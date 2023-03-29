@@ -32,6 +32,7 @@ include "inc/_cus_company_info.php";
   <link rel="stylesheet" href="../css/all.min.css">
   <link rel="stylesheet" href="../css/utilities.css">
   <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="cus_css/cus_style.css">
  
 <?php 
         include "../inc/const.php";

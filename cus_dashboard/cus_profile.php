@@ -7,12 +7,9 @@ include "inc/_cus_header.php";
 include "inc/_cus_navbar.php";
 ?>
 <?php
-
-
-
 if(!isset($_SESSION['cus_username'])){
-    header("location: index.php");
-    echo $_SESSION['cus_username'];
+    // header("location: index.php");
+    // echo $_SESSION['cus_username'];
     die('<div class="alert alert-danger alert-dismissible fade show" role="alert">
     <strong>Error !</strong> You should login sofdfdfd that you can access the page .
     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
@@ -30,6 +27,7 @@ if(!isset($_SESSION['cus_username'])){
     // session_start();
 
 ?>
+
 
     <div class="container title_bar mt-4" style="width: 100vw;">
         <?php
@@ -61,7 +59,7 @@ if(!isset($_SESSION['cus_username'])){
 
         if ($info_result) {
             while ($row = mysqli_fetch_assoc($info_result)) {
-                $check_id = $row['cus_id '];
+                $check_id = $row['cus_id'];
                 $cus_username = $row['cus_username'];
                 $cus_email = $row['cus_email'];
                 $cus_profile_description = $row['cus_desc'];
@@ -84,19 +82,20 @@ if(!isset($_SESSION['cus_username'])){
         <?php
 
         if (isset($_POST['save_changes'])) {
-            $profiles_username = mysqli_real_escape_string($conn, $_POST['cus_username']);
-            $email_address =mysqli_real_escape_string($conn, $_POST['cus_email']) ;
-            $cus_phone = mysqli_real_escape_string($conn, $_POST['phone_no']) ;
-            $cus_address = mysqli_real_escape_string($conn, $_POST['cus_address']) ;
+            
+            $profiles_username = htmlspecialchars(mysqli_real_escape_string($conn, $_POST['cus_username']), ENT_QUOTES);
+            $email_address = htmlspecialchars(mysqli_real_escape_string($conn, $_POST['cus_email']), ENT_QUOTES);
+            $cus_phone = htmlspecialchars(mysqli_real_escape_string($conn, $_POST['phone_no']), ENT_QUOTES);
+            $cus_address = htmlspecialchars(mysqli_real_escape_string($conn, $_POST['cus_address']), ENT_QUOTES);
            
-            $profile_description =  mysqli_real_escape_string($conn, $_POST['profile_description']) ;
+            $cus_profile_description = htmlspecialchars(mysqli_real_escape_string($conn, $_POST['cus_profile_description']), ENT_QUOTES);
 
             $cus_photo = $_FILES['cus_user_photo'];
 
             $cus_user_photo_name = $_FILES['cus_user_photo']['name'];
             $cus_user_photo_tmp = $_FILES['cus_user_photo']['tmp_name'];
 
-            $cus_user_photo_upload = 'uploaded_img/' . $admin_photo_name;
+            $cus_user_photo_upload = "../ecom-admin/uploaded_img/cus_photo_upload/" . $cus_user_photo_name;
 
             $sql = "SELECT * FROM `cus_users` WHERE `cus_username` = '$check_username'";
 
@@ -107,13 +106,15 @@ if(!isset($_SESSION['cus_username'])){
                 while ($row = mysqli_fetch_assoc($result)) {
                     $id = $row['cus_id'];
                 }
-                if ($admin_photo_name !== '') {
-                    $up_pho = "UPDATE `cus_users` SET `cus_username` = '$profiles_username', `cus_desc` = '$profile_description', `cus_email` = '$email_address', `cus_phone_no` = '$cus_phone', `cus_photo` = '$cus_user_photo_name', `cus_address` = '$cus_address' WHERE `cus_users`.`cus_id` = '$check_id';";
+                if ($cus_user_photo_name !== '') {
+                    $up_pho = "UPDATE `cus_users` SET `cus_username` = '$profiles_username', `cus_desc` = '$cus_profile_description', `cus_email` = '$email_address', `cus_phone_no` = '$cus_phone', `cus_photo` = '$cus_user_photo_name', `cus_address` = '$cus_address' WHERE `cus_users`.`cus_id` = '$check_id';";
                     $result_up_photo = mysqli_query($conn, $up_pho);
 
                     if ($result_up_photo) {
-                       if(move_uploaded_file($admin_photo_tmp, $admin_photo_upload)){
-                        $_SESSION['admin_photo'] = $admin_photo_upload;
+                       if(move_uploaded_file($cus_user_photo_tmp, $cus_user_photo_upload)){
+                        // used the cus_photo name as a variable and make it as  $_SESSION['cus_photo'] value
+                        
+                        $_SESSION['cus_photo'] = $cus_user_photo_name;
                         update_success_message();
                        }
                     } else {
@@ -121,13 +122,13 @@ if(!isset($_SESSION['cus_username'])){
                     }
                 }
 
-                if($admin_photo_name == ''){
-                    $sql_up = "UPDATE `admin_users` SET `username` = '$profiles_username', `email` = '$email_address', `admin_description` = '$profile_description', `admin_role` = '$admin_role' WHERE `admin_users`.`id` = '$check_id';";
+              else{
+                    $sql_up = "UPDATE `cus_users` SET `cus_username` = '$profiles_username', `cus_desc` = '$cus_profile_description', `cus_email` = '$email_address', `cus_phone_no` = '$cus_phone', `cus_address` = '$cus_address' WHERE `cus_users`.`cus_id` = '$check_id';";
                     
                     $result_up = mysqli_query($conn, $sql_up);
 
                     if($result_up){
-                        $_SESSION['username'] = $profiles_username;
+                        $_SESSION['cus_username'] = $profiles_username;
                         saved_success_message();
                     }else{
                         saved_error_message();
@@ -175,7 +176,7 @@ if(!isset($_SESSION['cus_username'])){
                 <label for="basic-url" class="form-label"> Description</label>
                 <div class="input-group">
                     <span class="input-group-text">@</span>
-                    <textarea class="form-control" aria-label="With textarea" placeholder="Write something about yourself on Description" name="profile_description"><?php echo $cus_profile_description ?></textarea>
+                    <textarea class="form-control" aria-label="With textarea" placeholder="Write something about yourself on Description" name="cus_profile_description"><?php echo $cus_profile_description ?></textarea>
                 </div>
             </div>
 
@@ -207,7 +208,7 @@ if(!isset($_SESSION['cus_username'])){
                 <label for="basic-url" class="form-label">Address</label>
                 <div class="input-group">
                     <span class="input-group-text" id="basic-addon3">@</span>
-                    <input type="text" class="form-control" placeholder="Email" name="cus_address" id="basic-url" aria-describedby="basic-addon3" value="<?php echo $cus_email ?>">
+                    <input type="text" class="form-control" placeholder="Email" name="cus_address" id="basic-url" aria-describedby="basic-addon3" value="<?php echo $cus_address ?>">
                 </div>
                 <div class="form-text">Example help text goes outside the input group.</div>
             </div>

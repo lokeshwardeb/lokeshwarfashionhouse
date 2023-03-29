@@ -63,7 +63,7 @@ include "inc/_title_bar.php";
     while ($row = mysqli_fetch_assoc($result)) {
       echo  '<tr class="hover-table">
       <th scope="row">'.$no++ . '</th>
-      <td>'.$row['customer_id'].'</td>
+      <td>'. $row["customer_id"].'</td>
       <td>'.$row['customer_name'].'</td>
       <td>'.$row['customer_email'].'</td>
       <td>'.$row['customer_phone_no'].'</td>
@@ -71,7 +71,7 @@ include "inc/_title_bar.php";
       <td>'.$row['join_datetime'].'</td>
 
       
-      <td><button type="submit" class="btn btn-dark">Order Details</button></td>
+      <td><a href="customer_details.php?id='.$row["customer_id"].'"> <button type="submit" class="btn btn-dark">Customer Details</button></a></td>
     </tr>';
     }
   }
