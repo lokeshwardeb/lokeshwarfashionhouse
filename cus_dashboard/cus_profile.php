@@ -1,6 +1,7 @@
 <?php 
+// session_start();
 include "../inc/conn.php";
-$active_class = "dashboard";
+$active_class = "profile";
 
 include "inc/_cus_header.php";
 include "inc/_cus_navbar.php";
@@ -8,26 +9,23 @@ include "inc/_cus_navbar.php";
 <?php
 
 
-include "inc/conn.php";
-$active_class = 'profile';
-include "inc/_header.php";
 
 if(!isset($_SESSION['cus_username'])){
     header("location: index.php");
+    echo $_SESSION['cus_username'];
     die('<div class="alert alert-danger alert-dismissible fade show" role="alert">
-    <strong>Error !</strong> You should login so that you can access the page .
+    <strong>Error !</strong> You should login sofdfdfd that you can access the page .
     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
   </div>') ;
   
     // exit;
   
   }
-  elseif(isset($_SESSION['cus_username'])){
+  else{
     
 
     // mysqli_real_escape_string($con)
 
-    include "inc/_cus_navbar.php";
 
     // session_start();
 
@@ -36,7 +34,7 @@ if(!isset($_SESSION['cus_username'])){
     <div class="container title_bar mt-4" style="width: 100vw;">
         <?php
 
-        include "inc/_title_bar.php";
+        include "inc/_cus_title_bar.php";
 
 
 
@@ -45,9 +43,9 @@ if(!isset($_SESSION['cus_username'])){
         <?php
 
         $search_class = 'customers';
-    include("inc/functions.php");
+    include("../inc/functions.php");
 
-  include("inc/_theme.php");
+//   include("inc/_theme.php");
 
 
         //   include "inc/_search.php"; 
@@ -56,29 +54,29 @@ if(!isset($_SESSION['cus_username'])){
         <?php
 
 // include("inc/functions.php");
-        $check_username = $_SESSION['username'];
+        $check_username = $_SESSION['cus_username'];
 
-        $info_sql = "SELECT * FROM `admin_users` WHERE `username` = '$check_username';";
+        $info_sql = "SELECT * FROM `cus_users` WHERE `cus_username` = '$check_username'";
         $info_result = mysqli_query($conn, $info_sql);
 
         if ($info_result) {
             while ($row = mysqli_fetch_assoc($info_result)) {
-                $check_id = $row['id'];
-                $profile_username = $row['username'];
-                $email = $row['email'];
-                $profile_description = $row['admin_description'];
-                $phone_no = $row['admin_phone_no'];
-                $admin_photo = $row['admin_photo'];
-                $role = $row['admin_role'];
+                $check_id = $row['cus_id '];
+                $cus_username = $row['cus_username'];
+                $cus_email = $row['cus_email'];
+                $cus_profile_description = $row['cus_desc'];
+                $cus_phone_no = $row['cus_phone_no'];
+                $cus_photo = $row['cus_photo'];
+               
             }
         } else {
             $check_id = '';
-            $profile_username = '';
-            $email = '';
-            $profile_description = '';
-            $phone_no = '';
-            $admin_photo = '';
-            $role = '';
+            $cus_username = '';
+            $cus_email = '';
+            $cus_profile_description = '';
+            $cus_phone_no = '';
+            $cus_photo = '';
+            
         }
 
 
@@ -86,30 +84,31 @@ if(!isset($_SESSION['cus_username'])){
         <?php
 
         if (isset($_POST['save_changes'])) {
-            $profiles_username = mysqli_real_escape_string($conn, $_POST['username']);
-            $email_address =mysqli_real_escape_string($conn, $_POST['email']) ;
-            $phone = mysqli_real_escape_string($conn, $_POST['phone_no']) ;
-            $admin_role = mysqli_real_escape_string($conn, $_POST['user_role']);
+            $profiles_username = mysqli_real_escape_string($conn, $_POST['cus_username']);
+            $email_address =mysqli_real_escape_string($conn, $_POST['cus_email']) ;
+            $cus_phone = mysqli_real_escape_string($conn, $_POST['phone_no']) ;
+            $cus_address = mysqli_real_escape_string($conn, $_POST['cus_address']) ;
+           
             $profile_description =  mysqli_real_escape_string($conn, $_POST['profile_description']) ;
 
-            $admins_photo = $_FILES['admin_photo'];
+            $cus_photo = $_FILES['cus_user_photo'];
 
-            $admin_photo_name = $_FILES['admin_photo']['name'];
-            $admin_photo_tmp = $_FILES['admin_photo']['tmp_name'];
+            $cus_user_photo_name = $_FILES['cus_user_photo']['name'];
+            $cus_user_photo_tmp = $_FILES['cus_user_photo']['tmp_name'];
 
-            $admin_photo_upload = 'uploaded_img/' . $admin_photo_name;
+            $cus_user_photo_upload = 'uploaded_img/' . $admin_photo_name;
 
-            $sql = "SELECT * FROM `admin_users` WHERE `username` = '$check_username';";
+            $sql = "SELECT * FROM `cus_users` WHERE `cus_username` = '$check_username'";
 
             $result = mysqli_query($conn, $sql);
 
 
             if ($result) {
                 while ($row = mysqli_fetch_assoc($result)) {
-                    $id = $row['id'];
+                    $id = $row['cus_id'];
                 }
                 if ($admin_photo_name !== '') {
-                    $up_pho = "UPDATE `admin_users` SET `username` = '$profiles_username', `email` = '$email_address', `admin_description` = '$profile_description', `admin_photo` = '$admin_photo_name', `admin_role` = '$admin_role' WHERE `admin_users`.`id` = '$check_id';";
+                    $up_pho = "UPDATE `cus_users` SET `cus_username` = '$profiles_username', `cus_desc` = '$profile_description', `cus_email` = '$email_address', `cus_phone_no` = '$cus_phone', `cus_photo` = '$cus_user_photo_name', `cus_address` = '$cus_address' WHERE `cus_users`.`cus_id` = '$check_id';";
                     $result_up_photo = mysqli_query($conn, $up_pho);
 
                     if ($result_up_photo) {
@@ -160,11 +159,11 @@ if(!isset($_SESSION['cus_username'])){
         <form action="<?php $_SERVER['PHP_SELF']; ?>" method="post" class="" enctype="multipart/form-data">
             <div class="mb-3">
                 <!-- <input type="text"> -->
-                <label for="basic-url" class="form-label">Admin Username</label>
+                <label for="basic-url" class="form-label">Username</label>
                 <div class="input-group">
                     <input type="hidden" value="<?php echo $check_id ?>">
                     <span class="input-group-text" id="basic-addon3">@</span>
-                    <input type="text" class="form-control" placeholder="Website Name" id="basic-url" aria-describedby="basic-addon3" name="username" value="<?php echo $profile_username ?>">
+                    <input type="text" class="form-control" placeholder="Website Name" id="basic-url" aria-describedby="basic-addon3" name="cus_username" value="<?php echo $cus_username ?>">
                 </div>
                 <div class="form-text">Example help text goes outside the input group.</div>
 
@@ -173,17 +172,17 @@ if(!isset($_SESSION['cus_username'])){
 
 
             <div class="mb-3">
-                <label for="basic-url" class="form-label">Admin Description</label>
+                <label for="basic-url" class="form-label"> Description</label>
                 <div class="input-group">
                     <span class="input-group-text">@</span>
-                    <textarea class="form-control" aria-label="With textarea" placeholder="Description" name="profile_description"><?php echo $profile_description ?></textarea>
+                    <textarea class="form-control" aria-label="With textarea" placeholder="Write something about yourself on Description" name="profile_description"><?php echo $cus_profile_description ?></textarea>
                 </div>
             </div>
 
 
             <div class="mb-3">
-                <label for="basic-url" class="form-label">Admin Photo</label>
-                <input type="file" class="form-control" aria-label="file example" name="admin_photo">
+                <label for="basic-url" class="form-label">Users Photo</label>
+                <input type="file" class="form-control" aria-label="file example" name="cus_user_photo">
                 <div class="invalid-feedback">Example invalid form file feedback</div>
             </div>
 
@@ -192,7 +191,7 @@ if(!isset($_SESSION['cus_username'])){
                 <label for="basic-url" class="form-label">Phone no</label>
                 <div class="input-group">
                     <span class="input-group-text" id="basic-addon3">@</span>
-                    <input type="text" class="form-control" placeholder="Author's Name" name="phone_no" id="basic-url" aria-describedby="basic-addon3" value="<?php echo $phone_no ?>">
+                    <input type="text" class="form-control" placeholder="Phone no" name="phone_no" id="basic-url" aria-describedby="basic-addon3" value="<?php echo $cus_phone_no ?>">
                 </div>
                 <div class="form-text">Example help text goes outside the input group.</div>
             </div>
@@ -200,18 +199,19 @@ if(!isset($_SESSION['cus_username'])){
                 <label for="basic-url" class="form-label">Email</label>
                 <div class="input-group">
                     <span class="input-group-text" id="basic-addon3">@</span>
-                    <input type="email" class="form-control" placeholder="Author's Email" name="email" id="basic-url" aria-describedby="basic-addon3" value="<?php echo $email ?>">
+                    <input type="email" class="form-control" placeholder="Email" name="cus_email" id="basic-url" aria-describedby="basic-addon3" value="<?php echo $cus_email ?>">
                 </div>
                 <div class="form-text">Example help text goes outside the input group.</div>
             </div>
             <div class="mb-3">
-                <label for="basic-url" class="form-label">User Role</label>
+                <label for="basic-url" class="form-label">Address</label>
                 <div class="input-group">
                     <span class="input-group-text" id="basic-addon3">@</span>
-                    <input type="text" class="form-control" placeholder="Company Name" name="user_role" id="basic-url" aria-describedby="basic-addon3" value="<?php echo $role ?>">
+                    <input type="text" class="form-control" placeholder="Email" name="cus_address" id="basic-url" aria-describedby="basic-addon3" value="<?php echo $cus_email ?>">
                 </div>
                 <div class="form-text">Example help text goes outside the input group.</div>
             </div>
+          
 
 
 

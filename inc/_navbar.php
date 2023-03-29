@@ -1,3 +1,15 @@
+<?php 
+if(isset($_SESSION['cus_username'])){
+include "cus_dashboard/inc/_cus_navbar.php";
+}else{
+
+
+
+
+?>
+
+
+
 <body>
   <!-- the main content starts here -->
   <main>
@@ -230,3 +242,7 @@ include_once("inc/functions.php");
   </div>
   <!-- search model ends here -->
 
+<?php 
+
+}
+?>

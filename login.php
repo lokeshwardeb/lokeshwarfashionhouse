@@ -91,7 +91,7 @@ include  "inc/functions.php";
                   $_SESSION['cus_address'] = $row['cus_address'];
                   $_SESSION['cus_joined_datatime'] = $row['cus_joined_datatime'];
 
-                  header("location: cus_dashboard/home.php");
+                  header("location: index.php");
                   // die("hi");
                 } else {
                   // $_SESSION['loggedin'] = false;
