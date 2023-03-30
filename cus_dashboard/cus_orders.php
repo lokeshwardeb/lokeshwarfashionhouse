@@ -203,7 +203,7 @@ if($result_sql_orders_check){
               ?> <?php echo '">'. ucfirst( $row['order_status']).'</td>
 
               
-              <td><a href="orders_details.php?id='.$row['id'].'"><button type="submit" class="btn btn-dark">Order Details</button></a></td>
+              <td><a href="cus_orders_details.php?id='.$row['id'].'"><button type="submit" class="btn btn-dark">Order Details</button></a></td>
             </tr>';
             }
           }

@@ -78,6 +78,54 @@ if(isset($_SESSION['cus_username'])){
 
 
 
+$check_username = $_SESSION["cus_username"];
+
+  $sql_check = "SELECT * FROM `cus_users` WHERE `cus_username` = '$check_username'";
+  $result_check = mysqli_query($conn, $sql_check);
+  if($result_check){
+    while($row = mysqli_fetch_assoc($result_check)){
+    $check_user_id =  $row['cus_id'];
+    }
+  }
+$check_customer_sql = "SELECT * FROM `customers` WHERE `cus_id` = '$check_user_id'";
+$result_customer_check = mysqli_query($conn, $check_customer_sql);
+if($result_customer_check){
+while($row = mysqli_fetch_assoc($result_customer_check)){
+$customer_id = $row['customer_id'];
+
+}
+
+
+}
+$sql_orders_check = "SELECT * FROM `orders` WHERE `customer_id_on_order` = '$customer_id'";
+$result_sql_orders_check = mysqli_query($conn, $sql_orders_check);
+if($result_sql_orders_check){
+if(mysqli_num_rows($result_sql_orders_check) > 0){
+$total_orders_count = mysqli_num_rows($result_sql_orders_check);
+$sql_in_process = "SELECT * FROM `orders` WHERE `customer_id_on_order` = '$customer_id' AND `order_status` = 'In-process'";
+$result_sql_in_process = mysqli_query($conn, $sql_in_process);
+
+if($result_sql_in_process){
+$in_process_orders_count = mysqli_num_rows($result_sql_in_process);
+}
+// $in_process_orders_count = 
+$sql_delivered = "SELECT * FROM `orders` WHERE `customer_id_on_order` = '$customer_id' AND `order_status` = 'completed'";
+$result_delivered = mysqli_query($conn, $sql_delivered);
+
+if($result_delivered){
+$delivered_orders_count = mysqli_num_rows($result_delivered);
+}
+
+}else{
+$total_orders_count = 0;
+$in_process_orders_count = 0;
+$delivered_orders_count = 0;
+}
+}
+
+
+ 
+  
 
 
 
