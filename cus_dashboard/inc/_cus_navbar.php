@@ -31,13 +31,13 @@
 
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link custom-light m-auto me-4" href="<?php echo SITE_URL ?>privacy-policy.html">Profile</a>
+                                <a class="nav-link custom-light m-auto me-4" href="<?php echo SITE_URL ?>cus_dashboard/cus_profile.php">Profile</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link custom-light m-auto me-4" href="<?php echo SITE_URL ?>termsofservice.html">Settings</a>
+                                <a class="nav-link custom-light m-auto me-4" href="<?php echo SITE_URL ?>cus_dashboard/cus_settings.php">Settings</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link custom-light m-auto me-4" href="<?php echo SITE_URL ?>about-us.html">About Us</a>
+                                <a class="nav-link custom-light m-auto me-4" href="<?php echo SITE_URL ?>about-us.php">About Us</a>
                             </li>
                             <!-- <li class="nav-item">
                 <a class="nav-link custom-light m-auto me-4" href="returnandrefundpolicy.html">Return and refund

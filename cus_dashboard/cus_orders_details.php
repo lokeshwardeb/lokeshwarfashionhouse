@@ -14,7 +14,7 @@ if (!isset($_SESSION['cus_username'])) {
 } elseif (isset($_SESSION['cus_username'])) {
 
 
-    include "inc/_navbar.php";
+    include "inc/_cus_navbar.php";
 
 ?>
 
@@ -273,7 +273,7 @@ if (!isset($_SESSION['cus_username'])) {
 
 
 <?php
-    include "inc/_footer.php";
+    include "inc/_cus_footer.php";
 }
 
 ?>

@@ -18,6 +18,7 @@ if ($result) {
             $id = $row['id'];
             $website_name = $row['website_name'];
             $website_description = $row['website_description'];
+            $website_contract_email = $row['website_contract_email'];
             $website_slogan = $row['website_slogan'];
             $aurthors_name = $row['authors_name'];
             $authors_email = $row['authors_email'];
@@ -35,6 +36,7 @@ if ($result) {
         $id = '';
         $website_name = '';
         $website_description = '';
+        $website_contract_email = '';
         $aurthors_name = '';
         $authors_email = '';
         $company_name = '';

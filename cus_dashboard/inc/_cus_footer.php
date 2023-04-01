@@ -6,7 +6,7 @@
     <div class="container-fluid footer-section text-light pt-4 ">
       <div class="row pt-2">
         <div class="col-3">
-          <img src="img/Loass Logo 1.png" width="" alt="Loass" srcset="" class="footer-logo"><br>
+          <img src="../img/Loass Logo 1.png" width="" alt="Loass" srcset="" class="footer-logo"><br>
           <div class="logo-title ">
             Loass
           </div>
@@ -26,10 +26,10 @@
               <a href="privacy-policy.html" class="nav-link nav-link-footer">Privacy Policy</a>
             </li>
             <li class="nav-item">
-              <a href="termsofservice.html" class="nav-link nav-link-footer">Terms and Service</a>
+              <a href="<?php echo SITE_URL?>termsofservice.html" class="nav-link nav-link-footer">Terms and Service</a>
             </li>
             <li class="nav-item">
-              <a href="return-refund-policy.php" class="nav-link nav-link-footer">Refund Policy</a>
+              <a href="<?php echo SITE_URL?>return-refund-policy.php" class="nav-link nav-link-footer">Refund Policy</a>
             </li>
             <li class="nav-item">
               <a href="" class="nav-link nav-link-footer">Contract us</a>
@@ -81,10 +81,10 @@
           Find us on
         </div>
         <div class="social-links mt-4">
-          <a href=""><img src="img/facebook 1 1.png" width="" class="img-fluid mt-4 me-4 pe-4 ms-4 ps-4 mt-4 mb-4 pb-4" alt="" srcset=""></a>
-          <a href=""> <img src="img/twitter 1 1.png" width="" class="img-fluid mt-4 me-4 pe-4 ms-4 ps-4 mt-4 mb-4 pb-4" alt="" srcset=""></a>
-          <a href=""><img src="img/instagram 1 1.png" width="" class="img-fluid mt-4 me-4 pe-4 ms-4 ps-4 mt-4 mb-4 pb-4" alt="" srcset=""></a>
-          <a href=""><img src="img/linkedin 1 1.png" width="" class="img-fluid mt-4 me-4 pe-4 ms-4 ps-4 mt-4 mb-4 pb-4" alt="" srcset=""></a>
+          <a href=""><img src="../img/facebook 1 1.png" width="" class="img-fluid mt-4 me-4 pe-4 ms-4 ps-4 mt-4 mb-4 pb-4" alt="" srcset=""></a>
+          <a href=""> <img src="../img/twitter 1 1.png" width="" class="img-fluid mt-4 me-4 pe-4 ms-4 ps-4 mt-4 mb-4 pb-4" alt="" srcset=""></a>
+          <a href=""><img src="../img/instagram 1 1.png" width="" class="img-fluid mt-4 me-4 pe-4 ms-4 ps-4 mt-4 mb-4 pb-4" alt="" srcset=""></a>
+          <a href=""><img src="../img/linkedin 1 1.png" width="" class="img-fluid mt-4 me-4 pe-4 ms-4 ps-4 mt-4 mb-4 pb-4" alt="" srcset=""></a>
         </div>
 
 
@@ -104,9 +104,9 @@
   <!-- bootstrap js script -->
 
   <!-- <script src="js/bootstrap.min.js"></script> -->
-  <script src="js/bootstrap.min.js"></script>
+  <script src="../js/bootstrap.min.js"></script>
 
-  <script src="js/script.js"></script>
+  <script src="../js/script.js"></script>
 
 </body>
 

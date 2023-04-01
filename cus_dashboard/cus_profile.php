@@ -226,12 +226,12 @@ if(!isset($_SESSION['cus_username'])){
     </div>
 
 
-
+</div>
 
 
 
 <?php
-    include "inc/_footer.php";
+    include "inc/_cus_footer.php";
 }
 
 ?>

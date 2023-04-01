@@ -204,8 +204,14 @@ if($result_sql_orders_check){
 
               
               <td><a href="cus_orders_details.php?id='.$row['id'].'"><button type="submit" class="btn btn-dark">Order Details</button></a></td>
-            </tr>';
+            </tr>
+            
+            
+           ';
             }
+
+            echo ' </tbody>
+            </table>';
           }
           else{
             echo '<div class = "custom-default-box-bg-color pt-4 mt-4 fs-4" style="height:200px !important;">
@@ -234,7 +240,7 @@ if($result_sql_orders_check){
 
 <?php
 
-include "inc/_footer.php";
+include "inc/_cus_footer.php";
         }
 
 ?>

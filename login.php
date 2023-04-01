@@ -14,7 +14,7 @@ include "inc/_header.php";
 // if(isset($_SESSION['username'])){
 //     header("location: home.php");
 //   }
-  // else{
+// else{
 
 
 
@@ -38,13 +38,15 @@ include "inc/_header.php";
     background-repeat: no-repeat;
     background-size: cover;
   }
-  #preloader{
+
+  #preloader {
     background: #ddd url(img/preloader_un.gif) no-repeat center center;
     height: 100vh !important;
     width: 100vw !important;
     position: fixed !important;
     z-index: 100 !important;
   }
+
   /* .login{
    
   } */
@@ -59,7 +61,7 @@ include "inc/_header.php";
     <div class="text-center">
 
       <?php
-include  "inc/functions.php";
+      include  "inc/functions.php";
 
       if (isset($_POST['signin'])) {
 
@@ -95,19 +97,19 @@ include  "inc/functions.php";
                   // die("hi");
                 } else {
                   // $_SESSION['loggedin'] = false;
-                preloader_include();
-                 echo(login_password_not_matched()) ;
+                  preloader_include();
+                  echo (login_password_not_matched());
                 }
               }
             } else {
               preloader_include();
-              echo(login_user_doesnot_exist());
+              echo (login_user_doesnot_exist());
             }
           } else {
 
-           preloader_include();
+            preloader_include();
 
-            echo(login_user_password_blank());
+            echo (login_user_password_blank());
             // exit();
           }
 
@@ -117,7 +119,7 @@ include  "inc/functions.php";
           // echo 'this is the verify' . $verify;
         } else {
           preloader_include();
-          echo(login_defficulties_error());
+          echo (login_defficulties_error());
         }
       }
 
@@ -140,7 +142,7 @@ include  "inc/functions.php";
             <label for="floatingPassword">Password</label>
           </div>
 
-          
+
 
           <div class="checkbox mb-3">
             <label>
@@ -151,12 +153,12 @@ include  "inc/functions.php";
 
           <div class="form-floating mb-3 mt-4">
             <label for="forgotPassword"></label>
-          <span>Forgot you password ?<a href="forgot_pass.php" id="forgotPassword"> Click here</a> to restore your account.</span>  
+            <span>Forgot you password ?<a href="forgot_pass.php" id="forgotPassword"> Click here</a> to restore your account.</span>
 
           </div>
           <div class="form-floating mb-3 mt-4">
             <label for="forgotPassword"></label>
-          <span>Don't have a account ?<a href="sign_up.php" id="forgotPassword"> Create a account </a> to restore your account.</span>  
+            <span>Don't have a account ?<a href="sign_up.php" id="forgotPassword"> Create a account </a> to restore your account.</span>
 
           </div>
 
@@ -183,11 +185,12 @@ include  "inc/functions.php";
   // include "inc/_footer.php";
 
 
-  // ?>
+  // 
+  ?>
 
-<script src="js/all.min.js"></script>
-<script src="js/bootstrap.min.js"></script>
-<script src="js/script.js"></script>
+  <script src="js/all.min.js"></script>
+  <script src="js/bootstrap.min.js"></script>
+  <script src="js/script.js"></script>
 
 </body>
 

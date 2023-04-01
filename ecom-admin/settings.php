@@ -54,6 +54,7 @@ if (!isset($_SESSION['username'])) {
                     $id = $row['id'];
                     $website_name = $row['website_name'];
                     $website_description = $row['website_description'];
+                    $website_contract_email = $row['website_contract_email'];
                     $website_slogan = $row['website_slogan'];
                     $product_currency = $row['product_currency'];
                     
@@ -84,6 +85,8 @@ if (!isset($_SESSION['username'])) {
         if (isset($_POST['save_changes'])) {
             $website_name = htmlspecialchars(mysqli_real_escape_string($conn, $_POST['website_name']), ENT_QUOTES);
             $website_description = htmlspecialchars(mysqli_real_escape_string($conn, $_POST['website_description']), ENT_QUOTES);
+            $website_contract_email = htmlspecialchars(mysqli_real_escape_string($conn, $_POST['website_contract_email']), ENT_QUOTES);
+            
             $websizte_slogan = htmlspecialchars(mysqli_real_escape_string($conn, $_POST['website_slogan']), ENT_QUOTES);
             $product_currency = $_POST['product_currency'];
             $aurthors_name = htmlspecialchars(mysqli_real_escape_string($conn, $_POST['authors_name']), ENT_QUOTES);
@@ -138,7 +141,7 @@ if (!isset($_SESSION['username'])) {
 
             // if the database is empty then insert the data into the table
             if (mysqli_num_rows($result) == 0) {
-                $sql = "INSERT INTO `settings` (`website_name`, `website_description`, `website_slogan`, `product_currency`, `logo_img_upload`, `authors_name`, `authors_email`, `company_name`, `phone_no`, `datetime`) VALUES ('$website_name', '$website_description', $website_slogan, '$product_currency', '$logo_name', '$aurthors_name', '$authors_email', '$company_name', '$company_phone_no', current_timestamp());";
+                $sql = "INSERT INTO `settings` (`website_name`, `website_description` `website_contract_email`, `website_slogan`, `product_currency`, `logo_img_upload`, `authors_name`, `authors_email`, `company_name`, `phone_no`, `datetime`) VALUES ('$website_name', '$website_description', '$website_contract_email', $website_slogan, '$product_currency', '$logo_name', '$aurthors_name', '$authors_email', '$company_name', '$company_phone_no', current_timestamp());";
 
                 $result = mysqli_query($conn, $sql);
 
@@ -169,7 +172,7 @@ if (!isset($_SESSION['username'])) {
             } else {
 
                 if ($logo_name == '') {
-                    $sql = "UPDATE `settings` SET `website_name` = '$website_name', `website_description` = '$website_description', `website_slogan`= '$website_slogan', `product_currency` = '$product_currency', `authors_name` = '$aurthors_name', `authors_email` = '$authors_email', `company_name` = '$company_name', `phone_no` = '$company_phone_no' WHERE `settings`.`id` = $id;;";
+                    $sql = "UPDATE `settings` SET `website_name` = '$website_name', `website_description` = '$website_description', `website_contract_email` = '$website_contract_email',  `website_slogan`= '$website_slogan', `product_currency` = '$product_currency', `authors_name` = '$aurthors_name', `authors_email` = '$authors_email', `company_name` = '$company_name', `phone_no` = '$company_phone_no' WHERE `settings`.`id` = $id;;";
                     $result = mysqli_query($conn, $sql);
                     if ($result) {
                         // echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
@@ -187,7 +190,7 @@ if (!isset($_SESSION['username'])) {
                     }
                 } elseif ($logo_name !== '') {
                     // if the database is not empty then update the table with the new data
-                    $sql = "UPDATE `settings` SET `website_name` = '$website_name', `website_description` = '$website_description', `website_slogan`= '$website_slogan', `product_currency` = '$product_currency',`logo_img_upload` = '$logo_name', `authors_name` = '$aurthors_name', `authors_email` = '$authors_email', `company_name` = '$company_name', `phone_no` = '$company_phone_no' WHERE `settings`.`id` = $id;";
+                    $sql = "UPDATE `settings` SET `website_name` = '$website_name', `website_contract_email` =  '$website_contract_email', `website_description` = '$website_description', `website_slogan`= '$website_slogan', `product_currency` = '$product_currency',`logo_img_upload` = '$logo_name', `authors_name` = '$aurthors_name', `authors_email` = '$authors_email', `company_name` = '$company_name', `phone_no` = '$company_phone_no' WHERE `settings`.`id` = $id;";
 
                     $result = mysqli_query($conn, $sql);
 
@@ -221,7 +224,7 @@ if (!isset($_SESSION['username'])) {
 
 
                 if ($login_name == '') {
-                    $sql = "UPDATE `settings` SET `website_name` = '$website_name', `website_description` = '$website_description', `website_slogan`= '$website_slogan',`product_currency` = '$product_currency', `authors_name` = '$aurthors_name', `authors_email` = '$authors_email', `company_name` = '$company_name', `phone_no` = '$company_phone_no' WHERE `settings`.`id` = $id;;";
+                    $sql = "UPDATE `settings` SET `website_name` = '$website_name', `website_description` = '$website_description', `website_contract_email` = '$website_contract_email', `website_slogan`= '$website_slogan',`product_currency` = '$product_currency', `authors_name` = '$aurthors_name', `authors_email` = '$authors_email', `company_name` = '$company_name', `phone_no` = '$company_phone_no' WHERE `settings`.`id` = $id;;";
                     $result = mysqli_query($conn, $sql);
                     if ($result) {
                         // echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
@@ -239,7 +242,7 @@ if (!isset($_SESSION['username'])) {
                         update_error_message();
                     }
                 } elseif ($login_name !== '') {
-                    $sql = "UPDATE `settings` SET `website_name` = '$website_name', `website_description` = '$website_description', `website_slogan`= '$website_slogan',`product_currency` = '$product_currency', `login_img` = '$login_name', `authors_name` = '$aurthors_name', `authors_email` = '$authors_email', `company_name` = '$company_name', `phone_no` = '$company_phone_no' WHERE `settings`.`id` = $id;";
+                    $sql = "UPDATE `settings` SET `website_name` = '$website_name', `website_description` = '$website_description',`website_contract_email` = '$website_contract_email', `website_slogan`= '$website_slogan',`product_currency` = '$product_currency', `login_img` = '$login_name', `authors_name` = '$aurthors_name', `authors_email` = '$authors_email', `company_name` = '$company_name', `phone_no` = '$company_phone_no' WHERE `settings`.`id` = $id;";
 
                     $result = mysqli_query($conn, $sql);
 
@@ -279,7 +282,7 @@ if (!isset($_SESSION['username'])) {
                 $user_login_image_upload = "uploaded_img/users_login_upload/" . $user_login_image;
 
                 if($user_login_image != '' && $login_name !==''){
-                    $sql = "UPDATE `settings` SET `website_name` = '$website_name', `website_description` = '$website_description', `website_slogan`= '$website_slogan',`product_currency` = '$product_currency', `login_img` = '$login_name', `users_login_img` = '$user_login_image',`authors_name` = '$aurthors_name', `authors_email` = '$authors_email', `company_name` = '$company_name', `phone_no` = '$company_phone_no' WHERE `settings`.`id` = $id;";
+                    $sql = "UPDATE `settings` SET `website_name` = '$website_name', `website_description` = '$website_description',`website_contract_email` = '$website_contract_email', `website_slogan`= '$website_slogan',`product_currency` = '$product_currency', `login_img` = '$login_name', `users_login_img` = '$user_login_image',`authors_name` = '$aurthors_name', `authors_email` = '$authors_email', `company_name` = '$company_name', `phone_no` = '$company_phone_no' WHERE `settings`.`id` = $id;";
 
                     $result = mysqli_query($conn, $sql);
 
@@ -294,7 +297,7 @@ if (!isset($_SESSION['username'])) {
 
                 }
                 if($user_login_image != '' && $login_name ==''){
-                    $sql = "UPDATE `settings` SET `website_name` = '$website_name', `website_description` = '$website_description', `website_slogan`= '$website_slogan',`product_currency` = '$product_currency', `users_login_img` = '$user_login_image',`authors_name` = '$aurthors_name', `authors_email` = '$authors_email', `company_name` = '$company_name', `phone_no` = '$company_phone_no' WHERE `settings`.`id` = $id;";
+                    $sql = "UPDATE `settings` SET `website_name` = '$website_name', `website_description` = '$website_description', `website_contract_email` = '$website_contract_email', `website_slogan`= '$website_slogan',`product_currency` = '$product_currency', `users_login_img` = '$user_login_image',`authors_name` = '$aurthors_name', `authors_email` = '$authors_email', `company_name` = '$company_name', `phone_no` = '$company_phone_no' WHERE `settings`.`id` = $id;";
 
                     $result = mysqli_query($conn, $sql);
 
@@ -379,6 +382,13 @@ if (!isset($_SESSION['username'])) {
                 <div class="input-group">
                     <span class="input-group-text">@</span>
                     <textarea class="form-control" aria-label="With textarea" placeholder="Description" name="website_description"><?php echo $website_description ?></textarea>
+                </div>
+            </div>
+            <div class="mb-3">
+                <label for="basic-url" class="form-label">Website Contract email</label>
+                <div class="input-group">
+                    <span class="input-group-text">@</span>
+                    <input type="email" class="form-control" aria-label="With textarea" placeholder="Website contract email" name="website_contract_email" value="<?php echo $website_contract_email ?>">
                 </div>
             </div>
             <div class="mb-3">

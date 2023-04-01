@@ -391,7 +391,7 @@ if ($featured_product_result) {
   </div>
   <div class="carousel-inner">
     <div class="carousel-item active">
-      <img src="img/front-self.jpg" class="d-block w-100 main-banner-img" alt="...">
+      <img src="img/brand-banner.jpg" class="d-block w-100 main-banner-img" alt="...">
       <div class="carousel-caption d-none d-md-block">
         <h5>First slide label</h5>
         <p>Some representative placeholder content for the first slide.</p>
