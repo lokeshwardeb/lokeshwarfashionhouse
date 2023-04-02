@@ -107,6 +107,7 @@ if ($featured_product_result) {
                         <img src="' . PRODUCT_INFO_PATH . '' . $row['product_img'] . '"" alt="" >
                       </div>
 
+                      <input type = "hidden" value="' . $row["product_id"] . '" name="product_id">
                       <input type = "hidden" value="' . $row["product_name"] . '" name="product_name">
                       <div class="p-title d-block mt-2 mb-3 ms-4 product-title"  id="pro-name">
                        ' . $row['product_name'] . '
@@ -236,6 +237,8 @@ if ($featured_product_result) {
                       <img src="' . PRODUCT_INFO_PATH . '' . $row['product_img'] . '"" alt="" >
                     </div>
 
+                    <input type = "hidden" value="' . $row["product_id"] . '" name="product_id">
+
                     <input type = "hidden" value="' . $row["product_name"] . '" name="product_name">
                     <div class="p-title d-block mt-2 mb-3 ms-4 product-title"  id="pro-name">
                      ' . $row['product_name'] . '
@@ -255,7 +258,7 @@ if ($featured_product_result) {
                   </div>
                   <div class="price d-inline-flex">
                     <div class="price_symbol">';
-          product_currency_bdt();
+         echo product_currency_bdt();
           echo '</div>
                     <div class="price_amount" name="product_price">' . $row['product_price'] . '</div>
                   </div><br>

@@ -31,16 +31,16 @@ include "cus_dashboard/inc/_cus_navbar.php";
                   href="index.php">Home</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link custom-light m-auto me-4" href="about-us.html">About Us</a>
+                <a class="nav-link custom-light m-auto me-4" href="about-us.php">About Us</a>
               </li>
               <li class="nav-item">
                 <a class="nav-link custom-light m-auto me-4" href="shop.php">Shop</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link custom-light m-auto me-4" href="privacy-policy.html">Privacy Policy</a>
+                <a class="nav-link custom-light m-auto me-4" href="privacy-policy.php">Privacy Policy</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link custom-light m-auto me-4" href="termsofservice.html">Terms of service</a>
+                <a class="nav-link custom-light m-auto me-4" href="termsofservice.php">Terms of service</a>
               </li>
               <!-- <li class="nav-item">
                 <a class="nav-link custom-light m-auto me-4" href="returnandrefundpolicy.html">Return and refund

@@ -85,6 +85,15 @@ $sql_orders_check = "SELECT * FROM `orders` WHERE `customer_id_on_order` = '$cus
 $result_sql_orders_check = mysqli_query($conn, $sql_orders_check);
 if($result_sql_orders_check){
   if(mysqli_num_rows($result_sql_orders_check) > 0){
+
+    $orders_sql_check = "SELECT * FROM `orders` WHERE `customer_id_on_order` = '$customer_id'";
+    $orders_result_check = mysqli_query($conn, $orders_sql_check);
+    if($orders_result_check){
+      while($row = mysqli_fetch_assoc($orders_result_check)){
+        $order_no = $row['order_no'];
+      }
+    }
+
     $total_orders_count = mysqli_num_rows($result_sql_orders_check);
     $sql_in_process = "SELECT * FROM `orders` WHERE `customer_id_on_order` = '$customer_id' AND `order_status` = 'In-process'";
     $result_sql_in_process = mysqli_query($conn, $sql_in_process);
@@ -163,6 +172,8 @@ if($result_sql_orders_check){
           <div class="fs-4 mb-4 mt-2">Recent orders</div>
           <?php 
           
+          $sql_orders_status = "SELECT * FROM `order_products` WHERE `orders_id` = '$order_no'";
+
           $sql = "SELECT * FROM `orders` WHERE `customer_id_on_order` = '$customer_id'";
           $result = mysqli_query($conn, $sql);
 

@@ -109,6 +109,18 @@ function login_user_password_blank(){
           <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>';
 }
+function order_placed_success(){
+ return '<div class="alert alert-success alert-dismissible fade show" role="alert">
+          <strong>Success !</strong> Order placed successfully !
+          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>';
+}
+function order_placed_error(){
+ return '<div class="alert alert-danger alert-dismissible fade show" role="alert">
+          <strong>Error !</strong> Order cannot placed successfully !
+          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>';
+}
 
 function login_defficulties_error(){
  return '<div class="alert alert-danger alert-dismissible fade show" role="alert">

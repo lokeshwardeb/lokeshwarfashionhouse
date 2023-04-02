@@ -19,6 +19,7 @@ include("inc/_navbar.php");
 <?php 
 // session_destroy();
 if (isset($_POST['add_cart'])) {
+  $product_id = $_POST['product_id'];
   $product_name = $_POST['product_name'];
   $product_desc = $_POST['product_desc'];
   $product_price = $_POST['product_price'];
@@ -40,6 +41,7 @@ if (isset($_POST['add_cart'])) {
     }else{
       $count = count($_SESSION['cart']);
       $_SESSION['cart'][$count] =  array(
+        "product_id" => $product_id,
         "product_name" => $product_name,
         "product_desc" => $product_desc,
         "product_price" => $product_price,
@@ -62,6 +64,7 @@ if (isset($_POST['add_cart'])) {
     // session_destroy();
   } else {
     $_SESSION['cart'][0] = array(
+      "product_id" => $product_id,
       "product_name" => $product_name,
       "product_desc" => $product_desc,
       "product_price" => $product_price,
