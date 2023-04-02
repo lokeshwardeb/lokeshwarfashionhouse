@@ -126,7 +126,7 @@ if ($featured_product_result) {
                     </div>
                     <div class="price d-inline-flex">
                       <div class="price_symbol">';
-            product_currency_bdt();
+          echo  product_currency_bdt();
             echo '</div>
                       <div class="price_amount" name="product_price">' . $row['product_price'] . '</div>
                     </div><br>

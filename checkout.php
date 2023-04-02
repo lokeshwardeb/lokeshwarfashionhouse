@@ -603,14 +603,17 @@ echo 'the first name is' . $first_name;
   
   <button class="w-100 btn btn-primary btn-lg" type="submit" name="place_order" data-bs-toggle="modal" data-bs-target="#check_username">Continue to checkout</button>
   ';
-}
+}else{
+
+
 
 
 
 ?>
-<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop" >
-  Launch static backdrop modal
+<button type="button" class="btn btn-primary w-100 btn-lg" data-bs-toggle="modal" data-bs-target="#staticBackdrop" >
+  Continue to checkout
 </button>
+<?php } ?>
             </form>
           </div>
         </div>
