@@ -73,13 +73,14 @@ $ordering_username = $_SESSION['cus_username'];
             $order_id = $row['id'];
           }
 
-
+          $total = 0;
           foreach ($_SESSION['cart'] as $key => $value) {
             $product_id =  $value['product_id'];
 
             $product_price = $value['product_price'];
 
             $product_qty = $value['product_qty'];
+            $total = $total + $value["product_price"];
 
             $place_order_sql = "INSERT INTO `orders` (`id`, `order_no`, `customer_id_on_order`, `order_shipping_address`, `payment_method`,  `total_amount`) VALUES (NULL, '$order_no', '$customer_id', '$address1','cod', '$total');";
 
@@ -88,13 +89,21 @@ $ordering_username = $_SESSION['cus_username'];
             if ($place_order_result) {
             //   echo 'order placed';
             }
-            $product_id =  $value['product_id'];
+            $place_order_customer_sql = "INSERT INTO `order_customers` (`cus_id`, `order_no`, `customer_firstname`, `customer_lastname`) VALUES ('$customer_id', '$order_no', '$first_name', '$last_name');";
+
+            $place_order_customer_result = mysqli_query($conn, $place_order_customer_sql);
+
+            if ($place_order_customer_result) {
+            //   echo 'order placed';
+            }
+            $product_id =  $value["product_id"];
 
             $product_price = $value['product_price'];
 
             $product_qty = $value['product_qty'];
+            
 
-            $sql_order_product_sql  = "INSERT INTO `order_products` (`id`, `orders_id`, `product_id`, `product_qty`, `datetime`) VALUES (NULL, '$order_no', '$product_id', '$product_qty', current_timestamp());";
+            $sql_order_product_sql  = "INSERT INTO `order_products` (`orders_id`, `product_id`, `product_qty`, `customer_id_on_order`) VALUES ('$order_no', '$product_id', '$product_qty', '$customer_id');";
 
             $result_order_product_sql = mysqli_query($conn, $sql_order_product_sql);
 
