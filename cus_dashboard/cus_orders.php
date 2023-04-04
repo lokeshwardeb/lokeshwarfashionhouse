@@ -193,7 +193,15 @@ if (!isset($_SESSION['cus_username'])) {
                   if (mysqli_num_rows($result_new_ord_che) > 0) {
                     while ($row = mysqli_fetch_assoc($result_new_ord_che)) {
                       $product_id = $row['product_id'];
+                     
                     }
+                  }
+                }
+                $sql_check_order_status = "SELECT * FROM `orders` WHERE  `customer_id_on_order` = '$customer_id'";
+                $result_check_order_status = mysqli_query($conn, $sql_check_order_status);
+                if($result_check_order_status){
+                  while($row = mysqli_fetch_assoc($result_check_order_status)){
+                    $order_status = $row['order_status'];
                   }
                 }
 
@@ -209,7 +217,7 @@ if (!isset($_SESSION['cus_username'])) {
                     <th scope="col">Product</th>
                     <th scope="col">Product Price</th>
                     <th scope="col">Description</th>
-                    <th scope="col">Status</th>
+         
                     <th scope="col">Payble amount</th>
                   </tr>
                 </thead>
@@ -234,10 +242,11 @@ if (!isset($_SESSION['cus_username'])) {
                 //     $
                 //   }
                 // }
-                $sql_ch_orders = "SELECT * FROM `orders` WHERE `customer_id_on_order` = '$customer_id'";
-                $result_ch_orders = mysqli_query($conn, $sql);
+                $sql_ch_orders = "SELECT * FROM `order_products` op JOIN products p ON p.product_id = op.product_id WHERE customer_id_on_order = '$customer_id';";
+                $result_ch_orders = mysqli_query($conn, $sql_ch_orders);
 
                 if ($result_ch_orders) {
+                  
                    while ($row = mysqli_fetch_assoc($result_ch_orders)) {
 
                   // $product
@@ -245,10 +254,11 @@ if (!isset($_SESSION['cus_username'])) {
                   echo '<tr class="hover-table">
                   <th scope="row">' . $no++ . '</th>
                   <td><b>' . $row['order_no'] . '</b></td>
-                  <td>' . $product_name . '</td>
-                  <td>' .  product_currency_bdt() . $product_price . '</td>
-                  <td>' . $product_desc . '</td>
-                  <td>' . $order_status . '</td>
+                  <td>' . $row['product_name'] . '</b></td>
+                  <td>' . $row['product_price'] . '</b></td>
+                  <td>' . $row['product_desc'] . '</b></td>
+                 
+             
                   <td>' . product_currency_bdt() . $total_amount . '</td>
                   <td class="'; ?>
                   <?php
@@ -274,6 +284,19 @@ if (!isset($_SESSION['cus_username'])) {
                 
                ';
                 }
+
+                
+                // $sql_new_ord_che = "SELECT * FROM `order_products` op JOIN products p ON p.product_id = op.product_id WHERE customer_id_on_order = 1010;";
+                // $result_new_ord_che = mysqli_query($conn, $sql_new_ord_che);
+
+                // if ($result_new_ord_che) {
+                //   if (mysqli_num_rows($result_new_ord_che) > 0) {
+                //     while ($row = mysqli_fetch_assoc($result_new_ord_che)) {
+                //      echo $product_id = $row['product_id'];
+                     
+                //     }
+                //   }
+                // }
 
                 }
                
