@@ -378,4 +378,18 @@ if(promoInputCheckedStatus){
   
   }
   
+  // let courierChecked = document.getElementById("courierChecked");
+
+  let courierCheckedStatus = document.getElementById("courierChecked").checked
+
+  let courierHandingDesc = document.getElementById("courierHandingDesc");
+
+  if(courierCheckedStatus){
+    courierHandingDesc.classList.remove('no-disp');
+
+  }else{
+    courierHandingDesc.classList.add('no-disp');
+  }
+
+
 

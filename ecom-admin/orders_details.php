@@ -66,6 +66,9 @@ if (!isset($_SESSION['username'])) {
                     $cancel_reason = $row['cancel_reason'];
                     $check_cancel_reason = $row['cancel_reason'];
                     $total_amount = $row['total_amount'];
+                    $courier_handing_status = $row['courier_handing_status'];
+                    $courier_handing_desc = $row['courier_handing_desc'];
+                    $order_accepting_status = $row['order_accepting_status'];
                 }
 
                 // get customer details
@@ -111,6 +114,8 @@ if (!isset($_SESSION['username'])) {
 
                     $product_last_checked_in_datetime_input = $_POST['product_last_checked_in_datetime_input'];
 
+                    $courier_handing_desc = htmlspecialchars(mysqli_real_escape_string($conn, $_POST['courier_handing_desc']));
+
                     //  echo 'the verify is ' . $verify = password_verify($password, $hash);
 
 
@@ -118,7 +123,7 @@ if (!isset($_SESSION['username'])) {
                     $order_status = mysqli_real_escape_string($conn, $_POST['order_status']);
 
                     $order_payment_status = mysqli_real_escape_string($conn, $_POST['payment_status']);
-$cancel_reason = $_POST['cancel_reason'];
+                    $cancel_reason = $_POST['cancel_reason'];
 
                     // $active_current_time = $_POST['active_current_time'];
                     // $time = $_POST['this_time'];
@@ -142,6 +147,31 @@ $cancel_reason = $_POST['cancel_reason'];
                             // if ($product_last_checked_in_datetime_input == '') {
 
                             // }
+
+
+                            if (filter_has_var(INPUT_POST, 'product_handed_on_courier')) {
+                                $handed_on_courier_status_sql = "UPDATE `orders` SET `courier_handing_status` = 'handed on courier', `courier_handing_desc` = '$courier_handing_desc' WHERE `orders`.`id` = '$order_id';";
+
+                                $handed_on_courier_status_result = mysqli_query($conn, $handed_on_courier_status_sql);
+
+                                if ($handed_on_courier_status_result) {
+                                    update_success_message();
+                                } else {
+                                    update_error_message();
+                                }
+                            } else {
+                                $handed_on_courier_status_sql = "UPDATE `orders` SET `courier_handing_status` = '', `courier_handing_desc` = '' WHERE `orders`.`id` = '$order_id';";
+
+                                $handed_on_courier_status_result = mysqli_query($conn, $handed_on_courier_status_sql);
+
+                                if ($handed_on_courier_status_result) {
+                                    update_success_message();
+                                } else {
+                                    update_error_message();
+                                }
+                            }
+
+
 
                             if (filter_has_var(INPUT_POST, 'this_time')) {
 
@@ -178,7 +208,7 @@ $cancel_reason = $_POST['cancel_reason'];
                                         update_error_message();
                                     }
                                 }
-                                if($check_cancel_reason == ''){
+                                if ($check_cancel_reason == '') {
                                     $order_update_sql = "UPDATE `orders` SET `payment_status` = '$order_payment_status', `product_last_checked_in` = '$product_last_checked_in', `product_last_checked_in_datetime` = '$product_last_checked_in_datetime_input', `order_status` = '$order_status', `cancel_reason` = 'order_$order_status' WHERE `orders`.`id` = $order_id";
 
                                     $order_update_result = mysqli_query($conn, $order_update_sql);
@@ -227,7 +257,7 @@ $cancel_reason = $_POST['cancel_reason'];
                                             update_error_message();
                                         }
                                     }
-                                    if($check_cancel_reason == ''){
+                                    if ($check_cancel_reason == '') {
                                         $order_update_sql = "UPDATE `orders` SET `payment_status` = '$order_payment_status', `product_last_checked_in` = '$product_last_checked_in', `product_last_checked_in_datetime` = '$product_last_checked_in_datetime_input', `order_status` = '$order_status', `cancel_reason` = 'order_$order_status' WHERE `orders`.`id` = $order_id";
 
                                         $order_update_result = mysqli_query($conn, $order_update_sql);
@@ -273,7 +303,7 @@ $cancel_reason = $_POST['cancel_reason'];
                                         }
                                     }
 
-                                    if($check_cancel_reason == ''){
+                                    if ($check_cancel_reason == '') {
                                         $order_update_sql = "UPDATE `orders` SET `payment_status` = '$order_payment_status', `product_last_checked_in` = '$product_last_checked_in', `product_last_checked_in_datetime` = '$product_last_checked_in_datetime_input', `order_status` = '$order_status', `cancel_reason` = 'order_$order_status' WHERE `orders`.`id` = $order_id";
 
                                         $order_update_result = mysqli_query($conn, $order_update_sql);
@@ -293,6 +323,42 @@ $cancel_reason = $_POST['cancel_reason'];
 
 
 
+                if ($order_accepting_status == '') {
+                    echo '<div class="alert alert-warning" role="alert">
+    <h4 class="alert-heading">New order ! Well done!</h4>
+    <p>Aww yeah, you successfully read this important alert message. This is a new order from your site. A customer has recently placed an order with the products.</p>
+    <hr>
+    <p class="mb-0">Do you accept the order ? If you accept the order then click on I accept the order button or else click on cancell the order.</p>
+    <form action = "" method = "post">
+    <div class = "row mt-2 mb-4">
+    <div class = "col-6"><button class = "btn btn-primary btn-sm" name= "order_accepted_submit">I accept the order</button></div>
+    <div class = "col-6"><button class = "btn btn-danger btn-sm" name= "order_cancelled_submit">Cancel the order</button></div>
+    </div>
+    </form>
+  </div>';
+                }
+
+                if (isset($_POST['order_accepted_submit'])) {
+                    $sql_order_accepted = "UPDATE `orders` SET `order_accepting_status` = 'order accepted', `order_status` = 'In-process', `cancel_reason` = '' WHERE `orders`.`id` = '$order_id';";
+                    $result_order_accepted = mysqli_query($conn, $sql_order_accepted);
+                    if ($result) {
+                        echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
+        <strong>Order accepted!</strong> Your order is accepted and you should start your order processing.
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      </div>';
+                    }
+                }
+                if (isset($_POST['order_cancelled_submit'])) {
+                    $sql_order_cancelled = "UPDATE `orders` SET `order_accepting_status` = 'not accepted by admin', `order_status` = 'cancelled', `cancel_reason` = 'not accepted by admin' WHERE `orders`.`id` = '$order_id';";
+                    $result_order_cancelled = mysqli_query($conn, $sql_order_cancelled);
+                    if ($result) {
+
+                        echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">
+        <strong>Order cancelled!</strong> Your order is cancelled and you have cancelled the order.
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      </div>';
+                    }
+                }
 
 
                 echo '
@@ -355,7 +421,7 @@ $cancel_reason = $_POST['cancel_reason'];
 
                                                         ?>"><?php echo '' . ucfirst($order_status)  . ' </span> </div> <br>
 
-   <div class ="fs-5 no-disp" id = "theCancelledResonShowDiv" >Reason for the cancelation: ' .ucfirst($cancel_reason)  . ' </div><br><br>
+   <div class ="fs-5 no-disp" id = "theCancelledResonShowDiv" >Reason for the cancelation: ' . ucfirst($cancel_reason)  . ' </div><br><br>
     Product Added Datetime: ' . $product_added_datetime . ' <br><br>
 
 </div>
@@ -403,7 +469,7 @@ $cancel_reason = $_POST['cancel_reason'];
                                         <div class="input-group">
                                             <input type="hidden" value="">
                                             <span class="input-group-text" id="basic-addon3">@</span>
-                                            <input type="text" class="form-control" placeholder="Product Name" id="basic-url" aria-describedby="basic-addon3" name="product_last_checked_in" value="<?php echo $product_last_checked_in; ?>" required>
+                                            <input type="text" class="form-control" placeholder="Product Name" id="basic-url" aria-describedby="basic-addon3" name="product_last_checked_in" value="<?php echo $product_last_checked_in; ?>">
                                         </div>
                                         <div class="form-text">Example help text goes outside the input group.</div>
 
@@ -420,6 +486,32 @@ $cancel_reason = $_POST['cancel_reason'];
                                         <div class="checkbox mb-3">
                                             <label>
                                                 <input type="checkbox" value="<?php echo $time_now ?>" name="this_time"> Use current time
+                                            </label>
+                                        </div>
+                                        <div class="form-text">Note: If you want to add custom time date then you can write on the box. If the box is blank then current time and date will be added as last checked in datetime. </div>
+
+                                    </div>
+
+                                    <div class="mb-3" id="courierDesc">
+                                        <label for="basic-url" class="form-label">Courier handing Description</label>
+                                        <div class="input-group">
+                                            <input type="hidden" value="">
+                                            <span class="input-group-text" id="basic-addon3">@</span>
+                                            <input type="text" class="form-control" placeholder="Courier handing Description" id="courierHandingDesc" aria-describedby="basic-addon3" name="courier_handing_desc" value="<?php echo $courier_handing_desc; ?>">
+
+
+                                        </div>
+
+
+                                        <div class="checkbox mb-3">
+                                            <label>
+                                                <input id="courierChecked" type="checkbox" value="<?php echo $courier_handing_status ?>" name="product_handed_on_courier" <?php
+                                                                                                                                                        if ($courier_handing_status !== '') {
+                                                                                                                                                            echo 'checked';
+                                                                                                                                                        }
+
+                                                                                                                                                        ?> >
+                                                Product Courier handed on courier
                                             </label>
                                         </div>
                                         <div class="form-text">Note: If you want to add custom time date then you can write on the box. If the box is blank then current time and date will be added as last checked in datetime. </div>
@@ -528,13 +620,12 @@ $cancel_reason = $_POST['cancel_reason'];
                                             ?>
                                             <input type="text" class="form-control" placeholder="Reason for the cancelation" id="resonInput" aria-describedby="basic-addon3" name="cancel_reason" value="<?php
 
-if($cancel_reason == 'order_In-process'|| $cancel_reason == 'order_completed'){
-    echo '';
-}
-else{
-    echo $cancel_reason;
-}
-                                                                                                                                                                                                                     ?>" required>
+                                                                                                                                                                                                            if ($cancel_reason == 'order_In-process' || $cancel_reason == 'order_completed') {
+                                                                                                                                                                                                                echo '';
+                                                                                                                                                                                                            } else {
+                                                                                                                                                                                                                echo $cancel_reason;
+                                                                                                                                                                                                            }
+                                                                                                                                                                                                            ?>">
                                         </div>
                                         <div class="form-text">Example help text goes outside the input group.</div>
 
