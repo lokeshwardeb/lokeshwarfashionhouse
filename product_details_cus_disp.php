@@ -2,6 +2,7 @@
 include "inc/conn.php";
 $active_class = 'products';
 include "inc/_header.php";
+include("inc/functions.php");
 
 
 include "inc/_navbar.php";
@@ -23,7 +24,6 @@ include "inc/_navbar.php";
     $search_class = 'products';
 
     include "inc/_search.php";
-    include("inc/functions.php");
 
     include("inc/_theme.php");
 

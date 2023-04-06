@@ -160,7 +160,7 @@ include "cus_dashboard/inc/_cus_navbar.php";
           echo 'the cart is empty';
          }
           
-include_once("inc/functions.php");
+// include_once("inc/functions.php");
           // displaying the cart items
           $total = 0;
        $no = 1;

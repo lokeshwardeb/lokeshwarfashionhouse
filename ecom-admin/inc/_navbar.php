@@ -148,6 +148,7 @@ $active_theme = $theme_row['active_theme'];
         </svg> -->
             <div class="row">
               <div class="col-6">
+              <i class="fa-solid fa-om"></i>
                 <img src="<?php echo 'uploaded_img/' . $website_logo ?>" class="img-fluid" alt="" srcset="">
               </div>
               <div class="col-6">

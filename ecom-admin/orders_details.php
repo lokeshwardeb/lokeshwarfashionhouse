@@ -69,6 +69,8 @@ if (!isset($_SESSION['username'])) {
                     $courier_handing_status = $row['courier_handing_status'];
                     $courier_handing_desc = $row['courier_handing_desc'];
                     $order_accepting_status = $row['order_accepting_status'];
+                    $order_packaging_status = $row['order_packaging_status'];
+                    $order_est_delivery_datetime = $row['order_est_delivery_datetime'];
                 }
 
                 // get customer details
@@ -115,6 +117,8 @@ if (!isset($_SESSION['username'])) {
                     $product_last_checked_in_datetime_input = $_POST['product_last_checked_in_datetime_input'];
 
                     $courier_handing_desc = htmlspecialchars(mysqli_real_escape_string($conn, $_POST['courier_handing_desc']));
+                    $order_packaging_status_input = htmlspecialchars(mysqli_real_escape_string($conn, $_POST['order_packaging_status_input']));
+                    $order_est_delivery_datetime_input = htmlspecialchars(mysqli_real_escape_string($conn, $_POST['order_est_delivery_datetime_input']));
 
                     //  echo 'the verify is ' . $verify = password_verify($password, $hash);
 
@@ -148,6 +152,35 @@ if (!isset($_SESSION['username'])) {
 
                             // }
 
+                            if(filter_has_var(INPUT_POST, 'order_packaging_status')){
+                                if($order_packaging_status_input == ''){
+                                    $order_packaging_status_sql = "UPDATE `orders` SET `order_packaging_status` = 'packaging has started' WHERE `orders`.`id` = '$order_id';";
+                                    $order_packaging_status_result = mysqli_query($conn, $order_packaging_status_sql);
+                                    if($order_packaging_status_result){
+                                        update_success_message();
+                                    }else{
+                                        update_error_message();
+                                    }
+                                }else{
+                                    $order_packaging_status_sql = "UPDATE `orders` SET `order_packaging_status` = '$order_packaging_status_input' WHERE `orders`.`id` = '$order_id';";
+                                    $order_packaging_status_result = mysqli_query($conn, $order_packaging_status_sql);
+                                    if($order_packaging_status_result){
+                                        update_success_message();
+                                    }else{
+                                        update_error_message();
+                                    }
+                                }
+                               
+                            }else{
+                                $order_packaging_status_sql = "UPDATE `orders` SET `order_packaging_status` = '' WHERE `orders`.`id` = '$order_id';";
+                                $order_packaging_status_result = mysqli_query($conn, $order_packaging_status_sql);
+                                if($order_packaging_status_result){
+                                    update_success_message();
+                                }else{
+                                    update_error_message();
+                                }
+                            }
+
 
                             if (filter_has_var(INPUT_POST, 'product_handed_on_courier')) {
                                 $handed_on_courier_status_sql = "UPDATE `orders` SET `courier_handing_status` = 'handed on courier', `courier_handing_desc` = '$courier_handing_desc' WHERE `orders`.`id` = '$order_id';";
@@ -176,7 +209,7 @@ if (!isset($_SESSION['username'])) {
                             if (filter_has_var(INPUT_POST, 'this_time')) {
 
                                 if ($order_status == 'In-process') {
-                                    $order_update_sql = "UPDATE `orders` SET `payment_status` = '$order_payment_status', `product_last_checked_in` = '$product_last_checked_in', `product_last_checked_in_datetime` = '$time_now', `order_status` = '$order_status', `cancel_reason` = 'order_In-process' WHERE `orders`.`id` = $order_id";
+                                    $order_update_sql = "UPDATE `orders` SET `payment_status` = '$order_payment_status', `order_est_delivery_datetime` = '$order_est_delivery_datetime_input', `product_last_checked_in` = '$product_last_checked_in', `product_last_checked_in_datetime` = '$time_now', `order_status` = '$order_status', `cancel_reason` = 'order_In-process' WHERE `orders`.`id` = $order_id";
 
                                     $order_update_result = mysqli_query($conn, $order_update_sql);
 
@@ -187,7 +220,7 @@ if (!isset($_SESSION['username'])) {
                                     }
                                 }
                                 if ($order_status == 'completed') {
-                                    $order_update_sql = "UPDATE `orders` SET `payment_status` = '$order_payment_status', `product_last_checked_in` = '$product_last_checked_in', `product_last_checked_in_datetime` = '$time_now', `order_status` = '$order_status', `cancel_reason` = 'order_completed' WHERE `orders`.`id` = $order_id";
+                                    $order_update_sql = "UPDATE `orders` SET `payment_status` = '$order_payment_status', `order_est_delivery_datetime` = '$order_est_delivery_datetime_input', `product_last_checked_in` = '$product_last_checked_in', `product_last_checked_in_datetime` = '$time_now', `order_status` = '$order_status', `cancel_reason` = 'order_completed' WHERE `orders`.`id` = $order_id";
 
                                     $order_update_result = mysqli_query($conn, $order_update_sql);
 
@@ -198,7 +231,7 @@ if (!isset($_SESSION['username'])) {
                                     }
                                 }
                                 if ($order_status == 'cancelled') {
-                                    $order_update_sql = "UPDATE `orders` SET `payment_status` = '$order_payment_status', `product_last_checked_in` = '$product_last_checked_in', `product_last_checked_in_datetime` = '$time_now', `order_status` = '$order_status', `cancel_reason` = '$cancel_reason' WHERE `orders`.`id` = $order_id";
+                                    $order_update_sql = "UPDATE `orders` SET `payment_status` = '$order_payment_status', `order_est_delivery_datetime` = '$order_est_delivery_datetime_input',`product_last_checked_in` = '$product_last_checked_in', `product_last_checked_in_datetime` = '$time_now', `order_status` = '$order_status', `cancel_reason` = '$cancel_reason' WHERE `orders`.`id` = $order_id";
 
                                     $order_update_result = mysqli_query($conn, $order_update_sql);
 
@@ -209,7 +242,7 @@ if (!isset($_SESSION['username'])) {
                                     }
                                 }
                                 if ($check_cancel_reason == '') {
-                                    $order_update_sql = "UPDATE `orders` SET `payment_status` = '$order_payment_status', `product_last_checked_in` = '$product_last_checked_in', `product_last_checked_in_datetime` = '$product_last_checked_in_datetime_input', `order_status` = '$order_status', `cancel_reason` = 'order_$order_status' WHERE `orders`.`id` = $order_id";
+                                    $order_update_sql = "UPDATE `orders` SET `payment_status` = '$order_payment_status', `order_est_delivery_datetime` = '$order_est_delivery_datetime_input',`product_last_checked_in` = '$product_last_checked_in', `product_last_checked_in_datetime` = '$product_last_checked_in_datetime_input', `order_status` = '$order_status', `cancel_reason` = 'order_$order_status' WHERE `orders`.`id` = $order_id";
 
                                     $order_update_result = mysqli_query($conn, $order_update_sql);
 
@@ -225,7 +258,7 @@ if (!isset($_SESSION['username'])) {
                                 if ($product_last_checked_in_datetime_input == '') {
 
                                     if ($order_status == 'In-process') {
-                                        $order_update_sql = "UPDATE `orders` SET `payment_status` = '$order_payment_status', `product_last_checked_in` = '$product_last_checked_in', `product_last_checked_in_datetime` = '$time_now', `order_status` = '$order_status', `cancel_reason` = 'order_In-process'  WHERE `orders`.`id` = $order_id";
+                                        $order_update_sql = "UPDATE `orders` SET `payment_status` = '$order_payment_status', `order_est_delivery_datetime` = '$order_est_delivery_datetime_input',`product_last_checked_in` = '$product_last_checked_in', `product_last_checked_in_datetime` = '$time_now', `order_status` = '$order_status', `cancel_reason` = 'order_In-process'  WHERE `orders`.`id` = $order_id";
 
                                         $order_update_result = mysqli_query($conn, $order_update_sql);
 
@@ -236,7 +269,7 @@ if (!isset($_SESSION['username'])) {
                                         }
                                     }
                                     if ($order_status == 'completed') {
-                                        $order_update_sql = "UPDATE `orders` SET `payment_status` = '$order_payment_status', `product_last_checked_in` = '$product_last_checked_in', `product_last_checked_in_datetime` = '$time_now', `order_status` = '$order_status', `cancel_reason` = 'order_completed'  WHERE `orders`.`id` = $order_id";
+                                        $order_update_sql = "UPDATE `orders` SET `payment_status` = '$order_payment_status', `order_est_delivery_datetime` = '$order_est_delivery_datetime_input',`product_last_checked_in` = '$product_last_checked_in', `product_last_checked_in_datetime` = '$time_now', `order_status` = '$order_status', `cancel_reason` = 'order_completed'  WHERE `orders`.`id` = $order_id";
 
                                         $order_update_result = mysqli_query($conn, $order_update_sql);
 
@@ -247,7 +280,7 @@ if (!isset($_SESSION['username'])) {
                                         }
                                     }
                                     if ($order_status == 'cancelled') {
-                                        $order_update_sql = "UPDATE `orders` SET `payment_status` = '$order_payment_status', `product_last_checked_in` = '$product_last_checked_in', `product_last_checked_in_datetime` = '$time_now', `order_status` = '$order_status', `cancel_reason` = '$cancel_reason'  WHERE `orders`.`id` = $order_id";
+                                        $order_update_sql = "UPDATE `orders` SET `payment_status` = '$order_payment_status', `order_est_delivery_datetime` = '$order_est_delivery_datetime_input',`product_last_checked_in` = '$product_last_checked_in', `product_last_checked_in_datetime` = '$time_now', `order_status` = '$order_status', `cancel_reason` = '$cancel_reason'  WHERE `orders`.`id` = $order_id";
 
                                         $order_update_result = mysqli_query($conn, $order_update_sql);
 
@@ -258,7 +291,7 @@ if (!isset($_SESSION['username'])) {
                                         }
                                     }
                                     if ($check_cancel_reason == '') {
-                                        $order_update_sql = "UPDATE `orders` SET `payment_status` = '$order_payment_status', `product_last_checked_in` = '$product_last_checked_in', `product_last_checked_in_datetime` = '$product_last_checked_in_datetime_input', `order_status` = '$order_status', `cancel_reason` = 'order_$order_status' WHERE `orders`.`id` = $order_id";
+                                        $order_update_sql = "UPDATE `orders` SET `payment_status` = '$order_payment_status', `order_est_delivery_datetime` = '$order_est_delivery_datetime_input',`product_last_checked_in` = '$product_last_checked_in', `product_last_checked_in_datetime` = '$product_last_checked_in_datetime_input', `order_status` = '$order_status', `cancel_reason` = 'order_$order_status' WHERE `orders`.`id` = $order_id";
 
                                         $order_update_result = mysqli_query($conn, $order_update_sql);
 
@@ -270,7 +303,7 @@ if (!isset($_SESSION['username'])) {
                                     }
                                 } else {
                                     if ($order_status == 'In-process') {
-                                        $order_update_sql = "UPDATE `orders` SET `payment_status` = '$order_payment_status', `product_last_checked_in` = '$product_last_checked_in', `product_last_checked_in_datetime` = '$product_last_checked_in_datetime_input', `order_status` = '$order_status', `cancel_reason` = 'order_In-process' WHERE `orders`.`id` = $order_id";
+                                        $order_update_sql = "UPDATE `orders` SET `payment_status` = '$order_payment_status', `order_est_delivery_datetime` = '$order_est_delivery_datetime_input',`product_last_checked_in` = '$product_last_checked_in', `product_last_checked_in_datetime` = '$product_last_checked_in_datetime_input', `order_status` = '$order_status', `cancel_reason` = 'order_In-process' WHERE `orders`.`id` = $order_id";
 
                                         $order_update_result = mysqli_query($conn, $order_update_sql);
 
@@ -281,7 +314,7 @@ if (!isset($_SESSION['username'])) {
                                         }
                                     }
                                     if ($order_status == 'completed') {
-                                        $order_update_sql = "UPDATE `orders` SET `payment_status` = '$order_payment_status', `product_last_checked_in` = '$product_last_checked_in', `product_last_checked_in_datetime` = '$product_last_checked_in_datetime_input', `order_status` = '$order_status', `cancel_reason` = 'order_completed' WHERE `orders`.`id` = $order_id";
+                                        $order_update_sql = "UPDATE `orders` SET `payment_status` = '$order_payment_status', `order_est_delivery_datetime` = '$order_est_delivery_datetime_input',`product_last_checked_in` = '$product_last_checked_in', `product_last_checked_in_datetime` = '$product_last_checked_in_datetime_input', `order_status` = '$order_status', `cancel_reason` = 'order_completed' WHERE `orders`.`id` = $order_id";
 
                                         $order_update_result = mysqli_query($conn, $order_update_sql);
 
@@ -292,7 +325,7 @@ if (!isset($_SESSION['username'])) {
                                         }
                                     }
                                     if ($order_status == 'cancelled') {
-                                        $order_update_sql = "UPDATE `orders` SET `payment_status` = '$order_payment_status', `product_last_checked_in` = '$product_last_checked_in', `product_last_checked_in_datetime` = '$product_last_checked_in_datetime_input', `order_status` = '$order_status', `cancel_reason` = '$cancel_reason' WHERE `orders`.`id` = $order_id";
+                                        $order_update_sql = "UPDATE `orders` SET `payment_status` = '$order_payment_status', `order_est_delivery_datetime_input` = '$order_est_delivery_datetime_input',`product_last_checked_in` = '$product_last_checked_in', `product_last_checked_in_datetime` = '$product_last_checked_in_datetime_input', `order_status` = '$order_status', `cancel_reason` = '$cancel_reason' WHERE `orders`.`id` = $order_id";
 
                                         $order_update_result = mysqli_query($conn, $order_update_sql);
 
@@ -304,7 +337,7 @@ if (!isset($_SESSION['username'])) {
                                     }
 
                                     if ($check_cancel_reason == '') {
-                                        $order_update_sql = "UPDATE `orders` SET `payment_status` = '$order_payment_status', `product_last_checked_in` = '$product_last_checked_in', `product_last_checked_in_datetime` = '$product_last_checked_in_datetime_input', `order_status` = '$order_status', `cancel_reason` = 'order_$order_status' WHERE `orders`.`id` = $order_id";
+                                        $order_update_sql = "UPDATE `orders` SET `payment_status` = '$order_payment_status', `order_est_delivery_datetime_input` = '$order_est_delivery_datetime_input',`product_last_checked_in` = '$product_last_checked_in', `product_last_checked_in_datetime` = '$product_last_checked_in_datetime_input', `order_status` = '$order_status', `cancel_reason` = 'order_$order_status' WHERE `orders`.`id` = $order_id";
 
                                         $order_update_result = mysqli_query($conn, $order_update_sql);
 
@@ -475,6 +508,16 @@ if (!isset($_SESSION['username'])) {
 
                                     </div>
                                     <div class="mb-3">
+                                        <label for="basic-url" class="form-label">Estmated delivery date time</label>
+                                        <div class="input-group">
+                                            <input type="hidden" value="">
+                                            <span class="input-group-text" id="basic-addon3">@</span>
+                                            <input type="text" class="form-control" placeholder="Product Name" id="basic-url" aria-describedby="basic-addon3" name="order_est_delivery_datetime_input" value="<?php echo $order_est_delivery_datetime; ?>">
+                                        </div>
+                                        <div class="form-text">Example help text goes outside the input group.</div>
+
+                                    </div>
+                                    <div class="mb-3">
                                         <label for="basic-url" class="form-label">Product Last Checked In Date time</label>
                                         <div class="input-group">
                                             <input type="hidden" value="">
@@ -486,6 +529,32 @@ if (!isset($_SESSION['username'])) {
                                         <div class="checkbox mb-3">
                                             <label>
                                                 <input type="checkbox" value="<?php echo $time_now ?>" name="this_time"> Use current time
+                                            </label>
+                                        </div>
+                                        <div class="form-text">Note: If you want to add custom time date then you can write on the box. If the box is blank then current time and date will be added as last checked in datetime. </div>
+
+                                    </div>
+
+                                    <div class="mb-3" id="courierDesc">
+                                        <label for="basic-url" class="form-label">Order packaging has been started</label>
+                                        <div class="input-group">
+                                            <input type="hidden" value="">
+                                            <span class="input-group-text" id="basic-addon3">@</span>
+                                            <input type="text" class="form-control" placeholder="Courier handing Description" id="courierHandingDesc" aria-describedby="basic-addon3" name="order_packaging_status_input" value="<?php echo $order_packaging_status; ?>">
+
+
+                                        </div>
+
+
+                                        <div class="checkbox mb-3">
+                                            <label>
+                                                <input id="courierChecked" type="checkbox" value="<?php echo $order_packaging_status ?>" name="order_packaging_status" <?php
+                                                                                                                                                        if ($order_packaging_status !== '') {
+                                                                                                                                                            echo 'checked';
+                                                                                                                                                        }
+
+                                                                                                                                                        ?> >
+                                                Order packaging has been started 
                                             </label>
                                         </div>
                                         <div class="form-text">Note: If you want to add custom time date then you can write on the box. If the box is blank then current time and date will be added as last checked in datetime. </div>
@@ -517,6 +586,7 @@ if (!isset($_SESSION['username'])) {
                                         <div class="form-text">Note: If you want to add custom time date then you can write on the box. If the box is blank then current time and date will be added as last checked in datetime. </div>
 
                                     </div>
+                                    
 
 
 
