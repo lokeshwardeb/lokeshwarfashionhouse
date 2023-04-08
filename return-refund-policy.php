@@ -98,10 +98,13 @@ include("inc/_navbar.php");
             <div class="m-4 ms-0"><a href="mailto:<?php echo $website_contract_email ?>"><?php echo $website_contract_email ?></a> 
             </div> 
             
-          
+            <div class=" text-center">
+<?php echo COPY_RIGHT ?>
+  </div>
                      
         </div> 
           
+        
          
         </div>
     </div>

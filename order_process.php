@@ -66,6 +66,12 @@ $ordering_username = $_SESSION['cus_username'];
           $last_id = mysqli_insert_id($conn);
 
           $order_no = "#lokfa" . date("dmY") . $rand_no . $order_unique_id;
+          // $order_no = '#loke1254545';
+          $create_date = date_create(date("d-m-Y")) ;
+          date_add($create_date, date_interval_create_from_date_string("7 days"));
+          $est_delivary_date = date_format($create_date, "d-m-Y");
+          $order_address = $address1 . ', ' . $state . '-' . $zip_code . ', ' . $country;
+
 
           $sele_ord_sql = "SELECT * FROM `orders` WHERE `order_no` = '$order_no'";
           $sele_ord_result = mysqli_query($conn, $sele_ord_sql);
@@ -82,7 +88,7 @@ $ordering_username = $_SESSION['cus_username'];
             $product_qty = $value['product_qty'];
             $total = $total + $value["product_price"];
 
-            $place_order_sql = "INSERT INTO `orders` (`id`, `order_no`, `product_id`, `order_phone_no`, `customer_id_on_order`, `order_shipping_address`, `payment_method`,  `total_amount`) VALUES (NULL, '$order_no', '$product_id', '$phone_no', '$customer_id', '$address1','cod', '$total');";
+            $place_order_sql = "INSERT INTO `orders` (`id`, `order_no`, `product_id`, `order_phone_no`, `customer_id_on_order`, `order_est_delivery_datetime`, `order_shipping_address`, `payment_method`, `order_status`,  `total_amount`) VALUES (NULL, '$order_no', '$product_id', '$phone_no', '$customer_id', '$est_delivary_date', '$order_address','cod', 'pending', '$total');";
 
             $place_order_result = mysqli_query($conn, $place_order_sql);
 
@@ -112,7 +118,14 @@ $ordering_username = $_SESSION['cus_username'];
             echo order_placed_success();
 
             echo '
-            <div class= "text-center">
+            <div class= "container   mb-4 pb-4">
+            <div class="container order_details_info page mt-4 pt-4 pb-4">
+            Thanks for your order. Here is details information about your product. Please keep in mind that the order no is very important to track the order and get info about this. It is also nessary for future. So, Please save the order no for future usage. <br>
+            Order No: <b>'.$order_no.'</b> <br>
+            Phone No: <b>'.$phone_no.'</b> <br>
+            Estimated delivary date: '.$est_delivary_date.'
+            
+            </div>
           <a href="cus_dashboard/cus_orders.php"><button class = "btn btn-primary">Go to my orders</button></a>
             </div>
             

@@ -312,7 +312,7 @@ if (!isset($_SESSION['cart'][0])) {
                     echo 'required';
                   } ?> name="country">
                     <option value="">Choose...</option>
-                    <option value="bangladesh">Bangladesh</option>
+                    <option value="Bangladesh">Bangladesh</option>
                   </select>
                   <div class="invalid-feedback">
                     Please select a valid country.
@@ -364,7 +364,7 @@ if (!isset($_SESSION['cart'][0])) {
 
               <h4 class="mb-3">Payment</h4>
 
-              <div class="my-3">
+              <div class="my-3 ">
                 <div class="form-check">
                   <input id="cod" name="paymentMethod" value="cash_on_delivary" type="radio" class="form-check-input"
                     checked <?php if (isset($_SESSION['cus_username'])) {
@@ -392,7 +392,7 @@ if (!isset($_SESSION['cart'][0])) {
                 </div>
               </div>
 
-              <div class="row gy-3">
+              <!-- <div class="row gy-3">
                 <div class="col-md-6">
                   <label for="cc-name" class="form-label">Name on card</label>
                   <input type="text" class="form-control" id="cc-name" placeholder="" <?php if (isset($_SESSION['cus_username'])) {
@@ -445,7 +445,7 @@ if (!isset($_SESSION['cart'][0])) {
                     } ?>
                   </div>
                 </div>
-              </div>
+              </div> -->
 
               <hr class="my-4">
 

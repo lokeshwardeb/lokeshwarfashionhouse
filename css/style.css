@@ -82,7 +82,11 @@
 .footer-logo{
     width: 20vw !important;
 }
+.page {
 
+    background-color: white;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+  }
 .logo-title{
     margin-left: 10vw;
 }

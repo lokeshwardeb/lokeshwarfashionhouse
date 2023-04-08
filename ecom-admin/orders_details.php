@@ -325,7 +325,7 @@ if (!isset($_SESSION['username'])) {
                                         }
                                     }
                                     if ($order_status == 'cancelled') {
-                                        $order_update_sql = "UPDATE `orders` SET `payment_status` = '$order_payment_status', `order_est_delivery_datetime_input` = '$order_est_delivery_datetime_input',`product_last_checked_in` = '$product_last_checked_in', `product_last_checked_in_datetime` = '$product_last_checked_in_datetime_input', `order_status` = '$order_status', `cancel_reason` = '$cancel_reason' WHERE `orders`.`id` = $order_id";
+                                        $order_update_sql = "UPDATE `orders` SET `payment_status` = '$order_payment_status', `order_est_delivery_datetime` = '$order_est_delivery_datetime_input',`product_last_checked_in` = '$product_last_checked_in', `product_last_checked_in_datetime` = '$product_last_checked_in_datetime_input', `order_status` = '$order_status', `cancel_reason` = '$cancel_reason' WHERE `orders`.`id` = $order_id";
 
                                         $order_update_result = mysqli_query($conn, $order_update_sql);
 
@@ -337,7 +337,7 @@ if (!isset($_SESSION['username'])) {
                                     }
 
                                     if ($check_cancel_reason == '') {
-                                        $order_update_sql = "UPDATE `orders` SET `payment_status` = '$order_payment_status', `order_est_delivery_datetime_input` = '$order_est_delivery_datetime_input',`product_last_checked_in` = '$product_last_checked_in', `product_last_checked_in_datetime` = '$product_last_checked_in_datetime_input', `order_status` = '$order_status', `cancel_reason` = 'order_$order_status' WHERE `orders`.`id` = $order_id";
+                                        $order_update_sql = "UPDATE `orders` SET `payment_status` = '$order_payment_status', `order_est_delivery_datetime` = '$order_est_delivery_datetime_input',`product_last_checked_in` = '$product_last_checked_in', `product_last_checked_in_datetime` = '$product_last_checked_in_datetime_input', `order_status` = '$order_status', `cancel_reason` = 'order_$order_status' WHERE `orders`.`id` = $order_id";
 
                                         $order_update_result = mysqli_query($conn, $order_update_sql);
 
