@@ -28,6 +28,8 @@ if (isset($_SESSION['cus_username'])) {
 
   <?php
   // main php code starts here
+$_SESSION['ord_trac_no_res_found'] = 0;
+
   $get_order_no = htmlspecialchars(mysqli_real_escape_string($conn, $_GET['search_text_order_track_no']));
   $get_order_phone_no = htmlspecialchars(mysqli_real_escape_string($conn, $_GET['search_text_order_track_pho_no']));
 
@@ -53,6 +55,10 @@ if (isset($_SESSION['cus_username'])) {
         $cancel_reason = $row['cancel_reason'];
         $payment_method = $row['payment_method'];
       }
+      
+    }else{
+      $_SESSION['ord_trac_no_res_found'] = 1;
+   
     }
   }
 
@@ -124,6 +130,18 @@ if (isset($_SESSION['cus_username'])) {
         </div>
 
       </div>
+      <?php
+      
+      if($_SESSION['ord_trac_no_res_found'] = 1){
+        echo ' <div class="container col-8 page pt-4 text-danger">
+       Sorry,  No order was found with this order no <b> '.$get_order_no.'</b> and this phone no <b>'.$get_order_phone_no.'</b>
+          </div>';
+      }else{
+
+      
+      
+      
+      ?>
       <div class="col-8">
         <div class="container order_section pb-4 pt-2 rounded">
           <div class="order_title text-center fs-3">Order No</div>
@@ -140,7 +158,10 @@ if (isset($_SESSION['cus_username'])) {
               <?php
               $strtotime = strtotime($order_est_delivery_datetime);
               $order_est_delivery_datetime_is = date("D d-M-Y ", $strtotime);
-              echo $order_est_delivery_datetime_is;
+              if($_SESSION['ord_trac_no_res_found'] == 0){
+                echo $order_est_delivery_datetime_is;
+
+              }
 
 
               // echo $order_est_delivery_datetime
@@ -151,7 +172,21 @@ if (isset($_SESSION['cus_username'])) {
           </div>
 
           <?php
-          if ($order_accepting_status == 'order accepted') {
+           $_SESSION['ord_acep_sta_ord_trac'] = 0;
+           $_SESSION['ord_pack_sta_ord_trac'] = 0;
+           $_SESSION['ord_couri_hand_sta_ord_trac'] = 0;
+           
+          $ord_acep_sta_ord_trac =  $_SESSION['ord_acep_sta_ord_trac'];
+          $ord_pack_sta_ord_trac =  $_SESSION['ord_pack_sta_ord_trac'] ;
+          $ord_couri_hand_sta_ord_trac =  $_SESSION['ord_couri_hand_sta_ord_trac'];
+
+
+
+            
+
+
+          if ($order_accepting_status == 'order accepted' && $_SESSION['ord_trac_no_res_found'] == 0) {
+            $_SESSION['ord_acep_sta_ord_trac'] = 1;
 
 
 
@@ -170,7 +205,9 @@ if (isset($_SESSION['cus_username'])) {
 
               <div class="order_acpected mb-4 fs-5"><img src="img/post.png" width="50px" height="50px" class="img-fluid bg-secondary rounded-circle" alt="" srcset=""> Order accepted</div>
               <?php
+
               if ($order_packaging_status !== '' && $order_accepting_status == 'order accepted') {
+                $_SESSION['ord_pack_sta_ord_trac'] = 1;
                 echo '
                       <div class="pakaging_starts mb-4 fs-5"><img src="img/box.png" width="50px" height="50px" class="img-fluid bg-warning rounded-circle" alt="" srcset=""> ' . $order_packaging_status . '</div>
                       ';
@@ -180,6 +217,7 @@ if (isset($_SESSION['cus_username'])) {
                 //       ';
               }
               if ($courier_handing_status == !'' && $order_packaging_status !== '' && $order_accepting_status == 'order accepted') {
+                $_SESSION['ord_couri_hand_sta_ord_trac'] = 1;
                 $courier_handing_desc;
                 if ($courier_handing_desc == '') {
                   echo '
@@ -218,6 +256,12 @@ if (isset($_SESSION['cus_username'])) {
             </div>
 
           <?php
+          }else{
+            echo "no result found";
+          }
+
+
+
           }
           ?>
           <!-- div. -->
@@ -259,21 +303,23 @@ if (isset($_SESSION['cus_username'])) {
             <tbody>
 
               <?php
-              $sql = "SELECT * FROM `products` AS prod JOIN order_products AS ord_prod ON prod.product_id = ord_prod.product_id WHERE ord_prod.orders_id = '$get_order_no';";
+              // $sql = "SELECT * FROM `products` AS prod JOIN order_products AS ord_prod ON prod.product_id = ord_prod.product_id WHERE ord_prod.orders_id = '$get_order_no';";
+              $sql_ord_select = "SELECT * FROM `products` AS prod JOIN order_products AS ord_prod ON prod.product_id = ord_prod.product_id JOIN orders AS ord ON ord.order_no = ord_prod.orders_id WHERE ord_prod.orders_id = '$get_order_no' AND ord.order_phone_no = '$get_order_phone_no';
+              ";
               // $sql = "SELECT * FROM `products` AS prod JOIN order_products AS ord_prod ON prod.product_id = ord_prod.product_id JOIN orders as ord ON ord.order_no = ord_prod.orders_id WHERE ord_prod.orders_id = '$get_order_no' AND ord.order_no = '$get_order_no';";
 
-              $result = mysqli_query($conn, $sql);
+              $result_ord_select = mysqli_query($conn, $sql_ord_select);
               if ($result) {
-                if (mysqli_num_rows($result) > 0) {
+                if (mysqli_num_rows($result_ord_select) > 0) {
                   $total_price = 0;
-                  while ($row = mysqli_fetch_assoc($result)) {
+                  while ($row = mysqli_fetch_assoc($result_ord_select)) {
                     $qt = $row['product_qty'];
                     $pri = $row['product_price'];
 
                     echo '
                   <tr>
-                  <th scope="row"><img src="' . PRODUCT_INFO_PATH . $row['product_img'] . '" class="img-fluid" height="150px" width="150px" alt="" srcset="">  </th>
-                  <td><a href="product_details_cus_disp.php?id=' . $row['product_id'] . '" class="nav-link prod_hover">' . $row['product_name'] . '</a></td>
+                  <th scope="row"><img src="' . PRODUCT_INFO_PATH . $row["product_img"] . '" class="img-fluid" height="150px" width="150px" alt="" srcset="">  </th>
+                  <td><a href="product_details_cus_disp.php?id=' . $row['product_id'] . '" class="nav-link prod_hover">' . $row["product_name"] . '</a></td>
                   <td>Price: ' . product_currency_bdt() . $per_price = $row['product_price'] . '</td>
                   <td>Qty: ' . $product_qty = $row['product_qty'] . '</td>
                   <td>' . product_currency_bdt() . $total_price += $row['product_price'] * $row['product_qty'] . '</td>
@@ -303,6 +349,14 @@ if (isset($_SESSION['cus_username'])) {
                   </tr>
                 </thead>
                 <tbody>
+                  <?php 
+                  if($_SESSION['ord_trac_no_res_found'] = 1){
+                    echo ' <div class="container pt-4 text-danger">
+                    Sorry,  No order was found with this order no <b> '.$get_order_no.'</b> and this phone no <b>'.$get_order_phone_no.'</b>
+                       </div>';
+                  }
+                  
+                  ?>
                   <tr>
                     <!-- <th scope="row"></th> -->
                     <td class="col-10"><span class="text-end">Total Items:</span></td>
