@@ -130,7 +130,30 @@ function preloader_include(){
 
 date_default_timezone_set("Asia/Dhaka");
 
-
+function product_currency_bdt(){
+  include("conn.php");
+  
+    $sql_currency = "SELECT * FROM `settings`";
+    $result_currency = mysqli_query($conn, $sql_currency);
+    if($result_currency){
+      // echo '৳';?
+      if(mysqli_num_rows($result_currency)>0){
+        while($row = mysqli_fetch_assoc($result_currency)){
+          $product_currency = $row['product_currency'];
+          if($product_currency == 'bdt'){
+            return '৳';
+          }
+          if($product_currency == 'usd'){
+            return  '$';
+  
+          }
+        }
+  
+      }
+    }else{
+      echo '$';
+    }
+  }
 
 
 

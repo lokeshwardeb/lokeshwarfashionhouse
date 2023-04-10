@@ -17,9 +17,12 @@ elseif(isset($_SESSION['cus_loggedin']) == true){
 
   <span id="closedBtn" class="" onclick="closeFun()">Close</span>
   <h2 class="col-9"> '. ucfirst($active_class) . '</h2>
+ 
+                              
+                            
     <div class = "col-3  ">
-    <img src="' . $_SESSION["admin_photo"] .'" alt="" width="32" height="32" class="rounded-circle me-2 float-end">
-    <strong class= "me-2 float-end pe-2">'.  $_SESSION["username"] . '</strong>
+    <div class="nav-link text-dark float-start ms-4 ps-4"><img src="' .CUS_PHOTO_PATH_INTO . $_SESSION["cus_photo"].'" alt="" srcset="" class="rounded-circle me-2" height="40px" width="40px"><strong>'.$_SESSION["cus_username"].'</strong></div>  
+   
     </div>
   
     

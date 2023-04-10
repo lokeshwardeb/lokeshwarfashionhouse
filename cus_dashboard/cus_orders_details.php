@@ -33,6 +33,7 @@ if (!isset($_SESSION['cus_username'])) {
 
         include "inc/_search.php";
         include("inc/functions.php");
+        include("../inc/functions.php");
 
         include("inc/_theme.php");
 
@@ -56,6 +57,8 @@ if (!isset($_SESSION['cus_username'])) {
                     $orders_quantity = $row['orders_quantity'];
                     $customer_id_on_order = $row['customer_id_on_order'];
                     $order_status = $row['order_status'];
+                    $order_phone_no = $row['order_phone_no'];
+                    $order_email = $row['order_email'];
                     $order_shipping_address = $row['order_shipping_address'];
                     $order_placed_datetime = $row['order_placed_datetime'];
                     $order_delivered_datetime = $row['order_delivered_datetime'];
@@ -102,7 +105,13 @@ if (!isset($_SESSION['cus_username'])) {
                 if ($product_img == '') {
                     $product_img = 'nature-sea.jpg';
                 }
+$order_customer_sql = "SELECT * FROM `order_customers` WHERE `cus_id` = '$customer_id' AND `order_no` = '$order_no'";
+$order_customer_result = mysqli_query($conn, $order_customer_sql);
 
+while($row = mysqli_fetch_assoc($order_customer_result)){
+    $order_customer_firstname = $row['customer_firstname'];
+    $order_customer_lastname = $row['customer_lastname'];
+}
 
 
 
@@ -112,18 +121,27 @@ if (!isset($_SESSION['cus_username'])) {
                 echo '
         
 <div class="row">
-<div class="col-6">
+<div class="col-6 page mb-4 pt-4 container">
 <a href = "cus_orders.php" class="mb-4"><button class = "btn btn-primary mb-4">Go to orders</button></a><br>
-    Order No: <b> ' . $order_no . ' </b> <br>
-    Product Id: ' . $product_id . ' <br>
-    Product Name : ' . $product_name . ' <br>
-    Product Description: ' . $product_desc . ' <br>
-    Quantity: ' . $orders_quantity . ' <br>
-    Customer Id: ' . $customer_id . ' <br>
-    Customer Name: ' . $customer_name . ' <br>
-    Customer Email: ' . $customer_email . ' <br>
-    Customer Phone: ' . $customer_phone_no . ' <br>
-    Customer Address: ' . $customer_address . ' <br>
+    Order No: <b> ' . $order_no . ' </b> <br>';
+
+
+
+//     $product_get_sql = ""
+
+    
+// while($row = mysqli_fetch_assoc())
+    echo '
+    
+
+    User Name: ' . $customer_name . ' <br>
+    User Email: ' . $customer_email . ' <br>
+    User Phone: ' . $customer_phone_no . ' <br>
+    User Address: ' . $customer_address . ' <br>
+    Order Customer Name: ' . $order_customer_firstname . ' ' . $order_customer_lastname . ' <br>
+    Order phone no Address: ' . $order_phone_no . ' <br>
+    Order email Address: ' . $order_email . ' <br>
+    
     Ordered placed on : ' . $order_placed_datetime . ' <br>
     Ordered delivered on : ' . $order_delivered_datetime . ' <br>
     current time is : ' . $product_last_checked_in_datetime . '<br>
@@ -142,8 +160,7 @@ if (!isset($_SESSION['cus_username'])) {
 
                                                             ?>"><?php echo '' . ucfirst($order_payment_status)  . ' </span> </div> <br>
     Order Shipping Address: ' . $order_shipping_address . ' <br>
-    Product Per Price: ' . $product_price . ' <br>
-    Total Amount: ' . $total_amount . ' <br>
+    
   
    <div class = ""> Product Status: '; ?><span class="<?php
                                                         if ($product_status == "In-stock") {
@@ -181,19 +198,43 @@ if (!isset($_SESSION['cus_username'])) {
     Product Added Datetime: ' . $product_added_datetime . ' <br><br>
 
 </div>
-<div class="col-6">
-    <img src="../ecom-admin/uploaded_img/products/' . $product_img . '" width="80%!important" height="250px!important" alt="" srcset="">
+<div class="col-6 page mb-4 pt-4 ">
+    ';
+
+    if($order_status == 'pending'){
+echo '<img src=" '.SITE_URL.'img/fast-delivery.png"  class = "img-fluid" alt="" srcset="">
+
+<div class="fs-4">Your order is '.$order_status.' at this moment</div>
+
+';
+
+    }
+    if($order_status == 'In-process'){
+echo '<img src=" '.SITE_URL.'img/delivery-man.png"  class = "img-fluid" alt="" srcset="">
+<div class="fs-4">Your order is '.$order_status.' at this moment</div>
+
+';
+    }
+    if($order_status == 'completed'){
+echo '<img src=" '.SITE_URL.'img/delivery.png"  class = "img-fluid" alt="" srcset="">
+<div class="fs-4">Your order was '.$order_status.' successfully</div>
+
+';
+    }
+
+    echo '
+    
 </div>
 
 </div>
         
         ';
-
+        // <img src="../ecom-admin/uploaded_img/products/' . $product_img . '" width="80%!important" height="250px!important" alt="" srcset="">
 
 
                                                             ?>
 
-                            <div class="row">
+                            <!-- <div class="row">
                                 <div class="col-2">
                                     <button class="btn btn-dark mb-4" onclick="productEdit()">Edit</button><br>
 
@@ -211,7 +252,7 @@ if (!isset($_SESSION['cus_username'])) {
 
                                     ?>
                                 </div>
-                            </div>
+                            </div> -->
 
                             <div id="productEdit" class="no-disp">
 
@@ -240,9 +281,130 @@ if (!isset($_SESSION['cus_username'])) {
 
 
 
+<div class="container page border-success border-top border-5">
+<table class="table table-borderless ">
+              <thead>
+                <tr>
+                  <th scope="col" class="fs-5">Order Summary</th>
+                  <th scope="col"></th>
+                  <th scope="col"></th>
+                  <th scope="col"></th>
+                </tr>
+              </thead>
+              <tbody>
 
+                <?php
+                // $sql = "SELECT * FROM `products` AS prod JOIN order_products AS ord_prod ON prod.product_id = ord_prod.product_id WHERE ord_prod.orders_id = '$get_order_no';";
+                $sql_ord_select = "SELECT * FROM `products` AS prod JOIN order_products AS ord_prod ON prod.product_id = ord_prod.product_id JOIN orders AS ord ON ord.order_no = ord_prod.orders_id WHERE ord_prod.orders_id = '$order_no' ;
+              ";
+                // $sql = "SELECT * FROM `products` AS prod JOIN order_products AS ord_prod ON prod.product_id = ord_prod.product_id JOIN orders as ord ON ord.order_no = ord_prod.orders_id WHERE ord_prod.orders_id = '$get_order_no' AND ord.order_no = '$get_order_no';";
+
+                $result_ord_select = mysqli_query($conn, $sql_ord_select);
+                if ($result) {
+                  if (mysqli_num_rows($result_ord_select) > 0) {
+                    $total_price = 0;
+                    $to_pri = 0;
+                    while ($row = mysqli_fetch_assoc($result_ord_select)) {
+                      $qt = $row['product_qty'];
+                      $pri = $row['product_price'];
+                      $to_pri += $row['product_qty'] * $row['product_price'];
+
+                      echo '
+                  <tr>
+                  <th scope="row"><img src="' . PRODUCT_INFO_PATH . $row["product_img"] . '" class="img-fluid" height="150px" width="150px" alt="" srcset="">  </th>
+                  <td><a href="product_details_cus_disp.php?id=' . $row['product_id'] . '" class="nav-link prod_hover">' . $row["product_name"] . '</a></td>
+                  <td>Price: '  . product_currency_bdt() . $per_price = $row['product_price'] . '</td>
+                  <td>Qty: ' . $product_qty = $row['product_qty'] . '</td>
+                  <td>'  . product_currency_bdt() . $total_price += $row['product_price'] * $row['product_qty'] . '</td>
+                </tr>
+                  
+                  ';
+                  $total_price = 0;
+                    }
+                  }
+                }
+
+
+                ?>
+
+
+
+              </tbody>
+            </table>
+            <div class="info-section border-top border-dark border-1 pt-4 pb-4">
+              <div class="container text-end">
+                <table class="table table-borderless">
+                  <thead>
+                    <tr>
+                      <th scope="col"></th>
+                      <th scope="col"></th>
+
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <?php
+                    // if ($query_result_run  == 1) {
+                    //   echo ' <div class="container pt-4 text-danger">
+                    // Sorry,  No order was found with this order no <b> ' . $get_order_no . '</b> and this phone no <b>' . $get_order_phone_no . '</b>
+                    //    </div>';
+                    // }else{
+                    //   echo ' <div class="container pt-4 text-danger">
+                    //   Sorry,  No order was found with this order no <b> ' . $get_order_no . '</b> and this phone no <b>' . $get_order_phone_no . '</b>
+                    //      </div>';
+                    // }
+
+                    ?>
+                    <tr>
+                      <!-- <th scope="row"></th> -->
+                      <td class="col-10"><span class="text-end">Total Items:</span></td>
+                      <td class="col-10"><span class=""><?php echo $qt ?>Product(s)</span></td>
+
+                    </tr>
+                    <tr>
+                      <!-- <th scope="row">1</th> -->
+                      <td class="col-10"> <span class="">Sub-Total:</span></td>
+                      <td class="col-10"><?php echo product_currency_bdt() .  $to_pri; ?></td>
+
+                    </tr>
+                    <tr>
+                      <!-- <th scope="row">1</th> -->
+                      <td class="col-10"> <span>Total Price:</span></td>
+                      <td class="col-10"><?php echo product_currency_bdt() .  $to_pri ?></td>
+
+                    </tr>
+                    <tr>
+                      <!-- <th scope="row">1</th> -->
+                      <td class="col-10"> <span>Payable Amount:</span></td>
+                      <td class="col-10"> <?php
+                                          if ($order_status == 'completed' || $order_status == 'cancelled') {
+                                            echo product_currency_bdt() . 0;
+                                          } else {
+                                            echo product_currency_bdt() . $to_pri;
+                                          }
+
+                                          ?>
+                      </td>
+
+                    </tr>
+
+                  </tbody>
+                </table>
+
+
+
+                <span>
+                  <?php
+                  if ($order_status == 'completed') {
+                    echo 'Paid by: ' . strtoupper($payment_method);
+                  } else {
+                  }
+                  ?>
+                </span>
+              </div>
+            </div>
+</div>
                      
-
+                                   
 
 
                     <?php

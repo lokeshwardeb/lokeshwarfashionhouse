@@ -2,7 +2,7 @@
 // session_start();
 // $_SESSION['loggedin'] = false;
 // this variable is to make activate the active class
-$active_class = 'login';
+$active_class = 'signup';
 include "inc/conn.php";
 
 

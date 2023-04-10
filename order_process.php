@@ -110,6 +110,7 @@ $ordering_username = $_SESSION['cus_username'];
             $sql_order_product_sql  = "INSERT INTO `order_products` (`orders_id`, `product_id`, `product_qty`, `customer_id_on_order`) VALUES ('$order_no', '$product_id', '$product_qty', '$customer_id');";
 
             $result_order_product_sql = mysqli_query($conn, $sql_order_product_sql);
+          }
 
             if ($result_order_product_sql) {
             //   echo 'order placed with product';
@@ -134,9 +135,9 @@ $ordering_username = $_SESSION['cus_username'];
             }
       
             
-          }
+          
 
-          $place_order_sql = "INSERT INTO `orders` (`id`, `order_no`, `product_id`, `order_phone_no`, `customer_id_on_order`, `order_est_delivery_datetime`, `order_shipping_address`, `payment_method`, `order_status`,  `total_amount`) VALUES (NULL, '$order_no', '$product_id', '$phone_no', '$customer_id', '$est_delivary_date', '$order_address','cod', 'pending', '$total');";
+          $place_order_sql = "INSERT INTO `orders` (`id`, `order_no`, `product_id`, `order_phone_no`, `order_email`,`customer_id_on_order`, `order_est_delivery_datetime`, `order_shipping_address`, `payment_method`, `order_status`,  `total_amount`) VALUES (NULL, '$order_no', '$product_id', '$phone_no', '$email', '$customer_id', '$est_delivary_date', '$order_address','cod', 'pending', '$total');";
 
             $place_order_result = mysqli_query($conn, $place_order_sql);
 

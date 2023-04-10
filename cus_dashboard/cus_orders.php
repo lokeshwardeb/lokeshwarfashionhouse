@@ -40,7 +40,7 @@ if (!isset($_SESSION['cus_username'])) {
 
   <div class="container title-bar mt-4" id="orderSec">
 
-    <?php include "../inc/_title_bar.php"; ?>
+    <?php include "inc/_cus_title_bar.php"; ?>
     <?php
 
 
@@ -169,36 +169,40 @@ if (!isset($_SESSION['cus_username'])) {
         </div>
         <style>
           .hover-table {
-    /* transform: ease-in .50s; */
-    transition: 500ms linear ;
+            /* transform: ease-in .50s; */
+            transition: 500ms linear;
 
-}
+          }
 
-.hover-table:hover {
-    /* transform: ease-in .50s; */
-    background-color: #0D6EFD;
-    color: white !important;
-   
-}
-  .on-table-hover{
-    transition: 500ms linear ;
-  }
-  .on-table-hover table{
-    transition: 500ms linear ;
-  }
-  .on-table-hover:hover{
-    transition: 500ms linear ;
+          .hover-table:hover {
+            /* transform: ease-in .50s; */
+            background-color: #0D6EFD;
+            color: white !important;
 
-    background-color: #0D6EFD;
-    color: white !important;
-  }
-  .on-table-hover:hover table{
-    transition: 500ms linear ;
+          }
 
-    background-color: #0D6EFD;
-    color: white !important;
-  }
-</style>
+          .on-table-hover {
+            transition: 500ms linear;
+          }
+
+          .on-table-hover table {
+            transition: 500ms linear;
+          }
+
+          .on-table-hover:hover {
+            transition: 500ms linear;
+
+            background-color: #0D6EFD;
+            color: white !important;
+          }
+
+          .on-table-hover:hover table {
+            transition: 500ms linear;
+
+            background-color: #0D6EFD;
+            color: white !important;
+          }
+        </style>
 
         <!-- new order section -->
         <div class="container">
@@ -224,23 +228,22 @@ if (!isset($_SESSION['cus_username'])) {
                   if (mysqli_num_rows($result_new_ord_che) > 0) {
                     while ($row = mysqli_fetch_assoc($result_new_ord_che)) {
                       $product_id = $row['product_id'];
-                     
                     }
                   }
                 }
                 $sql_check_order_status = "SELECT * FROM `orders` WHERE  `customer_id_on_order` = '$customer_id'";
                 $result_check_order_status = mysqli_query($conn, $sql_check_order_status);
-                if($result_check_order_status){
-                  while($row = mysqli_fetch_assoc($result_check_order_status)){
+                if ($result_check_order_status) {
+                  while ($row = mysqli_fetch_assoc($result_check_order_status)) {
                     $order_status = $row['order_status'];
                   }
                 }
 
                 $sql_ch_orders_no_new = "SELECT * FROM `order_products` op JOIN products p ON p.product_id = op.product_id JOIN orders AS ord ON ord.order_no = op.orders_id WHERE ord.customer_id_on_order = '$customer_id'";
                 $result_ch_orders_no_new = mysqli_query($conn, $sql_ch_orders_no_new);
-                if($result_ch_orders_no_new){
-                  if(mysqli_num_rows($result_ch_orders_no_new) > 0){
-                    while($row = mysqli_fetch_assoc($result_ch_orders_no_new)){
+                if ($result_ch_orders_no_new) {
+                  if (mysqli_num_rows($result_ch_orders_no_new) > 0) {
+                    while ($row = mysqli_fetch_assoc($result_ch_orders_no_new)) {
                       $orders_no_new_check = $row['order_no'];
                     }
                   }
@@ -258,7 +261,8 @@ if (!isset($_SESSION['cus_username'])) {
                     
                     <th scope="col">Payble amount</th>
                     
-                    <th scope="col"></th>
+                    <th scope="col">Order Product(s)</th>
+                    <th scope="col">Order Status</th>
                   </tr>
                 </thead>
                 <tbody>';
@@ -288,8 +292,8 @@ if (!isset($_SESSION['cus_username'])) {
                 $result_ch_orders = mysqli_query($conn, $sql_ch_orders);
 
                 if ($result_ch_orders) {
-                  
-                   while ($row = mysqli_fetch_assoc($result_ch_orders)) {
+
+                  while ($row = mysqli_fetch_assoc($result_ch_orders)) {
                     $order_no_new = $row['order_no'];
                     // if(mysqli_num_rows($result_ch_orders) > 1){
 
@@ -297,22 +301,22 @@ if (!isset($_SESSION['cus_username'])) {
 
                     // }
 
-                  // $product
-                  // include("")
-                  echo '<tr class="hover-table on-table-hover">
+                    // $product
+                    // include("")
+                    echo '<tr class="hover-table on-table-hover">
                   <th scope="row">' . $no++ . '</th>
                   <td><b>' . $row['order_no'] . '</b></td>
-                  <td><b>' . $row['total_amount'] . '</b></td>
+                  <td><b>' . product_currency_bdt() . $row['total_amount'] . '</b></td>
                  
                   <td class="">';
-                  $sql_get_prod = "SELECT * FROM `order_products` op JOIN products p ON p.product_id = op.product_id WHERE customer_id_on_order = '$customer_id' AND op.orders_id = '$order_no_new';";
-                  $result_get_prod = mysqli_query($conn, $sql_get_prod);
-                  if($result_get_prod){
-                    if(mysqli_num_rows($result_get_prod) . 0){
-                      $sl_no = 1;
-                      while ($get_prod_row = mysqli_fetch_assoc($result_get_prod)){
+                    $sql_get_prod = "SELECT * FROM `order_products` op JOIN products p ON p.product_id = op.product_id WHERE customer_id_on_order = '$customer_id' AND op.orders_id = '$order_no_new';";
+                    $result_get_prod = mysqli_query($conn, $sql_get_prod);
+                    if ($result_get_prod) {
+                      if (mysqli_num_rows($result_get_prod) . 0) {
+                        $sl_no = 1;
+                        while ($get_prod_row = mysqli_fetch_assoc($result_get_prod)) {
 
-                        echo '                  <table class="table ">
+                          echo '                  <table class="table table-borderless">
                         <thead>
                           <tr>
                             <th scope="col">#</th>
@@ -323,21 +327,21 @@ if (!isset($_SESSION['cus_username'])) {
                         </thead>
                         <tbody>
                           <tr>
-                            <th scope="row">'.$sl_no.'</th>
-                            <td>'. $get_prod_row['product_name'].'</td>
-                            <td>'. $get_prod_row['product_qty'].'</td>
-                            <td>'. $get_prod_row['product_price'].'</td>
+                            <th scope="row">' . $sl_no . '</th>
+                            <td>' . $get_prod_row['product_name'] . '</td>
+                            <td>' . $get_prod_row['product_qty'] . '</td>
+                            <td>' . product_currency_bdt() . $get_prod_row['product_price'] . '</td>
                             
                           </tr>
                        
                         </tbody>
                       </table>';
-$sl_no++;
+                          $sl_no++;
+                        }
                       }
                     }
-                  }
 
-                  echo '
+                    echo '
 
                   
                   </td>
@@ -345,49 +349,49 @@ $sl_no++;
              
                   
                   <td class="'; ?>
-                  <?php
+                    <?php
 
-                  if ($row['order_status'] == 'completed') {
-                    echo "text-success";
-                  }
-                  if ($row['order_status'] == 'In-process') {
-                    echo "text-warning";
-                  }
-                  if ($row['order_status'] == 'cancelled') {
-                    echo "text-danger";
-                  }
-
-
-                  ?>
+                    if ($row['order_status'] == 'completed') {
+                      echo "text-success";
+                    }
+                    if ($row['order_status'] == 'In-process') {
+                      echo "text-warning";
+                    }
+                    if ($row['order_status'] == 'cancelled') {
+                      echo "text-danger";
+                    }
 
 
+                    ?>
 
 
-            <?php echo '">' . ucfirst($row['order_status']) . '</td>
+
+
+                  <?php echo '">' . ucfirst($row['order_status']) . '</td>
     
                   
-                  <td><a href="cus_orders_details.php?id=' . $row['id'] . '"><button type="submit" class="btn btn-dark">Order Details</button></a></td>
-                </tr>
-                
-                
-               ';
+                      <td><a href="cus_orders_details.php?id=' . $row['id'] . '"><button type="submit" class="btn btn-dark">Order Details</button></a></td>
+                    </tr>
+                    
+                    
+                  ';
+                  }
+
+
+                  // $sql_new_ord_che = "SELECT * FROM `order_products` op JOIN products p ON p.product_id = op.product_id WHERE customer_id_on_order = 1010;";
+                  // $result_new_ord_che = mysqli_query($conn, $sql_new_ord_che);
+
+                  // if ($result_new_ord_che) {
+                  //   if (mysqli_num_rows($result_new_ord_che) > 0) {
+                  //     while ($row = mysqli_fetch_assoc($result_new_ord_che)) {
+                  //      echo $product_id = $row['product_id'];
+
+                  //     }
+                  //   }
+                  // }
+
                 }
 
-                
-                // $sql_new_ord_che = "SELECT * FROM `order_products` op JOIN products p ON p.product_id = op.product_id WHERE customer_id_on_order = 1010;";
-                // $result_new_ord_che = mysqli_query($conn, $sql_new_ord_che);
-
-                // if ($result_new_ord_che) {
-                //   if (mysqli_num_rows($result_new_ord_che) > 0) {
-                //     while ($row = mysqli_fetch_assoc($result_new_ord_che)) {
-                //      echo $product_id = $row['product_id'];
-                     
-                //     }
-                //   }
-                // }
-
-                }
-               
 
 
 
