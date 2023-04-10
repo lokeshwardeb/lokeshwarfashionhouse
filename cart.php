@@ -20,8 +20,13 @@ include("inc/_navbar.php");
   <div class="row">
     <div class="col-8">
       <table class="table <?php 
-      if($_SESSION['cart'][0] == ''){
+      // if($_SESSION['cart'][0] == ''){
+      //   echo 'd-none';
+      // }
+
+      if(count($_SESSION['cart']) == 0){
         echo 'd-none';
+
       }
       
       
@@ -40,9 +45,15 @@ include("inc/_navbar.php");
     
           <?php
 
-if($_SESSION['cart'][0] == ''){
+if(count($_SESSION['cart']) == 0){
   echo '<div class="text-center fs-4">The cart is empty</div>';
+  
+
 }
+
+// if($_SESSION['cart'][0] == ''){
+//   echo '<div class="text-center fs-4">The cart is empty</div>';
+// }
           
 
           // displaying the cart items

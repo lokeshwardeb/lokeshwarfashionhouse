@@ -255,8 +255,7 @@ if (!isset($_SESSION['cus_username'])) {
                   <tr>
                     <th scope="col">SL.No</th>
                     <th scope="col">Order no</th>
-                    <th scope="col">Customer Name</th>
-                    <th scope="col">Shipping Address</th>
+                    
                     <th scope="col">Payble amount</th>
                     
                     <th scope="col"></th>
@@ -283,28 +282,34 @@ if (!isset($_SESSION['cus_username'])) {
                 //     $
                 //   }
                 // }
+                $sql_ch_orders = "SELECT * FROM `orders` WHERE `customer_id_on_order` = '$customer_id'";
                 // $sql_ch_orders = "SELECT * FROM `order_products` op JOIN products p ON p.product_id = op.product_id WHERE customer_id_on_order = '$customer_id';";
-                $sql_ch_orders = "SELECT * FROM `order_products` op JOIN products p ON p.product_id = op.product_id JOIN orders AS ord ON ord.order_no = op.orders_id WHERE ord.customer_id_on_order = '$customer_id' AND ord.order_no = '$orders_no_new_check';";
+                // $sql_ch_orders = "SELECT * FROM `order_products` op JOIN products p ON p.product_id = op.product_id JOIN orders AS ord ON ord.order_no = op.orders_id WHERE ord.customer_id_on_order = '$customer_id' AND ord.order_no = '$orders_no_new_check';";
                 $result_ch_orders = mysqli_query($conn, $sql_ch_orders);
 
                 if ($result_ch_orders) {
                   
                    while ($row = mysqli_fetch_assoc($result_ch_orders)) {
                     $order_no_new = $row['order_no'];
+                    // if(mysqli_num_rows($result_ch_orders) > 1){
+
+                    // }else{
+
+                    // }
 
                   // $product
                   // include("")
                   echo '<tr class="hover-table on-table-hover">
                   <th scope="row">' . $no++ . '</th>
                   <td><b>' . $row['order_no'] . '</b></td>
-                  <td>' . $row['product_name'] . '</b></td>
-                  <td>' . $row['product_price'] . '</b></td>
-                  <td>' . $row['product_desc'] . '</b></td>
+                  <td><b>' . $row['total_amount'] . '</b></td>
+                 
                   <td class="">';
                   $sql_get_prod = "SELECT * FROM `order_products` op JOIN products p ON p.product_id = op.product_id WHERE customer_id_on_order = '$customer_id' AND op.orders_id = '$order_no_new';";
                   $result_get_prod = mysqli_query($conn, $sql_get_prod);
                   if($result_get_prod){
                     if(mysqli_num_rows($result_get_prod) . 0){
+                      $sl_no = 1;
                       while ($get_prod_row = mysqli_fetch_assoc($result_get_prod)){
 
                         echo '                  <table class="table ">
@@ -318,14 +323,16 @@ if (!isset($_SESSION['cus_username'])) {
                         </thead>
                         <tbody>
                           <tr>
-                            <th scope="row">1</th>
+                            <th scope="row">'.$sl_no.'</th>
                             <td>'. $get_prod_row['product_name'].'</td>
+                            <td>'. $get_prod_row['product_qty'].'</td>
+                            <td>'. $get_prod_row['product_price'].'</td>
                             
                           </tr>
                        
                         </tbody>
                       </table>';
-
+$sl_no++;
                       }
                     }
                   }
@@ -336,7 +343,7 @@ if (!isset($_SESSION['cus_username'])) {
                   </td>
                  
              
-                  <td>' . product_currency_bdt() . $total_amount . '</td>
+                  
                   <td class="'; ?>
                   <?php
 
