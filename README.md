@@ -8,7 +8,7 @@
 ##### DEVELOPED BY :
          LOKESHWAR DEB
 
-#####LICENSE      : 
+##### LICENSE      : 
 ```
     This software is under the license of the developer of this website and the
     software Mr.LOKESHWAR DEB. WITHOUT OF THE PERMISSION OF THE DEVELOPER OF 
@@ -28,4 +28,4 @@
 
 ###### Current Version :
     lokfahou-version-1.0.0
-#####NOTE : ANY KIND OF COPY OR DUPLICATE OF THIS WEBSITE IS UNDER AGAINST THE COPYRIGHT LAW.
+##### NOTE : ANY KIND OF COPY OR DUPLICATE OF THIS WEBSITE IS UNDER AGAINST THE COPYRIGHT LAW.
