@@ -1,4 +1,4 @@
-![alt text](https://jhumurroyweb.ml/img/IMG_20190208_141327.jpg)
+![alt text] (https://jhumurroyweb.ml/img/IMG_20190208_141327.jpg)
 
 # Project name  : Lokeshwar Fashion House 
 
