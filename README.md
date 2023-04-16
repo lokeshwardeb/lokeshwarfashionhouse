@@ -5,10 +5,10 @@
 ##### Description  :
  The software was developed with php and this is a ecommerce website with admin panel control. The website is fully dynamic. 
 
-######DEVELOPED BY :
+###### DEVELOPED BY :
          LOKESHWAR DEB
 
-#####LICENSE      : 
+##### LICENSE      : 
 ```
     This software is under the license of the developer of this website and the
     software Mr.LOKESHWAR DEB. WITHOUT OF THE PERMISSION OF THE DEVELOPER OF 
