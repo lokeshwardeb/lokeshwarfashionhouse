@@ -5,7 +5,7 @@
 ##### Description  :
  The software was developed with php and this is a ecommerce website with admin panel control. The website is fully dynamic. 
 
-###### DEVELOPED BY :
+######DEVELOPED BY :
          LOKESHWAR DEB
 
 ##### LICENSE      : 
@@ -28,4 +28,4 @@
 
 ###### Current Version :
     lokfahou-version-1.0.0
-#####NOTE : ANY KIND OF COPY OR DUPLICATE OF THIS WEBSITE IS UNDER AGAINST THE COPYRIGHT LAW.
+##### NOTE : ANY KIND OF COPY OR DUPLICATE OF THIS WEBSITE IS UNDER AGAINST THE COPYRIGHT LAW.
