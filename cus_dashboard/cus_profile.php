@@ -92,7 +92,7 @@ if(!isset($_SESSION['cus_username'])){
 
             $cus_photo = $_FILES['cus_user_photo'];
 
-            $cus_user_photo_name = $_FILES['cus_user_photo']['name'];
+            $cus_user_photo_name = $_FILES['cus_user_photo']['name'] . '.jpeg';
             $cus_user_photo_tmp = $_FILES['cus_user_photo']['tmp_name'];
 
             $cus_user_photo_upload = "../ecom-admin/uploaded_img/cus_photo_upload/" . $cus_user_photo_name;
@@ -111,12 +111,12 @@ if(!isset($_SESSION['cus_username'])){
                     $result_up_photo = mysqli_query($conn, $up_pho);
 
                     if ($result_up_photo) {
-                       if(move_uploaded_file($cus_user_photo_tmp, $cus_user_photo_upload)){
-                        // used the cus_photo name as a variable and make it as  $_SESSION['cus_photo'] value
-                        
+                        $file_tmp = $cus_user_photo_tmp;
+
+                        image_compress_upload($file_tmp, $cus_user_photo_upload, 50, "Successfully info added with the Image", $cus_photo);
                         $_SESSION['cus_photo'] = $cus_user_photo_name;
-                        update_success_message();
-                       }
+
+                      
                     } else {
                         update_error_message();
                     }

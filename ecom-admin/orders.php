@@ -44,7 +44,8 @@ include "inc/_title_bar.php";
            
   
             
-            $sql = "SELECT * FROM `orders` ORDER BY `orders`.`id` DESC";
+            // $sql = "SELECT * FROM `orders` ORDER BY `orders`.`id` DESC";
+            $sql = "SELECT * FROM `products` AS prod JOIN order_products AS ord_prod ON prod.product_id = ord_prod.product_id JOIN orders AS ord ON ord.order_no = ord_prod.orders_id ";
             $result = mysqli_query($conn, $sql);
 
             if (mysqli_num_rows($result) > 0) {

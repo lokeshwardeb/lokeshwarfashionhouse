@@ -144,7 +144,8 @@ include "inc/_title_bar.php";
 
       <!-- <?php
       //  include "inc/conn.php";
-      $sql_order = "SELECT * FROM `orders`";
+      // $sql_order = "SELECT * FROM `orders`";
+      $sql_order = "SELECT * FROM `products` AS prod JOIN order_products AS ord_prod ON prod.product_id = ord_prod.product_id JOIN orders AS ord ON ord.order_no = ord_prod.orders_id ";
       $result = mysqli_query($conn, $sql_order);
       if ($num = mysqli_num_rows($result) > 0) {
         while ($row = mysqli_fetch_assoc($result)) {
@@ -244,18 +245,79 @@ include "inc/_title_bar.php";
 
       </div>
 
-                                                               
+      <div class="fs-2 container mt-4 pt-2 pb-4">Accept the new orders</div>                              
 
       <?php
       //  include "inc/conn.php";
-      $sql_order = "SELECT * FROM `orders`";
+      // $sql_order = "SELECT * FROM `orders`";
+      $sql_order = "SELECT * FROM `products` AS prod JOIN order_products AS ord_prod ON prod.product_id = ord_prod.product_id JOIN orders AS ord ON ord.order_no = ord_prod.orders_id WHERE ord.order_accepting_status = ''; ";
       $result = mysqli_query($conn, $sql_order);
-      if ($num = mysqli_num_rows($result) > 0) {
+      // if ($num = mysqli_num_rows($result) > 0) {
+      //   while ($row = mysqli_fetch_assoc($result)) {
+      //     echo ' <th scope="row">'.$no++ . '</th>
+      //     <td>'.$row['id'].'</td>
+      //     <td>'.$row['product_name'].'</td>
+          
+          
+          
+      //     ';
+      //     echo '<div id="orders">' . 'the orders' . $row['product_name'] . '</div>';
+      //   }
+      
+      if (mysqli_num_rows($result) > 0) {
+        echo '<table class="table  custom-default-box-bg-color  ">
+        <thead>
+          <tr>
+            <th scope="col">SL.No</th>
+            <th scope="col">Order No</th>
+            <th scope="col">Product</th>
+            <th scope="col">Product Price</th>
+            <th scope="col">Description</th>
+            <th scope="col">Status</th>
+          </tr>
+        </thead>
+        <tbody>';
+        $no = 1;
         while ($row = mysqli_fetch_assoc($result)) {
-          echo '<div id="orders">' . 'the orders' . $row['product_name'] . '</div>';
+          echo  '<tr class="hover-table">
+          <th scope="row">'.$no++ . '</th>
+          <td><b>'.$row['order_no'].'</b></td>
+          <td>'. $row['product_name'].'</td>
+          <td>'.$row['price'].'</td>
+          <td>'.$row['product_desc'].'</td>
+          <td class="';?><?php 
+          
+          if($row['order_status'] == 'completed'){
+          echo "text-success";  
+          } 
+          if($row['order_status'] == 'In-process'){
+          echo "text-warning";  
+          } 
+          if($row['order_status'] == 'cancelled'){
+          echo "text-danger";  
+          } 
+          
+          
+          ?> <?php echo '">'. ucfirst( $row['order_status']).'</td>
+';
+
+
+echo '
+  <td><a href="orders_details.php?id='.$row['id'].'"><button type="submit" class="btn btn-dark">Order Details</button></a></td>
+        </tr>';
         }
       }
-      echo 'hi';
+      else{
+        echo '<div class = "custom-default-box-bg-color pt-4 mt-4 fs-4" style="height:200px !important;">
+        Sorry ! the searching result with "'.$search.'" are not found ..
+        
+        </div>';
+      }
+
+
+
+
+      // echo 'hi';
       ?>
     
     </div>

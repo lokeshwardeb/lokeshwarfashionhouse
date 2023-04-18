@@ -52,7 +52,7 @@ while ($prow = mysqli_fetch_assoc($result)){
   
   
             
-  $sql = "SELECT * FROM `products`";
+  $sql = "SELECT * FROM `products`  ORDER BY `products`.`product_id` DESC";
   $result = mysqli_query($conn, $sql);
   if($result){
     if (mysqli_num_rows($result) > 0) {

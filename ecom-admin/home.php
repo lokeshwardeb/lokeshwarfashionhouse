@@ -128,10 +128,12 @@ include "inc/_company_info.php";
       <!-- new order section -->
       <div class="container">
         <div class="">
-          <div class="fs-4 mb-4 mt-2">Recent orders</div>
+          <div class="fs-4 mb-4 mt-2">Accept the new orders  (Recent orders)</div>
           <?php 
           
-          $sql = "SELECT * FROM `orders` ORDER BY `orders`.`id` DESC";
+          // $sql = "SELECT * FROM `orders` ORDER BY `orders`.`id` DESC";
+          // $sql = "SELECT * FROM `products` AS prod JOIN order_products AS ord_prod ON prod.product_id = ord_prod.product_id JOIN orders AS ord ON ord.order_no = ord_prod.orders_id ";
+          $sql = "SELECT * FROM `products` AS prod JOIN order_products AS ord_prod ON prod.product_id = ord_prod.product_id JOIN orders AS ord ON ord.order_no = ord_prod.orders_id WHERE ord.order_accepting_status = '';  ";
           $result = mysqli_query($conn, $sql);
 
           if (mysqli_num_rows($result) > 0) {

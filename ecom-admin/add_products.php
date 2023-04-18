@@ -98,7 +98,8 @@ if(!isset($_SESSION['username'])){
         // $admin_role = $_POST['admin_role'];
 
         // this is the logo img file name
-        $img_name = htmlspecialchars(mysqli_real_escape_string($conn, $_FILES['product_photo']['name']), ENT_QUOTES)  ;
+        
+        $img_name = htmlspecialchars(mysqli_real_escape_string($conn, $_FILES['product_photo']['name']), ENT_QUOTES) . '.jpeg' ;
 
         // this is the logo img name with the upload file which is main name to upload or move the file
         $upload_img = "uploaded_img/products/" . $img_name;
@@ -154,21 +155,24 @@ if(!isset($_SESSION['username'])){
                     // $result = mysqli_query($conn, $sql);
 
                     if($result){
+                        $file_tmp = $img_tmp;
 
-                        if (move_uploaded_file($img_tmp, $upload_img)) {
-                            // echo 'updated and saved the changes';
-                            // echo 'uploaded img';
-                            // session_start();0
-                            // session_unset();
+                        image_compress_upload($file_tmp, $upload_img, 50, "Successfully Product added with the Image", $product_photo);
+                 
+                        // if (move_uploaded_file($img_tmp, $upload_img)) {
+                        //     // echo 'updated and saved the changes';
+                        //     // echo 'uploaded img';
+                        //     // session_start();0
+                        //     // session_unset();
     
     
-                            // this session is to store the logo image name and location
-                            // $_SESSION['logo_img'] = $upload_img;
+                        //     // this session is to store the logo image name and location
+                        //     // $_SESSION['logo_img'] = $upload_img;
     
-                         saved_success_message();
-                        } else {
-                           saved_error_message();
-                        }
+                        //  saved_success_message();
+                        // } else {
+                        //    saved_error_message();
+                        // }
                     }
 
 
@@ -206,21 +210,24 @@ if(!isset($_SESSION['username'])){
 
                     // $result = mysqli_query($conn, $sql);
 if($result){
+    $file_tmp = $img_tmp;
 
-    if (move_uploaded_file($img_tmp, $upload_img)) {
-        // echo 'updated and saved the changes';
-        // echo 'uploaded img';
-        // session_start();0
-        // session_unset();
-        $_SESSION['admin_photo'] = $upload_img;
+    image_compress_upload($file_tmp, $upload_img, 50, '', $product_photo);
+    $_SESSION['admin_photo'] = $upload_img;
 
-        // this session is to store the logo image name and location
-        // $_SESSION['logo_img'] = $upload_img;
+    // if (move_uploaded_file($img_tmp, $upload_img)) {
+    //     // echo 'updated and saved the changes';
+    //     // echo 'uploaded img';
+    //     // session_start();0
+    //     // session_unset();
 
-       saved_success_message();
-    } else {
-       saved_error_message();
-    }
+    //     // this session is to store the logo image name and location
+    //     // $_SESSION['logo_img'] = $upload_img;
+
+    //    saved_success_message();
+    // } else {
+    //    saved_error_message();
+    // }
 }
 
                 } else {

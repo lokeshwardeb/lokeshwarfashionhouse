@@ -1,0 +1,16 @@
+{
+    "name": "lokeshwarfashionhouse/lokeshwarfashionhouse",
+    "description": "This is a lokeshwar fashion house website and software developed in php",
+    "autoload": {
+        "psr-4": {
+            "Lokeshwarfashionhouse\\Lokeshwarfashionhouse\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Lokeshwar Deb",
+            "email": "lokeshwardebdevelop@gmail.com"
+        }
+    ],
+    "require": {}
+}

@@ -9,6 +9,8 @@ include("inc/_navbar.php");
 
 include("inc/conn.php");
 include("inc/_company_info.php");
+include "inc/sent-mail.php";
+
 
 if (!isset($_SESSION['cart'][0])) {
   echo "
@@ -129,6 +131,10 @@ $ordering_username = $_SESSION['cus_username'];
             </div>
             
             ';
+
+                  // code for email send to customer for placing order
+                  sent_mail("Lokeshwar Fashion House", $email, $first_name . ' ' . $last_name, "Order Placed Successfully", "Your Order no $order_no has been placed successfully", "Your order Has been placed check your email $email for details");
+              
               
             }else{
                 echo order_placed_error();
@@ -147,9 +153,13 @@ $ordering_username = $_SESSION['cus_username'];
           //   unset($_SESSION['cart']);
           // }
 
+          // if($place_order_result){
+      
+          // }
+
+        
           unset($_SESSION['cart'][0]);
           header("location: index.php");
-
         }
       } else {
         // $_SESSION['continue_checkout_status'] = 1;
@@ -167,4 +177,3 @@ $ordering_username = $_SESSION['cus_username'];
 
 
 }
-?>

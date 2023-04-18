@@ -50,13 +50,37 @@ if ($featured_product_result) {
   <div class="row hero-area-canvas-bg">
     <div class="col-8">
       <div class="hero-text ">
-        <div class="winter-sale"><b class="xx-large-font">W</b>inter</div> Sale !! <br>
-        40% off on the lattest products
+<?php 
+      $hero_aria_sql = "SELECT * FROM `page_settings`";
+      $hero_aria_result = mysqli_query($conn, $hero_aria_sql);
+
+      if($hero_aria_result){
+        if(mysqli_num_rows($hero_aria_result) > 0){
+          while($row = mysqli_fetch_assoc($hero_aria_result)){
+            $hero_aria_bold_word = $row['hero_aria_bold_word'];
+            $hero_aria_offer_title = $row['hero_aria_offer_title'];
+            $hero_aria_offer_title_photo = $row['hero_aria_offer_title_photo'];
+            $hero_aria_offer_canvas_img1 = $row['hero_aria_offer_canvas_img1'];
+            $hero_aria_offer_canvas_img2 = $row['hero_aria_offer_canvas_img2'];
+            $hero_aria_offer_canvas_img3 = $row['hero_aria_offer_canvas_img3'];
+          }
+        }
+      }
+     
+     
+     ?>
+        <div class="winter-sale"><b class="xx-large-font"><?php echo $hero_aria_bold_word ?></b>
+
+        <?php echo $hero_aria_offer_title ?>
+        <!-- inter -->
+        <!-- Sale !! <br>
+        40% off on the lattest products -->
+      </div> 
       </div>
     </div>
     <div class="col-4">
       <div class="img">
-        <img src="img/hand-tshirt.png" class="img-fluid">
+        <img src="<?php echo SITE_URL . 'ecom-admin/uploaded_img/hero_photo_upload/' . $hero_aria_offer_title_photo ?>" height="200px!important" style="max-height: 500px !important;" class="img-fluid">
       </div>
     </div>
   </div>
@@ -394,21 +418,21 @@ if ($featured_product_result) {
   </div>
   <div class="carousel-inner">
     <div class="carousel-item active">
-      <img src="img/brand-banner.jpg" class="d-block w-100 main-banner-img" alt="...">
+      <img src="<?php echo SITE_URL . 'ecom-admin/uploaded_img/hero_photo_upload/' . $hero_aria_offer_canvas_img1 ?>" class="d-block w-100 main-banner-img" alt="...">
       <div class="carousel-caption d-none d-md-block">
         <h5>First slide label</h5>
         <p>Some representative placeholder content for the first slide.</p>
       </div>
     </div>
     <div class="carousel-item">
-      <img src="img/one-side-self.jpg" class="d-block w-100 main-banner-img " alt="...">
+      <img src="<?php echo SITE_URL . 'ecom-admin/uploaded_img/hero_photo_upload/' . $hero_aria_offer_canvas_img2 ?>" class="d-block w-100 main-banner-img " alt="...">
       <div class="carousel-caption d-none d-md-block">
         <h5>Second slide label</h5>
         <p>Some representative placeholder content for the second slide.</p>
       </div>
     </div>
     <div class="carousel-item">
-      <img src="img/pink-room.jpg" class="d-block w-100 main-banner-img img-fluid" alt="..." height="250px">
+      <img src="<?php echo SITE_URL . 'ecom-admin/uploaded_img/hero_photo_upload/' . $hero_aria_offer_canvas_img3 ?>" class="d-block w-100 main-banner-img img-fluid" alt="..." height="250px">
       <div class="carousel-caption d-none d-md-block">
         <h5>Third slide label</h5>
         <p>Some representative placeholder content for the third slide.</p>

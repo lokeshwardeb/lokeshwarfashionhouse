@@ -16,7 +16,7 @@ if (!isset($_SESSION['username'])) {
 
     include "inc/_navbar.php";
 // include "../inc/functions.php";
-    include "../inc/const.php";
+    // include "../inc/const.php";
 
 ?>
 

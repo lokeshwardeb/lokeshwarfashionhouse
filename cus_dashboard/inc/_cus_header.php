@@ -37,6 +37,7 @@ include "inc/_cus_company_info.php";
 <?php 
         include "../inc/const.php";
         include "./inc/_cus_const.php";
+        include "./inc/_cus_functions.php";
 
 
 

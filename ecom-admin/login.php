@@ -5,6 +5,9 @@
 $active_class = 'login';
 include "inc/conn.php";
 
+include "inc/_company_info.php";
+include "inc/const.php";
+
 
 
 // include "inc/_company_info.php";
@@ -31,7 +34,7 @@ if(isset($_SESSION['username'])){
   }
 
   body {
-    background-image: url("uploaded_img/<?php echo $login_page ?>");
+    background-image: url("<?php echo PHOTO_UPLOADED_PATH . $login_page ?>") !important;
     background-repeat: no-repeat;
     background-size: cover;
   }

@@ -87,7 +87,8 @@ if(!isset($_SESSION['username'])){
 
             $admins_photo = $_FILES['admin_photo'];
 
-            $admin_photo_name = $_FILES['admin_photo']['name'];
+            $admin_photo_name = $_FILES['admin_photo']['name'] . '.jpeg';
+            $admin_photo_name_main = $_FILES['admin_photo']['name'];
             $admin_photo_tmp = $_FILES['admin_photo']['tmp_name'];
 
             $admin_photo_upload = 'uploaded_img/' . $admin_photo_name;
@@ -101,21 +102,26 @@ if(!isset($_SESSION['username'])){
                 while ($row = mysqli_fetch_assoc($result)) {
                     $id = $row['id'];
                 }
-                if ($admin_photo_name !== '') {
+                if ($admin_photo_name_main !== '') {
                     $up_pho = "UPDATE `admin_users` SET `username` = '$profiles_username', `email` = '$email_address', `admin_description` = '$profile_description', `admin_photo` = '$admin_photo_name', `admin_role` = '$admin_role' WHERE `admin_users`.`id` = '$check_id';";
                     $result_up_photo = mysqli_query($conn, $up_pho);
 
+                    
                     if ($result_up_photo) {
-                       if(move_uploaded_file($admin_photo_tmp, $admin_photo_upload)){
+                        $file_tmp = $admin_photo_tmp;
+                        image_compress_upload($file_tmp,$admin_photo_upload, 50, "Admin Photo Uploaded Successfully",$admins_photo);
+                        // image_compress_upload($file_tmp, $admin_photo_upload, 50, '', $admin_photo);
                         $_SESSION['admin_photo'] = $admin_photo_upload;
-                        update_success_message();
-                       }
+                    //    if(move_uploaded_file($admin_photo_tmp, $admin_photo_upload)){
+                    //     $_SESSION['admin_photo'] = $admin_photo_upload;
+                    //     update_success_message();
+                    //    }
                     } else {
                         update_error_message();
                     }
                 }
 
-                if($admin_photo_name == ''){
+                if($admin_photo_name_main == ''){
                     $sql_up = "UPDATE `admin_users` SET `username` = '$profiles_username', `email` = '$email_address', `admin_description` = '$profile_description', `admin_role` = '$admin_role' WHERE `admin_users`.`id` = '$check_id';";
                     
                     $result_up = mysqli_query($conn, $sql_up);

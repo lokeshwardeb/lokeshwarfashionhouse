@@ -1,5 +1,6 @@
 <?php
 include("conn.php");
+include "const.php";
 // include_once("functions.php");
 $active_username = $_SESSION['username'];
 $sql_theme = "SELECT * FROM `admin_users` WHERE `username` = '$active_username'";
@@ -129,6 +130,19 @@ $active_theme = $theme_row['active_theme'];
     </symbol>
   </svg>
 
+  <style>
+    .custom-hover{
+      transition: 500ms linear ;
+    }
+    .custom-hover:hover{
+      /* background-color: #0d6efd; */
+      /* background-color: #0727ce; */
+      /* background-color: #015fe9; */
+      background-color: red;
+      border-radius: 5px;
+      /* color: darkblue !important; */
+    }
+  </style>
   <main>
 
 <!-- short link section starts here -->
@@ -149,7 +163,7 @@ $active_theme = $theme_row['active_theme'];
             <div class="row">
               <div class="col-6">
               <i class="fa-solid fa-om"></i>
-                <img src="<?php echo 'uploaded_img/' . $website_logo ?>" class="img-fluid" alt="" srcset="">
+                <img src="<?php echo PHOTO_UPLOADED_PATH . $website_logo ?>" class="img-fluid" alt="" srcset="">
               </div>
               <div class="col-6">
                 <span class="fs-4 ">
@@ -223,8 +237,14 @@ $active_theme = $theme_row['active_theme'];
     </div>
     <hr>
     <!-- the ul and the homw section of sidebar starts here -->
-    <ul class="nav nav-pills flex-column mb-auto das-sidebar">
-      <li class="nav-item" id="home">
+    <ul class="nav nav-pills flex-column mb-auto das-sidebar ">
+      <li class="nav-item <?php if ($active_class == "home") {
+                                                        echo 'active';
+                                                      }else{
+                                                        echo 'custom-hover';
+                                                      }
+                                                      
+                                                      ?> " id="home">
         <a href="home.php" class="nav-link text-white <?php if ($active_class == "home") {
                                                         echo 'active';
                                                       } ?>" aria-current="page">
@@ -234,7 +254,7 @@ $active_theme = $theme_row['active_theme'];
           Home
         </a>
       </li>
-      <li id="dashboard">
+      <li id="dashboard" class="custom-hover">
         <a href="dashboard.php" class="nav-link text-white <?php if ($active_class == "dashboard") {
                                                               echo 'active';
                                                             } ?>">
@@ -244,7 +264,7 @@ $active_theme = $theme_row['active_theme'];
           Dashboard
         </a>
       </li>
-      <li>
+      <li class="custom-hover">
         <a href="orders.php" class="nav-link text-white <?php if ($active_class == "orders") {
                                                           echo 'active';
                                                         } ?>">
@@ -254,7 +274,7 @@ $active_theme = $theme_row['active_theme'];
           Orders
         </a>
       </li>
-      <li>
+      <li class="custom-hover">
         <a href="products.php" class="nav-link text-white <?php if ($active_class == "products") {
                                                             echo 'active';
                                                           } ?>">
@@ -264,7 +284,7 @@ $active_theme = $theme_row['active_theme'];
           Products
         </a>
       </li>
-      <li>
+      <li class="custom-hover">
         <a href="customers.php" class="nav-link text-white <?php if ($active_class == "customers") {
                                                               echo 'active';
                                                             } ?>">
@@ -282,6 +302,9 @@ $active_theme = $theme_row['active_theme'];
                           } elseif ($active_class == 'profile') {
                             echo 'active bg-primary';
                           } elseif ($active_class == 'settings') {
+                            # code...
+                            echo 'active bg-primary';
+                          }elseif ($active_class == 'page settings') {
                             # code...
                             echo 'active bg-primary';
                           } elseif ($active_class == 'admins') {
@@ -303,6 +326,9 @@ $active_theme = $theme_row['active_theme'];
         <li><a class="dropdown-item <?php if ($active_class == 'settings') {
                                       echo 'active';
                                     } ?>" href="settings.php">Settings</a></li>
+        <li><a class="dropdown-item <?php if ($active_class == 'page settings') {
+                                      echo 'active';
+                                    } ?>" href="page-settings.php">Page Settings</a></li>
         <li><a class="dropdown-item <?php if ($active_class == 'profile') {
                                       echo 'active';
                                     } ?>" href="profile.php">Profile</a></li>
