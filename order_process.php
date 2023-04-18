@@ -3,13 +3,15 @@
 $active_class = 'checkout';
 include("inc/_header.php");
 
+include("inc/conn.php");
+
 include("inc/functions.php");
 include("inc/const.php");
 include("inc/_navbar.php");
 
 include("inc/conn.php");
 include("inc/_company_info.php");
-include "inc/sent-mail.php";
+// require "inc/sent-mail.php";
 
 
 if (!isset($_SESSION['cart'][0])) {
@@ -131,9 +133,7 @@ $ordering_username = $_SESSION['cus_username'];
             </div>
             
             ';
-
-                  // code for email send to customer for placing order
-                  sent_mail("Lokeshwar Fashion House", $email, $first_name . ' ' . $last_name, "Order Placed Successfully", "Your Order no $order_no has been placed successfully", "Your order Has been placed check your email $email for details");
+            
               
               
             }else{
@@ -157,9 +157,22 @@ $ordering_username = $_SESSION['cus_username'];
       
           // }
 
+          if($place_order_result){
+            include "inc/sent-mail.php";
+
+                  // code for email send to customer for placing order
+                  sent_mail("Lokeshwar Fashion House", $email, $first_name . ' ' . $last_name, "Order Placed Successfully", "Your Order no $order_no has been placed successfully", "Your order Has been placed check your email $email for details");
+            unset($_SESSION['cart'][0]);
+            header("location: index.php");
+          }else{
+            echo 'order place error on placing order';
+          }
         
-          unset($_SESSION['cart'][0]);
-          header("location: index.php");
+         
+        //   echo '
+        //   <script>window.location.href= "sign_up.php"</script>
+        //  ';
+        
         }
       } else {
         // $_SESSION['continue_checkout_status'] = 1;
@@ -171,6 +184,8 @@ $ordering_username = $_SESSION['cus_username'];
       }
       // unset($_SESSION['continue_checkout_status']);
     }
+  }else{
+    echo 'not isset runs';
   }
 
 

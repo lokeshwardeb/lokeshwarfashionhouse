@@ -91,6 +91,15 @@ if(!isset($_SESSION['username'])){
             $admin_photo_name_main = $_FILES['admin_photo']['name'];
             $admin_photo_tmp = $_FILES['admin_photo']['tmp_name'];
 
+            $not_photo_uploaded = 0;
+
+            if ($_FILES['admin_photo']['type'] == 'image/jpeg' || $_FILES['admin_photo']['type'] == 'image/png') {
+                $not_photo_uploaded = 0;
+            }else{
+                $not_photo_uploaded = 1;
+
+            }
+
             $admin_photo_upload = 'uploaded_img/' . $admin_photo_name;
 
             $sql = "SELECT * FROM `admin_users` WHERE `username` = '$check_username';";
@@ -103,22 +112,27 @@ if(!isset($_SESSION['username'])){
                     $id = $row['id'];
                 }
                 if ($admin_photo_name_main !== '') {
-                    $up_pho = "UPDATE `admin_users` SET `username` = '$profiles_username', `email` = '$email_address', `admin_description` = '$profile_description', `admin_photo` = '$admin_photo_name', `admin_role` = '$admin_role' WHERE `admin_users`.`id` = '$check_id';";
-                    $result_up_photo = mysqli_query($conn, $up_pho);
-
-                    
-                    if ($result_up_photo) {
-                        $file_tmp = $admin_photo_tmp;
-                        image_compress_upload($file_tmp,$admin_photo_upload, 50, "Admin Photo Uploaded Successfully",$admins_photo);
-                        // image_compress_upload($file_tmp, $admin_photo_upload, 50, '', $admin_photo);
-                        $_SESSION['admin_photo'] = $admin_photo_upload;
-                    //    if(move_uploaded_file($admin_photo_tmp, $admin_photo_upload)){
-                    //     $_SESSION['admin_photo'] = $admin_photo_upload;
-                    //     update_success_message();
-                    //    }
-                    } else {
-                        update_error_message();
+                    if($not_photo_uploaded == 0){
+                        $up_pho = "UPDATE `admin_users` SET `username` = '$profiles_username', `email` = '$email_address', `admin_description` = '$profile_description', `admin_photo` = '$admin_photo_name', `admin_role` = '$admin_role' WHERE `admin_users`.`id` = '$check_id';";
+                        $result_up_photo = mysqli_query($conn, $up_pho);
+    
+                        
+                        if ($result_up_photo) {
+                            $file_tmp = $admin_photo_tmp;
+                            image_compress_upload($file_tmp,$admin_photo_upload, 50, "Admin Photo Uploaded Successfully",$admins_photo);
+                            // image_compress_upload($file_tmp, $admin_photo_upload, 50, '', $admin_photo);
+                            $_SESSION['admin_photo'] = $admin_photo_upload;
+                        //    if(move_uploaded_file($admin_photo_tmp, $admin_photo_upload)){
+                        //     $_SESSION['admin_photo'] = $admin_photo_upload;
+                        //     update_success_message();
+                        //    }
+                        } else {
+                            update_error_message();
+                        }
+                    }elseif($not_photo_uploaded == 1){
+                        
                     }
+                    
                 }
 
                 if($admin_photo_name_main == ''){

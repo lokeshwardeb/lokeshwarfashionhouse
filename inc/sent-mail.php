@@ -12,7 +12,9 @@ require   '../ecom-admin/PHPMailer/src/Exception.php';
 require   '../ecom-admin/PHPMailer/src/PHPMailer.php';
 require   '../ecom-admin/PHPMailer/src/SMTP.php';
 
-include 'inc/functions.php';
+// include "inc/functions.php";
+
+// include "inc/sent-mail.php";
 //Load Composer's autoloader
 // require 'vendor/autoload.php';
 // require '../vendor/autoload.php';
@@ -21,6 +23,7 @@ include 'inc/functions.php';
 
 function sent_mail($website_name_on_email = "Lokeshwar Fashion House", $sent_on_address, $sent_on_user_name, $email_subject, $email_body, $email_success_msg = "Email sent successfully", $email_add_cc = '', $email_add_bcc = ''){
     $mail = new PHPMailer(true);
+    // include "inc/sent-mail.php";
 
     try {
         //Server settings

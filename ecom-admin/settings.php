@@ -116,6 +116,15 @@ if (!isset($_SESSION['username'])) {
 
 
 
+            $not_photo_uploaded = 0;
+
+            if ($_FILES['logo_upload']['type'] == 'image/jpeg' || $_FILES['logo_upload']['type'] == 'image/png') {
+                $not_photo_uploaded = 0;
+            }else{
+                $not_photo_uploaded = 1;
+
+            }
+     
 
 
 
@@ -137,7 +146,12 @@ if (!isset($_SESSION['username'])) {
             $upload_login = "uploaded_img/" . $login_name;
 
 
+            if ($_FILES['login_upload']['type'] == 'image/jpeg' || $_FILES['login_upload']['type'] == 'image/png') {
+                $not_photo_uploaded = 0;
+            }else{
+                $not_photo_uploaded = 1;
 
+            }
 
 
 
@@ -217,38 +231,43 @@ if(isset($img)){
                         update_error_message();
                     }
                 } elseif ($logo_name_main !== '') {
-                    // if the database is not empty then update the table with the new data
-                    $sql = "UPDATE `settings` SET `website_name` = '$website_name', `website_contract_email` =  '$website_contract_email', `website_description` = '$website_description', `website_slogan`= '$website_slogan', `product_currency` = '$product_currency',`logo_img_upload` = '$logo_name', `authors_name` = '$aurthors_name', `authors_email` = '$authors_email', `company_name` = '$company_name', `phone_no` = '$company_phone_no' WHERE `settings`.`id` = $id;";
+                    if($not_photo_uploaded == 0){
+ // if the database is not empty then update the table with the new data
+ $sql = "UPDATE `settings` SET `website_name` = '$website_name', `website_contract_email` =  '$website_contract_email', `website_description` = '$website_description', `website_slogan`= '$website_slogan', `product_currency` = '$product_currency',`logo_img_upload` = '$logo_name', `authors_name` = '$aurthors_name', `authors_email` = '$authors_email', `company_name` = '$company_name', `phone_no` = '$company_phone_no' WHERE `settings`.`id` = $id;";
 
-                    $result = mysqli_query($conn, $sql);
-                    $file_tmp = $logo_tmp;
-                    image_compress_upload($file_tmp, $upload_logo, 50, '', $logo_file);
+ $result = mysqli_query($conn, $sql);
+ $file_tmp = $logo_tmp;
+ image_compress_upload($file_tmp, $upload_logo, 50, '', $logo_file);
 
-                    $_SESSION['logo_img'] = $upload_logo;
+ $_SESSION['logo_img'] = $upload_logo;
 
-                    // if (move_uploaded_file($logo_tmp, $upload_logo)) {
-                    //     // echo 'updated and saved the changes';
-                    //     // echo 'uploaded img';
-                    //     // session_start();0
-                    //     // session_unset();
+ // if (move_uploaded_file($logo_tmp, $upload_logo)) {
+ //     // echo 'updated and saved the changes';
+ //     // echo 'uploaded img';
+ //     // session_start();0
+ //     // session_unset();
 
 
-                    //     // this session is to store the logo image name and location
+ //     // this session is to store the logo image name and location
 
-                    //     //     echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
-                    //     //   <strong>updated and saved the changes with site logo!</strong> You should refresh the page to  check in on some of those fields below.
-                    //     //   <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                    //     // </div>';
+ //     //     echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
+ //     //   <strong>updated and saved the changes with site logo!</strong> You should refresh the page to  check in on some of those fields below.
+ //     //   <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+ //     // </div>';
 
-                    //     saved_success_message();
-                    // } else {
-                    //     // echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
-                    //     //     <strong>updated and saved the changes!</strong> You should refresh the page to  check in on some of those fields below.
-                    //     //     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                    //     //   </div>';
+ //     saved_success_message();
+ // } else {
+ //     // echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
+ //     //     <strong>updated and saved the changes!</strong> You should refresh the page to  check in on some of those fields below.
+ //     //     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+ //     //   </div>';
 
-                    //     saved_error_message();
-                    // }
+ //     saved_error_message();
+ // }
+                    }elseif ($not_photo_uploaded == 1) {
+                        # code...
+                    }
+                   
                 }
 
 
@@ -272,37 +291,42 @@ if(isset($img)){
                         update_error_message();
                     }
                 } if ($login_name_main !== '') {
-                    $sql = "UPDATE `settings` SET `website_name` = '$website_name', `website_description` = '$website_description',`website_contract_email` = '$website_contract_email', `website_slogan`= '$website_slogan',`product_currency` = '$product_currency', `login_img` = '$login_name', `authors_name` = '$aurthors_name', `authors_email` = '$authors_email', `company_name` = '$company_name', `phone_no` = '$company_phone_no' WHERE `settings`.`id` = $id;";
+                    if($not_photo_uploaded == 0){
+                        $sql = "UPDATE `settings` SET `website_name` = '$website_name', `website_description` = '$website_description',`website_contract_email` = '$website_contract_email', `website_slogan`= '$website_slogan',`product_currency` = '$product_currency', `login_img` = '$login_name', `authors_name` = '$aurthors_name', `authors_email` = '$authors_email', `company_name` = '$company_name', `phone_no` = '$company_phone_no' WHERE `settings`.`id` = $id;";
 
-                    $result = mysqli_query($conn, $sql);
-$file_tmp = $login_tmp;
-                    image_compress_upload($file_tmp, $upload_login, 50, '', $login_file);
+                        $result = mysqli_query($conn, $sql);
+    $file_tmp = $login_tmp;
+                        image_compress_upload($file_tmp, $upload_login, 50, '', $login_file);
+    
+                        $_SESSION['logo_img'] = $upload_login;
+    
+                        // if (move_uploaded_file($login_tmp, $upload_login)) {
+                        //     // echo 'updated and saved the changes';
+                        //     // echo 'uploaded img';
+                        //     // session_start();0
+                        //     // session_unset();
+    
+    
+                        //     // this session is to store the logo image name and location
+    
+                        //     //     echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
+                        //     //   <strong>updated and saved the changes with site login image!</strong> You should refresh the page to  check in on some of those fields below.
+                        //     //   <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        //     // </div>';
+    
+                        //     saved_success_message();
+                        // } else {
+                        //     // echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
+                        //     //     <strong>updated and saved the changes!</strong> You should refresh the page to  check in on some of those fields below.
+                        //     //     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        //     //   </div>';
+    
+                        //     saved_error_message();
+                        // }
+                    }elseif($not_photo_uploaded == 1){
 
-                    $_SESSION['logo_img'] = $upload_login;
-
-                    // if (move_uploaded_file($login_tmp, $upload_login)) {
-                    //     // echo 'updated and saved the changes';
-                    //     // echo 'uploaded img';
-                    //     // session_start();0
-                    //     // session_unset();
-
-
-                    //     // this session is to store the logo image name and location
-
-                    //     //     echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
-                    //     //   <strong>updated and saved the changes with site login image!</strong> You should refresh the page to  check in on some of those fields below.
-                    //     //   <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                    //     // </div>';
-
-                    //     saved_success_message();
-                    // } else {
-                    //     // echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
-                    //     //     <strong>updated and saved the changes!</strong> You should refresh the page to  check in on some of those fields below.
-                    //     //     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                    //     //   </div>';
-
-                    //     saved_error_message();
-                    // }
+                    }
+                    
                 }
 
                 // users login image functionality
@@ -314,61 +338,80 @@ $file_tmp = $login_tmp;
 
                 $user_login_image_upload = "uploaded_img/users_login_upload/" . $user_login_image;
 
+
+                
+            if ($_FILES['users_login_upload']['type'] == 'image/jpeg' || $_FILES['users_login_upload']['type'] == 'image/png') {
+                $not_photo_uploaded = 0;
+            }else{
+                $not_photo_uploaded = 1;
+
+            }
+
                 if($user_login_image_main !== '' && $login_name_main !== ''){
-                    $sql = "UPDATE `settings` SET `website_name` = '$website_name', `website_description` = '$website_description',`website_contract_email` = '$website_contract_email', `website_slogan`= '$website_slogan',`product_currency` = '$product_currency', `login_img` = '$login_name', `users_login_img` = '$user_login_image',`authors_name` = '$aurthors_name', `authors_email` = '$authors_email', `company_name` = '$company_name', `phone_no` = '$company_phone_no' WHERE `settings`.`id` = $id;";
+                    if($not_photo_uploaded == 0){
+                        $sql = "UPDATE `settings` SET `website_name` = '$website_name', `website_description` = '$website_description',`website_contract_email` = '$website_contract_email', `website_slogan`= '$website_slogan',`product_currency` = '$product_currency', `login_img` = '$login_name', `users_login_img` = '$user_login_image',`authors_name` = '$aurthors_name', `authors_email` = '$authors_email', `company_name` = '$company_name', `phone_no` = '$company_phone_no' WHERE `settings`.`id` = $id;";
 
-                    $result = mysqli_query($conn, $sql);
-
-                    if($result){
-                        $file_tmp = $user_login_image_tmp;
-image_compress_upload($file_tmp, $user_login_image_upload, 50, '', $users_login_upload);
-$file_tmp = $login_tmp;
-
-image_compress_upload($file_tmp, $upload_login, 50, '', $login_file);
-
-
-                        // if(move_uploaded_file($user_login_image_tmp, $user_login_image_upload)){
-                        //     update_success_message();
-                        // }else{
-                        //     update_error_message();
-                        // }
+                        $result = mysqli_query($conn, $sql);
+    
+                        if($result){
+                            $file_tmp = $user_login_image_tmp;
+    image_compress_upload($file_tmp, $user_login_image_upload, 50, '', $users_login_upload);
+    $file_tmp = $login_tmp;
+    
+    image_compress_upload($file_tmp, $upload_login, 50, '', $login_file);
+    
+    
+                            // if(move_uploaded_file($user_login_image_tmp, $user_login_image_upload)){
+                            //     update_success_message();
+                            // }else{
+                            //     update_error_message();
+                            // }
+                        }
+    
                     }
-
-                }
-//                 if($user_login_image !== '' ){
-//                     $sql = "UPDATE `settings` SET `website_name` = '$website_name', `website_description` = '$website_description',`website_contract_email` = '$website_contract_email', `website_slogan`= '$website_slogan',`product_currency` = '$product_currency',`users_login_img` = '$user_login_image',`authors_name` = '$aurthors_name', `authors_email` = '$authors_email', `company_name` = '$company_name', `phone_no` = '$company_phone_no' WHERE `settings`.`id` = $id;";
-
-//                     $result = mysqli_query($conn, $sql);
-
-//                     if($result){
-//                         $file_tmp = $user_login_image_tmp;
-// image_compress_upload($file_tmp, $user_login_image_upload, 50, '', $users_login_upload);
-
-
-//                         // if(move_uploaded_file($user_login_image_tmp, $user_login_image_upload)){
-//                         //     update_success_message();
-//                         // }else{
-//                         //     update_error_message();
-//                         // }
-//                     }
-
-//                 }
+    //                 if($user_login_image !== '' ){
+    //                     $sql = "UPDATE `settings` SET `website_name` = '$website_name', `website_description` = '$website_description',`website_contract_email` = '$website_contract_email', `website_slogan`= '$website_slogan',`product_currency` = '$product_currency',`users_login_img` = '$user_login_image',`authors_name` = '$aurthors_name', `authors_email` = '$authors_email', `company_name` = '$company_name', `phone_no` = '$company_phone_no' WHERE `settings`.`id` = $id;";
+    
+    //                     $result = mysqli_query($conn, $sql);
+    
+    //                     if($result){
+    //                         $file_tmp = $user_login_image_tmp;
+    // image_compress_upload($file_tmp, $user_login_image_upload, 50, '', $users_login_upload);
+    
+    
+    //                         // if(move_uploaded_file($user_login_image_tmp, $user_login_image_upload)){
+    //                         //     update_success_message();
+    //                         // }else{
+    //                         //     update_error_message();
+    //                         // }
+    //                     }
+    
+    //                 }
+                    }elseif ($not_photo_uploaded == 1) {
+                        # code...
+                    }
+                   
                 if($user_login_image_main !== '' && $login_name_main == ''){
-                    $sql = "UPDATE `settings` SET `website_name` = '$website_name', `website_description` = '$website_description', `website_contract_email` = '$website_contract_email', `website_slogan`= '$website_slogan',`product_currency` = '$product_currency', `users_login_img` = '$user_login_image',`authors_name` = '$aurthors_name', `authors_email` = '$authors_email', `company_name` = '$company_name', `phone_no` = '$company_phone_no' WHERE `settings`.`id` = $id;";
+                    if($not_photo_uploaded == 0){
+                        $sql = "UPDATE `settings` SET `website_name` = '$website_name', `website_description` = '$website_description', `website_contract_email` = '$website_contract_email', `website_slogan`= '$website_slogan',`product_currency` = '$product_currency', `users_login_img` = '$user_login_image',`authors_name` = '$aurthors_name', `authors_email` = '$authors_email', `company_name` = '$company_name', `phone_no` = '$company_phone_no' WHERE `settings`.`id` = $id;";
 
-                    $result = mysqli_query($conn, $sql);
-
-
-                    if($result){
-                        $file_tmp = $user_login_image_tmp;
-                        image_compress_upload($file_tmp, $user_login_image_upload, 50, '', $users_login_upload);
-                        // if(move_uploaded_file($user_login_image_tmp, $user_login_image_upload)){
-                        //     update_success_message();
-                        // }else{
-                        //     update_error_message();
-                        // }
+                        $result = mysqli_query($conn, $sql);
+    
+    
+                        if($result){
+                            $file_tmp = $user_login_image_tmp;
+                            image_compress_upload($file_tmp, $user_login_image_upload, 50, '', $users_login_upload);
+                            // if(move_uploaded_file($user_login_image_tmp, $user_login_image_upload)){
+                            //     update_success_message();
+                            // }else{
+                            //     update_error_message();
+                            // }
+                        }
+    
+                    }elseif ($not_photo_uploaded == 1) {
+                        # code...
                     }
-
+                    
                 }
                 
 

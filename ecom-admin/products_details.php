@@ -76,7 +76,7 @@ if (!isset($_SESSION['username'])) {
                     $custom_promo_code_input = htmlspecialchars(mysqli_real_escape_string($conn, $_POST['custom_promo_code_input']), ENT_QUOTES);
 
 
-
+$not_photo_uploaded = 0;
                     //  echo 'the verify is ' . $verify = password_verify($password, $hash);
 
                     $product_photo = $_FILES['product_photo'];
@@ -85,6 +85,14 @@ if (!isset($_SESSION['username'])) {
 
                     // this is the logo img file name
                     $img_name = $_FILES['product_photo']['name'];
+
+                    if($_FILES['product_photo']['type'] == 'image/jpeg' || $_FILES['product_photo']['type'] == 'image/png'){
+                        $not_photo_uploaded = 0;
+                    }else{
+                        error_alert("Uploaded file is not image. Please upload jpg or jpeg or png file");
+                        $not_photo_uploaded = 1;
+
+                    }
 
                     // this is the logo img name with the upload file which is main name to upload or move the file
                     $upload_img = "uploaded_img/products/" . $img_name;
@@ -178,17 +186,20 @@ if (!isset($_SESSION['username'])) {
 
                                 elseif ($img_name !== '') {
                                     // if the database is not empty then update the table with the new data
-                                    $sql_p_up = "UPDATE `products` SET `product_name` = '$product_name', `product_desc` = '$product_description',`product_img` = '$img_name', `product_price` = '$product_price', `product_status` = '$product_status', `make_as_featured` = 'featured_product' WHERE `products`.`product_id` = '$product_id'";
-                                    $result_u_wp = mysqli_query($conn, $sql_p_up);
-
-                                    // $result = mysqli_query($conn, $sql);
-                                    if ($result_u_wp) {
-                                        if (move_uploaded_file($img_tmp, $upload_img)) {
-                                            update_success_message();
-                                        } else {
-                                            // update_error_message();
+                                    if($not_photo_uploaded == 0){
+                                        $sql_p_up = "UPDATE `products` SET `product_name` = '$product_name', `product_desc` = '$product_description',`product_img` = '$img_name', `product_price` = '$product_price', `product_status` = '$product_status', `make_as_featured` = 'featured_product' WHERE `products`.`product_id` = '$product_id'";
+                                        $result_u_wp = mysqli_query($conn, $sql_p_up);
+    
+                                        // $result = mysqli_query($conn, $sql);
+                                        if ($result_u_wp) {
+                                            image_compress_upload($img_tmp, $upload_img, 50, "", $product_photo);
+    
+                                          
                                         }
+                                    }elseif($not_photo_uploaded == 1){
+                                        
                                     }
+                                   
                                 } else {
                                     saved_error_message();
                                 }
@@ -212,17 +223,20 @@ if (!isset($_SESSION['username'])) {
 
                                 elseif ($img_name !== '') {
                                     // if the database is not empty then update the table with the new data
+                                    if($not_photo_uploaded == 0){
                                     $sql_p_up = "UPDATE `products` SET `product_name` = '$product_name', `product_desc` = '$product_description',`product_img` = '$img_name', `product_price` = '$product_price', `product_status` = '$product_status',`make_as_featured` = 'not_featured_product' WHERE `products`.`product_id` = '$product_id'";
                                     $result_u_wp = mysqli_query($conn, $sql_p_up);
 
                                     // $result = mysqli_query($conn, $sql);
                                     if ($result_u_wp) {
-                                        if (move_uploaded_file($img_tmp, $upload_img)) {
-                                            update_success_message();
-                                        } else {
-                                            // update_error_message();
-                                        }
+                                        image_compress_upload($img_tmp, $upload_img, 50, "", $product_photo);
+
+                                        
+                                       
                                     }
+                                }elseif($not_photo_uploaded == 1){
+
+                                }
                                 } else {
                                     saved_error_message();
                                 }
@@ -306,27 +320,20 @@ if (!isset($_SESSION['username'])) {
 
                                 elseif ($product_photo !== '') {
                                     // if the database is not empty then update the table with the new data
+                                    if($not_photo_uploaded == 0){
                                     $sql = "INSERT INTO `products` (`product_name`, `product_desc`, `product_img`, `product_price`, `product_status`, `product_added_datetime`) VALUES ('$product_name', '$product_description', '$img_name', '$product_price', '$product_status', current_timestamp());";
                                     $result = mysqli_query($conn, $sql);
 
                                     // $result = mysqli_query($conn, $sql);
 
                                     if ($result) {
-                                        if (move_uploaded_file($img_tmp, $upload_img)) {
-                                            // echo 'updated and saved the changes';
-                                            // echo 'uploaded img';
-                                            // session_start();0
-                                            // session_unset();
-                                            $_SESSION['admin_photo'] = $upload_img;
+                                        image_compress_upload($img_tmp, $upload_img, 50, "", $product_photo);
 
-                                            // this session is to store the logo image name and location
-                                            // $_SESSION['logo_img'] = $upload_img;
-
-                                            saved_success_message();
-                                        } else {
-                                            saved_error_message();
-                                        }
+                                        
                                     }
+                                }elseif($not_photo_uploaded == 1){
+
+                                }
                                 } else {
                                     wrong_error_message();
                                 }

@@ -104,6 +104,14 @@ if(!isset($_SESSION['username'])){
         // this is the logo img name with the upload file which is main name to upload or move the file
         $upload_img = "uploaded_img/products/" . $img_name;
 
+        if($_FILES['product_photo']['type'] == 'image/jpeg' || $_FILES['product_photo']['type'] == 'image/png'){
+            $not_photo_uploaded = 0;
+        }else{
+            error_alert("Uploaded file is not image. Please upload jpg or jpeg or png file");
+            $not_photo_uploaded = 1;
+
+        }
+
         $img_tmp = $_FILES['product_photo']['tmp_name'];
 
         $product_status = htmlspecialchars(mysqli_real_escape_string($conn, $_POST['product_status']), ENT_QUOTES);
@@ -149,32 +157,38 @@ if(!isset($_SESSION['username'])){
 
                 elseif ($img_name !== '') {
                     // if the database is not empty then update the table with the new data
-                    $sql = "INSERT INTO `products` (`product_name`, `product_desc`, `product_img`, `product_price`, `product_status`, `product_added_datetime`) VALUES ('$product_name', '$product_description', '$img_name', '$product_price', '$product_status', current_timestamp());";
-                    $result = mysqli_query($conn, $sql);
-
-                    // $result = mysqli_query($conn, $sql);
-
-                    if($result){
-                        $file_tmp = $img_tmp;
-
-                        image_compress_upload($file_tmp, $upload_img, 50, "Successfully Product added with the Image", $product_photo);
-                 
-                        // if (move_uploaded_file($img_tmp, $upload_img)) {
-                        //     // echo 'updated and saved the changes';
-                        //     // echo 'uploaded img';
-                        //     // session_start();0
-                        //     // session_unset();
+                        
+                    if($not_photo_uploaded == 0){
+                        $sql = "INSERT INTO `products` (`product_name`, `product_desc`, `product_img`, `product_price`, `product_status`, `product_added_datetime`) VALUES ('$product_name', '$product_description', '$img_name', '$product_price', '$product_status', current_timestamp());";
+                        $result = mysqli_query($conn, $sql);
     
+                        // $result = mysqli_query($conn, $sql);
     
-                        //     // this session is to store the logo image name and location
-                        //     // $_SESSION['logo_img'] = $upload_img;
+                        if($result){
+                            $file_tmp = $img_tmp;
     
-                        //  saved_success_message();
-                        // } else {
-                        //    saved_error_message();
-                        // }
+                            image_compress_upload($file_tmp, $upload_img, 50, "Successfully Product added with the Image", $product_photo);
+                     
+                            // if (move_uploaded_file($img_tmp, $upload_img)) {
+                            //     // echo 'updated and saved the changes';
+                            //     // echo 'uploaded img';
+                            //     // session_start();0
+                            //     // session_unset();
+        
+        
+                            //     // this session is to store the logo image name and location
+                            //     // $_SESSION['logo_img'] = $upload_img;
+        
+                            //  saved_success_message();
+                            // } else {
+                            //    saved_error_message();
+                            // }
+                        }
+    
+                    }elseif($not_photo_uploaded == 1){
+
                     }
-
+                   
 
                 } else {
                     wrong_error_message();

@@ -98,7 +98,41 @@ if (!isset($_SESSION['username'])) {
 
             $upload_directory = 'uploaded_img/hero_photo_upload/';
             
+            $not_photo_uploaded_hero_title = 0;
+            $not_photo_uploaded_hero_canvas1 = 0;
+            $not_photo_uploaded_hero_canvas2 = 0;
+            $not_photo_uploaded_hero_canvas3 = 0;
 
+
+
+
+            if ($_FILES['hero_aria_offer_title_photo']['type'] == 'image/jpeg' || $_FILES['hero_aria_offer_title_photo']['type'] == 'image/png') {
+                $not_photo_uploaded_hero_title = 0;
+            }else{
+                $not_photo_uploaded_hero_title = 1;
+
+            }
+
+            if ($_FILES['hero_aria_offer_canvas_image1']['type'] == 'image/jpeg' || $_FILES['hero_aria_offer_canvas_image1']['type'] == 'image/png') {
+                $not_photo_uploaded_hero_canvas1 = 0;
+            }else{
+                $not_photo_uploaded_hero_canvas1 = 1;
+
+            }
+
+            if ($_FILES['hero_aria_offer_canvas_image2']['type'] == 'image/jpeg' || $_FILES['hero_aria_offer_canvas_image2']['type'] == 'image/png') {
+                $not_photo_uploaded_hero_canvas2 = 0;
+            }else{
+                $not_photo_uploaded_hero_canvas2 = 1;
+
+            }
+
+            if ($_FILES['hero_aria_offer_canvas_image3']['type'] == 'image/jpeg' || $_FILES['hero_aria_offer_canvas_image3']['type'] == 'image/png') {
+                $not_photo_uploaded_hero_canvas3 = 0;
+            }else{
+                $not_photo_uploaded_hero_canvas3 = 1;
+
+            }
 
             $sql = "SELECT * FROM `page_settings`";
             $result = mysqli_query($conn, $sql);
@@ -111,59 +145,89 @@ if (!isset($_SESSION['username'])) {
                         $result = mysqli_query($conn, $sql);
     
                         if ($result) {
-                            succcess_alert("Updated all the informations with all images successfully");
+                            if($not_photo_uploaded_hero_title == 0 && $not_photo_uploaded_hero_canvas1 == 0 && $not_photo_uploaded_hero_canvas2 == 0 && $not_photo_uploaded_hero_canvas3 == 0){
+                                succcess_alert("Updated all the informations with all images successfully");
 
-                            image_compress_upload($hero_aria_offer_title_photo_tmp, $upload_directory . $hero_aria_offer_title_photo_name.".jpeg", 50,"",$hero_aria_offer_title_photo);
-                            image_compress_upload($hero_aria_offer_canvas_image1_tmp, $upload_directory . $hero_aria_offer_canvas_image1_name.".jpeg", 50,"",$hero_aria_offer_canvas_image1);
-                            image_compress_upload($hero_aria_offer_canvas_image2_tmp, $upload_directory . $hero_aria_offer_canvas_image2_name.".jpeg", 50,"",$hero_aria_offer_canvas_image2);
-                            image_compress_upload($hero_aria_offer_canvas_image3_tmp, $upload_directory . $hero_aria_offer_canvas_image3_name.".jpeg", 50,"",$hero_aria_offer_canvas_image3);
+                                image_compress_upload($hero_aria_offer_title_photo_tmp, $upload_directory . $hero_aria_offer_title_photo_name.".jpeg", 50,"",$hero_aria_offer_title_photo);
+                                image_compress_upload($hero_aria_offer_canvas_image1_tmp, $upload_directory . $hero_aria_offer_canvas_image1_name.".jpeg", 50,"",$hero_aria_offer_canvas_image1);
+                                image_compress_upload($hero_aria_offer_canvas_image2_tmp, $upload_directory . $hero_aria_offer_canvas_image2_name.".jpeg", 50,"",$hero_aria_offer_canvas_image2);
+                                image_compress_upload($hero_aria_offer_canvas_image3_tmp, $upload_directory . $hero_aria_offer_canvas_image3_name.".jpeg", 50,"",$hero_aria_offer_canvas_image3);
+                            }else{
+                                error_alert("Uploaded file is not image. Please upload jpg or jpeg or png file");
+
+                            }
+                            
                         }
                     }
                     
                     if($hero_aria_offer_title_photo_name !== '' ){
-                        $sql = "UPDATE `page_settings` SET `hero_aria_bold_word` = '$Hero_aria_bold_word', `hero_aria_offer_title` = '$Hero_aria_offer_title', `hero_aria_offer_title_photo` = '$hero_aria_offer_title_photo_name.jpeg' WHERE `page_settings`.`id` = '$id';";
+                        if($not_photo_uploaded_hero_title == 0){
+                            $sql = "UPDATE `page_settings` SET `hero_aria_bold_word` = '$Hero_aria_bold_word', `hero_aria_offer_title` = '$Hero_aria_offer_title', `hero_aria_offer_title_photo` = '$hero_aria_offer_title_photo_name.jpeg' WHERE `page_settings`.`id` = '$id';";
 
-                        $result = mysqli_query($conn, $sql);
+                            $result = mysqli_query($conn, $sql);
+        
+                            if ($result) {
+                               succcess_alert("Updated hero-aria offer image successfully");
+                               image_compress_upload($hero_aria_offer_title_photo_tmp, $upload_directory . $hero_aria_offer_title_photo_name.".jpeg", 50,"",$hero_aria_offer_title_photo);
     
-                        if ($result) {
-                           succcess_alert("Updated hero-aria offer image successfully");
-                           image_compress_upload($hero_aria_offer_title_photo_tmp, $upload_directory . $hero_aria_offer_title_photo_name.".jpeg", 50,"",$hero_aria_offer_title_photo);
-
+                            }
+                        }else{
+            error_alert("Uploaded title image file is not image. Please upload jpg or jpeg or png file");
+                           
                         }
+                        
                     }
                     if($hero_aria_offer_canvas_image1_name !== '' ){
-                        $sql = "UPDATE `page_settings` SET `hero_aria_bold_word` = '$Hero_aria_bold_word', `hero_aria_offer_title` = '$Hero_aria_offer_title', `hero_aria_offer_title_photo` = '$hero_aria_offer_canvas_image1_name.jpeg' WHERE `page_settings`.`id` = '$id';";
+                        if($not_photo_uploaded_hero_canvas1 == 0){
+                            $sql = "UPDATE `page_settings` SET `hero_aria_bold_word` = '$Hero_aria_bold_word', `hero_aria_offer_title` = '$Hero_aria_offer_title', `hero_aria_offer_title_photo` = '$hero_aria_offer_canvas_image1_name.jpeg' WHERE `page_settings`.`id` = '$id';";
 
-                        $result = mysqli_query($conn, $sql);
+                            $result = mysqli_query($conn, $sql);
+        
+                            if ($result) {
+                                succcess_alert("Updated hero-aria canvas image1 successfully");
+                                image_compress_upload($hero_aria_offer_canvas_image1_tmp, $upload_directory . $hero_aria_offer_canvas_image1_name.".jpeg", 50,"",$hero_aria_offer_canvas_image1);
     
-                        if ($result) {
-                            succcess_alert("Updated hero-aria canvas image1 successfully");
-                            image_compress_upload($hero_aria_offer_canvas_image1_tmp, $upload_directory . $hero_aria_offer_canvas_image1_name.".jpeg", 50,"",$hero_aria_offer_canvas_image1);
+                            }
+                        }else{
+                            error_alert("Uploaded hero canvas1 file is not image. Please upload jpg or jpeg or png file");
 
                         }
+                        
                     }
                     if($hero_aria_offer_canvas_image2_name !== '' ){
-                        $sql = "UPDATE `page_settings` SET `hero_aria_bold_word` = '$Hero_aria_bold_word', `hero_aria_offer_title` = '$Hero_aria_offer_title', `hero_aria_offer_title_photo` = '$hero_aria_offer_canvas_image2_name.jpeg' WHERE `page_settings`.`id` = '$id';";
+                        if($not_photo_uploaded_hero_canvas2 == 0){
+                            $sql = "UPDATE `page_settings` SET `hero_aria_bold_word` = '$Hero_aria_bold_word', `hero_aria_offer_title` = '$Hero_aria_offer_title', `hero_aria_offer_title_photo` = '$hero_aria_offer_canvas_image2_name.jpeg' WHERE `page_settings`.`id` = '$id';";
 
-                        $result = mysqli_query($conn, $sql);
+                            $result = mysqli_query($conn, $sql);
+        
+                            if ($result) {
+                                succcess_alert("Updated hero-aria canvas image2 successfully");
+                                image_compress_upload($hero_aria_offer_canvas_image2_tmp, $upload_directory . $hero_aria_offer_canvas_image2_name.".jpeg", 50,"",$hero_aria_offer_canvas_image2);
     
-                        if ($result) {
-                            succcess_alert("Updated hero-aria canvas image2 successfully");
-                            image_compress_upload($hero_aria_offer_canvas_image2_tmp, $upload_directory . $hero_aria_offer_canvas_image2_name.".jpeg", 50,"",$hero_aria_offer_canvas_image2);
+                            }
+                        }else{
+                            error_alert("Uploaded hero canvas2 file is not image. Please upload jpg or jpeg or png file");
 
                         }
+                        
                     }
                     if($hero_aria_offer_canvas_image3_name !== '' ){
-                        $sql = "UPDATE `page_settings` SET `hero_aria_bold_word` = '$Hero_aria_bold_word', `hero_aria_offer_title` = '$Hero_aria_offer_title', `hero_aria_offer_title_photo` = '$hero_aria_offer_canvas_image3_name.jpeg' WHERE `page_settings`.`id` = '$id';";
+                        if($not_photo_uploaded_hero_canvas3 == 0){
+                            $sql = "UPDATE `page_settings` SET `hero_aria_bold_word` = '$Hero_aria_bold_word', `hero_aria_offer_title` = '$Hero_aria_offer_title', `hero_aria_offer_title_photo` = '$hero_aria_offer_canvas_image3_name.jpeg' WHERE `page_settings`.`id` = '$id';";
 
-                        $result = mysqli_query($conn, $sql);
+                            $result = mysqli_query($conn, $sql);
+        
+                            if ($result) {
+                                succcess_alert("Updated hero-aria canvas image3 successfully");
+                                image_compress_upload($hero_aria_offer_canvas_image3_tmp, $upload_directory . $hero_aria_offer_canvas_image3_name.".jpeg", 50,"",$hero_aria_offer_canvas_image3);
     
-                        if ($result) {
-                            succcess_alert("Updated hero-aria canvas image3 successfully");
-                            image_compress_upload($hero_aria_offer_canvas_image3_tmp, $upload_directory . $hero_aria_offer_canvas_image3_name.".jpeg", 50,"",$hero_aria_offer_canvas_image3);
+                                
+                            }
+                        }else{
+                            error_alert("Uploaded hero canvas3 file is not image. Please upload jpg or jpeg or png file");
 
-                            
                         }
+                        
                     }
 
                     if($hero_aria_offer_title_photo_name == '' && $hero_aria_offer_canvas_image1_name == '' && $hero_aria_offer_canvas_image2_name == '' && $hero_aria_offer_canvas_image3_name == ''){
