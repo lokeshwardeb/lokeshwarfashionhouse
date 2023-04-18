@@ -114,6 +114,8 @@ if(isset($_SESSION['fp_username'])){
     
     
     try {
+    include "inc/_company_info.php";
+
         //Server settings
         // $mail->SMTPDebug = SMTP::DEBUG_SERVER;                      //Enable verbose debug output
         $mail->isSMTP();                                            //Send using SMTP
@@ -124,9 +126,12 @@ if(isset($_SESSION['fp_username'])){
         $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;            //Enable implicit TLS encryption
         $mail->Port       = 465;                                    //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
     
+
+        $username = $_SESSION['fp_username'];
+
         //Recipients
-        $mail->setFrom('biratdebmail@gmail.com', 'Birat Deb Mail');
-        $mail->addAddress("$sent_on", 'Joe User');     //Add a recipient
+        $mail->setFrom('biratdebmail@gmail.com', $website_name);
+        $mail->addAddress("$sent_on", $username);     //Add a recipient
         $mail->addAddress('ellen@example.com');               //Name is optional
         $mail->addReplyTo('info@example.com', 'Information');
         $mail->addCC('cc@example.com');
