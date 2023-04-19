@@ -57,7 +57,7 @@ if (!isset($_SESSION['username'])) {
                     $website_contract_email = $row['website_contract_email'];
                     $website_slogan = $row['website_slogan'];
                     $product_currency = $row['product_currency'];
-                    
+
                     $aurthors_name = $row['authors_name'];
                     $authors_email = $row['authors_email'];
                     $company_name = $row['company_name'];
@@ -86,7 +86,7 @@ if (!isset($_SESSION['username'])) {
             $website_name = htmlspecialchars(mysqli_real_escape_string($conn, $_POST['website_name']), ENT_QUOTES);
             $website_description = htmlspecialchars(mysqli_real_escape_string($conn, $_POST['website_description']), ENT_QUOTES);
             $website_contract_email = htmlspecialchars(mysqli_real_escape_string($conn, $_POST['website_contract_email']), ENT_QUOTES);
-            
+
             $website_slogan = htmlspecialchars(mysqli_real_escape_string($conn, $_POST['website_slogan']), ENT_QUOTES);
             $product_currency = $_POST['product_currency'];
             $aurthors_name = htmlspecialchars(mysqli_real_escape_string($conn, $_POST['authors_name']), ENT_QUOTES);
@@ -102,8 +102,8 @@ if (!isset($_SESSION['username'])) {
             // this is the logo img file name
             $logo_name = $_FILES['logo_upload']['name'] . '.jpeg';
             $logo_name_main = $_FILES['logo_upload']['name'];
-            
-          $logo_file = $_FILES['logo_upload'];
+
+            $logo_file = $_FILES['logo_upload'];
             // echo $logo_name;
 
             // this is the logo img name with the upload file which is main name to upload or move the file
@@ -118,13 +118,17 @@ if (!isset($_SESSION['username'])) {
 
             $not_photo_uploaded = 0;
 
-            if ($_FILES['logo_upload']['type'] == 'image/jpeg' || $_FILES['logo_upload']['type'] == 'image/png') {
+            if ($_FILES['logo_upload']['type'] == 'image/jpeg') {
                 $not_photo_uploaded = 0;
-            }else{
-                $not_photo_uploaded = 1;
+            }elseif( $_FILES['logo_upload']['type'] == 'image/png'){
+                $not_photo_uploaded = 0;
 
             }
-     
+            
+            else {
+                $not_photo_uploaded = 1;
+            }
+
 
 
 
@@ -140,16 +144,22 @@ if (!isset($_SESSION['username'])) {
 
 
             $login_name = $_FILES['login_upload']['name'] . '.jpeg';
-            $login_name_main = $_FILES['login_upload']['name'] ;
+            $login_name_main = $_FILES['login_upload']['name'];
             $login_file = $_FILES['login_upload'];
             $login_tmp = $_FILES['login_upload']['tmp_name'];
             $upload_login = "uploaded_img/" . $login_name;
 
             $not_photo_uploaded_login = 0;
-            
-            if ($_FILES['login_upload']['type'] == 'image/jpeg' || $_FILES['login_upload']['type'] == 'image/png') {
+
+            if ($_FILES['login_upload']['type'] == 'image/jpeg') {
                 $not_photo_uploaded_login = 0;
-            }else{
+            }elseif($_FILES['login_upload']['type'] == 'image/png') {
+                $not_photo_uploaded_login = 0;
+
+            }
+            
+            
+            else {
                 $not_photo_uploaded_login = 1;
                 // error_alert("Uploaded file is not a jpg or jpeg or png. Please upload a jpg or jpeg or png file");
 
@@ -169,9 +179,9 @@ if (!isset($_SESSION['username'])) {
                 if ($result) {
                     echo 'inserted and saved the changes';
 
-                    image_compress_upload($logo_tmp, $upload_logo, 50,"", $logo_file);
+                    image_compress_upload($logo_tmp, $upload_logo, 50, "", $logo_file);
                     echo  $_SESSION['logo_img'] = $upload_logo;
-                    
+
                     // if (move_uploaded_file($logo_tmp, $upload_logo)) {
                     //     echo 'uploaded img';
 
@@ -214,46 +224,44 @@ if (!isset($_SESSION['username'])) {
                         update_error_message();
                     }
                 } elseif ($logo_name_main !== '') {
-                    if($not_photo_uploaded == 0){
- // if the database is not empty then update the table with the new data
- $sql = "UPDATE `settings` SET `website_name` = '$website_name', `website_contract_email` =  '$website_contract_email', `website_description` = '$website_description', `website_slogan`= '$website_slogan', `product_currency` = '$product_currency',`logo_img_upload` = '$logo_name', `authors_name` = '$aurthors_name', `authors_email` = '$authors_email', `company_name` = '$company_name', `phone_no` = '$company_phone_no' WHERE `settings`.`id` = $id;";
+                    if ($not_photo_uploaded == 0) {
+                        // if the database is not empty then update the table with the new data
+                        $sql = "UPDATE `settings` SET `website_name` = '$website_name', `website_contract_email` =  '$website_contract_email', `website_description` = '$website_description', `website_slogan`= '$website_slogan', `product_currency` = '$product_currency',`logo_img_upload` = '$logo_name', `authors_name` = '$aurthors_name', `authors_email` = '$authors_email', `company_name` = '$company_name', `phone_no` = '$company_phone_no' WHERE `settings`.`id` = $id;";
 
- $result = mysqli_query($conn, $sql);
- $file_tmp = $logo_tmp;
-//  image_compress_upload($file_tmp, $upload_logo, 50,"", );
-image_compress_upload($logo_tmp, $upload_logo, 50, "Image uploaded successfully", $logo_file);
+                        $result = mysqli_query($conn, $sql);
+                        $file_tmp = $logo_tmp;
+                        //  image_compress_upload($file_tmp, $upload_logo, 50,"", );
+                        image_compress_upload($logo_tmp, $upload_logo, 50, "Image uploaded successfully", $logo_file);
 
- $_SESSION['logo_img'] = $upload_logo;
+                        $_SESSION['logo_img'] = $upload_logo;
 
- // if (move_uploaded_file($logo_tmp, $upload_logo)) {
- //     // echo 'updated and saved the changes';
- //     // echo 'uploaded img';
- //     // session_start();0
- //     // session_unset();
+                        // if (move_uploaded_file($logo_tmp, $upload_logo)) {
+                        //     // echo 'updated and saved the changes';
+                        //     // echo 'uploaded img';
+                        //     // session_start();0
+                        //     // session_unset();
 
 
- //     // this session is to store the logo image name and location
+                        //     // this session is to store the logo image name and location
 
- //     //     echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
- //     //   <strong>updated and saved the changes with site logo!</strong> You should refresh the page to  check in on some of those fields below.
- //     //   <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
- //     // </div>';
+                        //     //     echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
+                        //     //   <strong>updated and saved the changes with site logo!</strong> You should refresh the page to  check in on some of those fields below.
+                        //     //   <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        //     // </div>';
 
- //     saved_success_message();
- // } else {
- //     // echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
- //     //     <strong>updated and saved the changes!</strong> You should refresh the page to  check in on some of those fields below.
- //     //     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
- //     //   </div>';
+                        //     saved_success_message();
+                        // } else {
+                        //     // echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
+                        //     //     <strong>updated and saved the changes!</strong> You should refresh the page to  check in on some of those fields below.
+                        //     //     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        //     //   </div>';
 
- //     saved_error_message();
- // }
-                    }elseif ($not_photo_uploaded == 1) {
+                        //     saved_error_message();
+                        // }
+                    } else {
                         # code...
-                error_alert("Uploaded file is not a jpg or jpeg or png. Please upload a jpg or jpeg or png file");
-
+                        error_alert("Uploaded file is not a jpg or jpeg or png. Please upload a jpg or jpeg or png file ss");
                     }
-                   
                 }
 
 
@@ -276,44 +284,43 @@ image_compress_upload($logo_tmp, $upload_logo, 50, "Image uploaded successfully"
 
                         update_error_message();
                     }
-                } if ($login_name_main !== '') {
-                    if($not_photo_uploaded_login == 0){
+                }
+                if ($login_name_main !== '') {
+                    if ($not_photo_uploaded_login == 0) {
                         $sql = "UPDATE `settings` SET `website_name` = '$website_name', `website_description` = '$website_description',`website_contract_email` = '$website_contract_email', `website_slogan`= '$website_slogan',`product_currency` = '$product_currency', `login_img` = '$login_name', `authors_name` = '$aurthors_name', `authors_email` = '$authors_email', `company_name` = '$company_name', `phone_no` = '$company_phone_no' WHERE `settings`.`id` = $id;";
 
                         $result = mysqli_query($conn, $sql);
-    $file_tmp = $login_tmp;
+                        $file_tmp = $login_tmp;
                         image_compress_upload($file_tmp, $upload_login, 50, '', $login_file);
-    
+
                         $_SESSION['logo_img'] = $upload_login;
-    
+
                         // if (move_uploaded_file($login_tmp, $upload_login)) {
                         //     // echo 'updated and saved the changes';
                         //     // echo 'uploaded img';
                         //     // session_start();0
                         //     // session_unset();
-    
-    
+
+
                         //     // this session is to store the logo image name and location
-    
+
                         //     //     echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
                         //     //   <strong>updated and saved the changes with site login image!</strong> You should refresh the page to  check in on some of those fields below.
                         //     //   <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                         //     // </div>';
-    
+
                         //     saved_success_message();
                         // } else {
                         //     // echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
                         //     //     <strong>updated and saved the changes!</strong> You should refresh the page to  check in on some of those fields below.
                         //     //     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                         //     //   </div>';
-    
+
                         //     saved_error_message();
                         // }
-                    }elseif($not_photo_uploaded_login == 1){
-                        error_alert("Uploaded file is not a jpg or jpeg or png. Please upload a jpg or jpeg or png file");
-
+                    } elseif ($not_photo_uploaded_login == 1) {
+                        error_alert("Uploaded file is not a jpg or jpeg or png. Please upload a jpg or jpeg or png filedfd");
                     }
-                    
                 }
 
                 // users login image functionality
@@ -325,69 +332,54 @@ image_compress_upload($logo_tmp, $upload_logo, 50, "Image uploaded successfully"
 
                 $user_login_image_upload = "uploaded_img/users_login_upload/" . $user_login_image;
 
-$not_photo_uploaded_user_login = 0;
-                
-            if ($_FILES['users_login_upload']['type'] == 'image/jpeg' || $_FILES['users_login_upload']['type'] == 'image/png') {
                 $not_photo_uploaded_user_login = 0;
-            }else{
-                $not_photo_uploaded_user_login = 1;
 
-            }
+                if ($_FILES['users_login_upload']['type'] == 'image/jpeg') {
+                    $not_photo_uploaded_user_login = 0;
+                }elseif($_FILES['users_login_upload']['type'] == 'image/png'){
+                    $not_photo_uploaded_user_login = 0;
 
-                if($user_login_image_main !== '' && $login_name_main !== ''){
-                    if($not_photo_uploaded_user_login == 0){
+                }
+                
+                else {
+                    $not_photo_uploaded_user_login = 1;
+                }
+
+                if ($user_login_image_main !== '' && $login_name_main !== '') {
+                    if ($not_photo_uploaded_user_login == 0 && $not_photo_uploaded_login == 0) {
                         $sql = "UPDATE `settings` SET `website_name` = '$website_name', `website_description` = '$website_description',`website_contract_email` = '$website_contract_email', `website_slogan`= '$website_slogan',`product_currency` = '$product_currency', `login_img` = '$login_name', `users_login_img` = '$user_login_image',`authors_name` = '$aurthors_name', `authors_email` = '$authors_email', `company_name` = '$company_name', `phone_no` = '$company_phone_no' WHERE `settings`.`id` = $id;";
 
                         $result = mysqli_query($conn, $sql);
-    
-                        if($result){
+
+                        if ($result) {
                             $file_tmp = $user_login_image_tmp;
-    image_compress_upload($file_tmp, $user_login_image_upload, 50, '', $users_login_upload);
-    $file_tmp = $login_tmp;
-    
-    image_compress_upload($file_tmp, $upload_login, 50, '', $login_file);
-    
-    
+                            image_compress_upload($file_tmp, $user_login_image_upload, 50, '', $users_login_upload);
+                            $file_tmp = $login_tmp;
+
+                            image_compress_upload($file_tmp, $upload_login, 50, '', $login_file);
+
+
                             // if(move_uploaded_file($user_login_image_tmp, $user_login_image_upload)){
                             //     update_success_message();
                             // }else{
                             //     update_error_message();
                             // }
                         }
-    
-                    }
-    //                 if($user_login_image !== '' ){
-    //                     $sql = "UPDATE `settings` SET `website_name` = '$website_name', `website_description` = '$website_description',`website_contract_email` = '$website_contract_email', `website_slogan`= '$website_slogan',`product_currency` = '$product_currency',`users_login_img` = '$user_login_image',`authors_name` = '$aurthors_name', `authors_email` = '$authors_email', `company_name` = '$company_name', `phone_no` = '$company_phone_no' WHERE `settings`.`id` = $id;";
-    
-    //                     $result = mysqli_query($conn, $sql);
-    
-    //                     if($result){
-    //                         $file_tmp = $user_login_image_tmp;
-    // image_compress_upload($file_tmp, $user_login_image_upload, 50, '', $users_login_upload);
-    
-    
-    //                         // if(move_uploaded_file($user_login_image_tmp, $user_login_image_upload)){
-    //                         //     update_success_message();
-    //                         // }else{
-    //                         //     update_error_message();
-    //                         // }
-    //                     }
-    
-    //                 }
-                    }elseif ($not_photo_uploaded_user_login == 1) {
+                    }else{
                         # code...
-                error_alert("Uploaded file is not a jpg or jpeg or png. Please upload a jpg or jpeg or png file");
-
+                        error_alert("Uploaded file is not a jpg or jpeg or png. Please upload a jpg or jpeg or png file use main login");
                     }
-                   
-                if($user_login_image_main !== '' && $login_name_main == ''){
-                    if($not_photo_uploaded_user_login == 0){
+                    
+                } 
+
+                if ($user_login_image_main !== '' && $login_name_main == '') {
+                    if ($not_photo_uploaded_user_login == 0) {
                         $sql = "UPDATE `settings` SET `website_name` = '$website_name', `website_description` = '$website_description', `website_contract_email` = '$website_contract_email', `website_slogan`= '$website_slogan',`product_currency` = '$product_currency', `users_login_img` = '$user_login_image',`authors_name` = '$aurthors_name', `authors_email` = '$authors_email', `company_name` = '$company_name', `phone_no` = '$company_phone_no' WHERE `settings`.`id` = $id;";
 
                         $result = mysqli_query($conn, $sql);
-    
-    
-                        if($result){
+
+
+                        if ($result) {
                             $file_tmp = $user_login_image_tmp;
                             image_compress_upload($file_tmp, $user_login_image_upload, 50, '', $users_login_upload);
                             // if(move_uploaded_file($user_login_image_tmp, $user_login_image_upload)){
@@ -396,15 +388,12 @@ $not_photo_uploaded_user_login = 0;
                             //     update_error_message();
                             // }
                         }
-    
-                    }elseif ($not_photo_uploaded_user_login == 1) {
+                    } elseif ($not_photo_uploaded_user_login == 1) {
                         # code...
-                error_alert("Uploaded file is not a jpg or jpeg or png. Please upload a jpg or jpeg or png file");
-
+                        error_alert("Uploaded file is not a jpg or jpeg or png. Please upload a jpg or jpeg or png filethie us login");
                     }
-                    
                 }
-                
+
 
 
 
@@ -526,39 +515,39 @@ $not_photo_uploaded_user_login = 0;
                 <div class="form-text">Example help text goes outside the input group.</div>
             </div>
             <div class="mb-3">
-                                <label for="basic-url" class="form-label">Product currency</label>
-                                <div class="input-group">
-                                    <span class="input-group-text" id="basic-addon3">@</span>
+                <label for="basic-url" class="form-label">Product currency</label>
+                <div class="input-group">
+                    <span class="input-group-text" id="basic-addon3">@</span>
 
 
-                                    <select class="form-select" name="product_currency" id="inputGroupSelect04" aria-label="Example select with button addon">
-                                        <!-- <option selected value="In-stock">Choose...</option> -->
+                    <select class="form-select" name="product_currency" id="inputGroupSelect04" aria-label="Example select with button addon">
+                        <!-- <option selected value="In-stock">Choose...</option> -->
 
-                                        <option <?php
+                        <option <?php
 
-                                                if ($product_currency == 'usd') {
-                                                    echo 'selected';
-                                                }
-
-
-                                                ?> value="usd">USD - US DOLLAR</option>
-                                        <option <?php
-
-                                                if ($product_currency == 'bdt') {
-                                                    echo 'selected';
-                                                }
+                                if ($product_currency == 'usd') {
+                                    echo 'selected';
+                                }
 
 
-                                                ?> value="bdt">BDT - BANGLADESHI TAKA</option>
-                                        <!-- <option value="3">Three</option> -->
-                                    </select>
-                                    <!-- <button class="btn btn-outline-secondary" type="button">Button</button> -->
+                                ?> value="usd">USD - US DOLLAR</option>
+                        <option <?php
+
+                                if ($product_currency == 'bdt') {
+                                    echo 'selected';
+                                }
+
+
+                                ?> value="bdt">BDT - BANGLADESHI TAKA</option>
+                        <!-- <option value="3">Three</option> -->
+                    </select>
+                    <!-- <button class="btn btn-outline-secondary" type="button">Button</button> -->
 
 
 
-                                </div>
-                                <div class="form-text">Example help text goes outside the input group.</div>
-                            </div>
+                </div>
+                <div class="form-text">Example help text goes outside the input group.</div>
+            </div>
             <div class="mb-3">
                 <label for="basic-url" class="form-label">Company name</label>
                 <div class="input-group">

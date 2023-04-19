@@ -34,7 +34,7 @@ include "inc/_header.php";
   }
 
   body {
-    background-image: url("ecom-admin/uploaded_img/users_login_upload/<?php echo $users_login_upload ?>") !important;
+    background-image: url("ecom-admin/uploaded_img/<?php echo $users_login_upload ?>") !important;
     background-repeat: no-repeat;
     background-size: cover;
   }
