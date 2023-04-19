@@ -77,9 +77,14 @@ include "inc/_navbar.php";
                                                         }
 
 
-                                                        ?>"><?php echo '' . $product_status . ' </span> </div> <br>
+                                                        ?>"><?php echo '' . $product_status . ' </span> </div> <br>';?>
     
-   <div class = "fs-5" id="featuredProductStatusId"> Product Featured Status: '; ?><span class="<?php
+   <div  id="featuredProductStatusId" class="fs-5 <?php 
+   if ($product_featured_status == "not_featured_product") {
+    echo 'd-none';
+}
+   
+   ?>"> Product Featured Status:<span class="<?php
                                                                                                 if ($product_featured_status == "featured_product") {
                                                                                                     echo 'bg-dark text-warning';
                                                                                                 }
