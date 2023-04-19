@@ -103,7 +103,7 @@ if (!isset($_SESSION['username'])) {
             $logo_name = $_FILES['logo_upload']['name'] . '.jpeg';
             $logo_name_main = $_FILES['logo_upload']['name'];
             
-          print_r($logo_file = $_FILES['logo_upload']);
+          $logo_file = $_FILES['logo_upload'];
             // echo $logo_name;
 
             // this is the logo img name with the upload file which is main name to upload or move the file
