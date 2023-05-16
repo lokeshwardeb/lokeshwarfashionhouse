@@ -167,7 +167,7 @@ if(isset($_SESSION['fp_username'])){
         <form action="' . $_SERVER["PHP_SELF"] . '" method="post" >
         <input type="text" class = "form-control input-group mb-4" name="otp_no" placeholder="your otp">
     
-        <input type="text" class = "form-control input-group mb-4" name="new_pass" placeholder= "new password" id="pass_inp">
+        <input type="password" class = "form-control input-group mb-4" name="new_pass" placeholder= "new password" id="pass_inp">
         <i class="fa-solid fa-eye no-disp" id = "show_pass" onclick="pass_show()"></i>
         <i class="fa-solid fa-eye-slash " id= "hide_pass" onclick="pass_show()"></i>
         <button type="submit" class = "btn btn-primary" name="submit_otp">submit otp</button>
