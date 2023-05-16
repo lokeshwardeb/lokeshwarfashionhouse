@@ -27,5 +27,5 @@
 
 
 ###### Current Version :
-    lokfahou-version-1.0.0
+    lokfahou-version-1.0.1
 ##### NOTE : ANY KIND OF COPY OR DUPLICATE OF THIS WEBSITE IS UNDER AGAINST THE COPYRIGHT LAW.
