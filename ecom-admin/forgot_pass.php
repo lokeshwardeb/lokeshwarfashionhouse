@@ -68,7 +68,7 @@ if($result_login){
 </head>
 
 <body>
-    <div class="container mt-4">
+    <div class="container mt-4 ">
     <form action="<?php $_SERVER['PHP_SELF'] ?>" method="post" id="fp_forgot_form" class="container">
         <h3 class="mt-4 ms-5 ps-5 test-center">Are you have forgot your password ?</h3>
         <input type="text" name="fp_username" placeholder="Your username" class = "form-control input-group mb-4">

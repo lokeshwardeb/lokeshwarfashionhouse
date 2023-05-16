@@ -393,3 +393,50 @@ if(promoInputCheckedStatus){
 
 
 
+// password show and hide functionality
+
+function pass_show() {
+
+  let show_pass = document.getElementById("show_pass");
+  let hide_pass = document.getElementById("hide_pass");
+
+  let pass_inp = document.getElementById("pass_inp");
+
+
+  if (show_pass.classList.contains("no-disp")) {
+    hide_pass.classList.add("no-disp");
+    show_pass.classList.remove("no-disp")
+    if (pass_inp.type == "password") {
+      pass_inp.type = "text"
+    } else {
+      pass_inp.type = "password";
+
+    }
+  } else {
+    hide_pass.classList.remove("no-disp");
+    show_pass.classList.add("no-disp")
+    // hide_pass.classList.toggle("no-disp");
+    // hide_pass.classList.ad("no-disp");
+    // pass_inp.type = "text";
+
+    if (pass_inp.type == "password") {
+      pass_inp.type = "text"
+    } else {
+      pass_inp.type = "password";
+
+    }
+
+  }
+
+  // if(hide_pass.classList.contains("no-disp")){
+  //   hide_pass.classList.remove("no-disp");
+  //     show_pass.classList.add("no-disp")
+  //     // hide_pass.classList.toggle("no-disp");
+  //     // hide_pass.classList.ad("no-disp");
+  //     pass_inp.type = "text";
+  // }
+
+
+
+
+}

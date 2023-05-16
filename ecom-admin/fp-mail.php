@@ -60,9 +60,13 @@ if(isset($_SESSION['fp_username'])){
             margin-left: 40% !important;
             margin-top: 10px !important;
         }
+        .no-disp{
+            display: none !important;
+        }
     </style>
 
     <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/all.min.css">
     
     
     <?php
@@ -160,10 +164,12 @@ if(isset($_SESSION['fp_username'])){
     if ($mail->send()) {
         echo '
         
-        <form action="' . $_SERVER["PHP_SELF"] . '" method="post">
+        <form action="' . $_SERVER["PHP_SELF"] . '" method="post" >
         <input type="text" class = "form-control input-group mb-4" name="otp_no" placeholder="your otp">
     
-        <input type="text" class = "form-control input-group mb-4" name="new_pass" placeholder= "new password">
+        <input type="text" class = "form-control input-group mb-4" name="new_pass" placeholder= "new password" id="pass_inp">
+        <i class="fa-solid fa-eye no-disp" id = "show_pass" onclick="pass_show()"></i>
+        <i class="fa-solid fa-eye-slash " id= "hide_pass" onclick="pass_show()"></i>
         <button type="submit" class = "btn btn-primary" name="submit_otp">submit otp</button>
     </form>
     
@@ -216,3 +222,84 @@ if(isset($_SESSION['fp_username'])){
 
 
 ?>
+
+<script>
+
+// function pass_show(){
+
+//     let show_pass = document.getElementById("show_pass");
+//     let hide_pass = document.getElementById("hide_pass");
+
+//     let pass_inp = document.getElementById("pass_inp");
+
+    
+//     if(show_pass.classList.contains("no-disp")){
+//         hide_pass.classList.remove("no-disp");
+//         pass_inp.type = "text";
+//     }
+    
+//     if(hide_pass.classList.contains("no-disp")){
+//         show_pass.classList.add("no-disp");
+//         // hide_pass.classList.ad("no-disp");
+//         pass_inp.type = "password";
+//     }
+
+
+
+
+// }
+
+function pass_show() {
+
+let show_pass = document.getElementById("show_pass");
+let hide_pass = document.getElementById("hide_pass");
+
+let pass_inp = document.getElementById("pass_inp");
+
+
+if (show_pass.classList.contains("no-disp")) {
+  hide_pass.classList.add("no-disp");
+  show_pass.classList.remove("no-disp")
+  if (pass_inp.type == "password") {
+    pass_inp.type = "text"
+  } else {
+    pass_inp.type = "password";
+
+  }
+} else {
+  hide_pass.classList.remove("no-disp");
+  show_pass.classList.add("no-disp")
+  // hide_pass.classList.toggle("no-disp");
+  // hide_pass.classList.ad("no-disp");
+  // pass_inp.type = "text";
+
+  if (pass_inp.type == "password") {
+    pass_inp.type = "text"
+  } else {
+    pass_inp.type = "password";
+
+  }
+
+}
+
+// if(hide_pass.classList.contains("no-disp")){
+//   hide_pass.classList.remove("no-disp");
+//     show_pass.classList.add("no-disp")
+//     // hide_pass.classList.toggle("no-disp");
+//     // hide_pass.classList.ad("no-disp");
+//     pass_inp.type = "text";
+// }
+
+
+
+
+}
+
+
+
+
+
+</script>
+
+<!-- <script src="js/script.js"></script> -->
+<script src="js/all.min.js"></script>

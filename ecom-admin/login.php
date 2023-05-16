@@ -14,173 +14,227 @@ include "inc/const.php";
 
 include "inc/_header.php";
 // include("inc/functions.php");
-if(isset($_SESSION['username'])){
-    header("location: home.php");
-  }
-  else{
+if (isset($_SESSION['username'])) {
+  header("location: home.php");
+} else {
 
 
 
 
-// include "inc/_navbar.php";
+  // include "inc/_navbar.php";
 
 ?>
 
-<style>
-  * {
-    margin: auto;
-    padding: auto;
-    box-sizing: border-box;
-  }
+  <style>
+    * {
+      margin: auto;
+      padding: auto;
+      box-sizing: border-box;
+    }
 
-  body {
-    background-image: url("<?php echo PHOTO_UPLOADED_PATH . $login_page ?>") !important;
-    background-repeat: no-repeat;
-    background-size: cover;
-  }
-</style>
+    body {
+      background-image: url("<?php echo PHOTO_UPLOADED_PATH . $login_page ?>") !important;
+      background-repeat: no-repeat;
+      background-size: cover;
+    }
 
-
-
-
-
-<body class="login">
-  <div id="preloader"></div>
-  <div class="container title-bar  mt-4" id="orderSec">
-
-    <div class="text-center">
-
-      <?php
-include  "inc/functions.php";
-
-      if (isset($_POST['signin'])) {
+    .pass {
+      background-color: #D9D9D9;
+    }
+  </style>
 
 
-        $username = mysqli_real_escape_string($conn, $_POST['username']);
-        $pass = mysqli_real_escape_string($conn, $_POST['password']);
 
 
-        $sql = "SELECT * FROM `admin_users` WHERE `username` = '$username'";
 
-        $result = mysqli_query($conn, $sql);
-        $hash = password_hash($pass, PASSWORD_DEFAULT);
+  <body class="login">
+    <div id="preloader"></div>
+    <div class="container title-bar  mt-4" id="orderSec">
 
-        $hash_verify = password_verify($pass, $hash);
+      <div class="text-center">
 
-        if ($result) {
-          if ($pass !== '') {
-            if (mysqli_num_rows($result) == 1) {
-              while ($row = mysqli_fetch_assoc($result)) {
-                $pass_verify = password_verify($pass, $row['password']);
-                if ($pass_verify === $hash_verify) {
-                  login_success();
-                  $_SESSION['loggedin'] = true;
-                  $_SESSION['username'] = $username;
-                  $_SESSION['email'] = $row['email'];
-                  $_SESSION['admin_phone_no'] = $row['admin_phone_no'];
-                  $_SESSION['admin_description'] = $row['admin_description'];
-                  $_SESSION['admin_photo'] = $row['admin_photo'];
-                  $_SESSION['admin_joined_datetime'] = $row['datetime'];
+        <?php
+        include  "inc/functions.php";
 
-                  header("location: home.php");
-                  // die("hi");
-                } else {
-                  // $_SESSION['loggedin'] = false;
-                preloader_include();
-                 echo(login_password_not_matched()) ;
+        if (isset($_POST['signin'])) {
+
+
+          $username = mysqli_real_escape_string($conn, $_POST['username']);
+          $pass = mysqli_real_escape_string($conn, $_POST['password']);
+
+
+          $sql = "SELECT * FROM `admin_users` WHERE `username` = '$username'";
+
+          $result = mysqli_query($conn, $sql);
+          $hash = password_hash($pass, PASSWORD_DEFAULT);
+
+          $hash_verify = password_verify($pass, $hash);
+
+          if ($result) {
+            if ($pass !== '') {
+              if (mysqli_num_rows($result) == 1) {
+                while ($row = mysqli_fetch_assoc($result)) {
+                  $pass_verify = password_verify($pass, $row['password']);
+                  if ($pass_verify === $hash_verify) {
+                    login_success();
+                    $_SESSION['loggedin'] = true;
+                    $_SESSION['username'] = $username;
+                    $_SESSION['email'] = $row['email'];
+                    $_SESSION['admin_phone_no'] = $row['admin_phone_no'];
+                    $_SESSION['admin_description'] = $row['admin_description'];
+                    $_SESSION['admin_photo'] = $row['admin_photo'];
+                    $_SESSION['admin_joined_datetime'] = $row['datetime'];
+
+                    header("location: home.php");
+                    // die("hi");
+                  } else {
+                    // $_SESSION['loggedin'] = false;
+                    preloader_include();
+                    echo (login_password_not_matched());
+                  }
                 }
+              } else {
+                preloader_include();
+                echo (login_user_doesnot_exist());
               }
             } else {
+
               preloader_include();
-              echo(login_user_doesnot_exist());
+
+              echo (login_user_password_blank());
+              // exit();
             }
+
+
+
+
+            // echo 'this is the verify' . $verify;
           } else {
-
-           preloader_include();
-
-            echo(login_user_password_blank());
-            // exit();
+            preloader_include();
+            echo (login_defficulties_error());
           }
-
-
-
-
-          // echo 'this is the verify' . $verify;
-        } else {
-          preloader_include();
-          echo(login_defficulties_error());
         }
-      }
 
 
 
-      ?>
+        ?>
 
 
-      <main class="form-signin">
-        <form action="<?php $_SERVER['PHP_SELF'] ?>" method="post">
-          <img class="mb-4 " src="<?php echo 'uploaded_img/' . $website_logo ?>" alt="" width="100vw" height="100vh">
-          <h1 class="h3 mb-3 fw-normal">ADMIN PANEL</h1>
-          <h1 class="h3 mb-3 fw-normal">Please sign in</h1>
+        <main class="form-signin">
+          <form action="<?php $_SERVER['PHP_SELF'] ?>" method="post">
+            <img class="mb-4 " src="<?php echo 'uploaded_img/' . $website_logo ?>" alt="" width="100vw" height="100vh">
+            <h1 class="h3 mb-3 fw-normal">ADMIN PANEL</h1>
+            <h1 class="h3 mb-3 fw-normal">Please sign in</h1>
 
-          <div class="form-floating">
-            <input type="text" class="form-control" id="floatingInput" placeholder="name@example.com" name="username">
-            <label for="floatingInput">Username</label>
-          </div>
-          <div class="form-floating">
-            <input type="password" class="form-control" id="floatingPassword" placeholder="Password" name="password">
-            <label for="floatingPassword">Password</label>
-          </div>
-
-          
-
-          <div class="checkbox mb-3">
-            <label>
-              <input type="checkbox" value="remember-me"> Remember me
-            </label>
-          </div>
-          <button class="w-100 btn btn-lg btn-primary" type="submit" name="signin">Sign in</button>
-
-          <div class="form-floating mb-3 mt-4">
-            <label for="forgotPassword"></label>
-          <span>Forgot you password ?<a href="forgot_pass.php" id="forgotPassword"> Click here</a> to restore your account.</span>  
-
-          </div>
-
-          <p class="mt-5 mb-3 text-muted ">© All rights are reserved by <?php echo $website_name ?>. || 2022 - <?php echo date('Y') ?></p>
-        </form>
-      </main>
+            <div class="form-floating">
+              <input type="text" class="form-control" id="floatingInput" placeholder="name@example.com" name="username">
+              <label for="floatingInput">Username</label>
+            </div>
+            <div class="form-floating d-flex pass">
+              <input type="password" class="form-control" id="pass_inp" placeholder="Password" name="password">
+              <label for="pass_inp">Password</label>
+              <i class="fa-solid fa-eye pass no-disp" id="show_pass" onclick="pass_show()"></i>
+              <i class="fa-solid fa-eye-slash  pass" id="hide_pass" onclick="pass_show()"></i>
+            </div>
 
 
 
+            <div class="checkbox mb-3">
+              <label>
+                <input type="checkbox" value="remember-me"> Remember me
+              </label>
+            </div>
+            <button class="w-100 btn btn-lg btn-primary" type="submit" name="signin">Sign in</button>
 
+            <div class="form-floating mb-3 mt-4">
+              <label for="forgotPassword"></label>
+              <span>Forgot you password ?<a href="forgot_pass.php" id="forgotPassword"> Click here</a> to restore your account.</span>
+
+            </div>
+
+            <p class="mt-5 mb-3 text-muted ">© All rights are reserved by <?php echo $website_name ?>. || 2022 - <?php echo date('Y') ?></p>
+          </form>
+        </main>
+
+
+
+
+
+      </div>
 
     </div>
 
-  </div>
+
+
+    </main>
 
 
 
-  </main>
+    <?php
+
+    // include "inc/_footer.php";
+
+
+    // 
+    ?>
+
+
+    <script>
+      function pass_show() {
+
+        let show_pass = document.getElementById("show_pass");
+        let hide_pass = document.getElementById("hide_pass");
+
+        let pass_inp = document.getElementById("pass_inp");
+
+
+        if (show_pass.classList.contains("no-disp")) {
+          hide_pass.classList.add("no-disp");
+          show_pass.classList.remove("no-disp")
+          if (pass_inp.type == "password") {
+            pass_inp.type = "text"
+          } else {
+            pass_inp.type = "password";
+
+          }
+        } else {
+          hide_pass.classList.remove("no-disp");
+          show_pass.classList.add("no-disp")
+          // hide_pass.classList.toggle("no-disp");
+          // hide_pass.classList.ad("no-disp");
+          // pass_inp.type = "text";
+
+          if (pass_inp.type == "password") {
+            pass_inp.type = "text"
+          } else {
+            pass_inp.type = "password";
+
+          }
+
+        }
+
+        // if(hide_pass.classList.contains("no-disp")){
+        //   hide_pass.classList.remove("no-disp");
+        //     show_pass.classList.add("no-disp")
+        //     // hide_pass.classList.toggle("no-disp");
+        //     // hide_pass.classList.ad("no-disp");
+        //     pass_inp.type = "text";
+        // }
 
 
 
-  <?php
 
-  // include "inc/_footer.php";
+      }
+    </script>
 
-
-  // ?>
-
-
-</body>
+  </body>
 
 
 
 
 <?php
 
-include "inc/_footer.php";
+  include "inc/_footer.php";
 }
 
 ?>
