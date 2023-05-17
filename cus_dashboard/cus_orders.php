@@ -22,11 +22,12 @@ if (!isset($_SESSION['cus_username'])) {
 
   // $active_theme = 'dark_theme';
 
-  include "../inc/functions.php";
+  // include "../inc/functions.php";
 
-  include "inc/_navbar.php";
+  // include "inc/_navbar.php";
 
-  include "inc/_company_info.php";
+  // include "inc/_company_info.php";
+  require_once "inc/_cus_functions.php";
 
 
 
@@ -43,6 +44,30 @@ if (!isset($_SESSION['cus_username'])) {
     <?php include "inc/_cus_title_bar.php"; ?>
     <?php
 
+// function product_currency_bdt_new(){
+//     include("./conn.php");
+    
+//       $sql_currency = "SELECT * FROM `settings`";
+//       $result_currency = mysqli_query($conn, $sql_currency);
+//       if($result_currency){
+//         // echo '৳';?
+//         if(mysqli_num_rows($result_currency)>0){
+//           while($row = mysqli_fetch_assoc($result_currency)){
+//             $product_currency = $row['product_currency'];
+//             if($product_currency == 'bdt'){
+//               return '৳';
+//             }
+//             if($product_currency == 'usd'){
+//               return  '$';
+    
+//             }
+//           }
+    
+//         }
+//       }else{
+//         return '$';
+//       }
+//     }
 
     $search_class = 'home';
 
@@ -50,6 +75,7 @@ if (!isset($_SESSION['cus_username'])) {
 
     include("inc/_theme.php");
 
+    
 
     ?>
 
@@ -306,7 +332,7 @@ if (!isset($_SESSION['cus_username'])) {
                     echo '<tr class="hover-table on-table-hover">
                   <th scope="row">' . $no++ . '</th>
                   <td><b>' . $row['order_no'] . '</b></td>
-                  <td><b>' . product_currency_bdt() . $row['total_amount'] . '</b></td>
+                  <td><b>' . product_currency_bdt_cus() . $row['total_amount'] . '</b></td>
                  
                   <td class="">';
                     $sql_get_prod = "SELECT * FROM `order_products` op JOIN products p ON p.product_id = op.product_id WHERE customer_id_on_order = '$customer_id' AND op.orders_id = '$order_no_new';";
@@ -330,7 +356,7 @@ if (!isset($_SESSION['cus_username'])) {
                             <th scope="row">' . $sl_no . '</th>
                             <td>' . $get_prod_row['product_name'] . '</td>
                             <td>' . $get_prod_row['product_qty'] . '</td>
-                            <td>' . product_currency_bdt() . $get_prod_row['product_price'] . '</td>
+                            <td>' . product_currency_bdt_cus(). $get_prod_row['product_price'] . '</td>
                             
                           </tr>
                        

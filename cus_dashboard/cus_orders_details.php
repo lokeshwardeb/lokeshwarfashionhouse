@@ -32,8 +32,11 @@ if (!isset($_SESSION['cus_username'])) {
         $search_class = 'orders';
 
         include "inc/_search.php";
-        include("inc/functions.php");
-        include("../inc/functions.php");
+        // include_once("inc/functions.php");
+
+        require_once "inc/_cus_functions.php";
+
+        // require_once("../inc/functions.php");
 
         include("inc/_theme.php");
 
@@ -313,9 +316,9 @@ echo '<img src=" '.SITE_URL.'img/delivery.png"  class = "img-fluid" alt="" srcse
                   <tr>
                   <th scope="row"><img src="' . PRODUCT_INFO_PATH . $row["product_img"] . '" class="img-fluid" height="150px" width="150px" alt="" srcset="">  </th>
                   <td><a href="product_details_cus_disp.php?id=' . $row['product_id'] . '" class="nav-link prod_hover">' . $row["product_name"] . '</a></td>
-                  <td>Price: '  . product_currency_bdt() . $per_price = $row['product_price'] . '</td>
+                  <td>Price: '  . product_currency_bdt_cus() . $per_price = $row['product_price'] . '</td>
                   <td>Qty: ' . $product_qty = $row['product_qty'] . '</td>
-                  <td>'  . product_currency_bdt() . $total_price += $row['product_price'] * $row['product_qty'] . '</td>
+                  <td>'  . product_currency_bdt_cus() . $total_price += $row['product_price'] * $row['product_qty'] . '</td>
                 </tr>
                   
                   ';
@@ -363,13 +366,13 @@ echo '<img src=" '.SITE_URL.'img/delivery.png"  class = "img-fluid" alt="" srcse
                     <tr>
                       <!-- <th scope="row">1</th> -->
                       <td class="col-10"> <span class="">Sub-Total:</span></td>
-                      <td class="col-10"><?php echo product_currency_bdt() .  $to_pri; ?></td>
+                      <td class="col-10"><?php echo product_currency_bdt_cus() .  $to_pri; ?></td>
 
                     </tr>
                     <tr>
                       <!-- <th scope="row">1</th> -->
                       <td class="col-10"> <span>Total Price:</span></td>
-                      <td class="col-10"><?php echo product_currency_bdt() .  $to_pri ?></td>
+                      <td class="col-10"><?php echo product_currency_bdt_cus() .  $to_pri ?></td>
 
                     </tr>
                     <tr>
@@ -377,9 +380,9 @@ echo '<img src=" '.SITE_URL.'img/delivery.png"  class = "img-fluid" alt="" srcse
                       <td class="col-10"> <span>Payable Amount:</span></td>
                       <td class="col-10"> <?php
                                           if ($order_status == 'completed' || $order_status == 'cancelled') {
-                                            echo product_currency_bdt() . 0;
+                                            echo product_currency_bdt_cus() . 0;
                                           } else {
-                                            echo product_currency_bdt() . $to_pri;
+                                            echo product_currency_bdt_cus() . $to_pri;
                                           }
 
                                           ?>
