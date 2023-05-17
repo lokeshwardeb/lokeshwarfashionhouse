@@ -299,70 +299,38 @@ include "inc/_header.php";
 
 
       <main class="form-signin">
+        
+          
+
+<style>
+          #otp-input::placeholder {
+            text-align: center !important;
+
+          }
+        </style>
         <div class="container <?php
-                              if ($otp_func_run_starts == 0) {
-                                echo 'd-flex';
-                              } else {
-                                echo 'd-none';
-                              }
+                            //   if ($otp_func_run_starts == 1) {
+                            //     echo 'd-flex';
+                            //   } else {
+                            //     echo 'd-none';
+                            //   }
 
                               ?>">
-          <form action="sign_up_process.php" method="post" enctype="multipart/form-data" id="main_form">
-            <img class="mb-4 " src="<?php echo 'ecom-admin/uploaded_img/' . $website_logo ?>" alt="" width="100vw" height="100vh">
-            <h1 class="h3 mb-3 fw-normal">Please sign up</h1>
+          <form action="<?php $_SERVER['PHP_SELF'] ?>" method="post">
+            <div class="container">
+              <div class="container bg-light mb-4">
+                We have sent an otp on your email. Please verify your email
 
-            <div class="form-floating">
-              <input type="text" class="form-control" id="floatingInput" placeholder="name@example.com" name="cus_username" required>
-              <label for="floatingInput">Username</label>
-            </div>
-            <div class="form-floating">
-              <input type="password" class="form-control" id="floatingPassword" placeholder="Password" name="cus_password">
-              <label for="floatingPassword">Password</label>
-            </div>
-            <div class="form-floating">
-              <input type="password" class="form-control" id="floatingPassword" placeholder="Password" name="cus_cpassword">
-              <label for="floatingPassword">Confirm Password</label>
-            </div>
-            <div class="form-floating">
-              <input type="email" class="form-control" id="floatingPassword" placeholder="Email" name="cus_email">
-              <label for="floatingPassword">Email</label>
-            </div>
-            <div class="form-floating">
-              <input type="file" class="form-control" id="floatingPassword" placeholder="Email" name="cus_photo">
-              <!-- <span>User photo</span> -->
-              <label for="floatingPassword">User photo</label>
-            </div>
-            <div class="form-floating">
-              <input type="number" class="form-control" id="floatingPassword" placeholder="Phone no" name="cus_phone_no" required>
-              <label for="floatingPassword">Phone no</label>
-            </div>
-            <div class="form-floating">
-              <input type="text" class="form-control" id="floatingPassword" placeholder="Address" name="cus_address" required>
-              <label for="floatingPassword">Address</label>
-            </div>
+                <?php echo $otp_func_run_starts; ?>
 
-
-
-            <div class="checkbox mb-3">
-              <label>
-                <input type="checkbox" value="remember-me"> Remember me
-              </label>
+              </div>
+              <div class="form-control pt-2 mb-4 pb-4">
+                <input class="form-control mb-4 pb-4 mt-2" type="number" name="otp_inp" id="otp-input" placeholder="Your otp">
+                <button class="btn btn-outline-primary" type="submit" name="otp_submit">Submit otp</button>
+              </div>
             </div>
-            <button class="w-100 btn btn-lg btn-primary" type="submit" name="signup">Sign up</button>
-
-            <div class="form-floating mb-3 mt-4">
-              <label for="forgotPassword"></label>
-              <span>Forgot you password ?<a href="forgot_pass.php" id="forgotPassword"> Click here</a> to restore your account.</span> <br>
-              <span>Already have a account ?<a href="login.php" id="forgotPassword"> Log in with your account </a> to restore your account.</span>
-              <span><a href="index.php" id="forgotPassword"> <input type="button" value="Go home" class="btn btn-primary"> </a></span>
-            </div>
-            <!-- <div class="form-floating mb-3 mt-4">
-            <label for="forgotPassword"></label>
-            
-
-          </div> -->
-
             <p class="mt-5 mb-3 text-muted ">© All rights are reserved by <?php echo $website_name ?>. || 2022 - <?php echo date('Y') ?></p>
+
           </form>
         </div>
 
