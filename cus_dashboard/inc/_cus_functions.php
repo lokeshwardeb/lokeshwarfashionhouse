@@ -86,8 +86,12 @@ function image_compress_upload($file_tmp, $image_upload_directory, $compress_qua
          
           if ($file['type'] == 'image/jpeg') {
               $img = imagecreatefromjpeg($file_tmp);
-          } else{
-            error_alert("Please select jpg or jpeg images only !");
+          }elseif($file['type'] == 'image/png'){
+            $img = imagecreatefrompng($file_tmp);
+            
+          }
+           else{
+            error_alert("Please select jpg or jpeg or pngs images only !");
           }
   
         //   elseif ($file['type'] == 'image/png') {

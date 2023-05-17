@@ -63,7 +63,7 @@ include "inc/_title_bar.php";
             </p>
           </div>
           <div class="col-6">
-            <img class="img-fluid" src="img/products.jpg" width="150px" style="border-radius: 20px;" height="100px" alt="" srcset="">
+            <img class="img-fluid" src="img/products.jpg" width="150px" style="border-radius: 20px;" height="100px" alt="products" srcset="">
           </div>
         </div>
 
@@ -86,7 +86,7 @@ include "inc/_title_bar.php";
             </p>
           </div>
           <div class="col-6">
-            <img class="img-fluid" src="img/process.jpg" alt="" srcset="" width="100px" height="100px" style="border-radius: 20px;">
+            <img class="img-fluid" src="img/process.jpg" alt="process" srcset="" width="100px" height="100px" style="border-radius: 20px;">
           </div>
         </div>
 
@@ -110,7 +110,7 @@ include "inc/_title_bar.php";
             </p>
           </div>
           <div class="col-6">
-            <img class="img-fluid" src="img/delivered.png" alt="" srcset="" width="150px" height="100px" style="border-radius: 20px;">
+            <img class="img-fluid" src="img/delivered.png" alt="delivered" srcset="" width="150px" height="100px" style="border-radius: 20px;">
           </div>
         </div>
 
@@ -134,7 +134,7 @@ include "inc/_title_bar.php";
             </p>
           </div>
           <div class="col-6">
-            <img class="img-fluid" src="img/delivered.png" alt="" srcset="" width="150px" height="100px" style="border-radius: 20px;">
+            <img class="img-fluid" src="img/delivered.png" alt="delivered" srcset="" width="150px" height="100px" style="border-radius: 20px;">
           </div>
         </div>
 

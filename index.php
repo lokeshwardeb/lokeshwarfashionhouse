@@ -410,6 +410,52 @@ if ($featured_product_result) {
 <!-- banner slider section starts here -->
 
 
+<?php
+
+        $sql = "SELECT * FROM `page_settings`";
+        $result = mysqli_query($conn, $sql);
+
+        if ($result) {
+            if (mysqli_num_rows($result) > 0) {
+
+                while($row = mysqli_fetch_assoc($result)){
+                    $id = $row['id'];
+                    $hero_aria_bold_word = $row['hero_aria_bold_word'];
+                    $hero_aria_offer_title = $row['hero_aria_offer_title'];
+                    $hero_aria_offer_title_photo = $row['hero_aria_offer_title_photo'];
+                    $hero_aria_offer_canvas_img1 = $row['hero_aria_offer_canvas_img1'];
+                    $hero_aria_offer_canvas_img2 = $row['hero_aria_offer_canvas_img2'];
+                    $hero_aria_offer_canvas_img3 = $row['hero_aria_offer_canvas_img3'];
+                    $datetime = $row['datetime'];
+                }
+
+                
+            }
+        }
+?>
+
+
+<style>
+.slide_img{
+  /* height: <?php ?>;
+  width: <?php ?>; */
+
+
+  /* height: 250px !important;
+  width: 250px !important;
+  margin: auto !important; */
+  height: 100vh !important;
+  width: 50vw!important;
+  margin: auto !important;
+}
+/* 
+.slide_img {
+    height: auto;
+
+    margin: auto !important;
+} */
+</style>
+
 <div id="carouselExampleCaptions" class="carousel slide banner-section">
   <div class="carousel-indicators">
     <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
@@ -418,21 +464,21 @@ if ($featured_product_result) {
   </div>
   <div class="carousel-inner">
     <div class="carousel-item active">
-      <img src="<?php echo SITE_URL . 'ecom-admin/uploaded_img/hero_photo_upload/' . $hero_aria_offer_canvas_img1 ?>" class="d-block w-100 main-banner-img" alt="...">
+      <img src="<?php echo SITE_URL . 'ecom-admin/uploaded_img/hero_photo_upload/' . $hero_aria_offer_canvas_img1 ?>" class="slide_img d-block w-100 main-banner-img" alt="...">
       <div class="carousel-caption d-none d-md-block">
         <h5>First slide label</h5>
         <p>Some representative placeholder content for the first slide.</p>
       </div>
     </div>
     <div class="carousel-item">
-      <img src="<?php echo SITE_URL . 'ecom-admin/uploaded_img/hero_photo_upload/' . $hero_aria_offer_canvas_img2 ?>" class="d-block w-100 main-banner-img " alt="...">
+      <img src="<?php echo SITE_URL . 'ecom-admin/uploaded_img/hero_photo_upload/' . $hero_aria_offer_canvas_img2 ?>" class="slide_img d-block w-100 main-banner-img " alt="...">
       <div class="carousel-caption d-none d-md-block">
         <h5>Second slide label</h5>
         <p>Some representative placeholder content for the second slide.</p>
       </div>
     </div>
     <div class="carousel-item">
-      <img src="<?php echo SITE_URL . 'ecom-admin/uploaded_img/hero_photo_upload/' . $hero_aria_offer_canvas_img3 ?>" class="d-block w-100 main-banner-img img-fluid" alt="..." height="250px">
+      <img src="<?php echo SITE_URL . 'ecom-admin/uploaded_img/hero_photo_upload/' . $hero_aria_offer_canvas_img3 ?>" class="slide_img d-block w-100 main-banner-img img-fluid" alt="..." height="250px">
       <div class="carousel-caption d-none d-md-block">
         <h5>Third slide label</h5>
         <p>Some representative placeholder content for the third slide.</p>

@@ -274,7 +274,7 @@ if (show_pass.classList.contains("no-disp")) {
   // pass_inp.type = "text";
 
   if (pass_inp.type == "password") {
-    pass_inp.type = "text"
+    pass_inp.type = "text";
   } else {
     pass_inp.type = "password";
 

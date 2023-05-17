@@ -179,7 +179,7 @@ if (!isset($_SESSION['username'])) {
                     }
                     if($hero_aria_offer_canvas_image1_name !== '' ){
                         if($not_photo_uploaded_hero_canvas1 == 0){
-                            $sql = "UPDATE `page_settings` SET `hero_aria_bold_word` = '$Hero_aria_bold_word', `hero_aria_offer_title` = '$Hero_aria_offer_title', `hero_aria_offer_title_photo` = '$hero_aria_offer_canvas_image1_name.jpeg' WHERE `page_settings`.`id` = '$id';";
+                            $sql = "UPDATE `page_settings` SET `hero_aria_bold_word` = '$Hero_aria_bold_word', `hero_aria_offer_title` = '$Hero_aria_offer_title', `hero_aria_offer_canvas_img1` = '$hero_aria_offer_canvas_image1_name.jpeg' WHERE `page_settings`.`id` = '$id';";
 
                             $result = mysqli_query($conn, $sql);
         
@@ -196,7 +196,7 @@ if (!isset($_SESSION['username'])) {
                     }
                     if($hero_aria_offer_canvas_image2_name !== '' ){
                         if($not_photo_uploaded_hero_canvas2 == 0){
-                            $sql = "UPDATE `page_settings` SET `hero_aria_bold_word` = '$Hero_aria_bold_word', `hero_aria_offer_title` = '$Hero_aria_offer_title', `hero_aria_offer_title_photo` = '$hero_aria_offer_canvas_image2_name.jpeg' WHERE `page_settings`.`id` = '$id';";
+                            $sql = "UPDATE `page_settings` SET `hero_aria_bold_word` = '$Hero_aria_bold_word', `hero_aria_offer_title` = '$Hero_aria_offer_title', `hero_aria_offer_canvas_img2` = '$hero_aria_offer_canvas_image2_name.jpeg' WHERE `page_settings`.`id` = '$id';";
 
                             $result = mysqli_query($conn, $sql);
         
@@ -213,7 +213,7 @@ if (!isset($_SESSION['username'])) {
                     }
                     if($hero_aria_offer_canvas_image3_name !== '' ){
                         if($not_photo_uploaded_hero_canvas3 == 0){
-                            $sql = "UPDATE `page_settings` SET `hero_aria_bold_word` = '$Hero_aria_bold_word', `hero_aria_offer_title` = '$Hero_aria_offer_title', `hero_aria_offer_title_photo` = '$hero_aria_offer_canvas_image3_name.jpeg' WHERE `page_settings`.`id` = '$id';";
+                            $sql = "UPDATE `page_settings` SET `hero_aria_bold_word` = '$Hero_aria_bold_word', `hero_aria_offer_title` = '$Hero_aria_offer_title', `hero_aria_offer_canvas_img3` = '$hero_aria_offer_canvas_image3_name.jpeg' WHERE `page_settings`.`id` = '$id';";
 
                             $result = mysqli_query($conn, $sql);
         

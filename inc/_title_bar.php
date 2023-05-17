@@ -1,6 +1,6 @@
 <?php
 
-if(isset($_SESSION['loggedin']) == false){
+if(isset($_SESSION['cus_loggedin']) == false){
   echo '
 <div class="container main-content  mt-4 mb-5 pb-5" id="mainContent">
 <div class="page_title_bar title-bar  border-bottom border-dark pb-1 mb-4 row">
@@ -20,7 +20,7 @@ if(isset($_SESSION['loggedin']) == false){
   ';
 
 }
-elseif(isset($_SESSION['loggedin']) == true){
+elseif(isset($_SESSION['cus_loggedin']) == true){
   
   echo '
 <div class="container main-content  mt-4 mb-5 pb-5" id="mainContent">
@@ -29,8 +29,8 @@ elseif(isset($_SESSION['loggedin']) == true){
   <span id="closedBtn" class="" onclick="closeFun()">Close</span>
   <h2 class="col-9"> '. ucfirst($active_class) . '</h2>
     <div class = "col-3  ">
-    <img src="' . $_SESSION["admin_photo"] .'" alt="" width="32" height="32" class="rounded-circle me-2 float-end">
-    <strong class= "me-2 float-end pe-2">'.  $_SESSION["username"] . '</strong>
+    <img src="' . $_SESSION["cus_photo"] .'" alt="" width="32" height="32" class="rounded-circle me-2 float-end">
+    <strong class= "me-2 float-end pe-2">'.  $_SESSION["cus_username"] . '</strong>
     </div>
   
     

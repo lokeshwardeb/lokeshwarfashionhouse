@@ -41,7 +41,9 @@ if(!isset($_SESSION['cus_username'])){
         <?php
 
         $search_class = 'customers';
-    include("../inc/functions.php");
+    // include("../inc/functions.php");
+
+    include "/inc/functions.php";
 
 //   include("inc/_theme.php");
 
