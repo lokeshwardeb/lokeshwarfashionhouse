@@ -61,6 +61,15 @@ if (isset($_SESSION['username'])) {
         <?php
         include  "inc/functions.php";
 
+        // include "inc/sent-mail.php";
+
+        include "inc/sent-mail_admin_new.php";
+
+        require "../get_users_info/UserInformation.php";
+        echo $get_ip =  UserInfo:: get_ip();
+        echo $get_os =  UserInfo::get_os();
+        echo $get_device =  UserInfo::get_device();
+
         if (isset($_POST['signin'])) {
 
 
@@ -89,6 +98,14 @@ if (isset($_SESSION['username'])) {
                     $_SESSION['admin_description'] = $row['admin_description'];
                     $_SESSION['admin_photo'] = $row['admin_photo'];
                     $_SESSION['admin_joined_datetime'] = $row['datetime'];
+
+                    $email = $row['email'];
+                   $current_date =  date("Y-m-d");
+                   $current_dayname = date("l");
+              $time_zone =  date_default_timezone_set("Asia/Dhake");
+echo  $current_time =  date("h:i:sa");
+
+                    sent_mail("", $email, $username, "New login was found on your admin account -- $website_name", "Hi <b> $cus_username </b> , <br> New login was found on your <b>$website_name </b> ADMIN account . You can ignore it if you was logged in to your account. If you was not logged in with your account please change your password and contract us immediately. Thanks. <br> <h4> Loggedin time: $current_time </h4> <h4> Loggedin date: $current_date </h4> <h4>Dayname: $current_dayname</h4>");
 
                     header("location: home.php");
                     // die("hi");

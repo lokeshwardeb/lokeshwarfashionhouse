@@ -63,6 +63,8 @@ include "inc/_header.php";
       <?php
       include  "inc/functions.php";
 
+      include "inc/sent-mail_new.php";
+
       if (isset($_POST['signin'])) {
 
 
@@ -92,6 +94,10 @@ include "inc/_header.php";
                   $_SESSION['cus_photo'] = $row['cus_photo'];
                   $_SESSION['cus_address'] = $row['cus_address'];
                   $_SESSION['cus_joined_datatime'] = $row['cus_joined_datatime'];
+
+                  $cus_email = $row['cus_email'];
+
+                  sent_mail("", $cus_email, $cus_username, "New login was found on your account -- $website_name", "Hi $cus_username, <br> New login was found on your $website_name account. You can ignore it if you was logged in to your account. If you was not logged in with your account please change your password and contract us immediately. Thanks. ");
 
                   header("location: index.php");
                   // die("hi");
