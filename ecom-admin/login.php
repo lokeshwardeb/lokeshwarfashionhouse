@@ -31,13 +31,18 @@ if (isset($_SESSION['username'])) {
       padding: auto;
       box-sizing: border-box;
     }
+    main{
+      overflow: hidden !important;
+    }
 
     body {
       background-image: url("<?php echo PHOTO_UPLOADED_PATH . $login_page ?>") !important;
       background-repeat: no-repeat;
       background-size: cover;
     }
-
+.login{
+  overflow: hidden;
+}
     .pass {
       background-color: #D9D9D9;
     }
