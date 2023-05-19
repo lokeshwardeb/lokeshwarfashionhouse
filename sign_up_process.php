@@ -12,14 +12,22 @@ include "inc/sent-mail_new.php";
 include "inc/_company_info.php";
 
 include "inc/_header.php";
-// include("inc/functions.php");
+// include_once("inc/functions.php");
 // if(isset($_SESSION['username'])){
 //     header("location: home.php");
 //   }
 // else{
 
 
-  if(!isset($_SESSION['verify_cus_username'])){
+//   if(!isset($_SESSION['verify_cus_username'])){
+//     // header("sign_up.php");
+//     echo '
+// <script>
+// window.location.href = "login.php";
+// </script>
+// ';
+//   }
+  if($_SESSION['cus_verify_status_check'] == 0){
     // header("sign_up.php");
     echo '
 <script>
@@ -81,6 +89,8 @@ window.location.href = "login.php";
 
       <?php
       include  "inc/functions.php";
+      // $_SESSION['resend_otp_status'] = 0;
+
 
       $otp_func_run_starts = 0;
 
@@ -157,14 +167,83 @@ window.location.href = "login.php";
                               ?>">
 
 
-<div class="container bg-light mb-4">
-<img class="mb-4 d-block " src="<?php echo 'ecom-admin/uploaded_img/' . $website_logo ?>" alt="" width="100vw" height="100vh">
+
+
+
+
+<?php
+
+require "inc/sent_mail_template_inc.php";
+
+// require "inc/alert_msg_functions.php";
+
+if(isset($_POST['resend_otp'])){
+  $cus_username = $_SESSION['cus_username'];
+
+  $sql_resend_otp = "SELECT * FROM `cus_users` WHERE `cus_username` = '$cus_username'";
+  $result_resend_otp = mysqli_query($conn, $sql_resend_otp);
+
+  if($result_resend_otp){
+    if(mysqli_num_rows($result_resend_otp) == 1){
+      while($row = mysqli_fetch_assoc($result_resend_otp)){
+        $resend_email = $row['cus_email'];
+        $resend_username = $row['cus_username'];
+        sent_mail("", $resend_email, $resend_username, "Verify your email -- $website_name", mail_template("", "verify_your_email", $resend_username), "Otp has been send to your email");
+        // $_SESSION['resend_otp_status'] = 1;
+        // succcess_alert("Otp has been send to your email");
+      }
+    }
+  }
+
+
+}
+
+$cus_username = $_SESSION['cus_username'];
+
+$sql_resend_otp = "SELECT * FROM `cus_users` WHERE `cus_username` = '$cus_username'";
+  $result_resend_otp = mysqli_query($conn, $sql_resend_otp);
+
+  if($result_resend_otp){
+    if(mysqli_num_rows($result_resend_otp) == 1){
+      while($row = mysqli_fetch_assoc($result_resend_otp)){
+        $resend_email = $row['cus_email'];
+        $resend_username = $row['cus_username'];
+        // $_SESSION['resend_otp_status'] = 1;
+        // succcess_alert("Otp has been send to your email");
+      }
+    }
+  }
+
+?>
+
+
+
+
+
+
+
+
+
+<div class="container bg-light mb-4 pb-4">
+<img class="mb-4 d-block " src="<?php echo 'ecom-admin/uploaded_img/' . $website_logo ?>" alt="" width="100vw" height="100vh" style = "border-radius:100%">
   
                 We have sent an otp on your email. Please verify your email
 
                 <!-- <?php echo $otp_func_run_starts; ?> -->
 
+                <?php
+
+echo $resend_email;
+// if($_SESSION['resend_otp_status'] == 1){
+//   succcess_alert("Otp is send");
+// }
+
+?>
+
               </div>
+
+
+              
 
               <form action="<?php $_SERVER['PHP_SELF'] ?>" method="post" enctype="multipart/form-data">
             <div class="container">
@@ -172,6 +251,10 @@ window.location.href = "login.php";
               <div class="form-control pt-2 mb-4 pb-4">
                 <input class="form-control mb-4 pb-4 mt-2" type="number" name="otp_inp" placeholder="Your otp">
                 <button class="btn btn-outline-primary" type="submit" name="otp_submit">Submit otp</button>
+                <br>
+               <span class="d-flex mt-5 mb-4">Didn't recived the otp? Resend it</span> 
+                <button class="btn btn-outline-primary btn-sm" type="submit" name="resend_otp">Resend otp</button>
+                <a href="logout.php"><input type="button" class="btn btn-outline-danger btn-sm" value=" Log out "> </a>
               </div>
             </div>
             <p class="mt-5 mb-3 text-muted ">© All rights are reserved by <?php echo $website_name ?>. || 2022 - <?php echo date('Y') ?></p>
@@ -180,8 +263,7 @@ window.location.href = "login.php";
         </div>
 
 
-
-
+<!-- here is the otp code was set -->
 
 
       </main>

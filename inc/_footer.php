@@ -23,10 +23,10 @@
               <a href="" class="nav-link nav-link-footer">Shop</a>
             </li>
             <li class="nav-item">
-              <a href="privacy-policy.html" class="nav-link nav-link-footer">Privacy Policy</a>
+              <a href="privacy-policy.php" class="nav-link nav-link-footer">Privacy Policy</a>
             </li>
             <li class="nav-item">
-              <a href="termsofservice.html" class="nav-link nav-link-footer">Terms and Service</a>
+              <a href="termsofservice.php" class="nav-link nav-link-footer">Terms and Service</a>
             </li>
             <li class="nav-item">
               <a href="return-refund-policy.php" class="nav-link nav-link-footer">Refund Policy</a>

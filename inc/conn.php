@@ -5,12 +5,12 @@
   // $password = "";
   // $database = "lokeshwarfashionhouse";
 
-  $hostname = "localhost";
-  $username = "root";
-  $password = "";
+  $db_hostname = "localhost";
+  $db_username = "root";
+  $db_password = "";
   $database = "lokeshwarfashionhouse";
   
-$conn = mysqli_connect($hostname, $username, $password, $database);
+$conn = mysqli_connect($db_hostname, $db_username, $db_password, $database);
 
 if($conn){
     // echo 'connected with the database';
@@ -21,7 +21,7 @@ else{
 
 }
 
-$select_conn = mysqli_connect($hostname, $username, $password);
+// $select_conn = mysqli_connect($hostname, $username, $password);
 
 
 // if($select_conn){

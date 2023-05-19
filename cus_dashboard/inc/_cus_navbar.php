@@ -10,6 +10,18 @@
         include "_cus_const.php";
         
         ?>
+          <?php 
+  
+  if($_SESSION['cus_verify_status_check'] == 1){
+    echo '
+    
+    <script>
+      window.location.href = "sign_up_process.php";
+    </script>
+    
+    ';
+  }
+    ?>
         <div class=" ">
             <!-- <h1>Hello, world!</h1> -->
             <nav class="container-fluid navbar  navbar-expand-lg custom-navbar-bg">

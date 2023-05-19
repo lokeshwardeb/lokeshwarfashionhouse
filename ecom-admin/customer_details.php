@@ -45,6 +45,23 @@ if (!isset($_SESSION['username'])) {
         $sql = "SELECT * FROM `customers` WHERE `customer_id` = '$get_id'";
         $result = mysqli_query($conn, $sql);
         if ($result) {
+
+            $sql_cus_info = "SELECT * FROM `admin_users` WHERE `username` = '$username'";
+            $result_cus_info = mysqli_query($conn, $sql_cus_info);
+
+            if($result_cus_info){
+                if(mysqli_num_rows($result_cus_info) > 0 ){
+                    while($row = mysqli_fetch_assoc($result_cus_info)){
+
+                        // $cus_last_ip_address = $row['cus_last_ip_address'];
+                        // $cus_last_used_os = $row['cus_last_used_os'];
+                        // $cus_last_used_device = $row['cus_last_used_device'];
+                    }
+                }
+            }
+
+
+
             if (mysqli_num_rows($result) > 0) {
                 while ($row = mysqli_fetch_assoc($result)) {
                     $customer_id =     $row["customer_id"];
@@ -61,11 +78,16 @@ $result_select_cus_id_customer = mysqli_query($conn, $select_cus_id_customer);
 if($result_select_cus_id_customer){
 while($row = mysqli_fetch_assoc($result_select_cus_id_customer)){
     $customer_image =  $row['cus_photo'];
+    
+    $cus_last_ip_address = $row['cus_last_ip_address'];
+    $cus_last_used_os = $row['cus_last_used_os'];
+    $cus_last_used_device = $row['cus_last_used_device'];
 }
 
     
     if ($customer_image == '') {
         $customer_image = 'nature-sea.jpg';
+        
     }
 }
 
@@ -92,7 +114,10 @@ if($result_customer_orders_select_check){
 <div class="row">
 <div class="col-6">
 <a href = "customers.php" class="mb-4"><button class = "btn btn-primary mb-4">Go to customers</button></a><br>
-    Customer Id: ' . $customer_id . ' <br>
+    Customer IP Address (last login): ' . $cus_last_ip_address . ' <br>
+    Customer OS (last login): ' . $cus_last_used_os . ' <br>
+    Customer Device (last login): ' . $cus_last_used_device . ' <br>
+    Customer ID: ' . $customer_id . ' <br>
     Customer Name : ' . $customer_name . ' <br>
     Customer Email: ' . $customer_email . ' <br>
     Customer Phone no: ' . $customer_phone_no . ' <br>

@@ -16,6 +16,7 @@ include "inc/_header.php";
 //   }
 // else{
 
+require_once "inc/const.php";
 
 
 
@@ -34,7 +35,7 @@ include "inc/_header.php";
   }
 
   body {
-    background-image: url("ecom-admin/uploaded_img/<?php echo $users_login_upload ?>") !important;
+    background-image: url("<?php echo SITE_URL ?>ecom-admin/uploaded_img/users_login_upload/<?php echo $users_login_upload ?>") !important;
     background-repeat: no-repeat;
     background-size: cover;
   }
@@ -64,6 +65,16 @@ include "inc/_header.php";
       include  "inc/functions.php";
 
       include "inc/sent-mail_new.php";
+      require_once "inc/sent_mail_template_inc.php";
+
+      require "get_users_info/UserInformation.php";
+      $get_ip =  UserInfo::get_ip();
+      $get_os =  UserInfo::get_os();
+      $get_device =  UserInfo::get_device();
+
+
+
+
 
       if (isset($_POST['signin'])) {
 
@@ -86,6 +97,8 @@ include "inc/_header.php";
                 $pass_verify = password_verify($cus_pass, $row['cus_pass']);
                 if ($pass_verify === $hash_verify) {
                   login_success();
+
+                    
                   $_SESSION['cus_loggedin'] = true;
                   $_SESSION['cus_username'] = $cus_username;
                   $_SESSION['cus_email'] = $row['cus_email'];
@@ -97,9 +110,48 @@ include "inc/_header.php";
 
                   $cus_email = $row['cus_email'];
 
-                  sent_mail("", $cus_email, $cus_username, "New login was found on your account -- $website_name", "Hi $cus_username, <br> New login was found on your $website_name account. You can ignore it if you was logged in to your account. If you was not logged in with your account please change your password and contract us immediately. Thanks. ");
+                  $cus_last_ip_address = $row['cus_last_ip_address'];
+                  $cus_last_used_os = $row['cus_last_used_os'];
+                  $cus_last_used_device = $row['cus_last_used_device'];
 
+                  $ip_up_sql = "UPDATE `cus_users` SET `cus_last_ip_address`='$get_ip' WHERE `cus_username` = '$cus_username'";
+                  $ip_up_result = mysqli_query($conn, $ip_up_sql);
+
+                  $os_up_sql = "UPDATE `cus_users` SET `cus_last_used_os`='$get_os' WHERE `cus_username` = '$cus_username'";
+                  $os_up_result = mysqli_query($conn, $os_up_sql);
+
+                  $device_up_sql = "UPDATE `cus_users` SET `cus_last_used_device`='$get_device' WHERE `cus_username` = '$cus_username'";
+                  $device_up_result = mysqli_query($conn, $device_up_sql);
+
+                  $cus_email = $row['cus_email'];
+                  $current_date =  date("Y-m-d");
+                  $current_dayname = date("l");
+                  $time_zone =  date_default_timezone_set("Asia/Dhaka");
+                  $current_time =  date("h:i:sa");
+                  $current_year = date("Y");
+
+
+                  sent_mail("", $cus_email, $cus_username, "New login was found on your account -- $website_name", mail_template("", "new_login_found", $cus_username));
+
+                  if($row['verify_status'] == ''){
+                    // if the $_SESSION['cus_verify_status_check'] = 1 then it is not verified the user and if it is 0 then it is verified user
+                    $_SESSION['cus_verify_status_check'] = 1;
+echo '
+
+<script>
+window.location.href = "sign_up_process.php";
+
+</script>
+
+';
+                  }else{
+                    $_SESSION['cus_verify_status_check'] = 0;
+                  
+                  }
+                  
                   header("location: index.php");
+
+                
                   // die("hi");
                 } else {
                   // $_SESSION['loggedin'] = false;

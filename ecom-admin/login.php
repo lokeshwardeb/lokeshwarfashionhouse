@@ -64,11 +64,12 @@ if (isset($_SESSION['username'])) {
         // include "inc/sent-mail.php";
 
         include "inc/sent-mail_admin_new.php";
+        require_once "../ecom-admin/inc/sent_mail_template_inc.php";
 
         require "../get_users_info/UserInformation.php";
-        echo $get_ip =  UserInfo:: get_ip();
-        echo $get_os =  UserInfo::get_os();
-        echo $get_device =  UserInfo::get_device();
+         $get_ip =  UserInfo:: get_ip();
+         $get_os =  UserInfo::get_os();
+         $get_device =  UserInfo::get_device();
 
         if (isset($_POST['signin'])) {
 
@@ -99,13 +100,28 @@ if (isset($_SESSION['username'])) {
                     $_SESSION['admin_photo'] = $row['admin_photo'];
                     $_SESSION['admin_joined_datetime'] = $row['datetime'];
 
+                    $admin_last_ip_address = $row['admin_last_ip_address'];
+                    $admin_last_used_os = $row['admin_last_used_os'];
+                    $admin_last_used_device = $row['admin_last_used_device'];
+
+                    $ip_up_sql = "UPDATE `admin_users` SET `admin_last_ip_address`='$get_ip' WHERE `username` = '$username'";
+                    $ip_up_result = mysqli_query($conn, $ip_up_sql);
+
+                    $os_up_sql = "UPDATE `admin_users` SET `admin_last_used_os`='$get_os' WHERE `username` = '$username'";
+                    $os_up_result = mysqli_query($conn, $os_up_sql);
+
+                    $device_up_sql = "UPDATE `admin_users` SET `admin_last_used_device`='$get_device' WHERE `username` = '$username'";
+                    $device_up_result = mysqli_query($conn, $device_up_sql);
+
+                    
+
                     $email = $row['email'];
                    $current_date =  date("Y-m-d");
                    $current_dayname = date("l");
-              $time_zone =  date_default_timezone_set("Asia/Dhake");
+              $time_zone =  date_default_timezone_set("Asia/Dhaka");
 echo  $current_time =  date("h:i:sa");
 
-                    sent_mail("", $email, $username, "New login was found on your admin account -- $website_name", "Hi <b> $cus_username </b> , <br> New login was found on your <b>$website_name </b> ADMIN account . You can ignore it if you was logged in to your account. If you was not logged in with your account please change your password and contract us immediately. Thanks. <br> <h4> Loggedin time: $current_time </h4> <h4> Loggedin date: $current_date </h4> <h4>Dayname: $current_dayname</h4>");
+                    sent_mail("", $email, $username, "New login was found on your admin account -- $website_name", mail_template("", "admin_new_login_found", $username));
 
                     header("location: home.php");
                     // die("hi");

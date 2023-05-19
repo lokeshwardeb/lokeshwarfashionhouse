@@ -23,7 +23,7 @@ include "cus_dashboard/inc/_cus_navbar.php";
       <!-- <h1>Hello, world!</h1> -->
       <nav class="container-fluid navbar  navbar-expand-lg custom-navbar-bg customr-user-select-none">
         <div class="container-fluid">
-          <a class="navbar-brand custom-light" href="#"><?php
+          <a class="navbar-brand custom-light" href="./"><?php
           echo $website_name;
           ?></a>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse"

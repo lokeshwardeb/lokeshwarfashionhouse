@@ -83,6 +83,31 @@ if ($info_result) {
 
 
 
+$info_sql = "SELECT * FROM `admin_users`   ";
+$info_result = @mysqli_query($conn, $info_sql);
+
+if ($info_result) {
+    while ($row = mysqli_fetch_assoc($info_result)) {
+        $check_id = $row['id'];
+        $admin_username = $row['username'];
+        $admin_email = $row['email'];
+        $profile_description = $row['admin_description'];
+        $phone_no = $row['admin_phone_no'];
+        $admin_photo = $row['admin_photo'];
+        $role = $row['admin_role'];
+        $_SESSION['admin_photo'] = 'uploaded_img/' . $admin_photo;
+    }
+} else {
+    $check_id = '';
+    $profile_username = '';
+    $email = '';
+    $profile_description = '';
+    $phone_no = '';
+    $admin_photo = '';
+    $role = '';
+    $_SESSION['admin_photo'] = '';
+}
+
 
 
 // $company_name = $_POST['website_name'] ;

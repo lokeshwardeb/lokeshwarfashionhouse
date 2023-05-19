@@ -114,6 +114,8 @@ if ($featured_product_result) {
     <div class="row  cus-d-block ">
       <?php
 
+      print_r($_SESSION['cus_verify_status_check']);
+
       $featured_product_sql = "SELECT * FROM `products` WHERE `make_as_featured` = 'featured_product'";
 
       $featured_product_result = mysqli_query($conn, $featured_product_sql);
