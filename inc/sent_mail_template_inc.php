@@ -227,7 +227,7 @@ function mail_template($website_name = "Lokeshwar Fashion House", $select_templa
 
 
         </div>
-
+d
         <center style='border:1px solid black !important; background-color: #0d6efd !important; padding:25px !important; color:white !important;'>
     <h1>    $otp  </h1>
         </center>
