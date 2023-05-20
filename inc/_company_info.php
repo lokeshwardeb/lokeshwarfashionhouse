@@ -20,6 +20,8 @@ if ($result) {
             $website_description = $row['website_description'];
             $website_contract_email = $row['website_contract_email'];
             $website_slogan = $row['website_slogan'];
+            $website_phone_no = $row['phone_no'];
+            $website_facebook_page = $row['website_facebook_page'];
             $aurthors_name = $row['authors_name'];
             $authors_email = $row['authors_email'];
             $company_name = $row['company_name'];
@@ -41,6 +43,7 @@ if ($result) {
         $authors_email = '';
         $company_name = '';
         $company_phone_no = '';
+        $website_facebook_page = '';
     }
 }
 

@@ -58,7 +58,7 @@ include "inc/_navbar.php";
        
 <div class="row">
 <div class="col-6">
-<a href = "products.php" class="mb-4"><button class = "btn btn-primary mb-4">Go to products</button></a><br>
+<a href = "shop.php" class="mb-4"><button class = "btn btn-primary mb-4">Go to products</button></a><br>
     Product Id: ' . $product_id . ' <br>
     Product Name : ' . $product_name . ' <br>
     Product Description: ' . $product_desc . ' <br>

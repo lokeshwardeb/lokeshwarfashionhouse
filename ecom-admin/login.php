@@ -64,7 +64,8 @@ if (isset($_SESSION['username'])) {
         // include "inc/sent-mail.php";
 
         include "inc/sent-mail_admin_new.php";
-        require_once "../ecom-admin/inc/sent_mail_template_inc.php";
+        // require_once "ecom-admin/inc/sent_mail_template_inc.php";
+        require_once "./../inc/sent_mail_template_inc.php";
 
         require "../get_users_info/UserInformation.php";
          $get_ip =  UserInfo:: get_ip();
@@ -161,8 +162,11 @@ echo  $current_time =  date("h:i:sa");
         <main class="form-signin">
           <form action="<?php $_SERVER['PHP_SELF'] ?>" method="post">
             <img class="mb-4 " src="<?php echo 'uploaded_img/' . $website_logo ?>" alt="" width="100vw" height="100vh">
-            <h1 class="h3 mb-3 fw-normal">ADMIN PANEL</h1>
+           <div class="container bg-light pb-2 mb-4">
+
+           <h1 class="h3 mb-3 fw-normal">ADMIN PANEL</h1>
             <h1 class="h3 mb-3 fw-normal">Please sign in</h1>
+           </div>
 
             <div class="form-floating">
               <input type="text" class="form-control" id="floatingInput" placeholder="name@example.com" name="username">

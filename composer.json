@@ -12,5 +12,7 @@
             "email": "lokeshwardebdevelop@gmail.com"
         }
     ],
-    "require": {}
+    "require": {
+        "mpdf/mpdf": "^8.1"
+    }
 }
