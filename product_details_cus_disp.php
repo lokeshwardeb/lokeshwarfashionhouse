@@ -84,7 +84,7 @@ include "inc/_navbar.php";
     echo 'd-none';
 }
    
-   ?>"> Product Featured Status:<span class="<?php
+   ?>"><span class="<?php
                                                                                                 if ($product_featured_status == "featured_product") {
                                                                                                     echo 'bg-dark text-warning';
                                                                                                 }
@@ -127,7 +127,7 @@ include "inc/_navbar.php";
                     <div class="price d-inline-flex">
                         <div class="price_symbol">
 
-                            <?php product_currency_bdt(); ?>
+                            <?php echo product_currency_bdt(); ?>
                         </div>
                         <div class="price_amount" name="product-price"><?php echo $product_price ?></div>
                     </div><br>

@@ -228,7 +228,7 @@ if ($featured_product_result) {
 </div>
 
 <div class="mt-4 buy-button more-products" style="">
-  <button type="submit" class="btn btn-outline-dark mt-4 more-products-btn" style="">More Products</button>
+ <a href="shop.php"> <button type="submit" class="btn btn-outline-dark mt-4 more-products-btn" style="">More Products</button></a>
 </div>
 
 </div>
@@ -322,7 +322,7 @@ if ($featured_product_result) {
 
 
     <div class="buy-button more-products" style="">
-      <button type="submit" class="btn btn-outline-dark mt-4 more-products-btn" style="">More Products</button>
+      <a href= "shop.php"><button type="submit" class="btn btn-outline-dark mt-4 more-products-btn" style="">More Products</button></a>
     </div>
 
   </div>

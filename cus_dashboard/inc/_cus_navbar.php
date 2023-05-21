@@ -26,7 +26,7 @@
             <!-- <h1>Hello, world!</h1> -->
             <nav class="container-fluid navbar  navbar-expand-lg custom-navbar-bg">
                 <div class="container-fluid">
-                    <a class="navbar-brand custom-light" href="#"><?php 
+                    <a class="navbar-brand custom-light" href="./"><?php 
                     echo $website_name;
                     ?></a>
                     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -66,9 +66,26 @@
 
                             <!-- checkout button model starts here -->
                             <!-- Button trigger modal -->
+                          
                             <button type="button" class="btn btn-outline-light me-4 " data-bs-toggle="modal" data-bs-target="#exampleModal">
-                                carts
+                                carts <sup style="font-size:15px !important;"><?php
+                                  if ($_SESSION['cart'] == '' || $_SESSION['cart'][0] == '') {
+                                    echo '';
+                                   
+                                }else{
+                                echo count($_SESSION['cart']);
+                                    
+                                }
+
+                                
+                                
+                                ?>
+                                
+                            
+                            </sup>
                             </button>
+                           
+                            
                             <!-- checkout button model ends here -->
 
                             <!-- search button model starts here -->

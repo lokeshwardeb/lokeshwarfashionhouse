@@ -65,7 +65,7 @@ if(count($_SESSION['cart']) == 0){
             echo '
  <tr>
       <th scope="row">'.$no.'</th>
-      <td><img src="' . $value["product_image"] . '"  class="img-fluid" alt="" srcset=""></td>
+      <td><img src="' . $value["product_image"] . '"  class="img-fluid product_img" alt="" srcset=""></td>
       <td>' . $value["product_name"] . '</td>
       <td>' .product_currency_bdt() . $value["product_price"] . '</td>
       <td><input type="number" class="input-group form-control" min="1" max="10" value="' . $value["product_qty"] . '"></td>
@@ -117,7 +117,7 @@ if(count($_SESSION['cart']) == 0){
 
 
 <style>
-  img {
+  .product_img {
     height: 100px !important;
   }
 

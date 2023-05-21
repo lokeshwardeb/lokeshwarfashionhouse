@@ -1,5 +1,35 @@
 <?php
 
+// this variable is to make activate the active class
+$active_class = 'home';
+// $active_theme = 'dark_theme';
+include "inc/conn.php";
+
+session_start();
+
+
+// if(!isset($_POST['place_order'])){
+//     echo "
+//     <script>window.location.href = 'index.php'</script>
+//     ";
+//   }
+  
+if(isset($_SESSION['cus_username'])){
+
+
+if(isset($_POST['download_order_invoice'])){
+
+
+
+// include "inc/_header.php";
+
+
+
+// include "inc/functions.php";
+
+// include "inc/_navbar.php";
+
+include "inc/_company_info.php";
 // require_once __DIR__ . '/vendor/autoload.php';
 
 // $mpdf = new \Mpdf\Mpdf();
@@ -8,17 +38,40 @@
 
 
 
+$down_ord_in_order_no = $_POST['down_ord_in_order_no'];
+$down_ord_in_customer_name = $_POST['down_ord_in_customer_name'];
+$down_ord_in_phone_no = $_POST['down_ord_in_phone_no'];
+$down_ord_in_email = $_POST['down_ord_in_email'];
+$down_ord_in_shipping_address = $_POST['down_ord_in_shipping_address'];
+
+// $sql_get_ord_details = "SELECT * FROM `order_products` op INNER JOIN order_customers oc ON op.customer_id_on_order = oc.cus_id;";
+// $sql_get_ord_details = "SELECT * FROM `order_products` op INNER JOIN order_customers oc ON op.customer_id_on_order = oc.cus_id INNER JOIN products p on op.product_id = p.product_id;";
+
+$sql_get_ord_details = "SELECT * FROM `order_products` op INNER JOIN products p ON op.product_id = p.product_id  WHERE op.orders_id = '$down_ord_in_order_no'";
+
+$result_get_ord_details = mysqli_query($conn, $sql_get_ord_details);
+
+if($result_get_ord_details){
+  if(mysqli_num_rows($result_get_ord_details) > 0){
+    while($row = mysqli_fetch_assoc($result_get_ord_details)){
+
+    }
+  }
+}
 
 
-
-function invoice_pdf($order_no, $ordered_customer_name, $ordered_customer_phone_no, $ordered_customer_email_address, $ordered_customer_shipping_address){
+// function invoice_pdf($order_no, $ordered_customer_name, $ordered_customer_phone_no, $ordered_customer_email_address, $ordered_customer_shipping_address){
 
   
 
 // require_once "_company_info.php";
 // require_once "const.php";
 
+require_once "inc/_company_info.php";
+
 include "inc/const.php";
+
+require_once "inc/functions.php";
 
 // require_once "../vendor/autoload.php";
 
@@ -30,6 +83,14 @@ require "./vendor/autoload.php";
 // include  SITE_URL . 'vendor/autoload.php';
 
 
+
+$_SESSION['generate_invoice'] ;
+$_SESSION['gi_order_no'];
+$_SESSION['gi_customer_name'];
+$_SESSION['gi_phone_no'];
+$_SESSION['gi_customer_email'];
+
+
   $ht = '
 <!DOCTYPE html>
 <html lang="en">
@@ -37,10 +98,11 @@ require "./vendor/autoload.php";
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pdf</title>
+    <title>Order Invoice</title>
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/utilities.css">
     <link rel="stylesheet" href="css/style.css">
+    <link rel="shortcut icon" href="' . PHOTO_UPLOADED_PATH .$website_logo.'" type="image/x-icon">
     <style>
 
   @import url("https://fonts.googleapis.com/css2?family=Noto+Serif+Bengali:wght@400;500;600;700&display=swap");
@@ -116,7 +178,7 @@ require "./vendor/autoload.php";
     .site_info{
       font-size: 08px !important;
       margin-left: 220px;
-      margin-bottom: 15px;
+     /* margin-bottom: 15px;*/
       margin-top: 15px;
     }
 
@@ -182,11 +244,13 @@ require "./vendor/autoload.php";
           </div> -->
 
 
+<hr>
+
 
           <div class="container info">
 
             <div class="order_no">
-             Order no: #lokfahou-458545845
+             Order no: '.$down_ord_in_order_no.'
             </div>
 
             <table class="table">
@@ -201,24 +265,24 @@ require "./vendor/autoload.php";
               <tbody>
                 <tr>
                   <!-- <th scope="row"></th> -->
-                  <td>Customer Name: '.$ordered_customer_name.'</td>
+                  <td>Customer Name: '.$down_ord_in_customer_name.'</td>
                
                 </tr>
                 <tr>
                   <!-- <th scope="row">2</th> -->
-                  <td>Customer Phone no: '.$ordered_customer_phone_no.'</td>
+                  <td>Customer Phone no: '.$down_ord_in_phone_no.'</td>
                 
                 </tr>
                 <tr>
                   <!-- <th scope="row">3</th>
                   <td colspan="2"></td> -->
-                  <td>Customer Email Address:  '.$ordered_customer_email_address.'</td>
+                  <td>Customer Email Address:  '.$down_ord_in_email.'</td>
               
                 </tr>
                 <tr>
                   <!-- <th scope="row">3</th>
                   <td colspan="2"></td> -->
-                  <td>Product Shipping Address:   '.$ordered_customer_shipping_address.' </td>
+                  <td>Product Shipping Address:   '.$down_ord_in_shipping_address.' </td>
                   
                 </tr>
               </tbody>
@@ -244,23 +308,39 @@ require "./vendor/autoload.php";
     </tr>
   </thead>
   <tbody>
-    <tr>
-      <th scope="row">1</th>
-      <td>Mark</td>
-      <td>Otto</td>
-      <td>@mdo</td>
-    </tr>
-    <tr>
-      <th scope="row">2</th>
-      <td>Jacob</td>
-      <td>Thornton</td>
-      <td>@fat</td>
-    </tr>
-    <tr>
-      <th scope="row">3</th>
-      <td colspan="2">Larry the Bird</td>
-      <td>@twitter</td>
-    </tr>
+    <tr>';
+
+    $sl_no = 1;
+
+    $sql_get_ord_details = "SELECT * FROM `order_products` op INNER JOIN products p ON op.product_id = p.product_id  WHERE op.orders_id = '$down_ord_in_order_no'";
+
+    $result_get_ord_details = mysqli_query($conn, $sql_get_ord_details);
+    
+    if($result_get_ord_details){
+      $total_items = mysqli_num_rows($result_get_ord_details);
+      if( mysqli_num_rows($result_get_ord_details) > 0){
+        while($row = mysqli_fetch_assoc($result_get_ord_details)){
+    $product_name = $row['product_name'];
+
+    $product_price = $row['product_price'];
+    $product_qty = $row['product_qty'];
+
+    $product_img = $row['product_img'];
+    $total_amount = $row['total_amount'];
+    $ht.= '    <tr>
+    <th scope="row">'.$sl_no.'</th>
+    <td>'.$product_name.'</td>
+    <td>'.$product_qty.'</td>
+    <td>'.$product_price.'</td>
+  </tr>';
+  $sl_no++;
+
+        }
+      }
+    }
+
+    $ht.= '
+      
   </tbody>
 </table>
 <div class="container ">
@@ -281,7 +361,7 @@ require "./vendor/autoload.php";
             <td class="td_sp">  </td>
             <td>Total Items:</td>
              <!-- below add the values -->
-             <td></td>
+             <td>'.$total_items.' Product(s)</td>
             
           </tr>
           <tr>
@@ -290,7 +370,7 @@ require "./vendor/autoload.php";
             <td class="td_sp">  </td>
             <td>Sub-Total:</td>
              <!-- below add the values -->
-             <td></td>
+             <td>'. product_currency_bdt(). $total_amount.'</td>
             
            
           </tr>
@@ -301,7 +381,7 @@ require "./vendor/autoload.php";
             <td class="td_sp">  </td>
             <td>Total Price:</td>
             <!-- below add the values -->
-            <td></td>
+            <td>'. product_currency_bdt().  $total_amount.'</td>
             
           </tr>
           <tr>
@@ -310,8 +390,8 @@ require "./vendor/autoload.php";
             <td class="td_sp">  </td>
             <td >Payable Amount:</td>
              <!-- below add the values -->
-             <td style = "font-family:"nikosh";">50 TAKA ৳
-                জ
+             <td style = "font-family:"nikosh";">
+             '. product_currency_bdt() . $total_amount.'
 
              </td>
           </tr>
@@ -350,72 +430,28 @@ $mpdf = new \Mpdf\Mpdf([
 //   'default_font' => 'nikosh'
 // ]);
 $mpdf->WriteHTML($ht);
-$mpdf->Output('lokfahou-invoice.pdf', 'D');
+$mpdf->Output('lokfahou-invoice.pdf', 'I');
 
 
-}
+// }
 
 
 
 
 ?>
+ <link rel="shortcut icon" href="<?php echo 'ecom-admin/uploaded_img/'.$website_logo ?>" type="image/x-icon">
+<?php
 
 
-<link rel="stylesheet" href="css/all.min.css">
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pdf</title>
-    <link rel="stylesheet" href="css/bootstrap.min.css">
-    <link rel="stylesheet" href="css/utilities.css">
-    <link rel="stylesheet" href="css/style.css">
-</head>
-
-<body>
-    <div class="container">
-        Welcome on mysite
-
-        <div class="container border-success border-top border-5">
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th scope="col">#</th>
-                        <th scope="col">First</th>
-                        <th scope="col">Last</th>
-                        <th scope="col">Handle</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <th scope="row">1</th>
-                        <td>Mark</td>
-                        <td>Otto</td>
-                        <td>@mdo</td>
-                    </tr>
-                    <tr>
-                        <th scope="row">2</th>
-                        <td>Jacob</td>
-                        <td>Thornton</td>
-                        <td>@fat</td>
-                    </tr>
-                    <tr>
-                        <th scope="row">3</th>
-                        <td colspan="2">Larry the Bird</td>
-                        <td>@twitter</td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
+// $_SESSION['generate_invoice'] = 0;
 
 
+}else{
+    header("location: index.php");
+}
+}else{
+    header("location: index.php");
+}
 
+?>
 
-
-    </div>
-</body>
-
-</html>

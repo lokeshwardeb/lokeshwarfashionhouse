@@ -94,7 +94,9 @@ window.location.href = "login.php";
 
       $otp_func_run_starts = 0;
 
-  $cus_username =  $_SESSION['verify_cus_username'] ;
+    $_SESSION['verify_cus_username'] ;
+
+    $cus_username = $_SESSION['cus_username']; 
 
     if(isset($_POST['otp_submit'])){
       $otp_inp = $_POST['otp_inp'];
@@ -119,6 +121,9 @@ window.location.href = "login.php";
               succcess_alert("Your Email has been verified successfully. Login with your username");
               $_SESSION['verify_cus_username'] = '';
               unset($_SESSION['verify_cus_username']);
+
+              $_SESSION['cus_verify_status_check'] = 0;
+              
 
             }
 
@@ -185,6 +190,12 @@ if(isset($_POST['resend_otp'])){
 
   if($result_resend_otp){
     if(mysqli_num_rows($result_resend_otp) == 1){
+
+      // $otp = rand(1111, 9999);
+
+      // $update_otp_sql = "UPDATE `cus_users` SET `otp`='$otp' WHERE `cus_username`='$cus_username'";
+      // $update_otp_reault = mysqli_query($conn, $update_otp_sql);
+
       while($row = mysqli_fetch_assoc($result_resend_otp)){
         $resend_email = $row['cus_email'];
         $resend_username = $row['cus_username'];
@@ -192,10 +203,16 @@ if(isset($_POST['resend_otp'])){
         // $_SESSION['resend_otp_status'] = 1;
         // succcess_alert("Otp has been send to your email");
       }
+    }else{
+      echo 'num rows not rund';
     }
+  }else{
+    echo 'resend not run';
   }
 
 
+}else{
+  echo 'otp not isset';
 }
 
 $cus_username = $_SESSION['cus_username'];

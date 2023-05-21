@@ -103,7 +103,7 @@ include("inc/_navbar.php");
 
 
     <div class="buy-button more-products" style="">
-      <button type="submit" class="btn btn-outline-dark mt-4 more-products-btn" style="">More Products</button>
+      <a href="shop.php"><button type="submit" class="btn btn-outline-dark mt-4 more-products-btn" style="">More Products</button></a>
     </div>
 
   </div>

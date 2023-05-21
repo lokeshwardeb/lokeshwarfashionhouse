@@ -1,5 +1,33 @@
 <?php
 
+// this variable is to make activate the active class
+$active_class = 'home';
+// $active_theme = 'dark_theme';
+include "inc/conn.php";
+
+session_start();
+
+
+// if(!isset($_POST['place_order'])){
+//     echo "
+//     <script>window.location.href = 'index.php'</script>
+//     ";
+//   }
+  
+
+if(isset($_POST['place_order'])){
+
+
+
+// include "inc/_header.php";
+
+
+
+// include "inc/functions.php";
+
+// include "inc/_navbar.php";
+
+include "inc/_company_info.php";
 // require_once __DIR__ . '/vendor/autoload.php';
 
 // $mpdf = new \Mpdf\Mpdf();
@@ -11,12 +39,15 @@
 
 
 
-function invoice_pdf($order_no, $ordered_customer_name, $ordered_customer_phone_no, $ordered_customer_email_address, $ordered_customer_shipping_address){
+
+// function invoice_pdf($order_no, $ordered_customer_name, $ordered_customer_phone_no, $ordered_customer_email_address, $ordered_customer_shipping_address){
 
   
 
 // require_once "_company_info.php";
 // require_once "const.php";
+
+require_once "inc/_company_info.php";
 
 include "inc/const.php";
 
@@ -30,6 +61,14 @@ require "./vendor/autoload.php";
 // include  SITE_URL . 'vendor/autoload.php';
 
 
+
+$_SESSION['generate_invoice'] ;
+$_SESSION['gi_order_no'];
+$_SESSION['gi_customer_name'];
+$_SESSION['gi_phone_no'];
+$_SESSION['gi_customer_email'];
+
+
   $ht = '
 <!DOCTYPE html>
 <html lang="en">
@@ -37,10 +76,11 @@ require "./vendor/autoload.php";
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pdf</title>
+    <title>Order Invoice</title>
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/utilities.css">
     <link rel="stylesheet" href="css/style.css">
+    <link rel="shortcut icon" href="' . PHOTO_UPLOADED_PATH .$website_logo.'" type="image/x-icon">
     <style>
 
   @import url("https://fonts.googleapis.com/css2?family=Noto+Serif+Bengali:wght@400;500;600;700&display=swap");
@@ -116,7 +156,7 @@ require "./vendor/autoload.php";
     .site_info{
       font-size: 08px !important;
       margin-left: 220px;
-      margin-bottom: 15px;
+     /* margin-bottom: 15px;*/
       margin-top: 15px;
     }
 
@@ -181,6 +221,8 @@ require "./vendor/autoload.php";
             Customer name: <br>
           </div> -->
 
+
+<hr>
 
 
           <div class="container info">
@@ -350,72 +392,26 @@ $mpdf = new \Mpdf\Mpdf([
 //   'default_font' => 'nikosh'
 // ]);
 $mpdf->WriteHTML($ht);
-$mpdf->Output('lokfahou-invoice.pdf', 'D');
+$mpdf->Output('lokfahou-invoice.pdf', 'I');
 
 
-}
+// }
 
 
 
 
 ?>
+ <link rel="shortcut icon" href="<?php echo 'ecom-admin/uploaded_img/'.$website_logo ?>" type="image/x-icon">
+<?php
 
 
-<link rel="stylesheet" href="css/all.min.css">
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pdf</title>
-    <link rel="stylesheet" href="css/bootstrap.min.css">
-    <link rel="stylesheet" href="css/utilities.css">
-    <link rel="stylesheet" href="css/style.css">
-</head>
-
-<body>
-    <div class="container">
-        Welcome on mysite
-
-        <div class="container border-success border-top border-5">
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th scope="col">#</th>
-                        <th scope="col">First</th>
-                        <th scope="col">Last</th>
-                        <th scope="col">Handle</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <th scope="row">1</th>
-                        <td>Mark</td>
-                        <td>Otto</td>
-                        <td>@mdo</td>
-                    </tr>
-                    <tr>
-                        <th scope="row">2</th>
-                        <td>Jacob</td>
-                        <td>Thornton</td>
-                        <td>@fat</td>
-                    </tr>
-                    <tr>
-                        <th scope="row">3</th>
-                        <td colspan="2">Larry the Bird</td>
-                        <td>@twitter</td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
+// $_SESSION['generate_invoice'] = 0;
 
 
+}else{
+    header("location: index.php");
+}
 
 
+?>
 
-    </div>
-</body>
-
-</html>

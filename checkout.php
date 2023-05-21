@@ -164,7 +164,7 @@ if (!isset($_SESSION['cart'][0])) {
                 </span>
               </li>
               <li class="list-group-item d-flex justify-content-between">
-                <span>Total (USD)</span>
+                <span>Total (<?php echo product_currency_bdt(); ?>)</span>
                 <strong>
                   <?php
 
@@ -224,7 +224,7 @@ if (!isset($_SESSION['cart'][0])) {
 
 
 
-            echo 'the first name is' . $first_name;
+            // echo 'the first name is' . $first_name;
             ?>
 
 
@@ -271,8 +271,10 @@ if (!isset($_SESSION['cart'][0])) {
                 </div>
 
                 <div class="col-12">
-                  <label for="email" class="form-label">Email <span class="text-muted">(Optional)</span></label>
-                  <input type="email" class="form-control" id="email" placeholder="you@example.com" name="email">
+                  <label for="email" class="form-label">Email <span class="text-muted"></span></label>
+                  <input type="email" class="form-control" id="email" placeholder="you@example.com" name="email"  <?php if (isset($_SESSION['cus_username'])) {
+                    echo 'required';
+                  } ?> name="first_name">
                   <div class="invalid-feedback">
                     Please enter a valid email address for shipping updates.
                   </div>
@@ -284,7 +286,7 @@ if (!isset($_SESSION['cart'][0])) {
                     <span class="input-group-text">@</span>
                     <input type="text" class="form-control" id="phone_no" placeholder="Phone no" <?php if (isset($_SESSION['cus_username'])) {
                       echo 'required';
-                    } ?> name="phone_no">
+                    } ?> name="order_customer_phone_no">
                     <div class="invalid-feedback">
                       Phone no is rdfdequireds.
                     </div>
@@ -320,16 +322,46 @@ if (!isset($_SESSION['cart'][0])) {
                 </div>
 
                 <div class="col-md-4">
-                  <label for="state" class="form-label">State</label>
+                  <label for="state" class="form-label">District</label>
                   <select class="form-select" id="state" <?php if (isset($_SESSION['cus_username'])) {
                     echo 'required';
                   } ?> name="state">
+                  
                     <option value="">Choose...</option>
-                    <option value="Dhaka">Dhaka</option>
-                    <option value="Cumilla">Cumilla</option>
+
+                    <?php
+
+                    $get_district_sql = "SELECT * FROM `city/state`";
+
+                    $get_district_result = mysqli_query($conn, $get_district_sql);
+
+                    if($get_district_result){
+                      if(mysqli_num_rows($get_district_result) > 0 ){
+                        while ($row = mysqli_fetch_assoc($get_district_result)) {
+                          echo '<option value="'.$row['district_name'].'"> '.$row['district_name'].' </option>';
+                        }
+                      }
+                    }
+
+
+                    ?>
+
                   </select>
                   <div class="invalid-feedback">
                     Please provide a valid state.
+                  </div>
+                </div>
+
+                <div class="col-md-3">
+                  <label for="zip" class="form-label">Upazila</label>
+                  <input type="text" class="form-control" id="upazila" placeholder="" <?php if (isset($_SESSION['cus_username'])) {
+                    echo 'required';
+                  } ?> name="upazila">
+                  <div class="invalid-feedback">
+                    Zip code
+                    <?php if (isset($_SESSION['cus_username'])) {
+                      echo 'required';
+                    } ?>.
                   </div>
                 </div>
 
@@ -350,13 +382,13 @@ if (!isset($_SESSION['cart'][0])) {
               <hr class="my-4">
 
               <div class="form-check">
-                <input type="checkbox" class="form-check-input" id="same-address" name="same_address">
+                <input type="checkbox" class="form-check-input" id="same-address" name="same_address" checked>
                 <label class="form-check-label" for="same-address">Shipping address is the same as my billing
                   address</label>
               </div>
 
               <div class="form-check">
-                <input type="checkbox" class="form-check-input" id="save-info" name="save_info">
+                <input type="checkbox" class="form-check-input" id="save-info" name="save_info" checked>
                 <label class="form-check-label" for="save-info">Save this information for next time</label>
               </div>
 
@@ -372,7 +404,7 @@ if (!isset($_SESSION['cart'][0])) {
                     } ?>>
                   <label class="form-check-label" for="cod">Cash on delivary</label>
                 </div>
-                <div class="form-check">
+                <!-- <div class="form-check">
                   <input id="credit" name="paymentMethod" type="radio" class="form-check-input" checked <?php if (isset($_SESSION['cus_username'])) {
                     echo 'required';
                   } ?>>
@@ -389,7 +421,7 @@ if (!isset($_SESSION['cart'][0])) {
                     echo 'required';
                   } ?>>
                   <label class="form-check-label" for="paypal">PayPal</label>
-                </div>
+                </div> -->
               </div>
 
               <!-- <div class="row gy-3">
@@ -499,6 +531,8 @@ if (!isset($_SESSION['cart'][0])) {
           </div>
           <div class="modal-body">
             <?php
+            require_once "inc/sent-mail_new.php";
+            require_once "inc/sent_mail_template_inc.php";
             // include("login.php");
             if (isset($_POST['signin'])) {
 
@@ -529,6 +563,10 @@ if (!isset($_SESSION['cart'][0])) {
                         $_SESSION['cus_photo'] = $row['cus_photo'];
                         $_SESSION['cus_address'] = $row['cus_address'];
                         $_SESSION['cus_joined_datatime'] = $row['cus_joined_datatime'];
+
+                        $cus_email = $row['cus_email'];
+
+                        sent_mail("", $cus_email , $cus_username, "New login has been found -- $website_name", mail_template("", "new_login_found", $cus_username) );
 
                         echo "
                     <script>

@@ -31,8 +31,8 @@ if (isset($_SESSION['cus_username'])) {
   // main php code starts here
   // $_SESSION['ord_trac_no_res_found'] = 0;
 
-  $get_order_no = htmlspecialchars(mysqli_real_escape_string($conn, $_GET['search_text_order_track_no']));
-  $get_order_phone_no = htmlspecialchars(mysqli_real_escape_string($conn, $_GET['search_text_order_track_pho_no']));
+  $get_order_no = htmlspecialchars(mysqli_real_escape_string($conn, $_GET['search_text_order_track_no']),ENT_QUOTES);
+  $get_order_phone_no = htmlspecialchars(mysqli_real_escape_string($conn, $_GET['search_text_order_track_pho_no']), ENT_QUOTES);
 
   // echo $get_order_no;
   // echo $get_order_phone_no;
