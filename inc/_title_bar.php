@@ -29,8 +29,8 @@ elseif(isset($_SESSION['cus_loggedin']) == true){
   <span id="closedBtn" class="" onclick="closeFun()">Close</span>
   <h2 class="col-9"> '. ucfirst($active_class) . '</h2>
     <div class = "col-3  ">
-    <img src="' . $_SESSION["cus_photo"] .'" alt="" width="32" height="32" class="rounded-circle me-2 float-end">
-    <strong class= "me-2 float-end pe-2">'.  $_SESSION["cus_username"] . '</strong>
+    <img src="'.SITE_URL.'ecom-admin/uploaded_img/cus_photo_upload/' . $_SESSION["cus_photo"] .'" alt="" width="32" height="32" class="rounded-circle me-2 float-end">
+    <strong class= "me-2 float-end pe-2 mt-2">'.  $_SESSION["cus_username"] . '</strong>
     </div>
   
     

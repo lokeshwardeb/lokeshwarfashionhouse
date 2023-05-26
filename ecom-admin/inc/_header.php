@@ -28,6 +28,8 @@ include "_company_info.php";
   <link href="css/signin.css" rel="stylesheet">
   <link href="css/style.css" rel="stylesheet">
   <link rel="stylesheet" href="css/all.min.css">
+
+  <!-- <script src="js/inc.gc.js"></script> -->
  
 
   <link rel="shortcut icon" href="<?php echo 'uploaded_img/'.$website_logo ?>" type="image/x-icon">

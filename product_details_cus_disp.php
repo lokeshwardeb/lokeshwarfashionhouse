@@ -59,6 +59,10 @@ include "inc/_navbar.php";
 <div class="row">
 <div class="col-6">
 <a href = "shop.php" class="mb-4"><button class = "btn btn-primary mb-4">Go to products</button></a><br>
+
+<div id="hover_box" class=""></div>
+
+<div class = "container " id = "product_info_main">
     Product Id: ' . $product_id . ' <br>
     Product Name : ' . $product_name . ' <br>
     Product Description: ' . $product_desc . ' <br>
@@ -69,45 +73,47 @@ include "inc/_navbar.php";
     <input type = "hidden" value="' . PRODUCT_INFO_PATH . '' . $row['product_img'] . '" name="product_image">
     
    <div class = ""> Product Status: '; ?><span class="<?php
-                                                        if ($product_status == "In-stock") {
+                                                        if ($product_status == " In-stock") {
                                                             echo 'text-success';
                                                         }
                                                         if ($product_status == "Out-stock") {
                                                             echo 'text-danger';
-                                                        }
+                                                        } ?>">
+                <?php echo '' . $product_status . ' </span> </div> <br>'; ?>
 
-
-                                                        ?>"><?php echo '' . $product_status . ' </span> </div> <br>';?>
-    
-   <div  id="featuredProductStatusId" class="fs-5 <?php 
-   if ($product_featured_status == "not_featured_product") {
-    echo 'd-none';
-}
-   
-   ?>"><span class="<?php
-                                                                                                if ($product_featured_status == "featured_product") {
-                                                                                                    echo 'bg-dark text-warning';
-                                                                                                }
-                                                                                                if ($product_featured_status == "not_featured_product") {
-                                                                                                    echo 'bg-dark text-danger';
-                                                                                                }
-
-
-                                                                                                ?>"><?php
+                <div id="featuredProductStatusId" class="fs-5 <?php
+                                                                if ($product_featured_status == " not_featured_product") {
+                                                                    echo 'd-none';
+                                                                } ?>">
+                                                                <span class="<?php
                                                                                                     if ($product_featured_status == "featured_product") {
-                                                                                                        echo 'Featured Product';
+                                                                                                        echo 'bg-dark text-warning';
                                                                                                     }
                                                                                                     if ($product_featured_status == "not_featured_product") {
-                                                                                                        echo 'Not Featured Product';
-                                                                                                    }
-                                                                                                    echo '' .
+                                                                                                        // echo 'bg-dark text-danger';
+                                                                                                    } ?>">
+                        <?php
+                        if ($product_featured_status == "featured_product") {
+                            echo 'Featured Product';
+                        }
+                        if ($product_featured_status == "not_featured_product") {
+                            // echo 'Not Featured Product';
+                        }
+                        echo '' .
 
-                                                                                                        ' </span> </div> <br>
+                            ' </span> </div> <br>
      <br>
+</div>
+
+
 
 </div>
-<div class="col-6">
-    <img src="' . PRODUCT_INFO_PATH . '' . $product_img . '" width="80%!important" height="250px!important" alt="" srcset="">
+<div class="col-6 " id="product">
+<div class="main" id="disp_main_img">
+    <span  id="lences"></span>
+<img src="' . PRODUCT_INFO_PATH . '' . $product_img . '" width="100%!important" height="100%!important" alt="" srcset="" class="product_img_cus_disp">
+</div>
+   
 </div>
 
 </div>
@@ -116,45 +122,117 @@ include "inc/_navbar.php";
 
 
 
-                                                                                                    ?>
+                        ?>
+                        <style>
+                            /* .product_img_cus_disp{
+        transition: transform 2s;
+    }
+    .product_img_cus_disp:hover{
+        transform: scale(1.3);
+    } */
 
-                    <div class="box ms-2 ps-5 d-flex">
-                        <label for="name"></label>
-                        <button class="dec button pe-4 btn">-</button>
-                        <input type="text" name="qty" id="1" value="1" class="numInp">
-                        <button class="inc button ps-4 btn">+</button>
-                    </div>
-                    <div class="price d-inline-flex">
-                        <div class="price_symbol">
+                            #disp_main_img {
 
-                            <?php echo product_currency_bdt(); ?>
+                                margin-bottom: 50px;
+                                /* width: 100px; */
+                                /* width: 100%;
+height: 100%;
+padding-left: -25px; */
+                                /* margin-left: 50px;
+margin-right: 50px; */
+                                overflow: hidden !important;
+                                /* position: relative; */
+                            }
+
+                            #lences {
+                                display: none;
+                                position: absolute;
+                                height: 200px;
+                                width: 400px !important;
+                                background-color: rgba(0, 0, 0, .4);
+                                /* transform: translate(-50%, -50%); */
+                                pointer-events: none !important;
+                                overflow: hidden !important;
+                                outline: hidden !important;
+                            }
+
+                            /* #hover_box{
+height: 500px;
+width: 200px;
+background-size: cover !important ;
+transform: translate(-50%);
+background: url("<?php echo  PRODUCT_INFO_PATH . $product_img  ?>") !important;
+} */
+                            #hover_box {
+                                border: 1px solid black;
+                                height: 100% !important;
+                                width: 100% !important;
+                                background: url("<?php echo PRODUCT_INFO_PATH . $product_img ?> ") !important;
+                                background-size: 600% 600%;
+                                overflow: hidden !important;
+
+                                display: none !important;
+
+                            }
+
+                            /* #hover_box:hover{
+display: block !important;
+
+} */
+                        </style>
+
+
+
+                        <div class="container" id="product_qty_main">
+                            <div class="box ms-2 ps-5 d-flex">
+                                <label for="name"></label>
+                                <button class="dec button pe-4 btn">-</button>
+                                <input type="text" name="qty" id="1" value="1" class="numInp">
+                                <button class="inc button ps-4 btn">+</button>
+                            </div>
+                            <div class="price d-inline-flex">
+                                <div class="price_symbol">
+
+                                    <?php echo product_currency_bdt(); ?>
+                                </div>
+                                <div class="price_amount" name="product-price">
+                                    <?php echo $product_price ?>
+                                </div>
+                            </div><br>
                         </div>
-                        <div class="price_amount" name="product-price"><?php echo $product_price ?></div>
-                    </div><br>
 
 
-</div>
 
-<form action="cart_manage.php" method="post">
-<div class="price-button d-inline-flex mb-5 pb-5">
-    <?php 
-    
-    echo '    <input type = "hidden" value="' . $product_name. '" name="product_name">
-    <input type = "hidden" value="'.$product_price.'" name="product_price">
+                </div>
+
+
+
+
+                <script>
+
+
+                </script>
+
+                <form action="cart_manage.php" method="post">
+                    <div class="price-button d-inline-flex mb-5 pb-5">
+                        <?php
+
+                        echo '    <input type = "hidden" value="' . $product_name . '" name="product_name">
+    <input type = "hidden" value="' . $product_price . '" name="product_price">
  
     <input type = "hidden" value="' . PRODUCT_INFO_PATH . '' . $row['product_img'] . '" name="product_image">';
-    
-    ?>
-    <div class="cart-button me-4 ">
-        <button type="submit" class="btn btn-outline-dark btn-sm-md" name="add_cart">Add to cart</button>
-    </div>
-    <div class="buy-button">
-        <button type="submit" class="btn btn-dark btn-md-sm">Buy now</button>
-    </div>
-</div>
+
+                        ?>
+                        <div class="cart-button me-4 ">
+                            <button type="submit" class="btn btn-outline-dark btn-sm-md" name="add_cart">Add to cart</button>
+                        </div>
+                        <div class="buy-button">
+                            <button type="submit" class="btn btn-dark btn-md-sm">Buy now</button>
+                        </div>
+                    </div>
 
 
-</form>
+                </form>
 
 
 

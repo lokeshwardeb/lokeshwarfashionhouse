@@ -187,5 +187,131 @@ var increButton = document.getElementsByClassName('inc');
                
               // //  window.location.href = SITE_URL +  "cart.php?pro_qty=" + qty;
               //  window.location.href = url;
+              }
 
+
+
+
+              // product disp cus zoom functionalities
+
+              var lences = document.getElementById("lences")
+              var disp_main_img = document.getElementById("disp_main_img");
+              var hover_box = document.getElementById("hover_box");
+              var product_info_main = document.getElementById("product_info_main");
+              var product_qty_main = document.getElementById("product_qty_main");
+          
+              
+              disp_main_img.addEventListener("mouseenter", function(){
+                  hover_box.style.display = "block";
+                  lences.style.display = "block";
+                  product_info_main.style.display = "none";
+                  product_qty_main.style.display = "none";
+          
+              });
+          
+              disp_main_img.addEventListener("mouseleave", function(){
+                  hover_box.style.display = "none";
+                  lences.style.display = "none";
+                  product_info_main.style.display = "block";
+                  product_qty_main.style.display = "block";
+              })
+              
+          
+              disp_main_img.addEventListener("mousemove", function (e) {
+                  var x = e.clientX - e.target.offsetLeft;
+                  var y = e.clientY - e.target.offsetTop;
+                 var xx = lences.style.left = x + 750+ 'px';
+                 var xx1 = lences.style.left = x + 750;
+                var yy =   lences.style.top = y + 250+ 'px';
+                var yy1 =   lences.style.top = y + 250;
+          
+          
+                console.log(y)
+                
+              //   if(x > 40  && x < 500){
+              //     hover_box.style.display = "block";
+              //   }
+                
+              //   if(x < 40  && x > 500){
+              //     // hover_box.setAttribute("style", "display:none !important");
+              //     hover_box.setAttribute("style", `display:none !important;`);
+                  
+              //     hover_box.style.display = "none";
+              //     // lences.style.display = "none";
+              //     // hover_box = "none";
+                  
+              //   }
+          
+              if(y < -80){
+                  lences.style.width = "150px";
+                  yy = lences.style.left = "800px";
+          
+              }
+          
+                if(x < 40){
+                  lences.style.width = "150px";
+                  xx = lences.style.left = "800px";
+          
+          
+                }
+          
+                if(x > 500){
+                  lences.style.width = "150px";
+                  xx = lences.style.left = "1250px";
+          
+          
+                }
+          
+                if(x > 340){
+                  lences.style.width = "150px";
+                  xx = lences.style.left = "1250px";
+          
+          
+                }else{
+                  lences.style.width = "300px";
+          
+                }
+          
+              //   if(xx < '1200px'){
+              //     lences.style.width = "300px";
+              //     // xx = lences.style.left = "1250px";
+              //    var xx = lences.style.left = x + 750+ 'px';
+          
+          
+              //   }
+              //   else if(xx > '1200px'){
+              //     xx = lences.style.left = "1250px";
+              //     lences.style.width = "150px";
+              //   }else{
+              //     var xx = lences.style.left = "800px";
+              //     lences.style.width = "300px";
+          
+              //   }
+          
+          
+          
+                
+              //   hover_box.setAttribute("style", `background-position: ${(x-(500 /2 /6)+14) * -6}px ${(y - (500 / 2 /6)+ 44) * -6 }px !important; background-repeat: no-repeat !important; display:block !important;`)
+                hover_box.setAttribute("style", `background-position: ${(x-(500 /2 /6)+14) * -6}px ${(y - (500 / 2 /6)+ 44) * -6 }px !important; background-repeat: no-repeat !important; display:block !important;`)
+                  // hover_box.style.backgroundPosition = (x-(500 /2 /6)+250) * -6 +'px' + (y - (500 / 2 /6)+ 250) * -6 +'px';
+                  // hover_box.style.backgroundPosition = (xx)+'px' + ' ' + (xx)+'px';
+                  // hover_box.style.backgroundPositionX = xx;
+                  // hover_box.style.backgroundPositionY = yy;
+          
+                  // hover_box.style.backgroundPosition = x + ' px !important' + ' ' + y + 'px';
+                  // hover_box.style.backgroundPosition = xx1 +'px ' + yy1 + 'px !important; ';
+              //    hover_box.style.backgroundPosition =  x + 750+ 'px' + ' ' + y + 250 + 'px';
+                  hover_box.style.backgroundPosition = x + 750 + "px"+ " " + y + 250 + "px ;";
+              })
+
+
+
+
+              function qty_inp_id() {
+                var qty_inp_id = document.getElementById();
+  var val_qty_inp = qty_inp_id.value;
+  console.log(val_qty_inp)
+  
+  
+  
               }

@@ -312,7 +312,7 @@ if (!isset($_SESSION['cus_username'])) {
                 //     $
                 //   }
                 // }
-                $sql_ch_orders = "SELECT * FROM `orders` WHERE `customer_id_on_order` = '$customer_id'";
+                $sql_ch_orders = "SELECT * FROM `orders` WHERE `customer_id_on_order` = '$customer_id' ORDER BY `orders`.`id` DESC";
                 // $sql_ch_orders = "SELECT * FROM `order_products` op JOIN products p ON p.product_id = op.product_id WHERE customer_id_on_order = '$customer_id';";
                 // $sql_ch_orders = "SELECT * FROM `order_products` op JOIN products p ON p.product_id = op.product_id JOIN orders AS ord ON ord.order_no = op.orders_id WHERE ord.customer_id_on_order = '$customer_id' AND ord.order_no = '$orders_no_new_check';";
                 $result_ch_orders = mysqli_query($conn, $sql_ch_orders);
@@ -321,6 +321,10 @@ if (!isset($_SESSION['cus_username'])) {
 
                   while ($row = mysqli_fetch_assoc($result_ch_orders)) {
                     $order_no_new = $row['order_no'];
+
+                    $trim_order_no = trim($order_no_new, '#');
+                    
+                    $order_phone_no_new = $row['order_phone_no'];
                     // if(mysqli_num_rows($result_ch_orders) > 1){
 
                     // }else{
@@ -366,6 +370,7 @@ if (!isset($_SESSION['cus_username'])) {
                         }
                       }
                     }
+                  // echo "the order no is" .  $send_order_no =   trim("#", $order_no_new);
 
                     echo '
 
@@ -396,7 +401,7 @@ if (!isset($_SESSION['cus_username'])) {
                   <?php echo '">' . ucfirst($row['order_status']) . '</td>
     
                   
-                      <td><a href="cus_orders_details.php?id=' . $row['id'] . '"><button type="submit" class="btn btn-dark">Order Details</button></a></td>
+                      <td><a href="cus_orders_details.php?search_text_order_track_no=%23'.$trim_order_no . '&search_text_order_track_pho_no='.$order_phone_no_new.'"><button type="submit" class="btn btn-dark">Order Details</button></a></td>
                     </tr>
                     
                     
