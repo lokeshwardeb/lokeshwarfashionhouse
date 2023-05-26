@@ -159,3 +159,33 @@ var increButton = document.getElementsByClassName('inc');
                 // this is to add the loading animation and function
                 loader.style.display = "none";
               })
+
+              function multi(product_price, SITE_URL){
+                let cart_input_qty = document.getElementById("cart_input_qty");
+
+                let qty_value = cart_input_qty.value;
+
+                let SITE_URLS = SITE_URL;
+
+                let price  = product_price;
+                let qty = qty_value;
+                let total_price = price * qty;
+
+                if(total_price >= 50){
+                  total_price = 20;
+                  cart_input_qty.value = 10;
+                }
+
+                document.getElementById("cart_total_price").innerHTML = total_price;
+
+              //   let url = SITE_URLS .concat("index.php?pro_qty=") .concat(qty);
+
+              document.cookie = `product_qty = ${qty}`;
+              location.reload();
+
+              // window.localStorage.setItem("product_qty", qty);
+               
+              // //  window.location.href = SITE_URL +  "cart.php?pro_qty=" + qty;
+              //  window.location.href = url;
+
+              }

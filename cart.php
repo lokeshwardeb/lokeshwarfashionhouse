@@ -19,18 +19,17 @@ include("inc/_navbar.php");
 <div class="container-fluid pt-4 pb-5 mb-5">
   <div class="row">
     <div class="col-8">
-      <table class="table <?php 
-      // if($_SESSION['cart'][0] == ''){
-      //   echo 'd-none';
-      // }
+      <table class="table <?php
+                          // if($_SESSION['cart'][0] == ''){
+                          //   echo 'd-none';
+                          // }
 
-      if(count($_SESSION['cart']) == 0){
-        echo 'd-none';
+                          if (count($_SESSION['cart']) == 0) {
+                            echo 'd-none';
+                          }
 
-      }
-      
-      
-      ?>">
+
+                          ?>">
         <thead>
           <tr>
             <th scope="col">#</th>
@@ -42,33 +41,53 @@ include("inc/_navbar.php");
           </tr>
         </thead>
         <tbody>
-    
+
           <?php
 
-if(count($_SESSION['cart']) == 0){
-  echo '<div class="text-center fs-4">The cart is empty</div>';
-  
+          if (count($_SESSION['cart']) == 0) {
+            echo '<div class="text-center fs-4">The cart is empty</div>';
+          }
 
-}
+          // if($_SESSION['cart'][0] == ''){
+          //   echo '<div class="text-center fs-4">The cart is empty</div>';
+          // }
 
-// if($_SESSION['cart'][0] == ''){
-//   echo '<div class="text-center fs-4">The cart is empty</div>';
-// }
-          
 
           // displaying the cart items
           $total = 0;
-       
-            $no = 1;
+
+          // $pro_qty = htmlspecialchars(mysqli_real_escape_string($conn, $_GET['pro_qty']), ENT_QUOTES) ;
+
+        echo  $product_qty_cookie = $_COOKIE["product_qty"];
+          $no = 1;
           foreach ($_SESSION['cart'] as $key => $value) {
-            $total = $total + $value["product_price"];
+  
+            if(isset($product_qty_cookie)){
+              $value['product_qty'] = $product_qty_cookie;
+
+            }
+
+            // $product_qty_cookie;
+
+            $multi = $value["product_price"] * $value['product_qty'];
+            $total = $total + $multi;
+            $product_price_cart = $value["product_price"];
+            $product_qty_cart = $value["product_qty"];
+
+            // if($pro_qty !== '' && $pro_qty <= 10){
+            //   $value['product_qty'] = $pro_qty;
+            // }
+
+            // if($product_qty_cart == )
+            $site_url = SITE_URL;
+
             echo '
  <tr>
-      <th scope="row">'.$no.'</th>
+      <th scope="row">' . $no . '</th>
       <td><img src="' . $value["product_image"] . '"  class="img-fluid product_img" alt="" srcset=""></td>
       <td>' . $value["product_name"] . '</td>
-      <td>' .product_currency_bdt() . $value["product_price"] . '</td>
-      <td><input type="number" class="input-group form-control" min="1" max="10" value="' . $value["product_qty"] . '"></td>
+      <td>' . product_currency_bdt() . $value["product_price"] . '</td>
+      <td><input id="cart_input_qty" type="number" class="input-group form-control" min="1" max="10" value="' . $value["product_qty"] . '"  onchange="multi(' . $product_price_cart . ')"></td>
       <form action="cart_manage.php" method="post">
       <input type = "hidden" value="' . $value["product_name"] . '" name="product_name">
       <td><button type="submit" class="input-group from-control btn btn-danger btn-sm" name="remove_cart">Remove</button></td>
@@ -77,36 +96,78 @@ if(count($_SESSION['cart']) == 0){
     </tr>
  
  ';
- $no++;
+            $no++;
           }
-    
-        
+
+
 
           ?>
 
-      
+
 
         </tbody>
-      
+
       </table>
-    
+
     </div>
     <div class="col-4 text-center">
       <div class="container border-primary border rounded bg-light pt-3 pb-5">
         <h2>Total: </h2>
-        <h4>
-          <?php
+
+        <?php
+        echo '
+   
+
+          ';
 
 
-            echo product_currency_bdt() .  $total; ?>
-        </h4>
+        // echo product_currency_bdt() .  $total;
 
 
 
 
+
+
+        ?>
+        <div class="container d-flex" style="justify-content: center;">
+          <div class="icon d-flex">
+            <div class="fs-4"><?php echo product_currency_bdt() ?></div>
+
+          </div>
+          <div class="price d-flex">
+            <div class="fs-4" id="cart_total_price">
+<?php 
+
+echo $total;
+
+
+?>
+            </div>
+          </div>
+
+        </div>
+
+
+
+
+
+        <script>
+          // function multi(product_price){
+          //           let cart_input_qty = document.getElementById("cart_input_qty");
+
+          //           let qty_value = cart_input_qty.value;
+
+          //           let price  = product_price;
+          //           let qty = qty_value;
+          //           let total_price = price * qty;
+
+          //           document.getElementById("cart_total_price").innerHTML =  total_price;
+
+          //         }
+        </script>
       </div>
 
-   <a href="checkout.php"><button type="submit" class="btn btn-primary mt-4">Checkout</button></a>
+      <a href="checkout.php"><button type="submit" class="btn btn-primary mt-4">Checkout</button></a>
 
     </div>
   </div>
