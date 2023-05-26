@@ -43,7 +43,7 @@ function product_currency_bdt_cus(){
   
       }
     }else{
-      echo '$';
+      return '$';
     }
   }
   

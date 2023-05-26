@@ -19,18 +19,17 @@ include("inc/_navbar.php");
 <div class="container-fluid pt-4 pb-5 mb-5">
   <div class="row">
     <div class="col-8">
-      <table class="table <?php 
-      // if($_SESSION['cart'][0] == ''){
-      //   echo 'd-none';
-      // }
+      <table class="table <?php
+                          // if($_SESSION['cart'][0] == ''){
+                          //   echo 'd-none';
+                          // }
 
-      if(count($_SESSION['cart']) == 0){
-        echo 'd-none';
+                          if (count($_SESSION['cart']) == 0) {
+                            echo 'd-none';
+                          }
 
-      }
-      
-      
-      ?>">
+
+                          ?>">
         <thead>
           <tr>
             <th scope="col">#</th>
@@ -42,33 +41,35 @@ include("inc/_navbar.php");
           </tr>
         </thead>
         <tbody>
-    
+
           <?php
 
-if(count($_SESSION['cart']) == 0){
-  echo '<div class="text-center fs-4">The cart is empty</div>';
-  
+          if (count($_SESSION['cart']) == 0) {
+            echo '<div class="text-center fs-4">The cart is empty</div>';
+          }
 
-}
+          // if($_SESSION['cart'][0] == ''){
+          //   echo '<div class="text-center fs-4">The cart is empty</div>';
+          // }
 
-// if($_SESSION['cart'][0] == ''){
-//   echo '<div class="text-center fs-4">The cart is empty</div>';
-// }
-          
 
           // displaying the cart items
           $total = 0;
-       
-            $no = 1;
+
+          $no = 1;
           foreach ($_SESSION['cart'] as $key => $value) {
-            $total = $total + $value["product_price"];
+            $cart_qty = $value["product_qty"];
+            $cart_price = $value["product_price"];
+            $total_per_item_price = $cart_qty * $cart_price;
+            // $total = $total + $value["product_price"];
+            $total = $total + $total_per_item_price;
             echo '
  <tr>
-      <th scope="row">'.$no.'</th>
+      <th scope="row">' . $no . '</th>
       <td><img src="' . $value["product_image"] . '"  class="img-fluid product_img" alt="" srcset=""></td>
       <td>' . $value["product_name"] . '</td>
-      <td>' .product_currency_bdt() . $value["product_price"] . '</td>
-      <td><input type="number" class="input-group form-control" min="1" max="10" value="' . $value["product_qty"] . '"></td>
+      <td>' . product_currency_bdt() . $value["product_price"] . '</td>
+      <td><input  type="number" class="product_qty_cart input-group form-control" min="1" max="10" value="' . $value["product_qty"] . '"  id="product_cart_qty_inp"> </td>
       <form action="cart_manage.php" method="post">
       <input type = "hidden" value="' . $value["product_name"] . '" name="product_name">
       <td><button type="submit" class="input-group from-control btn btn-danger btn-sm" name="remove_cart">Remove</button></td>
@@ -77,19 +78,42 @@ if(count($_SESSION['cart']) == 0){
     </tr>
  
  ';
- $no++;
+            $no++;
           }
-    
-        
+
+
 
           ?>
+          <script>
+//             function qty_inp_id(qty_inp_id) {
+//               var qty_inp_id = document.getElementById(qty_inp_id);
+// var val_qty_inp = qty_inp_id.value;
+// console.log(val_qty_inp)
 
-      
+
+
+//             }
+
+
+            // var product_qty_cart = document.getElementsByClassName("product_qty_cart")
+            // var prod_val = product_qty_cart.value;
+
+            // for (let i = 0; i < product_qty_cart.length; i++) {
+            //   prod_qt_car = product_qty_cart[0];
+            //   console.log("prod val cart is " + prod_qt_car)
+
+            // }
+
+            // console.log("the prod is" + product_qty_cart)
+          </script>
+
 
         </tbody>
-      
+
+        <input type="text" onchange="this('this')" name="" id="">
+
       </table>
-    
+
     </div>
     <div class="col-4 text-center">
       <div class="container border-primary border rounded bg-light pt-3 pb-5">
@@ -98,7 +122,7 @@ if(count($_SESSION['cart']) == 0){
           <?php
 
 
-            echo product_currency_bdt() .  $total; ?>
+          echo product_currency_bdt() .  $total; ?>
         </h4>
 
 
@@ -106,7 +130,7 @@ if(count($_SESSION['cart']) == 0){
 
       </div>
 
-   <a href="checkout.php"><button type="submit" class="btn btn-primary mt-4">Checkout</button></a>
+      <a href="checkout.php"><button type="submit" class="btn btn-primary mt-4">Checkout</button></a>
 
     </div>
   </div>

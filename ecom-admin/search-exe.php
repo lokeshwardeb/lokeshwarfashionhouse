@@ -129,7 +129,8 @@ $search = htmlspecialchars(mysqli_real_escape_string($conn, $_GET['search_text']
     if ($search_class == "home") {
       $search = htmlspecialchars(mysqli_real_escape_string($conn, $_GET['search_text']), ENT_QUOTES) ;
 
-      $sql = "SELECT * FROM `orders` WHERE `product_name` LIKE '%$search%' ORDER BY `product_name` DESC";
+      // $sql = "SELECT * FROM `orders` WHERE `product_name` LIKE '%$search%' ORDER BY `product_name` DESC";
+      $sql = "SELECT * FROM `products` AS prod JOIN order_products AS ord_prod ON prod.product_id = ord_prod.product_id JOIN orders AS ord ON ord.order_no = ord_prod.orders_id WHERE `order_no` LIKE '%$search%' OR `product_name` LIKE '%$search%' OR `product_desc` LIKE '%$search%' OR `price` LIKE '%$search%' OR `order_status` LIKE '%$search%' ORDER BY ord.`id` DESC";
       $result = mysqli_query($conn, $sql);
 
       if (mysqli_num_rows($result) > 0) {
@@ -217,7 +218,8 @@ $search = htmlspecialchars(mysqli_real_escape_string($conn, $_GET['search_text']
       $active_class = 'dashboard';
       $search = htmlspecialchars(mysqli_real_escape_string($conn, $_GET['search_text']), ENT_QUOTES) ;
 
-      $sql = "SELECT * FROM `orders` WHERE `product_name` LIKE '%$search%' ORDER BY `product_name` DESC";
+      // $sql = "SELECT * FROM `orders` WHERE `product_name` LIKE '%$search%' ORDER BY `product_name` DESC";
+      $sql = "SELECT * FROM `products` AS prod JOIN order_products AS ord_prod ON prod.product_id = ord_prod.product_id JOIN orders AS ord ON ord.order_no = ord_prod.orders_id WHERE `order_no` LIKE '%$search%' OR `product_name` LIKE '%$search%' OR `product_desc` LIKE '%$search%' OR `price` LIKE '%$search%' OR `order_status` LIKE '%$search%' ORDER BY ord.`id` DESC";
       $result = mysqli_query($conn, $sql);
 
       if (mysqli_num_rows($result) > 0) {

@@ -189,7 +189,11 @@ $ordering_username = $_SESSION['cus_username'];
             // $_SESSION['gi_customer_email'] = $email;
 
                   // code for email send to customer for placing order
-                  sent_mail("Lokeshwar Fashion House", $email, $first_name . ' ' . $last_name, "Order Placed Successfully", mail_template("", "order_placed", $ordering_username, $order_no , $order_phone_no,), "Your order Has been placed check your email $email for details");
+
+                  // sent_mail("Lokeshwar Fashion House", $email, $first_name . ' ' . $last_name, "Order Placed Successfully", mail_template("", "order_placed", $ordering_username, $order_no , $order_phone_no,), "Your order Has been placed check your email $email for details");
+
+
+                  
 
                   // code for making and generating order invoice
 

@@ -175,7 +175,7 @@ $active_theme = $theme_row['active_theme'];
 
                   ?>
                   <br>
-                  <span class="border-top ">
+                  <span class="border-top d-block">
                     Admin Panel
 
                   </span>
@@ -299,7 +299,9 @@ $active_theme = $theme_row['active_theme'];
     <!-- this is the dropdown section for settings -->
     <div class="dropdown <?php if ($active_class == 'add admin') {
                             echo 'active bg-primary';
-                          } elseif ($active_class == 'profile') {
+                          } elseif ($active_class == 'analyzer') {
+                            echo 'active bg-primary';
+                          }elseif ($active_class == 'profile') {
                             echo 'active bg-primary';
                           } elseif ($active_class == 'settings') {
                             # code...
@@ -323,6 +325,9 @@ $active_theme = $theme_row['active_theme'];
         <li><a class="dropdown-item <?php if ($active_class == 'admins') {
                                       echo 'active';
                                     } ?>" href="admins.php">Admins...</a></li>
+        <li><a class="dropdown-item <?php if ($active_class == 'analyzer') {
+                                      echo 'active';
+                                    } ?>" href="analyzer.php">Analyzer</a></li>
         <li><a class="dropdown-item <?php if ($active_class == 'settings') {
                                       echo 'active';
                                     } ?>" href="settings.php">Settings</a></li>
@@ -389,30 +394,46 @@ $active_theme = $theme_row['active_theme'];
       </li>
     </ul>
     <div class="dropdown border-top <?php 
-    if($active_class == 'admins'){
-      echo 'bg-primary';
-    }
-    if($active_class == 'settings'){
-      echo 'bg-primary';
-    }
-    if($active_class == 'profile'){
-      echo 'bg-primary';
-    }
+ if ($active_class == 'add admin') {
+  echo 'active bg-primary';
+} elseif ($active_class == 'analyzer') {
+  echo 'active bg-primary';
+}elseif ($active_class == 'profile') {
+  echo 'active bg-primary';
+}elseif ($active_class == 'settings') {
+  # code...
+  echo 'active bg-primary';
+}elseif ($active_class == 'page settings') {
+  # code...
+  echo 'active bg-primary';
+} elseif ($active_class == 'admins') {
+  # code...
+  echo 'active bg-primary';
+} else {
+  echo '';
+}
   
     ?>">
       <a href="#" class="d-flex align-items-center justify-content-center p-3 link-light text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
         <img src="<?php echo $_SESSION['admin_photo'] ?>"" alt="mdo" width="24" height="24" class="rounded-circle">
       </a>
       <ul class="dropdown-menu  text-small shadow">
-        <li><a class="dropdown-item <?php if ($active_class == 'admins') {
+      <li><a class="dropdown-item <?php if ($active_class == 'admins') {
                                       echo 'active';
-                                    } ?>" href="admins.php">Admins ...</a></li>
+                                    } ?>" href="admins.php">Admins...</a></li>
+      <li><a class="dropdown-item <?php if ($active_class == 'analyzer') {
+                                      echo 'active';
+                                    } ?>" href="analyzer.php">Analyzer</a></li>
         <li><a class="dropdown-item <?php if ($active_class == 'settings') {
                                       echo 'active';
                                     } ?>" href="settings.php">Settings</a></li>
+        <li><a class="dropdown-item <?php if ($active_class == 'page settings') {
+                                      echo 'active';
+                                    } ?>" href="page-settings.php">Page Settings</a></li>
         <li><a class="dropdown-item <?php if ($active_class == 'profile') {
                                       echo 'active';
                                     } ?>" href="profile.php">Profile</a></li>
+        <li>
         <li><hr class="dropdown-divider"></li>
         <li><a class="dropdown-item" href="logout.php">Sign out</a></li>
       </ul>

@@ -8,6 +8,7 @@ include "_company_info.php";
 
 
 
+
 ?>
 <!doctype html>
 <html lang="en">
@@ -33,6 +34,25 @@ include "_company_info.php";
   <link rel="stylesheet" href="css/utilities.css">
   <link rel="stylesheet" href="css/style.css">
  
+  <?php 
+
+if(!$active_class == 'login'){
+  require "inc/analyzer_exe.php";
+
+}else{
+  // require "inc/analyzer_exe.php";
+
+}
+if(!$active_class == 'signup'){
+  require "inc/analyzer_exe.php";
+
+}else{
+  // require "inc/analyzer_exe.php";
+  
+}
+
+  
+  ?>
 
   <link rel="shortcut icon" href="<?php echo 'ecom-admin/uploaded_img/'.$website_logo ?>" type="image/x-icon">
 

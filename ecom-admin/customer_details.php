@@ -46,25 +46,25 @@ if (!isset($_SESSION['username'])) {
         $result = mysqli_query($conn, $sql);
         if ($result) {
 
-            $sql_cus_info = "SELECT * FROM `admin_users` WHERE `username` = '$username'";
-            $result_cus_info = mysqli_query($conn, $sql_cus_info);
+            // $sql_cus_info = "SELECT * FROM `admin_users` WHERE `username` = '$username'";
+            // $result_cus_info = mysqli_query($conn, $sql_cus_info);
 
-            if($result_cus_info){
-                if(mysqli_num_rows($result_cus_info) > 0 ){
-                    while($row = mysqli_fetch_assoc($result_cus_info)){
+            // if($result_cus_info){
+            //     if(mysqli_num_rows($result_cus_info) > 0 ){
+            //         while($row = mysqli_fetch_assoc($result_cus_info)){
 
-                        // $cus_last_ip_address = $row['cus_last_ip_address'];
-                        // $cus_last_used_os = $row['cus_last_used_os'];
-                        // $cus_last_used_device = $row['cus_last_used_device'];
-                    }
-                }
-            }
+            //             // $cus_last_ip_address = $row['cus_last_ip_address'];
+            //             // $cus_last_used_os = $row['cus_last_used_os'];
+            //             // $cus_last_used_device = $row['cus_last_used_device'];
+            //         }
+            //     }
+            // }
 
 
 
             if (mysqli_num_rows($result) > 0) {
                 while ($row = mysqli_fetch_assoc($result)) {
-                    $customer_id =     $row["customer_id"];
+                    $customer_id =  $row["customer_id"];
                     $cus_id = $row['cus_id'];
                     $customer_name =   $row['customer_name'];
                     $customer_email =  $row['customer_email'];
@@ -124,7 +124,25 @@ if($result_customer_orders_select_check){
     Customer Join datetime: ' . $customer_join_datetime . ' <br>
     Customer Total orders: ' . $customer_total_orders . ' <br>
 
- 
+    <div class="row container mt-4">
+    <div class="col-2">
+        <button class="btn btn-dark mb-4" onclick="productEdit()">Edit</button><br>
+
+    </div>
+
+
+    <div class="col-10">
+        <form action="'.$_SERVER["PHP_SELF"].'" method="post">
+            <button class="btn btn btn-danger mb-4" name="block_customer_user" id="block_cus_btn">Block Customer User</button> <label for="block_cus_btn" class="text-danger"> (block customer user for spaming and security issues)</label><br>
+
+        </form>
+        <?php
+
+
+
+        ?>
+    </div>
+</div>
 
 
 </div>

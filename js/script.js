@@ -275,3 +275,15 @@ var increButton = document.getElementsByClassName('inc');
               //    hover_box.style.backgroundPosition =  x + 750+ 'px' + ' ' + y + 250 + 'px';
                   hover_box.style.backgroundPosition = x + 750 + "px"+ " " + y + 250 + "px ;";
               })
+
+
+
+
+              function qty_inp_id() {
+                var qty_inp_id = document.getElementById();
+  var val_qty_inp = qty_inp_id.value;
+  console.log(val_qty_inp)
+  
+  
+  
+              }
