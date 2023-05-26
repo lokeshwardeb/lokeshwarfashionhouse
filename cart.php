@@ -62,9 +62,13 @@ include("inc/_navbar.php");
           $no = 1;
           foreach ($_SESSION['cart'] as $key => $value) {
   
-            if(isset($product_qty_cookie)){
+            if(isset($product_qty_cookie) && $product_qty_cookie !== ''){
               $value['product_qty'] = $product_qty_cookie;
 
+            }
+
+            if(isset($product_qty_cookie) && $product_qty_cookie > 10){
+              $_COOKIE["product_qty"] = 10;
             }
 
             // $product_qty_cookie;
@@ -73,6 +77,8 @@ include("inc/_navbar.php");
             $total = $total + $multi;
             $product_price_cart = $value["product_price"];
             $product_qty_cart = $value["product_qty"];
+
+            $_SESSION['product_total_price'] = $total;
 
             // if($pro_qty !== '' && $pro_qty <= 10){
             //   $value['product_qty'] = $pro_qty;

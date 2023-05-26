@@ -120,7 +120,9 @@ if (!isset($_SESSION['cart'][0])) {
 
               <?php
 
-              $total = 0;
+$product_total_price =  $_SESSION['product_total_price'];
+
+              // $total = 0;
               foreach ($_SESSION['cart'] as $key => $value) {
 
 
@@ -133,7 +135,7 @@ if (!isset($_SESSION['cart'][0])) {
                 <span class="text-muted">' . product_currency_bdt() . $value['product_price'] . '</span>
               </li>
                 ';
-                $total = $total + $value['product_price'];
+                // $total = $total + $value['product_price'];
               }
 
 
@@ -151,7 +153,7 @@ if (!isset($_SESSION['cart'][0])) {
                 <span class="text-success">
                   <?php
 
-                  if ($promo_discount > 0 && $promo_discount < $total) {
+                  if ($promo_discount > 0 && $promo_discount < $product_total_price) {
                     echo '−' . product_currency_bdt() . $promo_discount;
                   } else {
                     $invalid_promo_code = 1;
@@ -171,9 +173,9 @@ if (!isset($_SESSION['cart'][0])) {
 
                   // echo product_currency_bdt() . $total = $total - $promo_discount ;
                   if ($invalid_promo_code == 1) {
-                    echo product_currency_bdt() . $total;
+                    echo product_currency_bdt() . $product_total_price;
                   } else {
-                    echo product_currency_bdt() . $total = $total - $promo_discount;
+                    echo product_currency_bdt() . $product_total_price = $product_total_price - $promo_discount;
                   }
 
 
