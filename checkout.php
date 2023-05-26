@@ -119,7 +119,7 @@ if (!isset($_SESSION['cart'][0])) {
             <ul class="list-group mb-3">
 
               <?php
-
+// initializing the product total price into a session variable
 $product_total_price =  $_SESSION['product_total_price'];
 
               // $total = 0;
@@ -159,6 +159,25 @@ $product_total_price =  $_SESSION['product_total_price'];
                     $invalid_promo_code = 1;
                     echo ' <span class="text-danger">invalid promo code</span>';
                   }
+
+
+
+        if(isset($_COOKIE['product_qty'])){
+          // unset($_COOKIE['product_qty']);
+          // setcookie('product_qty', null, -1, '/'); 
+          // // setcookie("", "",)
+
+          echo '
+          <script>
+          document.cookie = "product_qty=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=./;";
+          </script>
+          
+          ';
+
+
+        }
+
+
 
 
 
@@ -290,7 +309,7 @@ $product_total_price =  $_SESSION['product_total_price'];
                       echo 'required';
                     } ?> name="order_customer_phone_no">
                     <div class="invalid-feedback">
-                      Phone no is rdfdequireds.
+                      Phone no is required.
                     </div>
                   </div>
                 </div>

@@ -160,6 +160,8 @@ var increButton = document.getElementsByClassName('inc');
                 loader.style.display = "none";
               })
 
+              // product cart multiplecation functionalities
+
               function multi(product_price, SITE_URL){
                 let cart_input_qty = document.getElementById("cart_input_qty");
 
@@ -169,12 +171,27 @@ var increButton = document.getElementsByClassName('inc');
 
                 let price  = product_price;
                 let qty = qty_value;
+
+                if(qty_value == null){
+                  qty = 1;
+                }
+
+                if(qty > 10){
+                  qty = 10;
+                }
+                if(qty < 1){
+                  qty = 1;
+                }
+
                 let total_price = price * qty;
 
-                if(total_price >= 50){
-                  total_price = 20;
-                  cart_input_qty.value = 10;
-                }
+                
+
+
+                // if(total_price >= 50){
+                //   total_price = 20;
+                //   cart_input_qty.value = 10;
+                // }
 
                 document.getElementById("cart_total_price").innerHTML = total_price;
 

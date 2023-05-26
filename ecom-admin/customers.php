@@ -76,8 +76,8 @@ include "inc/_title_bar.php";
     }
   }
   else{
-    echo '<div class = "custom-default-box-bg-color pt-4 mt-4 fs-4" style="height:200px !important;">
-    Sorry ! the searching result with "'.$search.'" are not found ..
+    echo '<div class = "custom-default-box-bg-color pt-4 mt-4 fs-4 ps-4" style="height:200px !important;">
+    Sorry ! no recent customers are not found ..
     
     </div>';
   }

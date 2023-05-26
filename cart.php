@@ -57,6 +57,8 @@ include("inc/_navbar.php");
           $total = 0;
 
           // $pro_qty = htmlspecialchars(mysqli_real_escape_string($conn, $_GET['pro_qty']), ENT_QUOTES) ;
+            // setcookie("product_qty", null, time() - 3600);
+
 
         echo  $product_qty_cookie = $_COOKIE["product_qty"];
           $no = 1;
@@ -67,7 +69,7 @@ include("inc/_navbar.php");
 
             }
 
-            if(isset($product_qty_cookie) && $product_qty_cookie > 10){
+            if(isset($product_qty_cookie) && $product_qty_cookie >= 10){
               $_COOKIE["product_qty"] = 10;
             }
 
@@ -79,6 +81,14 @@ include("inc/_navbar.php");
             $product_qty_cart = $value["product_qty"];
 
             $_SESSION['product_total_price'] = $total;
+            // setcookie("product_qty", null, time() - 3600);
+
+            // echo '
+            // <script>
+            // document.cookie = "product_qty=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=./;";
+            // </script>
+            
+            // ';
 
             // if($pro_qty !== '' && $pro_qty <= 10){
             //   $value['product_qty'] = $pro_qty;
@@ -121,6 +131,13 @@ include("inc/_navbar.php");
         <h2>Total: </h2>
 
         <?php
+        // $_COOKIE['product_total_price']
+
+        // setcookie("product_total_price", $total, time() - 3600);
+
+        // unset($_COOKIE['product_total_price']);
+        // setcookie('product_qty', null, time() - 60*60*24, "./"); // 
+
         echo '
    
 
