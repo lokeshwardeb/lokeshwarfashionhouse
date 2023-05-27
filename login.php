@@ -189,7 +189,7 @@ window.location.href = "sign_up_process.php";
       <main class="form-signin">
         <form action="<?php $_SERVER['PHP_SELF'] ?>" method="post">
           <img class="mb-4 " src="<?php echo 'ecom-admin/uploaded_img/' . $website_logo ?>" alt="" width="100vw" height="100vh">
-          <h1 class="h3 mb-3 fw-normal">Please sign in</h1>
+          <h1 class="h3 mb-3 fw-normal bg-light">Please sign in</h1>
 
           <div class="form-floating">
             <input type="text" class="form-control" id="floatingInput" placeholder="name@example.com" name="cus_username">

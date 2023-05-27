@@ -21,7 +21,7 @@ if (isset($_SESSION['cus_username'])) {
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link ">Support</a>
+            <a class="nav-link " href ="support.php">Support</a>
           </li>
           <li class="nav-item float-end">
             <a class="nav-link " href="cus_profile.php">Profile</a>
@@ -107,7 +107,7 @@ if (isset($_SESSION['cus_username'])) {
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link ">Support</a>
+            <a class="nav-link " href ="support.php">Support</a>
           </li>
           <!-- <li class="nav-item float-end">
             <a class="nav-link " href="cus_profile.php">Profile</a>

@@ -301,6 +301,8 @@ $active_theme = $theme_row['active_theme'];
                             echo 'active bg-primary';
                           } elseif ($active_class == 'analyzer') {
                             echo 'active bg-primary';
+                          }elseif ($active_class == 'newsletter') {
+                            echo 'active bg-primary';
                           }elseif ($active_class == 'profile') {
                             echo 'active bg-primary';
                           } elseif ($active_class == 'settings') {
@@ -311,6 +313,8 @@ $active_theme = $theme_row['active_theme'];
                             echo 'active bg-primary';
                           } elseif ($active_class == 'admins') {
                             # code...
+                            echo 'active bg-primary';
+                          }elseif ($active_class == 'visit_site') {
                             echo 'active bg-primary';
                           } else {
                             echo '';
@@ -328,6 +332,9 @@ $active_theme = $theme_row['active_theme'];
         <li><a class="dropdown-item <?php if ($active_class == 'analyzer') {
                                       echo 'active';
                                     } ?>" href="analyzer.php">Analyzer</a></li>
+        <li><a class="dropdown-item <?php if ($active_class == 'newsletter') {
+                                      echo 'active';
+                                    } ?>" href="newsletter.php">Newsletter</a></li>                            
         <li><a class="dropdown-item <?php if ($active_class == 'settings') {
                                       echo 'active';
                                     } ?>" href="settings.php">Settings</a></li>
@@ -337,6 +344,10 @@ $active_theme = $theme_row['active_theme'];
         <li><a class="dropdown-item <?php if ($active_class == 'profile') {
                                       echo 'active';
                                     } ?>" href="profile.php">Profile</a></li>
+        <li>
+        <li><a class="dropdown-item <?php if ($active_class == 'visit_site') {
+                                      echo 'active';
+                                    } ?>" href="<?php echo SITE_URL; ?>"  target="_blank">Visit Site</a></li>
         <li>
           <hr class="dropdown-divider">
         </li>
@@ -398,6 +409,8 @@ $active_theme = $theme_row['active_theme'];
   echo 'active bg-primary';
 } elseif ($active_class == 'analyzer') {
   echo 'active bg-primary';
+} elseif ($active_class == 'newsletter') {
+  echo 'active bg-primary';
 }elseif ($active_class == 'profile') {
   echo 'active bg-primary';
 }elseif ($active_class == 'settings') {
@@ -407,6 +420,9 @@ $active_theme = $theme_row['active_theme'];
   # code...
   echo 'active bg-primary';
 } elseif ($active_class == 'admins') {
+  # code...
+  echo 'active bg-primary';
+} elseif ($active_class == 'visit_site') {
   # code...
   echo 'active bg-primary';
 } else {
@@ -424,6 +440,9 @@ $active_theme = $theme_row['active_theme'];
       <li><a class="dropdown-item <?php if ($active_class == 'analyzer') {
                                       echo 'active';
                                     } ?>" href="analyzer.php">Analyzer</a></li>
+         <li><a class="dropdown-item <?php if ($active_class == 'newsletter') {
+                                      echo 'active';
+                                    } ?>" href="newsletter.php">Newsletter</a></li>                           
         <li><a class="dropdown-item <?php if ($active_class == 'settings') {
                                       echo 'active';
                                     } ?>" href="settings.php">Settings</a></li>
@@ -433,6 +452,10 @@ $active_theme = $theme_row['active_theme'];
         <li><a class="dropdown-item <?php if ($active_class == 'profile') {
                                       echo 'active';
                                     } ?>" href="profile.php">Profile</a></li>
+        <li>
+        <li><a class="dropdown-item <?php if ($active_class == 'visit_site') {
+                                      echo 'active';
+                                    } ?>" href="<?php echo SITE_URL; ?>" target="_blank">Visit Site</a></li>
         <li>
         <li><hr class="dropdown-divider"></li>
         <li><a class="dropdown-item" href="logout.php">Sign out</a></li>

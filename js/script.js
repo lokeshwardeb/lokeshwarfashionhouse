@@ -162,50 +162,79 @@ var increButton = document.getElementsByClassName('inc');
 
               // product cart multiplecation functionalities
 
-              function multi(product_price, SITE_URL){
-                let cart_input_qty = document.getElementById("cart_input_qty");
+              // function multi(product_price, SITE_URL){
+              //   let cart_input_qty = document.getElementById("cart_input_qty");
 
-                let qty_value = cart_input_qty.value;
+              //   let qty_value = cart_input_qty.value;
 
-                let SITE_URLS = SITE_URL;
+              //   let SITE_URLS = SITE_URL;
 
-                let price  = product_price;
-                let qty = qty_value;
+              //   let price  = product_price;
+              //   let qty = qty_value;
 
-                if(qty_value == null){
-                  qty = 1;
-                }
+              //   if(qty_value == null){
+              //     qty = 1;
+              //   }
 
-                if(qty > 10){
-                  qty = 10;
-                }
-                if(qty < 1){
-                  qty = 1;
-                }
+              //   if(qty > 10){
+              //     qty = 10;
+              //   }
+              //   if(qty < 1){
+              //     qty = 1;
+              //   }
 
-                let total_price = price * qty;
+              //   let total_price = price * qty;
 
                 
 
 
-                // if(total_price >= 50){
-                //   total_price = 20;
-                //   cart_input_qty.value = 10;
-                // }
+              //   // if(total_price >= 50){
+              //   //   total_price = 20;
+              //   //   cart_input_qty.value = 10;
+              //   // }
 
-                document.getElementById("cart_total_price").innerHTML = total_price;
+              //   document.getElementById("cart_total_price").innerHTML = total_price;
 
-              //   let url = SITE_URLS .concat("index.php?pro_qty=") .concat(qty);
+              // //   let url = SITE_URLS .concat("index.php?pro_qty=") .concat(qty);
 
-              document.cookie = `product_qty = ${qty}`;
-              location.reload();
+              // // the cookies declaration
 
-              // window.localStorage.setItem("product_qty", qty);
+              // // document.cookie = `product_qty = ${qty}`;
+              // location.reload();
+
+              // // document.cookie = `product_`;
+
+              // // window.localStorage.setItem("product_qty", qty);
                
-              // //  window.location.href = SITE_URL +  "cart.php?pro_qty=" + qty;
-              //  window.location.href = url;
-              }
+              // // //  window.location.href = SITE_URL +  "cart.php?pro_qty=" + qty;
+              // //  window.location.href = url;
+              // }
 
+
+              // product qty cart main functionalities
+
+              var gt = 0;
+              var iprice =document.getElementsByClassName("iprice");
+              var iqty =document.getElementsByClassName("iqty");
+              var itotal =document.getElementsByClassName("itotal")
+              var gTotal =document.getElementById("gTotal");
+              
+              
+              function subTotal(){
+                gt = 0;
+                for (let i = 0; i < iprice.length; i++) {
+                // const element = array[i];
+              itotal[i].innerText = (iprice[i].value) * (iqty[i].value);
+              gt = gt + (iprice[i].value) * (iqty[i].value);
+                
+              }
+              
+              gTotal.innerText = gt;
+              
+              }
+              subTotal();
+              
+              
 
 
 

@@ -117,17 +117,7 @@ if (!isset($_SESSION['cart'][0])) {
               </span>
             </h4>
             <ul class="list-group mb-3">
-<?php 
-// foreach($_GET['iproduct_qty'] as  $gvalue){
-//  echo 'the val is' . $gvalue;
-// }
 
-for($i = 0; $i< count($_GET['iproduct_qty']); $i ++){
-  echo $i;
-}
-
-
-?>
               <?php
 // initializing the product total price into a session variable
 $product_total_price =  $_SESSION['product_total_price'];
@@ -139,7 +129,7 @@ $product_total_price =  $_SESSION['product_total_price'];
                 echo '      
                 <li class="list-group-item d-flex justify-content-between lh-sm">
                 <div>
-                <h6 class="my-0 d-flex">' . $value['product_name'] . ' x <span class="text-muted">' .  $_GET['iproduct_qty'] . '</span>
+                <h6 class="my-0 d-flex">' . $value['product_name'] . ' x <span class="text-muted">' . $value['product_qty'] . $_SESSION['product_qty_is'] . '</span>
                 </h6>
                 <small class="text-muted">' . $value['product_desc'] . '</small>
                 </div>

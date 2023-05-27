@@ -3,6 +3,8 @@ include 'inc/_error_reporting.php';
 $active_class = 'home';
 // $website_slogan = 'feel the shopping';
 
+include "inc/_company_info.php";
+
 include("inc/_header.php");
 include("inc/conn.php");
 include("inc/const.php");
@@ -382,6 +384,110 @@ if ($featured_product_result) {
 </div>
 <!-- caragories section ends here -->
 
+
+<?php
+
+require_once "get_users_info/UserInformation.php";
+ $ip =  UserInfo::get_ip();
+ $os =  UserInfo::get_os();
+ $browser =  UserInfo::get_browser();
+ $device =  UserInfo::get_device();
+
+$subs_email_exist = 0;
+
+if(isset($_SESSION['cus_username'])){
+
+  $cus_account_email = $cus_email;
+
+  $sql_check_newsletter = "SELECT * FROM `newsletter` WHERE `newsletter_email` = '$cus_account_email' ";
+  $result_check_newsletter = mysqli_query($conn, $sql_check_newsletter);
+
+  if($result_check_newsletter){
+    if(mysqli_num_rows($result_check_newsletter) == 1){
+$subs_email_exist = 1;
+    }
+  }
+
+
+
+}
+
+if(isset($_POST['subscribe_btn'])){
+  $subscribe_inp = htmlspecialchars(mysqli_real_escape_string($conn, $_POST['subscribe_inp']));
+
+  if(isset($_SESSION['cus_username'])){
+  $subscribe_inp = $cus_account_email;
+
+  }
+
+  $sql_check_newsletter = "SELECT * FROM `newsletter` WHERE `newsletter_email` = '$subscribe_inp' ";
+  $result_check_newsletter = mysqli_query($conn, $sql_check_newsletter);
+
+  if($result_check_newsletter){
+    if(mysqli_num_rows($result_check_newsletter) > 0){
+      error_alert("This email is already exist on newsletter");
+    }else{
+
+      if($subscribe_inp == '' && $subs_email_exist == 1 && isset($_SESSION['cus_username'])){
+        // error_alert("The submitted email cannot be blanks");
+        error_alert("The submitted email already exist on newsletter");
+      }
+      // elseif($subscribe_inp == '' && $subs_email_exist == 0 && isset($_SESSION['cus_username'])){
+      //   // error_alert("The submitted email cannot be blanks");
+      //   error_alert("The submitted email already exist on newsletter");
+
+      //   $subscribe_inp = $cus_email;
+
+      //   $newsletter_otp = rand("1111", "9999");
+
+
+
+      //   $sql_newsletter_subscribe = "INSERT INTO `newsletter`(`newsletter_email`) VALUES ('$subscribe_inp')";
+      //   $result_newsletter_subscribe = mysqli_query($conn, $sql_newsletter_subscribe);
+      
+      //   if($result_newsletter_subscribe){
+      //     succcess_alert("Email has been added to our newsletter. Thanks for subscribing our newsletter. From now you will find various offers and newses from our newsletter");
+      //   }
+
+
+
+      // }
+      
+      else{
+
+        $newsletter_otp = rand("1111", "9999");
+
+        
+
+
+        $sql_newsletter_subscribe = "INSERT INTO `newsletter`( `newsletter_email`, `ip_address`, `os`, `browser`, `device`) VALUES ('$subscribe_inp', '$ip', '$os', '$browser', '$device')";
+        $result_newsletter_subscribe = mysqli_query($conn, $sql_newsletter_subscribe);
+      
+        if($result_newsletter_subscribe){
+          succcess_alert("Email has been added to our newsletter. Thanks for subscribing our newsletter. From now you will find various offers and newses from our newsletter");
+        }
+      }
+
+ 
+    }
+  }
+
+
+
+
+
+
+
+}
+
+
+
+?>
+
+
+
+
+
 <!-- newsletter section starts here -->
 
 <div class="container newsletter-section mb-5 pb-4 mt-4">
@@ -393,11 +499,65 @@ if ($featured_product_result) {
       </div>
     </div>
     <div class="col-6">
+      <form action="<?php $_SERVER['PHP_SELF'] ?>" method="post">
       <div class="input-group mb-3 mt-5">
 
-        <input type="text" class="form-control" placeholder="example@example.com" aria-label="Username" aria-describedby="basic-addon1">
-        <button type="submit" class="btn btn-dark">Subscribe Now</button>
-      </div>
+      <?php 
+      if(isset($_SESSION['cus_username'])){
+        if($subs_email_exist == 1){
+          echo '<input type="text" name="subscribe_inp" class="form-control" placeholder="example@example.com" aria-label="Username" aria-describedby="basic-addon1" value="'.$cus_email.'" disabled>
+          <button type="submit" class="btn btn-secondary" name="subscribe_btn">Subscribed</button>';
+        }
+      }else{
+        if($subs_email_exist == 1){
+          echo '<input type="text" name="subscribe_inp" class="form-control" placeholder="example@example.com" aria-label="Username" aria-describedby="basic-addon1" value="'.$cus_email.'" >
+          <button type="submit" class="btn btn-secondary" name="subscribe_btn">Subscribed</button>';
+        }
+      }
+     
+      
+
+      
+      ?>
+
+<?php
+
+if(isset($_SESSION['cus_username'])){
+if($subs_email_exist == 0){
+  echo '
+  <input type="text" name="subscribe_inp" class="form-control" placeholder="example@example.com" aria-label="Username" aria-describedby="basic-addon1" value="'.$cus_email.'" >
+  <button type="submit" class="btn btn-dark" name="subscribe_btn">Subscribe Now</button>';
+}
+}else{
+if($subs_email_exist == 0){
+
+  // echo '
+
+  // <input type="text" name="subscribe_inp" class="form-control" placeholder="example@example.com" aria-label="Username" aria-describedby="basic-addon1">
+  // <button type="submit" class="btn btn-dark" name="subscribe_btn">Subscribe Now</button>
+  
+  // ';
+  echo '
+
+  <input type="text"  class="form-control" placeholder="example@example.com" aria-label="Username" aria-describedby="basic-addon1">
+ <a href="login.php"><input type="button" class="btn btn-dark" value ="Subscribe Now"></a> 
+  
+  ';
+}
+
+
+
+
+
+
+}
+
+?>
+
+
+</div>
+    </form>
+  
 
 
     </div>

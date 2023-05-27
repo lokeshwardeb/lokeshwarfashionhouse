@@ -16,20 +16,23 @@ include("inc/_navbar.php");
 
 
 ?>
+<form action="checkout.php" method="get">
 <div class="container-fluid pt-4 pb-5 mb-5">
   <div class="row">
     <div class="col-8">
-      <table class="table <?php
-                          // if($_SESSION['cart'][0] == ''){
-                          //   echo 'd-none';
-                          // }
 
-                          if (count($_SESSION['cart']) == 0) {
-                            echo 'd-none';
-                          }
+      <table class="table <?php 
+      // if($_SESSION['cart'][0] == ''){
+      //   echo 'd-none';
+      // }
 
+      if(count($_SESSION['cart']) == 0){
+        echo 'd-none';
 
-                          ?>">
+      }
+      
+      
+      ?>">
         <thead>
           <tr>
             <th scope="col">#</th>
@@ -37,73 +40,39 @@ include("inc/_navbar.php");
             <th scope="col">Products</th>
             <th scope="col">Price</th>
             <th scope="col">Quantity</th>
+            <th scope="col">Total</th>
             <th scope="col">Action</th>
           </tr>
         </thead>
         <tbody>
-
+    
           <?php
 
-          if (count($_SESSION['cart']) == 0) {
-            echo '<div class="text-center fs-4">The cart is empty</div>';
-          }
+if(count($_SESSION['cart']) == 0){
+  echo '<div class="text-center fs-4">The cart is empty</div>';
+  
 
-          // if($_SESSION['cart'][0] == ''){
-          //   echo '<div class="text-center fs-4">The cart is empty</div>';
-          // }
+}
 
+// if($_SESSION['cart'][0] == ''){
+//   echo '<div class="text-center fs-4">The cart is empty</div>';
+// }
+          
 
           // displaying the cart items
-          $total = 0;
-
-          // $pro_qty = htmlspecialchars(mysqli_real_escape_string($conn, $_GET['pro_qty']), ENT_QUOTES) ;
-            // setcookie("product_qty", null, time() - 3600);
-
-
-        echo  $product_qty_cookie = $_COOKIE["product_qty"];
-          $no = 1;
-          foreach ($_SESSION['cart'] as $key => $value) {
   
-            if(isset($product_qty_cookie) && $product_qty_cookie !== ''){
-              $value['product_qty'] = $product_qty_cookie;
-
-            }
-
-            if(isset($product_qty_cookie) && $product_qty_cookie >= 10){
-              $_COOKIE["product_qty"] = 10;
-            }
-
-            // $product_qty_cookie;
-
-            $multi = $value["product_price"] * $value['product_qty'];
-            $total = $total + $multi;
-            $product_price_cart = $value["product_price"];
-            $product_qty_cart = $value["product_qty"];
-
-            $_SESSION['product_total_price'] = $total;
-            // setcookie("product_qty", null, time() - 3600);
-
-            // echo '
-            // <script>
-            // document.cookie = "product_qty=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=./;";
-            // </script>
-            
-            // ';
-
-            // if($pro_qty !== '' && $pro_qty <= 10){
-            //   $value['product_qty'] = $pro_qty;
-            // }
-
-            // if($product_qty_cart == )
-            $site_url = SITE_URL;
-
+       
+            $no = 1;
+          foreach ($_SESSION['cart'] as $key => $value) {
+            $total = $total + $value["product_price"];
             echo '
  <tr>
-      <th scope="row">' . $no . '</th>
+      <th scope="row">'.$no.'</th>
       <td><img src="' . $value["product_image"] . '"  class="img-fluid product_img" alt="" srcset=""></td>
       <td>' . $value["product_name"] . '</td>
-      <td>' . product_currency_bdt() . $value["product_price"] . '</td>
-      <td><input id="cart_input_qty" type="number" class="input-group form-control" min="1" max="10" value="' . $value["product_qty"] . '"  onchange="multi(' . $product_price_cart . ')"></td>
+      <td>' .product_currency_bdt() . $value["product_price"] . ' <input class="iprice" type = "hidden" value= "'.$value["product_price"].'"></td>
+      <td><input name="iproduct_qty" type="number" class="iqty input-group form-control" min="1" max="10" value="' . $value["product_qty"] . '" onchange="subTotal()"></td>
+      <td class="d-flex"><div>'.product_currency_bdt().'</div><div class="itotal"></div></td>
       <form action="cart_manage.php" method="post">
       <input type = "hidden" value="' . $value["product_name"] . '" name="product_name">
       <td><button type="submit" class="input-group from-control btn btn-danger btn-sm" name="remove_cart">Remove</button></td>
@@ -112,85 +81,66 @@ include("inc/_navbar.php");
     </tr>
  
  ';
-            $no++;
+ $no++;
           }
-
-
+    
+        
 
           ?>
 
-
-
+   
         </tbody>
-
+      
       </table>
-
+    
     </div>
     <div class="col-4 text-center">
       <div class="container border-primary border rounded bg-light pt-3 pb-5">
-        <h2>Total: </h2>
-
+        <h2>Grand Total: </h2>
+        <div class="container d-flex" style="justify-content:center;">
         <?php
-        // $_COOKIE['product_total_price']
-
-        // setcookie("product_total_price", $total, time() - 3600);
-
-        // unset($_COOKIE['product_total_price']);
-        // setcookie('product_qty', null, time() - 60*60*24, "./"); // 
-
-        echo '
-   
-
-          ';
 
 
-        // echo product_currency_bdt() .  $total;
-
-
-
-
-
-
-        ?>
-        <div class="container d-flex" style="justify-content: center;">
-          <div class="icon d-flex">
-            <div class="fs-4"><?php echo product_currency_bdt() ?></div>
-
-          </div>
-          <div class="price d-flex">
-            <div class="fs-4" id="cart_total_price">
-<?php 
-
-echo $total;
-
-
-?>
-            </div>
-          </div>
-
+echo product_currency_bdt() ?>
+        <h4 id="gTotal">
+         
+        </h4>
         </div>
 
 
 
-
-
         <script>
-          // function multi(product_price){
-          //           let cart_input_qty = document.getElementById("cart_input_qty");
+          var gt = 0;
+var iprice =document.getElementsByClassName("iprice");
+var iqty =document.getElementsByClassName("iqty");
+var itotal =document.getElementsByClassName("itotal")
+var gTotal =document.getElementById("gTotal");
 
-          //           let qty_value = cart_input_qty.value;
 
-          //           let price  = product_price;
-          //           let qty = qty_value;
-          //           let total_price = price * qty;
+function subTotal(){
+  gt = 0;
+  for (let i = 0; i < iprice.length; i++) {
+  // const element = array[i];
+itotal[i].innerText = (iprice[i].value) * (iqty[i].value);
+gt = gt + (iprice[i].value) * (iqty[i].value);
+  
+}
 
-          //           document.getElementById("cart_total_price").innerHTML =  total_price;
+gTotal.innerText = gt;
 
-          //         }
+}
+subTotal();
+
+
+
+
+
         </script>
+
+
       </div>
 
-      <a href="checkout.php"><button type="submit" class="btn btn-primary mt-4">Checkout</button></a>
+   <a href="checkout.php"><button type="submit" class="btn btn-primary mt-4" name="checkout">Checkout</button></a>
 
     </div>
   </div>
@@ -198,7 +148,7 @@ echo $total;
 
 
 </div>
-
+</form>
 
 <style>
   .product_img {

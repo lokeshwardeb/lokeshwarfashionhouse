@@ -113,6 +113,34 @@ if ($info_result) {
 
 
 
+// cus users info
+
+$get_cus_username = $_SESSION['cus_username'];
+
+$sql_cus_users = "SELECT * FROM `cus_users` WHERE `cus_username` = '$get_cus_username'";
+
+$result_cus_users = mysqli_query($conn, $sql_cus_users);
+
+if($result_cus_users){
+    if(mysqli_num_rows($result_cus_users) > 0 ){
+while ($row = mysqli_fetch_assoc($result_cus_users)) {
+    $cus_username = $row['cus_username'];
+    $cus_desc = $row['cus_desc'];
+    $cus_email = $row['cus_email'];
+    $cus_phone_no = $row['cus_phone_no'];
+    $cus_photo = $row['cus_photo'];
+    $cus_joined_datatime = $row['cus_joined_datatime'];
+}
+    }
+}
+
+
+
+
+
+
+
+
 // $company_name = $_POST['website_name'] ;
 
 // echo 'the company name is '. $company_name;
