@@ -321,7 +321,10 @@ if (isset($_SESSION['cus_username'])) {
 
     $sl_no = 1;
 
-    $sql_get_ord_details = "SELECT * FROM `order_products` op INNER JOIN products p ON op.product_id = p.product_id  WHERE op.orders_id = '$down_ord_in_order_no'";
+    // $sql_get_ord_details = "SELECT * FROM `order_products` op INNER JOIN products p ON op.product_id = p.product_id  WHERE op.orders_id = '$down_ord_in_order_no'";
+
+    $sql_get_ord_details = "SELECT * FROM `order_products` op INNER JOIN products p ON op.product_id = p.product_id INNER JOIN `orders` o ON op.orders_id = o.order_no WHERE op.orders_id = '$down_ord_in_order_no';";
+
 
     $result_get_ord_details = mysqli_query($conn, $sql_get_ord_details);
 

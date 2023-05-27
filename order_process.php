@@ -152,10 +152,10 @@ $ordering_username = $_SESSION['cus_username'];
                 echo order_placed_error();
             }
       
-           $product_total_price =  $_SESSION['product_total_price'];
-          
+          //  $product_total_price =  $_SESSION['product_total_price'];
+          $grand_total =   $_SESSION['grand_total'];
 
-          $place_order_sql = "INSERT INTO `orders` (`id`, `order_no`, `product_id`, `order_phone_no`, `order_email`,`customer_id_on_order`, `order_est_delivery_datetime`, `order_shipping_address`, `payment_method`, `order_status`,  `total_amount`) VALUES (NULL, '$order_no', '$product_id', '$order_customer_phone_no', '$email', '$customer_id', '$est_delivary_date', '$order_address','cod', 'pending', '$product_total_price');";
+          $place_order_sql = "INSERT INTO `orders` (`id`, `order_no`, `product_id`, `order_phone_no`, `order_email`,`customer_id_on_order`, `order_est_delivery_datetime`, `order_shipping_address`, `payment_method`, `order_status`,  `total_amount`) VALUES (NULL, '$order_no', '$product_id', '$order_customer_phone_no', '$email', '$customer_id', '$est_delivary_date', '$order_address','cod', 'pending', '$grand_total');";
 
             $place_order_result = mysqli_query($conn, $place_order_sql);
 

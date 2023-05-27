@@ -122,13 +122,29 @@ if (!isset($_SESSION['cart'][0])) {
 //  echo 'the val is' . $gvalue;
 // }
 
-for($i = 0; $i< count($_GET['iproduct_qty']); $i ++){
-  echo $i;
-}
+// for($i = 0; $i< count($_GET['iproduct_qty']); $i ++){
+//   echo $i;
+// }
 
 
 ?>
               <?php
+
+               echo '
+               <script>
+               document.cookie = "grand_total=; expires=Thu, 01 Jan 1970 00:00:00 UTC;";
+               </script>
+               
+               ';
+               
+              //  echo $_COOKIE['grand_total'];
+
+            //  echo $_SESSION['grand_total'];
+
+              
+
+// $grand_total = $_COOKIE['grand_total'];
+
 // initializing the product total price into a session variable
 $product_total_price =  $_SESSION['product_total_price'];
 
@@ -139,13 +155,14 @@ $product_total_price =  $_SESSION['product_total_price'];
                 echo '      
                 <li class="list-group-item d-flex justify-content-between lh-sm">
                 <div>
-                <h6 class="my-0 d-flex">' . $value['product_name'] . ' x <span class="text-muted">' .  $_GET['iproduct_qty'] . '</span>
+                <h6 class="my-0 d-flex">' . $value['product_name'] . '<span class="ms-2 text-muted">x</span>   <span class="ms-2 text-muted">' .  $value["product_qty"] . '</span>
                 </h6>
                 <small class="text-muted">' . $value['product_desc'] . '</small>
                 </div>
                 <span class="text-muted">' . product_currency_bdt() . $value['product_price'] . '</span>
               </li>
                 ';
+                // $grand_total_price = $value['']
                 // $total = $total + $value['product_price'];
               }
               
@@ -203,9 +220,12 @@ $product_total_price =  $_SESSION['product_total_price'];
 
                   // echo product_currency_bdt() . $total = $total - $promo_discount ;
                   if ($invalid_promo_code == 1) {
-                    echo product_currency_bdt() . $product_total_price;
+                    // echo product_currency_bdt() . $product_total_price;
+                  $grand_total =   $_SESSION['grand_total'];
+                    echo product_currency_bdt() . $grand_total;
                   } else {
-                    echo product_currency_bdt() . $product_total_price = $product_total_price - $promo_discount;
+                    // echo product_currency_bdt() . $product_total_price = $product_total_price - $promo_discount;
+                    // echo product_currency_bdt() . $product_total_price = $product_total_price - $promo_discount;
                   }
 
 

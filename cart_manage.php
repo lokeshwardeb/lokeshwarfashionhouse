@@ -16,7 +16,7 @@ include("inc/_navbar.php");
 
 
 ?>
-<?php 
+<?php
 // session_destroy();
 if (isset($_POST['add_cart'])) {
   $product_id = $_POST['product_id'];
@@ -29,16 +29,16 @@ if (isset($_POST['add_cart'])) {
 
 
   if (isset($_SESSION['cart'])) {
-// check all the product name if it contains on the cart session
+    // check all the product name if it contains on the cart session
     $myCartItems = array_column($_SESSION['cart'], "product_name");
 
-    if(in_array($_POST['product_name'], $myCartItems)){
-        echo "<script>
+    if (in_array($_POST['product_name'], $myCartItems)) {
+      echo "<script>
 
         alert('item already exist on cart')
         window.location.href = 'index.php'
         </script>";
-    }else{
+    } else {
       $count = count($_SESSION['cart']);
       $_SESSION['cart'][$count] =  array(
         "product_id" => $product_id,
@@ -56,11 +56,10 @@ if (isset($_POST['add_cart'])) {
       </script>
       
       ';
-  
     }
 
- 
- 
+
+
     // session_destroy();
   } else {
     $_SESSION['cart'][0] = array(
@@ -80,8 +79,6 @@ if (isset($_POST['add_cart'])) {
     </script>
     
     ';
-
-
   }
   // session_destroy();
   // print_r($_SESSION['cart']);
@@ -90,25 +87,73 @@ if (isset($_POST['add_cart'])) {
   // echo 'the qtu is array' . $_SESSION['cart']['product_name'];
 }
 
-if(isset($_POST['remove_cart'])){
-foreach ($_SESSION['cart'] as $key => $value) {
-  if($value["product_name"] == $_POST["product_name"]){
-    unset($_SESSION['cart'][$key]);
-    $_SESSION['cart'] = array_values($_SESSION['cart']);
-    echo '<script>
-alert("Item Removed")   
-    window.location.href= "index.php"
-    
-    </script>';
-  }else{
-    echo 'something error';
+if (isset($_POST['remove_cart'])) {
+  foreach ($_SESSION['cart'] as $key => $value) {
+    if ($value["product_name"] == $_POST["product_name"]) {
+      unset($_SESSION['cart'][$key]);
+      $_SESSION['cart'] = array_values($_SESSION['cart']);
+      echo '<script>
+            alert("Item Removed")   
+            window.location.href= "index.php"
+            
+            </script>';
+    } else {
+      echo 'something error';
+    }
   }
 }
+
+// if (isset($_POST['checkout'])) {
+// }
+
+
+
+
+// update cart
+
+if (isset($_POST['update_cart'])) {
+
+  $product_id = $_POST['product_id'];
+  $product_name = $_POST['product_name'];
+  $product_desc = $_POST['product_desc'];
+  $product_price = $_POST['iprice'];
+  $product_qty = $_POST['iproduct_qty'];
+  $itotal = $_POST['itotal'];
+  $product_image = $_POST['product_image'];
+
+
+  foreach ($_SESSION['cart'] as $key => $value) {
+    if ($value["product_name"] == $_POST["product_name"]) {
+      $_SESSION['cart'][$key] = array(
+        "product_id" => $product_id,
+        "product_name" => $product_name,
+        "product_desc" => $product_desc,
+        "product_price" => $product_price,
+        "product_qty" => $product_qty,
+        "itotal" => $itotal,
+        "product_image" => $product_image
+      );
+      // unset($_SESSION['cart'][$key]);
+      // $_SESSION['cart'] = array_values($_SESSION['cart']);
+      echo '<script>
+            alert("Carts Item Updated Successfully !")   
+            window.location.href= "cart.php"
+            
+            </script>';
+    } else {
+      echo 'something error';
+    }
+  }
 }
 
-if(isset($_POST['checkout'])){
 
-}
+
+
+
+
+
+
+
 // displaying the value
 
 
@@ -128,7 +173,7 @@ if(isset($_POST['checkout'])){
 </main>
 <!-- the main content ends here -->
 
-<?php 
+<?php
 // include("cart.php");
 include("inc/_footer.php");
 

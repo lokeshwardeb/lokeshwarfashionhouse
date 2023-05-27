@@ -16,7 +16,7 @@ include("inc/_navbar.php");
 
 
 ?>
-<form action="checkout.php" method="get">
+<!-- <form action="checkout.php" method="get"> -->
 <div class="container-fluid pt-4 pb-5 mb-5">
   <div class="row">
     <div class="col-8">
@@ -30,11 +30,62 @@ include("inc/_navbar.php");
         echo 'd-none';
 
       }
+
+      
+// echo "
+// <script>
+// // JavaScript anonymous function
+// (() => {
+//     if (window.localStorage) {
+
+//         // If there is no item as 'reload'
+//         // in localstorage then create one &
+//         // reload the page
+//         if (!localStorage.getItem('reload')) {
+//             localStorage['reload'] = true;
+//             window.location.reload();
+//         } else {
+
+//             // If there exists a 'reload' item
+//             // then clear the 'reload' item in
+//             // local storage
+//             localStorage.removeItem('reload');
+//         }
+//     }
+// })(); // Calling anonymous function here only
+
+// </script>";
       
       
       ?>">
         <thead>
           <tr>
+               <script>
+
+
+
+                // window.onload
+    //             const reloadUsingLocationHash = () => {
+    //   window.location.hash = "reload";
+    // }
+    // window.onload = reloadUsingLocationHash();
+
+    // for (let i = 0; i < 4; i++) {
+    //   // const element = array[i];
+    //   window.location();
+      
+    // }
+
+
+    // window.onload = function () {window.location.reload()}
+
+
+               </script>
+            <?php
+            //  echo $_COOKIE['grand_total']; 
+             
+             ?>
+             <div class="text-danger text-center mb-4 ">*NOTE: Please click on update cart button each time you changes the cart items quantity</div>
             <th scope="col">#</th>
             <th scope="col"></th>
             <th scope="col">Products</th>
@@ -60,7 +111,16 @@ if(count($_SESSION['cart']) == 0){
           
 
           // displaying the cart items
-  
+  ?>
+
+<!-- <form action="checkout" method="post"> -->
+
+
+<?php
+
+$_SESSION['cart_qty'][0] = array(
+  "product_qty" => $product_qty,
+);
        
             $no = 1;
           foreach ($_SESSION['cart'] as $key => $value) {
@@ -71,10 +131,14 @@ if(count($_SESSION['cart']) == 0){
       <td><img src="' . $value["product_image"] . '"  class="img-fluid product_img" alt="" srcset=""></td>
       <td>' . $value["product_name"] . '</td>
       <td>' .product_currency_bdt() . $value["product_price"] . ' <input class="iprice" type = "hidden" value= "'.$value["product_price"].'"></td>
-      <td><input name="iproduct_qty" type="number" class="iqty input-group form-control" min="1" max="10" value="' . $value["product_qty"] . '" onchange="subTotal()"></td>
-      <td class="d-flex"><div>'.product_currency_bdt().'</div><div class="itotal"></div></td>
       <form action="cart_manage.php" method="post">
+      <td><input name="iproduct_qty" type="number" class="iqty input-group form-control" min="1" max="10" value="' . $value["product_qty"] . '" onchange="subTotal()"></td>
+      <td class="d-flex"><div>'.product_currency_bdt().'</div><div class="itotal" name="itotal"></div></td>
+      
+      <input type = "hidden" value="' . $value["product_id"] . '" name="product_id">
       <input type = "hidden" value="' . $value["product_name"] . '" name="product_name">
+      <input class="idprice" name="iprice" type = "hidden" value= "'.$value["product_price"].'">
+      <td><button type="submit" class="input-group from-control btn btn-dark btn-sm" name="update_cart">Update cart</button></td>
       <td><button type="submit" class="input-group from-control btn btn-danger btn-sm" name="remove_cart">Remove</button></td>
 
       </form>
@@ -88,7 +152,7 @@ if(count($_SESSION['cart']) == 0){
 
           ?>
 
-   
+<!-- </form> -->
         </tbody>
       
       </table>
@@ -99,8 +163,91 @@ if(count($_SESSION['cart']) == 0){
         <h2>Grand Total: </h2>
         <div class="container d-flex" style="justify-content:center;">
         <?php
+ $grand_total_cookie = $_COOKIE['grand_total'];
+if(isset($_COOKIE['grand_total'])){
+$_SESSION['grand_total'] = $_COOKIE['grand_total'];
+// echo 'cookie set';
+// echo "
+// <script>
+// // JavaScript anonymous function
+// (() => {
+//     if (window.localStorage) {
 
+//         // If there is no item as 'reload'
+//         // in localstorage then create one &
+//         // reload the page
+//         if (!localStorage.getItem('reload')) {
+//             localStorage['reload'] = true;
+//             window.location.reload();
+//         } else {
 
+//             // If there exists a 'reload' item
+//             // then clear the 'reload' item in
+//             // local storage
+//             localStorage.removeItem('reload');
+//         }
+//     }
+// })(); // Calling anonymous function here only
+
+// </script>";
+  
+}else{
+  echo '
+  <script>
+  // location.reload();
+  </script>
+  
+  ';
+
+  // echo "
+  // <script>
+  // // JavaScript anonymous function
+  // (() => {
+  //     if (window.localStorage) {
+
+  //         // If there is no item as 'reload'
+  //         // in localstorage then create one &
+  //         // reload the page
+  //         if (!localStorage.getItem('reload')) {
+  //             localStorage['reload'] = true;
+  //             window.location.reload();
+  //         } else {
+
+  //             // If there exists a 'reload' item
+  //             // then clear the 'reload' item in
+  //             // local storage
+  //             localStorage.removeItem('reload');
+  //         }
+  //     }
+  // })(); // Calling anonymous function here only
+
+  // </script>";
+  echo 'not set cookie';
+}
+
+// echo "
+// <script>
+// // JavaScript anonymous function
+// (() => {
+//     if (window.localStorage) {
+
+//         // If there is no item as 'reload'
+//         // in localstorage then create one &
+//         // reload the page
+//         if (!localStorage.getItem('reload')) {
+//             localStorage['reload'] = true;
+//             window.location.reload();
+//         } else {
+
+//             // If there exists a 'reload' item
+//             // then clear the 'reload' item in
+//             // local storage
+//             localStorage.removeItem('reload');
+//         }
+//     }
+// })(); // Calling anonymous function here only
+
+// </script>";
 echo product_currency_bdt() ?>
         <h4 id="gTotal">
          
@@ -115,6 +262,13 @@ var iprice =document.getElementsByClassName("iprice");
 var iqty =document.getElementsByClassName("iqty");
 var itotal =document.getElementsByClassName("itotal")
 var gTotal =document.getElementById("gTotal");
+// var gt = 
+// if(getCookie("grand_total") == ''){
+//  gt =  gTotal.value;
+//  gTotal.innerText
+// document.cookie = `grand_total=${gt}`;
+// }
+// getCookie("grand_total")
 
 
 function subTotal(){
@@ -127,6 +281,26 @@ gt = gt + (iprice[i].value) * (iqty[i].value);
 }
 
 gTotal.innerText = gt;
+document.cookie = `grand_total=${gt}`;
+// JavaScript anonymous function
+(() => {
+    if (window.localStorage) {
+
+        // If there is no item as 'reload'
+        // in localstorage then create one &
+        // reload the page
+        if (!localStorage.getItem('reload')) {
+            localStorage['reload'] = true;
+            window.location.reload();
+        } else {
+
+            // If there exists a 'reload' item
+            // then clear the 'reload' item in
+            // local storage
+            localStorage.removeItem('reload');
+        }
+    }
+})(); // Calling anonymous function here only
 
 }
 subTotal();
@@ -148,7 +322,7 @@ subTotal();
 
 
 </div>
-</form>
+<!-- </form> -->
 
 <style>
   .product_img {
