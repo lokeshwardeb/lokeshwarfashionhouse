@@ -19,6 +19,7 @@ include "_company_info.php";
   <meta name="description" content="">
   <meta name="author" content="<?php echo $aurthors_name ?>">
   <meta name="generator" content="Hugo 0.88.1">
+  <meta name="keywords" content="<?php echo $website_name . ', ' . $keywords ?>">
   <!-- <meta property="og:site_name" content="WordPress.org" /> -->
   <title><?php echo $website_name ?> -- <?php echo ucwords($active_class);?> || <?php echo ucwords($website_slogan);?></title>
 

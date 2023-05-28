@@ -56,6 +56,7 @@ if (!isset($_SESSION['username'])) {
                     $promo_code_discount_show = $row['promo_code_discount'];
                     $product_status = $row['product_status'];
                     $product_featured_status = $row['make_as_featured'];
+                    $product_keywords = $row['product_keywords'];
                     $product_added_datetime = $row['product_added_datetime'];
                 }
 
@@ -74,6 +75,8 @@ if (!isset($_SESSION['username'])) {
 
                     $promo_code_discount = htmlspecialchars(mysqli_real_escape_string($conn, $_POST['promo_code_discount']), ENT_QUOTES);
                     $custom_promo_code_input = htmlspecialchars(mysqli_real_escape_string($conn, $_POST['custom_promo_code_input']), ENT_QUOTES);
+        $product_keywords = htmlspecialchars(mysqli_real_escape_string($conn, $_POST['product_keywords']), ENT_QUOTES);
+
 
 
 $not_photo_uploaded = 0;
@@ -172,7 +175,7 @@ $not_photo_uploaded = 0;
 
 
 
-                                    $sql_wp_up = "UPDATE `products` SET `product_name` = '$product_name', `product_desc` = '$product_description', `product_price` = '$product_price', `product_status` = '$product_status', `make_as_featured` = 'featured_product' WHERE `products`.`product_id` = '$product_id'";
+                                    $sql_wp_up = "UPDATE `products` SET `product_name` = '$product_name', `product_desc` = '$product_description', `product_price` = '$product_price', `product_status` = '$product_status', `make_as_featured` = 'featured_product', `product_keywords` = '$product_keywords' WHERE `products`.`product_id` = '$product_id'";
                                     // $result = mysqli_query($conn, $sql);
                                     $result_wp_up = mysqli_query($conn, $sql_wp_up);
                                     if ($result_wp_up) {
@@ -187,7 +190,7 @@ $not_photo_uploaded = 0;
                                 elseif ($img_name !== '') {
                                     // if the database is not empty then update the table with the new data
                                     if($not_photo_uploaded == 0){
-                                        $sql_p_up = "UPDATE `products` SET `product_name` = '$product_name', `product_desc` = '$product_description',`product_img` = '$img_name', `product_price` = '$product_price', `product_status` = '$product_status', `make_as_featured` = 'featured_product' WHERE `products`.`product_id` = '$product_id'";
+                                        $sql_p_up = "UPDATE `products` SET `product_name` = '$product_name', `product_desc` = '$product_description',`product_img` = '$img_name', `product_price` = '$product_price', `product_status` = '$product_status', `make_as_featured` = 'featured_product', `product_keywords` = '$product_keywords' WHERE `products`.`product_id` = '$product_id'";
                                         $result_u_wp = mysqli_query($conn, $sql_p_up);
     
                                         // $result = mysqli_query($conn, $sql);
@@ -209,7 +212,7 @@ $not_photo_uploaded = 0;
 
 
 
-                                    $sql_wp_up = "UPDATE `products` SET `product_name` = '$product_name', `product_desc` = '$product_description', `product_price` = '$product_price', `product_status` = '$product_status',`make_as_featured` = 'not_featured_product' WHERE `products`.`product_id` = '$product_id'";
+                                    $sql_wp_up = "UPDATE `products` SET `product_name` = '$product_name', `product_desc` = '$product_description', `product_price` = '$product_price', `product_status` = '$product_status',`make_as_featured` = 'not_featured_product', `product_keywords` = '$product_keywords' WHERE `products`.`product_id` = '$product_id'";
                                     // $result = mysqli_query($conn, $sql);
                                     $result_wp_up = mysqli_query($conn, $sql_wp_up);
                                     if ($result_wp_up) {
@@ -224,7 +227,7 @@ $not_photo_uploaded = 0;
                                 elseif ($img_name !== '') {
                                     // if the database is not empty then update the table with the new data
                                     if($not_photo_uploaded == 0){
-                                    $sql_p_up = "UPDATE `products` SET `product_name` = '$product_name', `product_desc` = '$product_description',`product_img` = '$img_name', `product_price` = '$product_price', `product_status` = '$product_status',`make_as_featured` = 'not_featured_product' WHERE `products`.`product_id` = '$product_id'";
+                                    $sql_p_up = "UPDATE `products` SET `product_name` = '$product_name', `product_desc` = '$product_description',`product_img` = '$img_name', `product_price` = '$product_price', `product_status` = '$product_status',`make_as_featured` = 'not_featured_product', `product_keywords` = '$product_keywords' WHERE `products`.`product_id` = '$product_id'";
                                     $result_u_wp = mysqli_query($conn, $sql_p_up);
 
                                     // $result = mysqli_query($conn, $sql);
@@ -306,7 +309,7 @@ $not_photo_uploaded = 0;
 
 
 
-                                    $sql = "INSERT INTO `products` (`product_name`, `product_desc`, `product_price`, `product_status`, `make_as_featured, `product_added_datetime`) VALUES ('$product_name', '$product_description', '$product_price', '$product_status', 'not_featured_products',current_timestamp());";
+                                    $sql = "INSERT INTO `products` (`product_name`, `product_desc`, `product_price`, `product_status`, `make_as_featured,`product_keywords`, `product_added_datetime`) VALUES ('$product_name', '$product_description', '$product_price', '$product_status', 'not_featured_products', '$product_keywords' current_timestamp());";
                                     // $result = mysqli_query($conn, $sql);
                                     $result = mysqli_query($conn, $sql);
                                     if ($result) {
@@ -321,7 +324,7 @@ $not_photo_uploaded = 0;
                                 elseif ($product_photo !== '') {
                                     // if the database is not empty then update the table with the new data
                                     if($not_photo_uploaded == 0){
-                                    $sql = "INSERT INTO `products` (`product_name`, `product_desc`, `product_img`, `product_price`, `product_status`, `product_added_datetime`) VALUES ('$product_name', '$product_description', '$img_name', '$product_price', '$product_status', current_timestamp());";
+                                    $sql = "INSERT INTO `products` (`product_name`, `product_desc`, `product_img`, `product_price`, `product_status`, `product_keywords`, `product_added_datetime`) VALUES ('$product_name', '$product_description', '$img_name', '$product_price', '$product_status', '$product_keywords', current_timestamp());";
                                     $result = mysqli_query($conn, $sql);
 
                                     // $result = mysqli_query($conn, $sql);
@@ -376,6 +379,7 @@ $not_photo_uploaded = 0;
     Product Description: ' . $product_desc . ' <br>
     Product Price: ' . $product_price . ' <br>
     Product Promo Code: ' . $promo_code . ' <br>
+    Product Keywords: ' . $product_keywords . ' <br>
     
    <div class = ""> Product Status: '; ?><span class="<?php
                                                         if ($product_status == "In-stock") {
@@ -459,6 +463,9 @@ $not_photo_uploaded = 0;
                                     <div class="form-text">Example help text goes outside the input group.</div>
 
                                 </div>
+        
+
+                      
 
 
 
@@ -593,6 +600,19 @@ $not_photo_uploaded = 0;
 
                                     </div>
                                     <div class="form-text">Example help text goes outside the input group.</div>
+                                </div>
+
+
+
+                                <div class="mb-3">
+                                    <label for="basic-url" class="form-label">Product Keywords</label>
+                                    <div class="input-group">
+                                        <input type="hidden" value="">
+                                        <span class="input-group-text" id="basic-addon3">@</span>
+                                        <input type="text" class="form-control" placeholder="Product Keywords" id="basic-url" aria-describedby="basic-addon3" name="product_keywords" value="<?php echo $product_keywords; ?>" required>
+                                    </div>
+                                    <div class="form-text">Use comma (,) after adding each Keywords.</div>
+
                                 </div>
 
 

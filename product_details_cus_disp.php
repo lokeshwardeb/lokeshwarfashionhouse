@@ -1,6 +1,34 @@
 <?php
 include "inc/conn.php";
 $active_class = 'products';
+$get_id = htmlspecialchars(mysqli_real_escape_string($conn, $_GET['id']), ENT_QUOTES);
+// echo $get_id;
+
+
+$sql_product_keywords = "SELECT * FROM `products` WHERE `product_id` = '$get_id'";
+$result_product_keywords = mysqli_query($conn, $sql_product_keywords);
+if ($result_product_keywords) {
+    if (mysqli_num_rows($result_product_keywords) > 0) {
+        while ($row = mysqli_fetch_assoc($result_product_keywords)) {
+            $product_id = $row['product_id'];
+            $product_name = $row['product_name'];
+            $product_desc = $row['product_desc'];
+            $product_img = $row['product_img'];
+            $product_price = $row['product_price'];
+            $product_status = $row['product_status'];
+            $product_featured_status = $row['make_as_featured'];
+            $product_keywords = $row['product_keywords'];
+            $product_added_datetime = $row['product_added_datetime'];
+        }
+    }
+}
+// $sql_product_keywords = "";
+// $result_product_keywords = "";
+
+
+$keywords = $product_keywords;
+
+
 include "inc/_header.php";
 // include("inc/functions.php");
 require_once("inc/functions.php");

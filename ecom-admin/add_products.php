@@ -85,9 +85,12 @@ if(!isset($_SESSION['username'])){
     //   to save the information from the settings
     if (isset($_POST['save_changes'])) {
         // $id = $row['id'];
+
         $product_name = htmlspecialchars(mysqli_real_escape_string($conn,  $_POST['product_name']), ENT_QUOTES) ;
         $product_description = htmlspecialchars(mysqli_real_escape_string($conn, $_POST['product_description']), ENT_QUOTES) ;
         $product_price = htmlspecialchars(mysqli_real_escape_string($conn, $_POST['product_price']), ENT_QUOTES)  ;
+
+        $product_keywords = htmlspecialchars(mysqli_real_escape_string($conn, $_POST['product_keywords']), ENT_QUOTES);
 
         
 
@@ -143,7 +146,7 @@ if(!isset($_SESSION['username'])){
 
 
 
-                    $sql = "INSERT INTO `products` (`product_name`, `product_desc`, `product_price`, `product_status`, `product_added_datetime`) VALUES ('$product_name', '$product_description', '$product_price', '$product_status', current_timestamp());";
+                    $sql = "INSERT INTO `products` (`product_name`, `product_desc`, `product_price`, `product_status`, `product_keywords`, `product_added_datetime`) VALUES ('$product_name', '$product_description', '$product_price', '$product_status', '$product_keywords', current_timestamp());";
                     // $result = mysqli_query($conn, $sql);
                     $result = mysqli_query($conn, $sql);
                     if ($result) {
@@ -159,7 +162,7 @@ if(!isset($_SESSION['username'])){
                     // if the database is not empty then update the table with the new data
                         
                     if($not_photo_uploaded == 0){
-                        $sql = "INSERT INTO `products` (`product_name`, `product_desc`, `product_img`, `product_price`, `product_status`, `product_added_datetime`) VALUES ('$product_name', '$product_description', '$img_name', '$product_price', '$product_status', current_timestamp());";
+                        $sql = "INSERT INTO `products` (`product_name`, `product_desc`, `product_img`, `product_price`, `product_status`, `product_keywords`, `product_added_datetime`) VALUES ('$product_name', '$product_description', '$img_name', '$product_price', '$product_status', '$product_keywords', current_timestamp());";
                         $result = mysqli_query($conn, $sql);
     
                         // $result = mysqli_query($conn, $sql);
@@ -205,7 +208,7 @@ if(!isset($_SESSION['username'])){
 
 
 
-                    $sql = "INSERT INTO `products` (`product_name`, `product_desc`, `product_price`, `product_status`, `product_added_datetime`) VALUES ('$product_name', '$product_description', '$product_price', '$product_status', current_timestamp());";
+                    $sql = "INSERT INTO `products` (`product_name`, `product_desc`, `product_price`, `product_status`, `product_keywords`, `product_added_datetime`) VALUES ('$product_name', '$product_description', '$product_price', '$product_status', '$product_keywords', current_timestamp());";
                     // $result = mysqli_query($conn, $sql);
                     $result = mysqli_query($conn, $sql);
                     if ($result) {
@@ -219,7 +222,7 @@ if(!isset($_SESSION['username'])){
 
                 elseif ($img_name !== '') {
                     // if the database is not empty then update the table with the new data
-                    $sql = "INSERT INTO `products` (`product_name`, `product_desc`, `product_img`, `product_price`, `product_status`, `product_added_datetime`) VALUES ('$product_name', '$product_description', '$img_name', '$product_price', '$product_status', current_timestamp());";
+                    $sql = "INSERT INTO `products` (`product_name`, `product_desc`, `product_img`, `product_price`, `product_status`, `product_keywords`, `product_added_datetime`) VALUES ('$product_name', '$product_description', '$img_name', '$product_price', '$product_status', '$product_keywords', current_timestamp());";
                     $result = mysqli_query($conn, $sql);
 
                     // $result = mysqli_query($conn, $sql);
@@ -268,6 +271,7 @@ if($result){
             <div class="form-text">Example help text goes outside the input group.</div>
 
         </div>
+       
 
 
 
@@ -314,7 +318,17 @@ if($result){
             <div class="form-text">Example help text goes outside the input group.</div>
         </div>
 
-        
+        <div class="mb-3">
+            <label for="basic-url" class="form-label">Product Keywords</label>
+            <div class="input-group">
+                <input type="hidden" value="">
+                <span class="input-group-text" id="basic-addon3">@</span>
+                <input type="text" class="form-control" placeholder="Product Keywords" id="basic-url" aria-describedby="basic-addon3" name="product_keywords" value="" required>
+            </div>
+            <div class="form-text">Use comma (,) after adding each Keywords.</div>
+
+
+        </div>
         
         
 
