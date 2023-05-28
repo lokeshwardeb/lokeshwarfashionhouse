@@ -38,17 +38,6 @@ include "inc/_navbar.php";
 
 ?>
 
-<style>
-    img{
-        max-height: 521px;
-    max-width: 520px;
-    justify-content: center;
-    /* margin: 55px; */
-    padding: auto;
-    margin-left: 96px;
-    }
-</style>
-
 <div class="container full-width title_bar mt-4">
     <?php
 
