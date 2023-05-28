@@ -2,7 +2,8 @@
 include "inc/conn.php";
 $active_class = 'products';
 include "inc/_header.php";
-include("inc/functions.php");
+// include("inc/functions.php");
+require_once("inc/functions.php");
 
 
 include "inc/_navbar.php";
