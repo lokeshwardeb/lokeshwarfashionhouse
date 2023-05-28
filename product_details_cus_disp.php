@@ -212,11 +212,11 @@ display: block !important;
 
 
 
-                        <div class="container" id="product_qty_main">
+                        <!-- <div class="container" id="product_qty_main">
                             <div class="box ms-2 ps-5 d-flex">
                                 <label for="name"></label>
                                 <button class="dec button pe-4 btn">-</button>
-                                <input type="text" name="qty" id="1" value="1" class="numInp">
+                                <input type="text" name="product_qty" id="1" value="1" class="numInp">
                                 <button class="inc button ps-4 btn">+</button>
                             </div>
                             <div class="price d-inline-flex">
@@ -228,7 +228,7 @@ display: block !important;
                                     <?php echo $product_price ?>
                                 </div>
                             </div><br>
-                        </div>
+                        </div> -->
 
 
 
@@ -351,7 +351,26 @@ var lences = document.getElementById("lences")
                 </script>
 
                 <form action="cart_manage.php" method="post">
+                <div class="container" id="product_qty_main">
+                            <div class="box ms-2 ps-5 d-flex">
+                                <label for="name"></label>
+                                <input type="button" class="dec button pe-4 btn" value="-"></input>
+                                <input type="text" name="product_qty" id="1" value="1" class="numInp">
+                                <input type="button" class="inc button ps-4 btn" value="+"></input>
+                            </div>
+                            <div class="price d-inline-flex">
+                                <div class="price_symbol">
+
+                                    <?php echo product_currency_bdt(); ?>
+                                </div>
+                                <div class="price_amount" name="product-price">
+                                    <?php echo $product_price ?>
+                                </div>
+                            </div><br>
+                        </div>
+
                     <div class="price-button d-inline-flex mb-5 pb-5">
+                        
                         <?php
 
                         echo '    <input type = "hidden" value="' . $product_name . '" name="product_name">
