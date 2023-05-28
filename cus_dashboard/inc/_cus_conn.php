@@ -12,6 +12,15 @@
   
 $conn = mysqli_connect($db_hostname, $db_username, $db_password, $database);
 
+
+// for initializing the utf8 and the bangla font language support on mysql database
+mysqli_query($conn, "SET CHARACTER SET utf8");
+mysqli_query($conn, "SET SESSION collation_connection ='utf8_general_ci'");
+
+
+
+
+
 if($conn){
     // echo 'connected with the database';
 }
