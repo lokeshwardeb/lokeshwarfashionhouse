@@ -67,7 +67,7 @@ include "inc/_navbar.php";
     Product Id: ' . $product_id . ' <br>
     Product Name : ' . $product_name . ' <br>
     Product Description: ' . $product_desc . ' <br>
-    Product Price: ' . $product_price . ' <br>
+    Product Price: ' . product_currency_bdt() .  $product_price . ' <br>
     <input type = "hidden" value="' . $row["product_name"] . '" name="product_name">
     <input type = "hidden" value="' . $row['product_price'] . '" name="product_price">
  
