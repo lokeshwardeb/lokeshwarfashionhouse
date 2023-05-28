@@ -208,6 +208,15 @@ background: url("<?php echo  PRODUCT_INFO_PATH . $product_img  ?>") !important;
 display: block !important;
 
 } */
+
+
+img{
+    max-width: 600px;
+    max-height: 500px;
+}
+
+
+
                         </style>
 
 
