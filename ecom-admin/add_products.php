@@ -7,16 +7,22 @@ include "inc/_navbar.php";
 // session_start();
 
 if(!isset($_SESSION['username'])){
+    // header("location: index.php");
+    echo '
+    <script>
+    window.location.href = "login.php";
+    </script>
+    ';
     header("location: index.php");
     die('<div class="alert alert-danger alert-dismissible fade show" role="alert">
-    <strong>Error !</strong> You should login so that you can access the page .
+    <strong>Error !</strong> You should login so that you can access the pagesssdf .
     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
   </div>') ;
   
     // exit;
   
   }
-  elseif(isset($_SESSION['username'])){
+  if(isset($_SESSION['username'])){
     
     
 

@@ -3,6 +3,11 @@ include "inc/conn.php";
 $active_class = 'newsletter';
 include "inc/_header.php";
 if(!isset($_SESSION['username'])){
+  echo '
+  <script>
+  window.location.href = "login.php";
+  </script>
+  ';
   header("location: index.php");
   die('<div class="alert alert-danger alert-dismissible fade show" role="alert">
   <strong>Error !</strong> You should login so that you can access the page .
