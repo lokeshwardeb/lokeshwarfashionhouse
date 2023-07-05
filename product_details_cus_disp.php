@@ -86,7 +86,7 @@ include "inc/_navbar.php";
             echo '
        
 <div class="row">
-<div class="col-6">
+<div class="col-md-12 col-lg-6">
 <a href = "shop.php" class="mb-4"><button class = "btn btn-primary mb-4">Go to products</button></a><br>
 
 <div id="hover_box" class=""></div>
@@ -137,7 +137,7 @@ include "inc/_navbar.php";
 
 
 </div>
-<div class="col-6 " id="product">
+<div class="col-md-12 col-lg-6 " id="product">
 <div class="main" id="disp_main_img">
     <span  id="lences"></span>
 <img src="' . PRODUCT_INFO_PATH . '' . $product_img . '" width="100%!important" height="100%!important" alt="" srcset="" class="product_img_cus_disp">
@@ -401,7 +401,7 @@ var lences = document.getElementById("lences")
 
 
 
-</div>';
+</div>
 
 </div>
 
