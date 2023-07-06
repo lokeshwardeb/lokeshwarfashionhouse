@@ -25,8 +25,41 @@ include "cus_dashboard/inc/_cus_navbar.php";
 
 
 <body>
+
+<?php 
+
+if($active_class == 'checkout'){
+    
+echo '
+<div  class="loading">
+
+<div id="preloader" class="text-center pt-5 fs-4">
+Please wait and do not close the window while we are processing...
+</div>
+
+</div>
+
+
+';
+
+}else{
+
+echo '
+<div id="preloader"></div>
+
+';
+}
+
+
+
+?>
+   
+
+
+
+
   <!-- the main content starts here -->
-  <div id="preloader"></div>
+  <!-- <div id="preloader"></div> -->
   <main>
     
     <!-- navbar starts here -->
