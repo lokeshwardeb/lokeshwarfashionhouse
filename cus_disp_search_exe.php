@@ -57,7 +57,7 @@ include("inc/const.php");
   include "inc/_search.php"; ?>
   <div class="orders">
     <div class="row">
-      <div class="col-4 ">
+      <div class="col-md-12 col-lg-4 ">
 
 
 
@@ -189,7 +189,7 @@ $search = htmlspecialchars(mysqli_real_escape_string($conn, $_GET['search_text']
           <div class="row  cus-d-block">';
         $no = 1;
         while ($row = mysqli_fetch_assoc($result)) {
-          echo  '<div class="col-4 products-col mb-4 p-3 custom-bg-light">
+          echo  '<div class="col-md-12 col-lg-4 products-col mb-4 p-3 custom-bg-light">
           <div class="product-info">
             <a href="product_details_cus_disp.php?id='.$row['product_id'].'" class="nav-link">
               <div class="p-img">

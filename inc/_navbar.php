@@ -12,16 +12,27 @@ include "cus_dashboard/inc/_cus_navbar.php";
     -webkit-user-select: none;
     user-select: none;
   }
+
+  #preloader{
+    background: #ddd url(img/preloader_un.gif) no-repeat center center;
+    height: 100vh !important;
+    width: 100vw !important;
+    position: fixed !important;
+    z-index: 100 !important;
+}
+
 </style>
 
 
 <body>
   <!-- the main content starts here -->
+  <div id="preloader"></div>
   <main>
+    
     <!-- navbar starts here -->
     <div class=" ">
       <!-- <h1>Hello, world!</h1> -->
-      <nav class="container-fluid navbar  navbar-expand-lg custom-navbar-bg customr-user-select-none">
+      <nav class="container-fluid navbar d-print-none navbar-dark  navbar-expand-lg custom-navbar-bg customr-user-select-none">
         <div class="container-fluid">
           <a class="navbar-brand custom-light" href="./"><?php
           echo $website_name;
@@ -55,7 +66,7 @@ include "cus_dashboard/inc/_cus_navbar.php";
               </li> -->
               <li class="nav-item">
               </li>
-              <a class="nav-link custom-light m-auto me-4" href="login.php">Login/Signup</a>
+              <a class="nav-link custom-light text-center " href="login.php">Login/Signup</a>
 
               <li class="nav-item">
                 <a class="nav-link custom-light m-auto me-4" href="#">Contract Us</a>
@@ -78,7 +89,7 @@ include "cus_dashboard/inc/_cus_navbar.php";
               <!-- search button model ends here -->
               <!-- buy now button in navbar starts here -->
              
-              <form class="d-flex" role="search">
+              <form class="d-flex cus-col-mt" role="search">
 
               <a href="shop.php">  <button class="btn btn-dark" type="button">Buy now</button></a>
               </form>

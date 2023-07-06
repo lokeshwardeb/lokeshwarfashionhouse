@@ -60,7 +60,7 @@ if ($featured_product_result) {
 
 <div class="container hero-area mt-1 hero-area-canvas-bg">
   <div class="row hero-area-canvas-bg">
-    <div class="col-8">
+    <div class="col-md-12 col-lg-6">
       <div class="hero-text ">
 <?php 
       $hero_aria_sql = "SELECT * FROM `page_settings`";
@@ -90,14 +90,14 @@ if ($featured_product_result) {
       </div> 
       </div>
     </div>
-    <div class="col-4">
+    <div class="col-md-12 col-lg-6">
       <div class="img">
         <img src="<?php echo SITE_URL . 'ecom-admin/uploaded_img/hero_photo_upload/' . $hero_aria_offer_title_photo ?>" height="200px!important" style="max-height: 500px !important;" class="img-fluid">
       </div>
     </div>
   </div>
-  <div class="row hero-area-canvas-bg mb-4 pb-4">
-    <div class="col-2 hero-area-canvas-bg float-s">
+  <div class="row hero-area-canvas-bg container ms-4 mt-5 mb-4 pb-4">
+    <div class="col-2 hero-area-canvas-bg container float-s">
       <form class="d-flex float-end hero-shop-btn" role="search">
 
         <button class="btn btn-dark" type="submit">Shop</button>
@@ -122,7 +122,7 @@ if ($featured_product_result) {
     Featured Products
   </div>
 
-  <div class="f-products-section ">
+  <div class="f-products-section container ">
     <div class="row  cus-d-block ">
       <?php
 
@@ -137,7 +137,7 @@ if ($featured_product_result) {
       if ($featured_product_result) {
         if (mysqli_num_rows($featured_product_result)) {
           while ($row = mysqli_fetch_assoc($featured_product_result)) {
-            echo '<div class="col-4 products-col mb-4 p-3 custom-bg-light">
+            echo '<div class="col-md-12 col-lg-4 products-col mb-4 p-3 custom-bg-light">
               <form action="cart_manage.php" method="post" >
                 <div class="product-info">
                   <a href="product_details_cus_disp.php?id=' . $row['product_id'] . '" class="nav-link">
@@ -147,7 +147,7 @@ if ($featured_product_result) {
 
                       <input type = "hidden" value="' . $row["product_id"] . '" name="product_id">
                       <input type = "hidden" value="' . $row["product_name"] . '" name="product_name">
-                      <div class="p-title d-block mt-2 mb-3 ms-4 product-title"  id="pro-name">
+                      <div class="p-title d-block mt-4 mb-3 ms-4 product-title"  id="pro-name">
                        ' . $row['product_name'] . '
                       </div>
 
@@ -180,7 +180,7 @@ if ($featured_product_result) {
                       <button type="submit" class="btn btn-outline-dark btn-sm-md" name="add_cart">Add to cart</button>
                     </div>
                     <div class="buy-button">
-                      <button type="submit" class="btn btn-dark btn-md-sm">Buy now</button>
+                      <button type="submit" class="btn btn-dark btn-md-sm" name="add_cart">Buy now</button>
                     </div>
                   </div>
               </form>
@@ -254,7 +254,7 @@ if ($featured_product_result) {
     Products
   </div>
 
-  <div class="f-products-section">
+  <div class="f-products-section container">
     <div class="row  cus-d-block">
       <?php
 
@@ -267,7 +267,7 @@ if ($featured_product_result) {
       if ($all_product_result) {
         if (mysqli_num_rows($all_product_result)) {
           while ($row = mysqli_fetch_assoc($all_product_result)) {
-            echo '<div class="col-4 products-col mb-4 p-3 custom-bg-light">
+            echo '<div class="col-md-12 col-lg-4 products-col mb-4 p-3 custom-bg-light">
             <form action="cart_manage.php" method="post" >
               <div class="product-info">
                 <a href="product_details_cus_disp.php?id=' . $row['product_id'] . '" class="nav-link">
@@ -278,7 +278,7 @@ if ($featured_product_result) {
                     <input type = "hidden" value="' . $row["product_id"] . '" name="product_id">
 
                     <input type = "hidden" value="' . $row["product_name"] . '" name="product_name">
-                    <div class="p-title d-block mt-2 mb-3 ms-4 product-title"  id="pro-name">
+                    <div class="p-title d-block mt-4 mb-3 ms-4 product-title"  id="pro-name">
                      ' . $row['product_name'] . '
                     </div>
 
@@ -311,7 +311,7 @@ if ($featured_product_result) {
                     <button type="submit" class="btn btn-outline-dark btn-sm-md" name="add_cart">Add to cart</button>
                   </div>
                   <div class="buy-button">
-                    <button type="submit" class="btn btn-dark btn-md-sm">Buy now</button>
+                    <button type="submit" class="btn btn-dark btn-md-sm" name="add_cart">Buy now</button>
                   </div>
                 </div>
             </form>
@@ -502,13 +502,13 @@ if(isset($_POST['subscribe_btn'])){
 
 <div class="container newsletter-section mb-5 pb-4 mt-4">
   <div class="row">
-    <div class="col-6">
+    <div class="col-md-12 col-lg-6">
       <div class="newsletter-text mt-5 fw-normal">
         Please subscribe our newsletter to get all the updates of the newest arrivals.
         All the offers and the lattest products updates are available on our newsletter.
       </div>
     </div>
-    <div class="col-6">
+    <div class="col-md-12 col-lg-6">
       <form action="<?php $_SERVER['PHP_SELF'] ?>" method="post">
       <div class="input-group mb-3 mt-5">
 
@@ -700,11 +700,11 @@ if($subs_email_exist == 0){
   <div class="section-title text-center mt-4 mb-4">
     About us
   </div>
-  <div class="row">
-    <div class="col-6">
+  <div class="row container">
+    <div class="col-md-12 col-lg-6">
       <img src="img/lokeshwar_fashion_house 1.png" class="img-fluid" alt="" srcset="">
     </div>
-    <div class="col-6 bg-light custom-round">
+    <div class="col-md-12 container col-lg-6 mt-4 p-2 pb-4 bg-light custom-round">
       <div class="mt-4 ">
         <?php echo $website_description ?>
       </div>

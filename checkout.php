@@ -730,6 +730,7 @@ $product_total_price =  $_SESSION['product_total_price'];
     <script src="js/bootstrap.bundle.min.js"></script>
 
     <script src="js/checkout.js"></script>
+    <script src="js/script.js"></script>
   </body>
 
   </html>

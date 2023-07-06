@@ -22,9 +22,50 @@
     ';
   }
     ?>
+    
+<style>
+  .customr-user-select-none{
+    -webkit-user-select: none;
+    user-select: none;
+  }
+
+  #preloader{
+    background: #ddd url(img/preloader_un.gif) no-repeat center center;
+    height: 100vh !important;
+    width: 100vw !important;
+    position: fixed !important;
+    z-index: 100 !important;
+}
+
+</style>
+<?php 
+
+if($active_class == 'checkout'){
+    
+echo '
+<div  class="loading">
+
+<div id="preloader" class="text-center pt-5 fs-4">
+Please wait and do not close the window while we are processing...
+</div>
+
+</div>
+
+
+';
+
+}else{
+
+echo '
+<div id="preloader"></div>';
+}
+
+
+
+?>
         <div class=" ">
             <!-- <h1>Hello, world!</h1> -->
-            <nav class="container-fluid navbar  navbar-expand-lg custom-navbar-bg">
+            <nav class="container-fluid navbar d-print-none cus-print-disp-none navbar-dark navbar-expand-lg customr-user-select-none custom-navbar-bg">
                 <div class="container-fluid">
                     <a class="navbar-brand custom-light" href="./"><?php 
                     echo $website_name;
@@ -96,12 +137,12 @@
                             <!-- search button model ends here -->
                             <!-- buy now button in navbar starts here -->
 
-                            <form class="d-flex" role="search">
+                            <form class="d-flex cus-col-mt" role="search">
 
                                 <a href="shop.php"> <button class="btn btn-dark mt-2" type="button">Buy now</button></a>
                             </form>
                             <!-- buy now button in navbar ends here -->
-                            <li class="nav-item">
+                            <li class="nav-item cus-col-mt">
                               <div class="nav-link text-light float-start ms-4 ps-4"><img src="<?php echo CUS_PHOTO_PATH_INTO . $_SESSION['cus_photo'] ?>" alt="" srcset="" class="rounded-circle me-2" height="40px" width="40px"> <?php echo $_SESSION['cus_username']; ?></div>  
                             </li>
 
@@ -229,7 +270,7 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <a href="checkout.php"><button type="button" class="btn btn-primary">Checkout</button></a>
+                        <a href="cart.php"><button type="button" class="btn btn-primary">My Cart</button></a>
                     </div>
                 </div>
             </div>

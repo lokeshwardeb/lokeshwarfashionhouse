@@ -361,7 +361,7 @@ if (isset($_SESSION['cus_username'])) {
                       echo '
                   <tr>
                   <th scope="row"><img src="' . PRODUCT_INFO_PATH . $row["product_img"] . '" class="img-fluid" height="150px" width="150px" alt="" srcset="">  </th>
-                  <td><a href="product_details_cus_disp.php?id=' . $row['product_id'] . '" class="nav-link prod_hover">' . $row["product_name"] . '</a></td>
+                  <td><a href="'.SITE_URL.'product_details_cus_disp.php?id=' . $row['product_id'] . '" class="nav-link prod_hover">' . $row["product_name"] . '</a></td>
                   <td>Price: ' . product_currency_bdt_cus() . $per_price = $row['product_price'] . '</td>
                   <td>Qty: ' . $product_qty = $row['product_qty'] . '</td>
                   <td>' . product_currency_bdt_cus() . $total_price += $row['product_price'] * $row['product_qty'] . '</td>

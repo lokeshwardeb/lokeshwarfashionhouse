@@ -7,7 +7,7 @@ if (isset($_SESSION['cus_username'])) {
 
   <header>
     <div class="row mt-2 mb-5 container-fluid border-bottom border-dark">
-      <div class="col-7">
+      <div class="col-md-12 col-lg-7">
         <ul class="nav ">
           <li class="nav-item">
             <a class="nav-link active" aria-current="page" href="#">Lattest</a>
@@ -35,7 +35,7 @@ if (isset($_SESSION['cus_username'])) {
 
         </ul>
       </div>
-      <div class="col-5">
+      <div class="col-md-12 mt-4 mb-4 text-center col-lg-5">
         <span class="float-end me-4 mt-2"> <img src="ecom-admin/uploaded_img/cus_photo_upload/<?php echo $_SESSION['cus_photo'] ?>" alt="" srcset="" width="24" height="24" class="rounded-circle "> <?php echo $_SESSION['cus_username'] ?></span>
 
       </div>
@@ -54,15 +54,15 @@ if (isset($_SESSION['cus_username'])) {
             ?>
             <form class="d-flex" role="search" action="./order_tracking.php" method="get ">
               <div class="row">
-                <div class="col-12 mb-2">
+                <div class="col-md-12 col-lg-12 mb-2">
                   <input class="form-control me-2" type="search" placeholder="# Please Give the order no" aria-label="Search" name="search_text_order_track_no">
                 </div>
-                <div class="col-12 ">
+                <div class="col-md-12 col-lg-12 ">
                   <div class="row">
-                    <div class="col-2 ">
+                    <div class="col-md-12 col-lg-2 ">
                       <button disabled="disabled" class="form-control m-0 ">+88</button>
                     </div>
-                    <div class="col-10">
+                    <div class="col-md-12 col-lg-10">
                       <input class="form-control me-2" type="number" min="0" max="99999999999" placeholder="# Please Give the phone no" aria-label="Search" name="search_text_order_track_pho_no" id="search_text_order_track_pho_no">
                     </div>
                   </div>

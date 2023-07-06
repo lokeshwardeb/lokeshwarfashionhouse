@@ -3,15 +3,15 @@
   <footer>
     <!-- footer section starts here -->
 
-    <div class="container-fluid footer-section text-light pt-4 ">
+    <div class="container-fluid d-print-none footer-section text-light pt-4 ">
       <div class="row pt-2">
-        <div class="col-3">
-          <img src="<?php echo PHOTO_UPLOADED_PATH . $website_logo ?>" width="" alt="Loass" srcset="" class="footer-logo"><br>
-          <div class="logo-title m-auto p-auto text-center ">
+        <div class="col-xs-12 col-md-3 cus-footer-text-center ">
+          <img src="<?php echo PHOTO_UPLOADED_PATH . $website_logo ?>" width="" alt="Loass" srcset="" class="text-center footer-logo"><br>
+          <div class="logo-title m-auto p-auto text-center mt-4">
             <?php echo $website_name ?>
           </div>
         </div>
-        <div class="col-3">
+        <div class="col-xs-12 col-md-3 cus-footer-text-center mt-4">
           <ul class="navbar-nav">
             <li class="nav-item">
               <a href="index.html" class="nav-link nav-link-footer">Home</a>
@@ -36,7 +36,7 @@
             </li>
           </ul>
         </div>
-        <div class="col-3">
+        <div class="col-xs-12 col-md-3 cus-footer-text-center">
           <ul class="navbar-nav">
             <li class="nav-item">
               <a href="" class="nav-link nav-link-footer">Caragories</a>
@@ -59,7 +59,7 @@
 
           </ul>
         </div>
-        <div class="col-3">
+        <div class="col-xs-12 col-md-3 cus-footer-text-center">
           <ul class="navbar-nav">
             <li class="nav-item">
               <a href="" class="nav-link nav-link-footer">Support</a>
@@ -72,7 +72,7 @@
         </div>
 
       </div>
-      <div class="container text-center">
+      <div class="container text-center mt-4">
 
         <img src="img/google.png" width="200px" class="img-fluid" alt="" srcset="">
       </div>
