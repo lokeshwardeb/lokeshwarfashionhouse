@@ -1,11 +1,17 @@
 <?php
-include('inc/conn.php');
+// include('inc/conn.php');
 
 include 'inc/_error_reporting.php';
 include 'inc/install_functions.php';
 
-if(!$conn){
-  
+// if(!$conn){
+  // echo $_SESSION['mysqli_info_empty'] = 1 ;
+session_start();
+
+
+  // if($_SESSION['mysqli_info_empty'] == 1){
+
+
 
 ?>
 <!DOCTYPE html>
@@ -781,8 +787,12 @@ $result_sql_run = mysqli_query($conn, $sql_run);
 
 <?php 
 
-}else{
-  header("location: index.php");
-}
+// }else{
+//   header("location: index.php");
+// }
+
+// }else{
+//   // header("location: index.php");
+// }
 
 ?>

@@ -19,9 +19,19 @@ if(isset($_SESSION['cus_username'])){
   // echo '<div class="text-light mt-2">'.$_SESSION["cus_username"].'</div>' ;
 }
 
-include("inc/_heading_header.php")
+include("inc/_heading_header.php");
  
+if($db_hostname == '' && $db_username == '' && $db_password == '' && $database == ''){
+  $_SESSION['mysqli_info_empty'] = 1 ;
 
+  // header('location: ./install.php');
+  echo '
+  <script>
+  window.location.href = "install.php";
+  </script>
+  ';
+
+}
 
 ?>
 <?php
