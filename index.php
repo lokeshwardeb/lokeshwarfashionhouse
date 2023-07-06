@@ -50,7 +50,7 @@ if ($featured_product_result) {
 
 <div class="container hero-area mt-1 hero-area-canvas-bg">
   <div class="row hero-area-canvas-bg">
-    <div class="col-md-12 col-lg-10">
+    <div class="col-md-12 col-lg-6">
       <div class="hero-text ">
 <?php 
       $hero_aria_sql = "SELECT * FROM `page_settings`";
@@ -80,13 +80,13 @@ if ($featured_product_result) {
       </div> 
       </div>
     </div>
-    <div class="col-md-12 col-lg-2">
+    <div class="col-md-12 col-lg-6">
       <div class="img">
         <img src="<?php echo SITE_URL . 'ecom-admin/uploaded_img/hero_photo_upload/' . $hero_aria_offer_title_photo ?>" height="200px!important" style="max-height: 500px !important;" class="img-fluid">
       </div>
     </div>
   </div>
-  <div class="row hero-area-canvas-bg container ms-4 mt-4 mb-4 pb-4">
+  <div class="row hero-area-canvas-bg container ms-4 mt-5 mb-4 pb-4">
     <div class="col-2 hero-area-canvas-bg container float-s">
       <form class="d-flex float-end hero-shop-btn" role="search">
 
@@ -170,7 +170,7 @@ if ($featured_product_result) {
                       <button type="submit" class="btn btn-outline-dark btn-sm-md" name="add_cart">Add to cart</button>
                     </div>
                     <div class="buy-button">
-                      <button type="submit" class="btn btn-dark btn-md-sm">Buy now</button>
+                      <button type="submit" class="btn btn-dark btn-md-sm" name="add_cart">Buy now</button>
                     </div>
                   </div>
               </form>
@@ -301,7 +301,7 @@ if ($featured_product_result) {
                     <button type="submit" class="btn btn-outline-dark btn-sm-md" name="add_cart">Add to cart</button>
                   </div>
                   <div class="buy-button">
-                    <button type="submit" class="btn btn-dark btn-md-sm">Buy now</button>
+                    <button type="submit" class="btn btn-dark btn-md-sm" name="add_cart">Buy now</button>
                   </div>
                 </div>
             </form>

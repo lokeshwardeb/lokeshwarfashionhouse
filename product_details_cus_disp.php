@@ -38,7 +38,7 @@ include "inc/_navbar.php";
 
 ?>
 
-<div class="container full-width title_bar mt-4">
+<div class="container page mb-4 pt-4 full-width title_bar mt-4">
     <?php
 
     include "inc/_title_bar.php";
@@ -85,7 +85,7 @@ include "inc/_navbar.php";
 
             echo '
        
-<div class="row">
+<div class="row ">
 <div class="col-md-12 col-lg-6">
 <a href = "shop.php" class="mb-4"><button class = "btn btn-primary mb-4">Go to products</button></a><br>
 

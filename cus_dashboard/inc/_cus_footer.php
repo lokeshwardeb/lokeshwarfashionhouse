@@ -3,7 +3,7 @@
   <footer>
     <!-- footer section starts here -->
 
-    <div class="container-fluid footer-section text-light pt-4 ">
+    <div class="container-fluid d-print-none footer-section text-light pt-4 ">
       <div class="row pt-2">
         <div class="col-3">
         <img src="<?php echo PHOTO_UPLOADED_PATH . $website_logo ?>" width="" alt="Loass" srcset="" class="footer-logo"><br>

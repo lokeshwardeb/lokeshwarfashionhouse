@@ -13,24 +13,33 @@ include("inc/conn.php");
 include("inc/_company_info.php");
 // require "inc/sent-mail.php";
 
+// echo "<b>Please don't close the window while we processing your order !</b>
+// <div id='preloader'></div>
+
+
+// ";
+
 $_SESSION['generate_invoice'] = 0;
 
 if (!isset($_POST['place_order'])) {
-  echo "
-  <script>window.location.href = 'index.php'</script>
-  ";
+  // echo "
+  // <script>window.location.href = 'index.php'</script>
+  // ";
 }
 
 
 if (!isset($_SESSION['cart'][0])) {
-  echo "
-  <script>window.location.href = 'index.php'</script>
-  ";
+  // echo "
+  // <script>window.location.href = 'index.php'</script>
+  // ";
 } else {
 
 
 
   if (isset($_POST['place_order'])) {
+
+   
+
     $first_name = htmlspecialchars(mysqli_real_escape_string($conn, $_POST['first_name']), ENT_QUOTES);
     $last_name = htmlspecialchars(mysqli_real_escape_string($conn, $_POST['last_name']), ENT_QUOTES);
     $order_username = htmlspecialchars(mysqli_real_escape_string($conn, $_POST['username']), ENT_QUOTES);
@@ -170,7 +179,8 @@ if (!isset($_SESSION['cart'][0])) {
           // }
 
           if ($place_order_result) {
-            include "inc/sent-mail.php";
+            // include "inc/sent-mail.php";
+            include "inc/sent-mail_new.php";
             require_once "inc/sent_mail_template_inc.php";
             $order_phone_no = $order_customer_phone_no;
 
@@ -190,7 +200,7 @@ if (!isset($_SESSION['cart'][0])) {
 
             // code for email send to customer for placing order
 
-            // sent_mail("Lokeshwar Fashion House", $email, $first_name . ' ' . $last_name, "Order Placed Successfully", mail_template("", "order_placed", $ordering_username, $order_no , $order_phone_no,), "Your order Has been placed check your email $email for details");
+            sent_mail("Lokeshwar Fashion House", $email, $first_name . ' ' . $last_name, "Order Placed Successfully", mail_template("", "order_placed", $ordering_username, $order_no , $order_phone_no,), "Your order Has been placed check your email $email for details");
 
 
 
@@ -204,6 +214,8 @@ if (!isset($_SESSION['cart'][0])) {
             unset($_SESSION['product_total_price']);
 
             unset($_SESSION['cart'][0]);
+
+            $fresh_order_no =  str_replace("#", "%23", $order_no);
 
             echo '
             <form action="order_invoice_pdf.php" method="post">
@@ -228,7 +240,7 @@ if (!isset($_SESSION['cart'][0])) {
             
             </div>
             
-            <button type="submit" name="download_order_invoice" class = "btn btn-primary">Download</button>
+           <a href="download_order_invoice.php?order_no='.$fresh_order_no.'&order_phone_no='.$order_customer_phone_no.'"> <button type="button" class = "btn btn-primary">Download and Print Invoice</button></a>
             <a href="cus_dashboard/cus_orders.php"><input class = "btn btn-primary" type= "button" value="Go to my orders"></input></a>
            
             </div>
@@ -241,7 +253,7 @@ if (!isset($_SESSION['cart'][0])) {
 
             // unset($_SESSION['cart'][0]);
 
-            header("location: index.php");
+            // header("location: index.php");
           } else {
             echo 'order place error on placing order';
           }
@@ -266,3 +278,6 @@ if (!isset($_SESSION['cart'][0])) {
     echo 'not isset runs';
   }
 }
+?>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/script.js"></script>

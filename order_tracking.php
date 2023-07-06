@@ -123,7 +123,7 @@ if (isset($_SESSION['cus_username'])) {
 
   <div class="container mb-4 mt-4">
     <div class="row">
-      <div class="col-4">
+      <div class="col-md-12 col-lg-4">
         <div class="container page rounded pt-3">
           <div>Order Shipping Address</div>
           <address><?php echo $order_shipping_address ?></address>
@@ -148,7 +148,7 @@ if (isset($_SESSION['cus_username'])) {
       <?php
 
       if ($query_result_run == 1) {
-        echo ' <div class="container col-8 page pt-4 text-danger">
+        echo ' <div class="container col-md-12 col-lg-8 page pt-4 text-danger">
        Sorry,  No order was found with this order no <b> ' . $get_order_no . '</b> and this phone no <b>' . $get_order_phone_no . '</b>
           </div>';
       } else {
@@ -157,7 +157,7 @@ if (isset($_SESSION['cus_username'])) {
 
 
       ?>
-        <div class="col-8">
+        <div class="col-md-12 col-lg-8">
           <div class="container order_section pb-4 pt-2 rounded">
             <div class="order_title text-center fs-3">Order No</div>
             <div class="fs-3 text-center"><?php echo $order_no ?></div>
@@ -305,9 +305,9 @@ if (isset($_SESSION['cus_username'])) {
   <!-- <hr> -->
   <div class="container ">
     <div class="row">
-      <div class="col-4"></div>
-      <div class="col-8">
-        <div class="container page mb-4 border-top border-success border-4">
+      <div class="col-md-12 col-lg-4"></div>
+      <div class="col-md-12 col-lg-8">
+        <div class="container page mb-4 border-top border-success border-4 table-responsive">
           <?php
           if ($order_status !== 'cancelled') {
 
@@ -360,8 +360,8 @@ if (isset($_SESSION['cus_username'])) {
             </table>
 
             <div class="info-section border-top border-dark border-1 pt-4 pb-4">
-              <div class="container text-end">
-                <table class="table table-borderless">
+              <div class="container text-end table-responsive">
+                <table class="table table-borderless ">
                   <thead>
                     <tr>
                       <th scope="col"></th>
@@ -384,26 +384,26 @@ if (isset($_SESSION['cus_username'])) {
                     ?>
                     <tr>
                       <!-- <th scope="row"></th> -->
-                      <td class="col-10"><span class="text-end">Total Items:</span></td>
-                      <td class="col-10"><span class=""><?php echo $qt ?>Product(s)</span></td>
+                      <td class="col-md-12 col-lg-10"><span class="text-end">Total Items:</span></td>
+                      <td class="col-md-12 col-lg-10"><span class=""><?php echo $qt ?>Product(s)</span></td>
 
                     </tr>
                     <tr>
                       <!-- <th scope="row">1</th> -->
-                      <td class="col-10"> <span class="">Sub-Total:</span></td>
-                      <td class="col-10"><?php echo product_currency_bdt() .  $pri; ?></td>
+                      <td class="col-md-12 col-lg-10"> <span class="">Sub-Total:</span></td>
+                      <td class="col-md-12 col-lg-10"><?php echo product_currency_bdt() .  $pri; ?></td>
 
                     </tr>
                     <tr>
                       <!-- <th scope="row">1</th> -->
-                      <td class="col-10"> <span>Total Price:</span></td>
-                      <td class="col-10"><?php echo product_currency_bdt() .  $total_price ?></td>
+                      <td class="col-md-12 col-lg-10"> <span>Total Price:</span></td>
+                      <td class="col-md-12 col-lg-10"><?php echo product_currency_bdt() .  $total_price ?></td>
 
                     </tr>
                     <tr>
                       <!-- <th scope="row">1</th> -->
-                      <td class="col-10"> <span>Payable Amount:</span></td>
-                      <td class="col-10"> <?php
+                      <td class="col-md-12 col-lg-10"> <span>Payable Amount:</span></td>
+                      <td class="col-md-12 col-log-10"> <?php
                                           if ($order_status == 'completed' || $order_status == 'cancelled') {
                                             echo product_currency_bdt() . 0;
                                           } else {

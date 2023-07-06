@@ -27,7 +27,7 @@ include("inc/_navbar.php");
   </div>
 
   <div class="f-products-section">
-    <div class="row  cus-d-block">
+    <div class="row container cus-d-block">
       <?php
 
       $all_product_sql = "SELECT * FROM `products`"; // WHERE `make_as_featured` = 'featured_product'
@@ -39,7 +39,7 @@ include("inc/_navbar.php");
       if ($all_product_result) {
         if (mysqli_num_rows($all_product_result)) {
           while ($row = mysqli_fetch_assoc($all_product_result)) {
-            echo '<div class="col-4 products-col mb-4 p-3 custom-bg-light">
+            echo '<div class="col-md-12 container col-lg-4 products-col mb-4 p-3 custom-bg-light">
             <form action="cart_manage.php" method="post" >
               <div class="product-info">
                 <a href="product_details_cus_disp.php?id=' . $row['product_id'] . '" class="nav-link">
@@ -80,7 +80,7 @@ include("inc/_navbar.php");
                     <button type="submit" class="btn btn-outline-dark btn-sm-md" name="add_cart">Add to cart</button>
                   </div>
                   <div class="buy-button">
-                    <button type="submit" class="btn btn-dark btn-md-sm">Buy now</button>
+                    <button type="submit" class="btn btn-dark btn-md-sm" name="add_cart">Buy now</button>
                   </div>
                 </div>
             </form>
@@ -192,11 +192,11 @@ include("inc/_navbar.php");
   <div class="section-title text-center mt-4 mb-4">
     About us
   </div>
-  <div class="row">
-    <div class="col-6">
+  <div class="row ">
+    <div class="col-md-12 col-lg-6">
       <img src="img/lokeshwar_fashion_house 1.png" class="img-fluid" alt="" srcset="">
     </div>
-    <div class="col-6 bg-light custom-round">
+    <div class="col-md-12 col-lg-6 bg-light custom-round">
       <div class="mt-4 ">
         <?php echo $website_description ?>
       </div>

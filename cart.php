@@ -19,7 +19,7 @@ include("inc/_navbar.php");
 <!-- <form action="checkout.php" method="get"> -->
 <div class="container-fluid pt-4 pb-5 mb-5">
   <div class="row">
-    <div class="col-8">
+    <div class="col-8 table-responsive">
 
       <table class="table <?php 
       // if($_SESSION['cart'][0] == ''){
@@ -85,7 +85,8 @@ include("inc/_navbar.php");
             //  echo $_COOKIE['grand_total']; 
              
              ?>
-             <div class="text-danger text-center mb-4 ">*NOTE: Please click on update cart button each time you changes the cart items quantity</div>
+             <div class="text-danger text-center mb-2 ">*NOTE: Please click on <b>Update Cart</b>  button each time you changes the cart items quantity</div>
+             <div class="text-danger text-center mb-4 ">*লক্ষ করুন: প্রতেকবার পণের পরিমাণ পরিবর্তন করার পর <b>Update Cart</b> বাটনে ক্লিক করুন</div>
             <th scope="col">#</th>
             <th scope="col"></th>
             <th scope="col">Products</th>
