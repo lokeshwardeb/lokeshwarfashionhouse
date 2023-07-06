@@ -22,16 +22,16 @@ include("inc/_company_info.php");
 $_SESSION['generate_invoice'] = 0;
 
 if (!isset($_POST['place_order'])) {
-  // echo "
-  // <script>window.location.href = 'index.php'</script>
-  // ";
+  echo "
+  <script>window.location.href = 'index.php'</script>
+  ";
 }
 
 
 if (!isset($_SESSION['cart'][0])) {
-  // echo "
-  // <script>window.location.href = 'index.php'</script>
-  // ";
+  echo "
+  <script>window.location.href = 'index.php'</script>
+  ";
 } else {
 
 
