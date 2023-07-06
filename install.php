@@ -1,5 +1,5 @@
-<?php
-// include('inc/conn.php');
+<!-- <?php
+include('inc/conn.php');
 
 include 'inc/_error_reporting.php';
 include 'inc/install_functions.php';
@@ -795,4 +795,4 @@ $result_sql_run = mysqli_query($conn, $sql_run);
 //   // header("location: index.php");
 // }
 
-?>
+?> -->
