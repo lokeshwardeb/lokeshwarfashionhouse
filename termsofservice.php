@@ -26,7 +26,7 @@ include("inc/_navbar.php");
 
           <h4>1. Terms</h4>
           
-          <p>By accessing this Website, accessible from https://lokeshwarfashionhouse.ml, you are agreeing to be bound by these Website Terms and Conditions of Use and agree that you are responsible for the agreement with any applicable local laws. If you disagree with any of these terms, you are prohibited from accessing this site. The materials contained in this Website are protected by copyright and trade mark law.</p>
+          <p>By accessing this Website, accessible from <?php echo SITE_URL ?>, you are agreeing to be bound by these Website Terms and Conditions of Use and agree that you are responsible for the agreement with any applicable local laws. If you disagree with any of these terms, you are prohibited from accessing this site. The materials contained in this Website are protected by copyright and trade mark law.</p>
           
           <h4>2. Use License</h4>
           
@@ -40,7 +40,7 @@ include("inc/_navbar.php");
               <li>transferring the materials to another person or "mirror" the materials on any other server.</li>
           </ul>
           
-          <p>This will let <?php echo $website_name ?> to terminate upon violations of any of these restrictions. Upon termination, your viewing right will also be terminated and you should destroy any downloaded materials in your possession whether it is printed or electronic format. These Terms of Service has been created with the help of the <a href="https://www.termsofservicegenerator.net">Terms Of Service Generator</a>.</p>
+          <p>This will let <?php echo $website_name ?> to terminate upon violations of any of these restrictions. Upon termination, your viewing right will also be terminated and you should destroy any downloaded materials in your possession whether it is printed or electronic format. </p>
           
           <h4>3. Disclaimer</h4>
           
