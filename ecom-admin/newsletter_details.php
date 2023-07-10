@@ -119,7 +119,7 @@ if (!isset($_SESSION['username'])) {
                 echo '
         
 <div class="row">
-<div class="col-6">
+<div class="col-lg-6 col-md-12">
 <a href = "newsletter.php" class="mb-4"><button class = "btn btn-primary mb-4">Go to newsletter</button></a><br>
     Newsletter ID: ' . $newsletter_id . ' <br>
 
@@ -134,13 +134,13 @@ if (!isset($_SESSION['username'])) {
 
 
     <div class="row container mt-4">
-    <div class="col-2">
+    <div class="col-lg-2 col-md-12">
         <button class="btn btn-dark mb-4" onclick="productEdit()">Edit</button><br>
 
     </div>
 
 
-    <div class="col-10">
+    <div class="col-lg-10 col-md-12">
         <form action="'.$_SERVER["PHP_SELF"].'" method="post">
             <button class="btn btn btn-danger mb-4" name="block_customer_user" id="block_cus_btn">Block Customer User</button> <label for="block_cus_btn" class="text-danger"> (block customer user for spaming and security issues)</label><br>
 

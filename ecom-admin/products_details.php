@@ -377,7 +377,7 @@ $not_photo_uploaded = 0;
                 echo '
         
 <div class="row">
-<div class="col-6">
+<div class="col-lg-6 col-md-12">
 <a href = "products.php" class="mb-4"><button class = "btn btn-primary mb-4">Go to products</button></a><br>
     Product Id: ' . $product_id . ' <br>
     Product Name : ' . $product_name . ' <br>
@@ -419,7 +419,7 @@ $not_photo_uploaded = 0;
     Product Added Datetime: ' . $product_added_datetime . ' <br>
 
 </div>
-<div class="col-6">
+<div class="col-lg-6 col-md-12">
     <img src="uploaded_img/products/' . $product_img . '" width="80%!important" height="250px!important" alt="" srcset="">
 </div>
 
@@ -432,13 +432,13 @@ $not_photo_uploaded = 0;
                                                                                                     ?>
 
                         <div class="row">
-                            <div class="col-2">
+                            <div class="col-lg-2 col-md-12">
                                 <button class="btn btn-dark mb-4" onclick="productEdit()">Edit</button><br>
 
                             </div>
 
 
-                            <div class="col-10">
+                            <div class="col-lg-10 col-md-12">
                                 <form action="<?php $_SERVER['PHP_SELF'] ?>" method="post">
                                     <button class="btn btn-danger mb-4" name="product_delete">Delete</button><br>
 

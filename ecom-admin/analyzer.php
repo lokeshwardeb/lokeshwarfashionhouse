@@ -79,7 +79,9 @@ echo '<div class="bg-primary text-light m-4 p-2">Total unique user (by cookie): 
 // echo date("Y-m-d H:i:s",strtotime("-1 month"));
 
             if (mysqli_num_rows($result) > 0) {
-              echo '<table class="table  custom-default-box-bg-color  ">
+              echo '
+              <div class="table-responsive">
+              <table class="table  custom-default-box-bg-color  ">
               <thead>
                 <tr>
                   <th scope="col">SL.No</th>
@@ -100,6 +102,8 @@ echo '<div class="bg-primary text-light m-4 p-2">Total unique user (by cookie): 
                 <td>'.$row['user_browser'].'</td>
                 <td>'.$row['user_device'].'</td>
                 <td>'.$row['datetime'].'</td>
+              </div>
+              
              
 ';
 

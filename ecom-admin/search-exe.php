@@ -55,7 +55,7 @@ include "inc/_navbar.php";
   include "inc/_search.php"; ?>
   <div class="orders">
     <div class="row">
-      <div class="col-4 ">
+      <div class="col-lg-4 col-md-12">
 
 
 
@@ -134,7 +134,9 @@ $search = htmlspecialchars(mysqli_real_escape_string($conn, $_GET['search_text']
       $result = mysqli_query($conn, $sql);
 
       if (mysqli_num_rows($result) > 0) {
-        echo '<table class="table  custom-default-box-bg-color  ">
+        echo '
+        <div class="table-responsive">
+        <table class="table  custom-default-box-bg-color  ">
               <thead>
                 <tr>
                   <th scope="col">SL.No</th>
@@ -160,7 +162,9 @@ $search = htmlspecialchars(mysqli_real_escape_string($conn, $_GET['search_text']
 
                 
                 <td><button type="submit" class="btn btn-dark">Order Details</button></td>
-              </tr>';
+              </tr>
+        </div>
+        ';
         }
       } else {
         echo '<div class = "custom-default-box-bg-color pt-4 mt-4 fs-4" style="height:200px !important;">
@@ -179,33 +183,37 @@ $search = htmlspecialchars(mysqli_real_escape_string($conn, $_GET['search_text']
       $result = mysqli_query($conn, $sql);
 
       if (mysqli_num_rows($result) > 0) {
-        echo '<table class="table  custom-default-box-bg-color  ">
-              <thead>
-                <tr>
-                  <th scope="col">SL.No</th>
-                  <th scope="col">Order No</th>
-                  <th scope="col">Product ID</th>
-                  <th scope="col">Product</th>
-                  <th scope="col">Product Price</th>
-                  <th scope="col">Description</th>
-                  <th scope="col">Status</th>
-                </tr>
-              </thead>
-              <tbody>';
-        $no = 1;
-        while ($row = mysqli_fetch_assoc($result)) {
-          echo  '<tr class="hover-table">
-                <th scope="row">' . $no++ . '</th>
-                <td><b>' . $row['order_no'] . '</b></td>
-                <td>' . $row['id'] . '</td>
-                <td>' . $row['product_name'] . '</td>
-                <td>' . $row['price'] . '</td>
-                <td>' . $row['product_desc'] . '</td>
-                <td>' . $row['order_status'] . '</td>
+        echo '
+        <div class="table-responsive">
+        <table class="table  custom-default-box-bg-color  ">
+        <thead>
+          <tr>
+            <th scope="col">SL.No</th>
+            <th scope="col">Order No</th>
+            <th scope="col">Product ID</th>
+            <th scope="col">Product</th>
+            <th scope="col">Product Price</th>
+            <th scope="col">Description</th>
+            <th scope="col">Status</th>
+          </tr>
+        </thead>
+        <tbody>';
+  $no = 1;
+  while ($row = mysqli_fetch_assoc($result)) {
+    echo  '<tr class="hover-table">
+          <th scope="row">' . $no++ . '</th>
+          <td><b>' . $row['order_no'] . '</b></td>
+          <td>' . $row['id'] . '</td>
+          <td>' . $row['product_name'] . '</td>
+          <td>' . $row['price'] . '</td>
+          <td>' . $row['product_desc'] . '</td>
+          <td>' . $row['order_status'] . '</td>
 
-                
-                <td><button type="submit" class="btn btn-dark">Order Details</button></td>
-              </tr>';
+          
+          <td><button type="submit" class="btn btn-dark">Order Details</button></td>
+        </tr>
+        </div>
+      ';
         }
       } else {
         echo '<div class = "custom-default-box-bg-color pt-4 mt-4 fs-4" style="height:200px !important;">
@@ -223,7 +231,9 @@ $search = htmlspecialchars(mysqli_real_escape_string($conn, $_GET['search_text']
       $result = mysqli_query($conn, $sql);
 
       if (mysqli_num_rows($result) > 0) {
-        echo '<table class="table  custom-default-box-bg-color  ">
+        echo '
+        <div class="table-responsive">
+        <table class="table  custom-default-box-bg-color  ">
               <thead>
                 <tr>
                   <th scope="col">SL.No</th>
@@ -247,7 +257,9 @@ $search = htmlspecialchars(mysqli_real_escape_string($conn, $_GET['search_text']
 
                 
                 <td><button type="submit" class="btn btn-dark">Order Details</button></td>
-              </tr>';
+              </tr>
+        </div>
+        ';
         }
       } else {
         echo '<div class = "custom-default-box-bg-color pt-4 mt-4 fs-4" style="height:200px !important;">
@@ -263,7 +275,9 @@ $search = htmlspecialchars(mysqli_real_escape_string($conn, $_GET['search_text']
       $result = mysqli_query($conn, $sql);
 
       if (mysqli_num_rows($result) > 0) {
-        echo '<table class="table  custom-default-box-bg-color  ">
+        echo '
+        <div class="table-responsive">
+        <table class="table  custom-default-box-bg-color  ">
               <thead>
                 <tr>
                   <th scope="col">SL.No</th>
@@ -289,7 +303,9 @@ $search = htmlspecialchars(mysqli_real_escape_string($conn, $_GET['search_text']
 
                 
                 <td><button type="submit" class="btn btn-dark">Order Details</button></td>
-              </tr>';
+              </tr>
+        </div>
+        ';
         }
       } else {
         echo '<div class = "custom-default-box-bg-color pt-4 mt-4 fs-4" style="height:200px !important;">
@@ -306,7 +322,9 @@ $search = htmlspecialchars(mysqli_real_escape_string($conn, $_GET['search_text']
       $result = mysqli_query($conn, $sql);
 
       if (mysqli_num_rows($result) > 0) {
-        echo '<table class="table  custom-default-box-bg-color  ">
+        echo '
+        <div class="table-responsive">
+        <table class="table  custom-default-box-bg-color  ">
               <thead>
                 <tr>
                   <th scope="col">SL.No</th>
@@ -332,7 +350,9 @@ $search = htmlspecialchars(mysqli_real_escape_string($conn, $_GET['search_text']
 
                 
                 <td><button type="submit" class="btn btn-dark">Order Details</button></td>
-              </tr>';
+              </tr>
+        </div>
+        ';
         }
       } else {
         echo '<div class = "custom-default-box-bg-color pt-4 mt-4 fs-4" style="height:200px !important;">
@@ -349,7 +369,9 @@ $search = htmlspecialchars(mysqli_real_escape_string($conn, $_GET['search_text']
       $result = mysqli_query($conn, $sql);
 
       if (mysqli_num_rows($result) > 0) {
-        echo '<table class="table  custom-default-box-bg-color  ">
+        echo '
+        <div class="table-responsive">
+        <table class="table  custom-default-box-bg-color  ">
               <thead>
                 <tr>
                   <th scope="col">SL.No</th>
@@ -372,7 +394,9 @@ $search = htmlspecialchars(mysqli_real_escape_string($conn, $_GET['search_text']
 
                 
                 <td><button type="submit" class="btn btn-dark">Admin Details</button></td>
-              </tr>';
+              </tr>
+        </div>
+        ';
         }
       } else {
         echo '<div class = "custom-default-box-bg-color pt-4 mt-4 fs-4" style="height:200px !important;">

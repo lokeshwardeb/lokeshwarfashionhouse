@@ -54,7 +54,9 @@ include "inc/_title_bar.php";
             $result = mysqli_query($conn, $sql);
 
             if (mysqli_num_rows($result) > 0) {
-              echo '<table class="table  custom-default-box-bg-color  ">
+              echo '
+              <div class="table-responsive">
+              <table class="table  custom-default-box-bg-color  ">
               <thead>
                 <tr>
                   <th scope="col">SL.No</th>
@@ -77,7 +79,9 @@ include "inc/_title_bar.php";
 
   echo '
         <td><a href="newsletter_details.php?id='.$row['id'].'"><button type="submit" class="btn btn-dark">Newsletter Details</button></a></td>
-              </tr>';
+              </tr>
+              </div>
+             ';
               }
             }
             else{

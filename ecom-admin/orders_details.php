@@ -380,8 +380,8 @@ if (!isset($_SESSION['username'])) {
     <p class="mb-0">Do you accept the order ? If you accept the order then click on I accept the order button or else click on cancell the order.</p>
     <form action = "" method = "post">
     <div class = "row mt-2 mb-4">
-    <div class = "col-6"><button class = "btn btn-primary btn-sm" name= "order_accepted_submit">I accept the order</button></div>
-    <div class = "col-6"><button class = "btn btn-danger btn-sm" name= "order_cancelled_submit">Cancel the order</button></div>
+    <div class = "col-lg-6 col-md-12"><button class = "btn btn-primary btn-sm" name= "order_accepted_submit">I accept the order</button></div>
+    <div class = "col-lg-6 col-md-12"><button class = "btn btn-danger btn-sm" name= "order_cancelled_submit">Cancel the order</button></div>
     </div>
     </form>
   </div>';
@@ -413,7 +413,7 @@ if (!isset($_SESSION['username'])) {
                 echo '
         
                 <div class="row">
-                <div class="col-6 page mb-4 pt-4 container">
+                <div class="col-lg-6 col-md-12 page mb-4 pt-4 container">
                 <a href = "orders.php" class="mb-4"><button class = "btn btn-primary mb-4">Go to orders</button></a><br>
                     Order No: <b> ' . $order_no . ' </b> <br>';
                 
@@ -490,7 +490,7 @@ if (!isset($_SESSION['username'])) {
                     Product Added Datetime: ' . $product_added_datetime . ' <br><br>
                 
                 </div>
-                <div class="col-6 page mb-4 pt-4 ">
+                <div class="col-lg-6 col-md-12 page mb-4 pt-4 ">
                     ';
                 
                     if($order_status == 'pending'){
@@ -527,13 +527,13 @@ if (!isset($_SESSION['username'])) {
                                                             ?>
 
                             <div class="row">
-                                <div class="col-2">
+                                <div class="col-lg-2 col-md-12">
                                     <button class="btn btn-dark mb-4" onclick="productEdit()">Edit</button><br>
 
                                 </div>
 
 
-                                <div class="col-10">
+                                <div class="col-lg-10 col-md-12">
                                     <form action="<?php $_SERVER['PHP_SELF'] ?>" method="post">
                                         <button class="btn btn-danger mb-4" name="product_delete">Delete</button><br>
 
@@ -546,7 +546,7 @@ if (!isset($_SESSION['username'])) {
                                 </div>
                             </div>
 
-                            <div class="container page border-success border-top border-5">
+                            <div class="container table-responsive page border-success border-top border-5">
 <table class="table table-borderless ">
               <thead>
                 <tr>
@@ -597,7 +597,7 @@ if (!isset($_SESSION['username'])) {
               </tbody>
             </table>
             <div class="info-section border-top border-dark border-1 pt-4 pb-4">
-              <div class="container text-end">
+              <div class="container table-responsive text-end">
                 <table class="table table-borderless">
                   <thead>
                     <tr>
@@ -621,26 +621,26 @@ if (!isset($_SESSION['username'])) {
                     ?>
                     <tr>
                       <!-- <th scope="row"></th> -->
-                      <td class="col-10"><span class="text-end">Total Items:</span></td>
-                      <td class="col-10"><span class=""><?php echo $qt ?>Product(s)</span></td>
+                      <td class="col-lg-10 col-md-12"><span class="text-end">Total Items:</span></td>
+                      <td class="col-lg-10 col-md-12"><span class=""><?php echo $qt ?>Product(s)</span></td>
 
                     </tr>
                     <tr>
                       <!-- <th scope="row">1</th> -->
-                      <td class="col-10"> <span class="">Sub-Total:</span></td>
-                      <td class="col-10"><?php echo product_currency_bdt() .  $to_pri; ?></td>
+                      <td class="col-lg-10 col-md-12"> <span class="">Sub-Total:</span></td>
+                      <td class="col-lg-10 col-md-12"><?php echo product_currency_bdt() .  $to_pri; ?></td>
 
                     </tr>
                     <tr>
                       <!-- <th scope="row">1</th> -->
-                      <td class="col-10"> <span>Total Price:</span></td>
-                      <td class="col-10"><?php echo product_currency_bdt() .  $to_pri ?></td>
+                      <td class="col-lg-10 col-md-12"> <span>Total Price:</span></td>
+                      <td class="col-lg-10 col-md-12"><?php echo product_currency_bdt() .  $to_pri ?></td>
 
                     </tr>
                     <tr>
                       <!-- <th scope="row">1</th> -->
-                      <td class="col-10"> <span>Payable Amount:</span></td>
-                      <td class="col-10"> <?php
+                      <td class="col-lg-10 col-md-12"> <span>Payable Amount:</span></td>
+                      <td class="col-lg-10 col-md-12"> <?php
                                           if ($order_status == 'completed' || $order_status == 'cancelled') {
                                             echo product_currency_bdt() . 0;
                                           } else {

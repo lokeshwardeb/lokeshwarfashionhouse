@@ -117,7 +117,7 @@ if($result_customer_orders_select_check){
                 echo '
         
 <div class="row">
-<div class="col-6">
+<div class="col-lg-6 col-md-12">
 <a href = "customers.php" class="mb-4"><button class = "btn btn-primary mb-4">Go to customers</button></a><br>
     Customer IP Address (last login): ' . $cus_last_ip_address . ' <br>
     Customer OS (last login): ' . $cus_last_used_os . ' <br>
@@ -130,13 +130,13 @@ if($result_customer_orders_select_check){
     Customer Total orders: ' . $customer_total_orders . ' <br>
 
     <div class="row container mt-4">
-    <div class="col-2">
+    <div class="col-lg-2 col-md-12">
         <button class="btn btn-dark mb-4" onclick="productEdit()">Edit</button><br>
 
     </div>
 
 
-    <div class="col-10">
+    <div class="col-lg-10 col-md-12">
         <form action="'.$_SERVER["PHP_SELF"].'" method="post">
             <button class="btn btn btn-danger mb-4" name="block_customer_user" id="block_cus_btn">Block Customer User</button> <label for="block_cus_btn" class="text-danger"> (block customer user for spaming and security issues)</label><br>
 
@@ -156,14 +156,14 @@ if($result_customer_orders_select_check){
 <?php 
 if($customer_image == ''){
 echo '
-<div class="col-6">
+<div class="col-lg-6 col-md-12">
     <img src="uploaded_img/cus_photo_upload/' . $customer_image . '" width="80%!important" height="250px!important" alt="" srcset="">
 </div>
         
         ';
 }else{
     echo '
-<div class="col-6">
+<div class="col-lg-6 col-md-12">
     <img src="uploaded_img/' . $customer_image . '" width="80%!important" height="250px!important" alt="" srcset="">
 </div>';
 }

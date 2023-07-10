@@ -61,7 +61,9 @@ while ($prow = mysqli_fetch_assoc($result)){
   $result = mysqli_query($conn, $sql);
   if($result){
     if (mysqli_num_rows($result) > 0) {
-      echo '<table class="table  custom-default-box-bg-color mb-4 ">
+      echo '
+      <div class="table-responsive">
+      <table class="table  custom-default-box-bg-color mb-4 ">
       <thead>
         <tr>
           <th scope="col">SL.No</th>
@@ -90,7 +92,9 @@ while ($prow = mysqli_fetch_assoc($result)){
   
         
         <td><a href="products_details.php?id='.$pro_id.'"> <button type="submit" class="btn btn-dark">Product Details</button></a></td>
-      </tr>';
+      </tr>
+      </div>
+      ';
 
 
       

@@ -58,9 +58,9 @@ include "inc/_company_info.php";
 
   <div class="orders">
     <div class="row">
-      <div class="col-4 custom-box-bg-color border-start border-primary border-5 custom-box-height pt-2">
+      <div class="col-lg-4 col-md-12 custom-box-bg-color border-start border-primary border-5 custom-box-height pt-2">
         <div class="row">
-          <div class="col-6">
+          <div class="col-lg-6 col-md-12">
             <div class="fs-4">Total Orders </div>
             <p class="dashb-order-info">
             <?php
@@ -75,15 +75,15 @@ include "inc/_company_info.php";
               <span class="fs-5"><?php echo $total_orders_count?> </span>
             </p>
           </div>
-          <div class="col-6">
+          <div class="col-lg-6 col-md-12">
             <img class="img-fluid" src="img/products.jpg" width="150px" style="border-radius: 20px;" height="100px" alt="" srcset="">
           </div>
         </div>
 
       </div>
-      <div class="col-4 custom-box-bg-color border-start border-primary border-5 custom-box-height pt-2">
+      <div class="col-lg-4 col-md-12 custom-box-bg-color border-start border-primary border-5 custom-box-height pt-2">
         <div class="row">
-          <div class="col-6">
+          <div class="col-lg-6 col-md-12">
             <div class="fs-4"> Orders in Process </div>
             <p class="dashb-order-info">
             <?php
@@ -98,16 +98,16 @@ include "inc/_company_info.php";
               <span class="fs-5"><?php echo  $in_process_orders_count?> </span>
             </p>
           </div>
-          <div class="col-6">
+          <div class="col-lg-6  col-md-12 ">
             <img class="img-fluid" src="img/process.jpg" alt="" srcset="" width="100px" height="100px" style="border-radius: 20px;">
           </div>
         </div>
 
       </div>
-      <div class="col-4 custom-box-bg-color border-start border-primary border-5 pt-2">
+      <div class="col-lg-4 col-md-12 custom-box-bg-color border-start border-primary border-5 pt-2">
 
         <div class="row">
-          <div class="col-6">
+          <div class="col-lg-6 col-md-12">
             <div class="fs-4"> Delivered Products </div>
             <p class="dashb-order-info">
               <?php
@@ -122,7 +122,7 @@ include "inc/_company_info.php";
               <span class="fs-5"><?php echo $delivered_orders_count ?> </span>
             </p>
           </div>
-          <div class="col-6">
+          <div class="col-lg-6 col-md-12">
             <img class="img-fluid" src="img/delivered.png" alt="" srcset="" width="150px" height="100px" style="border-radius: 20px;">
           </div>
         </div>
@@ -142,7 +142,9 @@ include "inc/_company_info.php";
           $result = mysqli_query($conn, $sql);
 
           if (mysqli_num_rows($result) > 0) {
-            echo '<table class="table  custom-default-box-bg-color  ">
+            echo '
+            <div class="table-responsive">
+            <table class="table  custom-default-box-bg-color  ">
             <thead>
               <tr>
                 <th scope="col">SL.No</th>
@@ -179,7 +181,9 @@ include "inc/_company_info.php";
 
               
               <td><a href="orders_details.php?id='.$row['id'].'"><button type="submit" class="btn btn-dark">Order Details</button></a></td>
-            </tr>';
+            </tr>
+            </div>
+           ';
             }
           }
           else{

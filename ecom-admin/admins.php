@@ -49,6 +49,8 @@ if(isset($_SESSION['loggedin']) == true){
 
   <button type="submit" class="btn btn-primary"><a href="add_admin.php" class="nav-link">Add admin</a></button>
 
+  <div class="table-responsive container mt-4">
+
   <?php
 
 
@@ -60,7 +62,9 @@ if(isset($_SESSION['loggedin']) == true){
   if (mysqli_num_rows($result) > 0) {
     // $server = ;
 
-    echo '<table class="table  custom-default-box-bg-color  ">
+    echo '
+    <div class="table-responsive">
+    <table class="table  custom-default-box-bg-color  ">
             <thead>
               <tr>
                 <th scope="col">SL.No</th>
@@ -85,7 +89,9 @@ if(isset($_SESSION['loggedin']) == true){
               <td><a href="http://localhost/phpdevelopment/ecom-admin/edit-admin.php"><button class="btn btn-dark">Edit</button></a></td>
               <td><button type="submit" class="btn btn-danger" name = "submit">Delete</button></td>
               </form>
-            </tr>';
+            </tr>
+    </div>
+    ';
 
 
       //    $sql = "SELECT * FROM admin_users where id = $id";
@@ -154,6 +160,7 @@ if(isset($_SESSION['loggedin']) == true){
 
 </div>
 
+</div>
 
 
 

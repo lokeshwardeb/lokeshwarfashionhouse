@@ -48,11 +48,11 @@ include "inc/_title_bar.php";
   ?>
 
 <div class="container">
-<div class="orders">
+<div class="orders mb-4">
     <div class="row">
-      <div class="col-3 custom-box-bg-color border-start border-primary border-5 custom-box-height pt-2">
+      <div class="col-lg-3 col-md-12 mb-4 custom-box-bg-color border-start border-primary border-5 custom-box-height pt-2">
         <div class="row">
-          <div class="col-6">
+          <div class="col-lg-6 mb-4 col-md-12">
             <div class="fs-4">Total Orders </div>
             <p class="dashb-order-info">
             <?php
@@ -67,15 +67,15 @@ include "inc/_title_bar.php";
               <span class="fs-5"><?php echo $total_orders_count?> </span>
             </p>
           </div>
-          <div class="col-6">
+          <div class="col-lg-6 col-md-12">
             <img class="img-fluid" src="img/products.jpg" width="150px" style="border-radius: 20px;" height="100px" alt="products" srcset="">
           </div>
         </div>
 
       </div>
-      <div class="col-3 custom-box-bg-color border-start border-primary border-5 custom-box-height pt-2">
+      <div class="col-lg-3 col-md-12 mb-4 custom-box-bg-color border-start border-primary border-5 custom-box-height pt-2">
         <div class="row">
-          <div class="col-6">
+          <div class="col-lg-6 col-md-12">
             <div class="fs-4"> Orders in Process </div>
             <p class="dashb-order-info">
             <?php
@@ -90,16 +90,16 @@ include "inc/_title_bar.php";
               <span class="fs-5"><?php echo  $in_process_orders_count?> </span>
             </p>
           </div>
-          <div class="col-6">
+          <div class="col-lg-6 col-md-12">
             <img class="img-fluid" src="img/process.jpg" alt="process" srcset="" width="100px" height="100px" style="border-radius: 20px;">
           </div>
         </div>
 
       </div>
-      <div class="col-3 custom-box-bg-color border-start border-primary border-5 pt-2">
+      <div class="col-lg-3 col-md-12 mb-4 custom-box-bg-color border-start border-primary border-5 pt-2">
 
         <div class="row">
-          <div class="col-6">
+          <div class="col-lg-6 col-md-12">
             <div class="fs-4"> Delivered Products </div>
             <p class="dashb-order-info">
               <?php
@@ -114,16 +114,16 @@ include "inc/_title_bar.php";
               <span class="fs-5"><?php echo $delivered_orders_count ?> </span>
             </p>
           </div>
-          <div class="col-6">
+          <div class="col-lg-6 col-md-12">
             <img class="img-fluid" src="img/delivered.png" alt="delivered" srcset="" width="150px" height="100px" style="border-radius: 20px;">
           </div>
         </div>
 
       </div>
-      <div class="col-3 custom-box-bg-color border-start border-primary border-5 pt-2">
+      <div class="col-lg-3 mb-4 col-md-12 custom-box-bg-color border-start border-primary border-5 pt-2">
 
         <div class="row">
-          <div class="col-6">
+          <div class="col-lg-6 mb-4 col-md-12">
             <div class="fs-4"> Cancelled Orders </div>
             <p class="dashb-order-info">
               <?php
@@ -138,7 +138,7 @@ include "inc/_title_bar.php";
               <span class="fs-5"><?php echo $delivered_orders_count ?> </span>
             </p>
           </div>
-          <div class="col-6">
+          <div class="col-lg-6 col-md-12">
             <img class="img-fluid" src="img/delivered.png" alt="delivered" srcset="" width="150px" height="100px" style="border-radius: 20px;">
           </div>
         </div>
@@ -177,11 +177,11 @@ include "inc/_title_bar.php";
 <div class="container">
 
 <!-- products count section -->
-<div class="orders">
+<div class="orders mt-4">
     <div class="row">
-      <div class="col-4 custom-box-bg-color border-start border-primary border-5 custom-box-height pt-2">
+      <div class="col-lg-4 mb-4 col-md-12 custom-box-bg-color border-start border-primary border-5 custom-box-height pt-2">
         <div class="row">
-          <div class="col-6">
+          <div class="col-lg-6 mb-4 col-md-12">
             <div class="fs-4">Total Products </div>
             <p class="dashb-order-info">
             <?php
@@ -196,15 +196,15 @@ include "inc/_title_bar.php";
               <span class="fs-5"><?php echo $total_products_count?> </span>
             </p>
           </div>
-          <div class="col-6">
+          <div class="col-lg-6 col-md-12">
             <img class="img-fluid" src="img/totalProducts.jpg" width="150px" style="border-radius: 20px;" height="100px" alt="" srcset="">
           </div>
         </div>
 
       </div>
-      <div class="col-4 custom-box-bg-color border-start border-primary border-5 custom-box-height pt-2">
+      <div class="col-lg-4 mb-4 col-md-12 custom-box-bg-color border-start border-primary border-5 custom-box-height pt-2">
         <div class="row">
-          <div class="col-6">
+          <div class="col-lg-6 col-md-12">
             <div class="fs-4"> Products In-Stock </div>
             <p class="dashb-order-info">
             <?php
@@ -219,16 +219,16 @@ include "inc/_title_bar.php";
               <span class="fs-5"><?php echo  $in_stock_products_count?> </span>
             </p>
           </div>
-          <div class="col-6">
+          <div class="col-lg-6 col-md-12">
             <img class="img-fluid" src="img/product-inStock.jpg" alt="" srcset="" width="100px" height="100px" style="border-radius: 20px;">
           </div>
         </div>
 
       </div>
-      <div class="col-4 custom-box-bg-color border-start border-primary border-5 pt-2">
+      <div class="col-lg-4 mb-4 col-md-12 custom-box-bg-color border-start border-primary border-5 pt-2">
 
         <div class="row">
-          <div class="col-6">
+          <div class="col-lg-6 ">
             <div class="fs-4">Products Out-stock</div>
             <p class="dashb-order-info">
               <?php
@@ -243,7 +243,7 @@ include "inc/_title_bar.php";
               <span class="fs-5"><?php echo $out_stock_products_count ?> </span>
             </p>
           </div>
-          <div class="col-6">
+          <div class="col-lg-6 col-md-12">
             <img class="img-fluid" src="img/products-outStock.jpg" alt="" srcset="" width="150px" height="100px" style="border-radius: 20px;">
           </div>
         </div>
@@ -270,7 +270,9 @@ include "inc/_title_bar.php";
       //   }
       
       if (mysqli_num_rows($result) > 0) {
-        echo '<table class="table  custom-default-box-bg-color  ">
+        echo '
+        <div class="table-responsive">
+        <table class="table  custom-default-box-bg-color  ">
         <thead>
           <tr>
             <th scope="col">SL.No</th>
@@ -309,7 +311,10 @@ include "inc/_title_bar.php";
 
 echo '
   <td><a href="orders_details.php?id='.$row['id'].'"><button type="submit" class="btn btn-dark">Order Details</button></a></td>
-        </tr>';
+        </tr>
+
+        </div>
+       ';
         }
       }
       else{
