@@ -4,7 +4,6 @@ $db_username = 'epiz_34172411';
 $db_password = 'XsThGKTD9H';
 $db_name = 'epiz_34172411_lokeshwarfashionhouse';
 
-
 $conn = mysqli_connect($db_hostname, $db_username, $db_password, $db_name);
 
 // checking that if mysqli error occurs. It the mysqli database connect error occurs than it will follow the bellow code instractions and will process the code further
