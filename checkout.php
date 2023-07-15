@@ -13,8 +13,20 @@ if (!isset($_SESSION['cart'][0])) {
   echo "
   <script>window.location.href = 'index.php'</script>
   ";
+
+  if(isset($_COOKIE['verified_order_phone_no'])){
+    setcookie('verified_order_phone_no', '', time() - 3600);
+
+    // setcookie("user", "", time() - 3600);
+  }
+
 } else {
 
+  if(!isset($_COOKIE['verified_order_phone_no'])){
+    echo "
+    <script>window.location.href = 'otp_check.php'</script>
+    ";
+  }
 
 
   ?>
@@ -332,17 +344,51 @@ $product_total_price =  $_SESSION['product_total_price'];
                   </div>
                 </div>
 
+                <!-- value="<?php 
+                    if(isset($_COOKIE['verified_order_phone_no'])){
+                      echo $_COOKIE['verified_order_phone_no'];
+                    }else{
+                      echo '';
+                    }
+                    
+                    ?>" -->
+
                 <div class="col-12">
                   <label for="username" class="form-label">Phone no</label>
                   <div class="input-group has-validation">
-                    <span class="input-group-text">@</span>
-                    <input type="text" class="form-control" id="phone_no" placeholder="Phone no" <?php if (isset($_SESSION['cus_username'])) {
+                    <span class="input-group-text">+88</span>
+                    <input value="<?php
+                    
+                    if(isset($_COOKIE['verified_order_phone_no'])){
+                      echo $_COOKIE['verified_order_phone_no'];
+                    }else{
+                      echo 'Error ! Phone no is not verified';
+                    }
+                    
+                    ?>" type="text" class="form-control" id="phone_no" placeholder="Phone no" <?php if (isset($_SESSION['cus_username'])) {
+                      echo 'required';
+                    } ?> name="order_customer_phone_no" disabled>
+
+                    <!-- hidden phone no -->
+                    <input value="<?php
+                    
+                    if(isset($_COOKIE['verified_order_phone_no'])){
+                      echo $_COOKIE['verified_order_phone_no'];
+                    }else{
+                      // echo 'Error ! Phone no is not verified';
+                    }
+                    
+                    ?>" type="hidden" class="form-control" id="phone_no" placeholder="Phone no" <?php if (isset($_SESSION['cus_username'])) {
                       echo 'required';
                     } ?> name="order_customer_phone_no">
                     <div class="invalid-feedback">
                       Phone no is required.
                     </div>
                   </div>
+                </div>
+                
+                <div class="col-12">
+                  <a href="otp_check.php">Change Phone no</a>
                 </div>
 
                 <div class="col-12">

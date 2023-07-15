@@ -13,6 +13,18 @@ include("inc/functions.php");
 <?php
 include("inc/_navbar.php");
 
+if (!isset($_SESSION['cart'][0])) {
+  echo "
+  <script>window.location.href = 'index.php'</script>
+  ";
+
+  if(isset($_COOKIE['verified_order_phone_no'])){
+    setcookie('verified_order_phone_no', '', time() - 3600);
+
+    // setcookie("user", "", time() - 3600);
+  }
+
+}
 
 
 ?>

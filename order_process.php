@@ -44,7 +44,7 @@ if (!isset($_SESSION['cart'][0])) {
     $last_name = htmlspecialchars(mysqli_real_escape_string($conn, $_POST['last_name']), ENT_QUOTES);
     $order_username = htmlspecialchars(mysqli_real_escape_string($conn, $_POST['username']), ENT_QUOTES);
     $email = htmlspecialchars(mysqli_real_escape_string($conn, $_POST['email']), ENT_QUOTES);
-    $order_customer_phone_no = htmlspecialchars(mysqli_real_escape_string($conn, $_POST['order_customer_phone_no']), ENT_QUOTES);
+    $check_order_customer_phone_no = htmlspecialchars(mysqli_real_escape_string($conn, $_POST['order_customer_phone_no']), ENT_QUOTES);
     $address1 = htmlspecialchars(mysqli_real_escape_string($conn, $_POST['address1']), ENT_QUOTES);
     $address2 = htmlspecialchars(mysqli_real_escape_string($conn, $_POST['address2']), ENT_QUOTES);
     $country = htmlspecialchars(mysqli_real_escape_string($conn, $_POST['country']), ENT_QUOTES);
@@ -52,6 +52,17 @@ if (!isset($_SESSION['cart'][0])) {
     $zip_code = htmlspecialchars(mysqli_real_escape_string($conn, $_POST['zip_code']), ENT_QUOTES);
     $paymentMethod = htmlspecialchars(mysqli_real_escape_string($conn, $_POST['paymentMethod']), ENT_QUOTES);
     $upazila = htmlspecialchars(mysqli_real_escape_string($conn, $_POST['upazila']), ENT_QUOTES);
+
+
+
+    if($check_order_customer_phone_no == $_COOKIE['verified_order_phone_no']){
+$order_customer_phone_no = $check_order_customer_phone_no;
+    }else{
+      echo 'your phone no is not valid';
+      exit;
+      
+    }
+    
 
 
     $ordering_username = $_SESSION['cus_username'];
@@ -212,6 +223,16 @@ if (!isset($_SESSION['cart'][0])) {
             // usued the form to post and send the data.
 
             unset($_SESSION['product_total_price']);
+
+            if(isset($_COOKIE['verified_order_phone_no'])){
+              // setcookie('verified_order_phone_no', '', time() - 3600);
+            
+              echo '<script>
+              document.cookie = "verified_order_phone_no=; expires=Thu, 01 Jan 1970 00:00:00 UTC; ";
+              </script>';
+            
+              // setcookie("user", "", time() - 3600);
+            }
 
             unset($_SESSION['cart'][0]);
 

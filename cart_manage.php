@@ -17,6 +17,9 @@ include("inc/_navbar.php");
 
 ?>
 <?php
+
+
+
 // session_destroy();
 if (isset($_POST['add_cart'])) {
   $product_id = $_POST['product_id'];
@@ -62,6 +65,20 @@ if (isset($_POST['add_cart'])) {
 
     // session_destroy();
   } else {
+
+    
+    // if(isset($_COOKIE['verified_order_phone_no'])){
+    //   // setcookie('verified_order_phone_no', '', time() - 3600);
+    
+    //   echo '<script>
+    //   document.cookie = "verified_order_phone_no=; expires=Thu, 01 Jan 1970 00:00:00 UTC; ";
+    //   </script>';
+    
+    //   // setcookie("user", "", time() - 3600);
+    // }
+   
+    
+    
     $_SESSION['cart'][0] = array(
       "product_id" => $product_id,
       "product_name" => $product_name,
@@ -92,6 +109,29 @@ if (isset($_POST['remove_cart'])) {
     if ($value["product_name"] == $_POST["product_name"]) {
       unset($_SESSION['cart'][$key]);
       $_SESSION['cart'] = array_values($_SESSION['cart']);
+
+      if(!isset($_SESSION['cart'][0])){
+        if(isset($_COOKIE['verified_order_phone_no'])){
+          // setcookie('verified_order_phone_no', '', time() - 3600);
+        
+          echo '<script>
+          document.cookie = "verified_order_phone_no=; expires=Thu, 01 Jan 1970 00:00:00 UTC; ";
+          </script>';
+        
+          // setcookie("user", "", time() - 3600);
+        }
+      }
+
+      // if(isset($_COOKIE['verified_order_phone_no'])){
+      //   // setcookie('verified_order_phone_no', '', time() - 3600);
+      
+      //   echo '<script>
+      //   document.cookie = "verified_order_phone_no=; expires=Thu, 01 Jan 1970 00:00:00 UTC; ";
+      //   </script>';
+      
+      //   // setcookie("user", "", time() - 3600);
+      // }
+
       echo '<script>
             alert("Item Removed")   
             window.location.href= "index.php"
