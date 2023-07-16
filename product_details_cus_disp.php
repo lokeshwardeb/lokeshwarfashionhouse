@@ -102,7 +102,7 @@ include "inc/_navbar.php";
     <input type = "hidden" value="' . PRODUCT_INFO_PATH . '' . $row['product_img'] . '" name="product_image">
     
    <div class = ""> Product Status: '; ?><span class="<?php
-                                                        if ($product_status == " In-stock") {
+                                                        if ($product_status == "In-stock") {
                                                             echo 'text-success';
                                                         }
                                                         if ($product_status == "Out-stock") {
@@ -385,14 +385,14 @@ var lences = document.getElementById("lences")
                         echo '    <input type = "hidden" value="' . $product_name . '" name="product_name">
     <input type = "hidden" value="' . $product_price . '" name="product_price">
  
-    <input type = "hidden" value="' . PRODUCT_INFO_PATH . '' . $row['product_img'] . '" name="product_image">';
+    <input type = "hidden" value="' . PRODUCT_INFO_PATH . '' . $product_img . '" name="product_image">';
 
                         ?>
                         <div class="cart-button me-4 ">
                             <button type="submit" class="btn btn-outline-dark btn-sm-md" name="add_cart">Add to cart</button>
                         </div>
                         <div class="buy-button">
-                            <button type="submit" class="btn btn-dark btn-md-sm">Buy now</button>
+                            <button type="submit" class="btn btn-dark btn-md-sm" name="add_cart">Buy now</button>
                         </div>
                     </div>
 

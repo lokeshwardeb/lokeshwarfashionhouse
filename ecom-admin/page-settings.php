@@ -71,6 +71,12 @@ if (!isset($_SESSION['username'])) {
                     $hero_aria_offer_canvas_img1 = $row['hero_aria_offer_canvas_img1'];
                     $hero_aria_offer_canvas_img2 = $row['hero_aria_offer_canvas_img2'];
                     $hero_aria_offer_canvas_img3 = $row['hero_aria_offer_canvas_img3'];
+                    $hero_aria_canvar_offer_canvar_title_1 = $row['hero_aria_canvar_offer_canvar_title_1'];
+                    $hero_aria_canvar_offer_canvar_title_2 = $row['hero_aria_canvar_offer_canvar_title_2'];
+                    $hero_aria_canvar_offer_canvar_title_3 = $row['hero_aria_canvar_offer_canvar_title_3'];
+                    $hero_aria_canvar_offer_canvar_sub_title_1 = $row['hero_aria_canvar_offer_canvar_sub_title_1'];
+                    $hero_aria_canvar_offer_canvar_sub_title_2 = $row['hero_aria_canvar_offer_canvar_sub_title_2'];
+                    $hero_aria_canvar_offer_canvar_sub_title_3 = $row['hero_aria_canvar_offer_canvar_sub_title_3'];
                     $datetime = $row['datetime'];
                 }
 
@@ -82,6 +88,21 @@ if (!isset($_SESSION['username'])) {
         if (isset($_POST['save_changes'])) {
             $Hero_aria_bold_word = mysqli_real_escape_string($conn, $_POST['Hero_aria_bold_word']);
             $Hero_aria_offer_title = mysqli_real_escape_string($conn, $_POST['Hero_aria_offer_title']);
+
+            $hero_aria_canvar_offer_canvar_title_1 = mysqli_real_escape_string($conn, $_POST['hero_aria_canvar_offer_canvar_title_1']);
+            $hero_aria_canvar_offer_canvar_title_2 = mysqli_real_escape_string($conn, $_POST['hero_aria_canvar_offer_canvar_title_2']);
+            $hero_aria_canvar_offer_canvar_title_3 = mysqli_real_escape_string($conn, $_POST['hero_aria_canvar_offer_canvar_title_3']);
+            $hero_aria_canvar_offer_canvar_sub_title_1 = mysqli_real_escape_string($conn, $_POST['hero_aria_canvar_offer_canvar_sub_title_1']);
+            $hero_aria_canvar_offer_canvar_sub_title_2 = mysqli_real_escape_string($conn, $_POST['hero_aria_canvar_offer_canvar_sub_title_2']);
+            $hero_aria_canvar_offer_canvar_sub_title_3 = mysqli_real_escape_string($conn, $_POST['hero_aria_canvar_offer_canvar_sub_title_3']);
+                    
+                   
+                    
+                    
+                   
+
+
+
             //   $Hero_aria_bold_word = mysqli_real_escape_string($conn, $_POST['Hero_aria_bold_word']);
             //   $Hero_aria_bold_word = mysqli_real_escape_string($conn, $_POST['Hero_aria_bold_word']);
 
@@ -145,7 +166,7 @@ if (!isset($_SESSION['username'])) {
             if ($result) {
                 if (mysqli_num_rows($result) > 0) {
                     if($hero_aria_offer_title_photo_name !== '' && $hero_aria_offer_canvas_image1_name !== '' && $hero_aria_offer_canvas_image2_name !== '' && $hero_aria_offer_canvas_image3_name !== ''){
-                        $sql = "UPDATE `page_settings` SET `hero_aria_bold_word` = '$Hero_aria_bold_word', `hero_aria_offer_title` = '$Hero_aria_offer_title', `hero_aria_offer_title_photo` = '$hero_aria_offer_title_photo_name.jpeg', `hero_aria_offer_canvas_img1` = '$hero_aria_offer_canvas_image1_name.jpeg', `hero_aria_offer_canvas_img2` = '$hero_aria_offer_canvas_image2_name.jpeg', `hero_aria_offer_canvas_img3` = '$hero_aria_offer_canvas_image3_name.jpeg' WHERE `page_settings`.`id` = '$id';";
+                        $sql = "UPDATE `page_settings` SET `hero_aria_bold_word` = '$Hero_aria_bold_word', `hero_aria_offer_title` = '$Hero_aria_offer_title', `hero_aria_offer_title_photo` = '$hero_aria_offer_title_photo_name.jpeg', `hero_aria_offer_canvas_img1` = '$hero_aria_offer_canvas_image1_name.jpeg', `hero_aria_offer_canvas_img2` = '$hero_aria_offer_canvas_image2_name.jpeg', `hero_aria_offer_canvas_img3` = '$hero_aria_offer_canvas_image3_name.jpeg', `hero_aria_canvar_offer_canvar_title_1` = '$hero_aria_canvar_offer_canvar_title_1', `hero_aria_canvar_offer_canvar_title_2` = '$hero_aria_canvar_offer_canvar_title_2', `hero_aria_canvar_offer_canvar_title_3` = '$hero_aria_canvar_offer_canvar_title_3', `hero_aria_canvar_offer_canvar_sub_title_1` = '$hero_aria_canvar_offer_canvar_sub_title_1', `hero_aria_canvar_offer_canvar_sub_title_2` = '$hero_aria_canvar_offer_canvar_sub_title_2', `hero_aria_canvar_offer_canvar_sub_title_3` = '$hero_aria_canvar_offer_canvar_sub_title_3' WHERE `page_settings`.`id` = '$id';";
 
                         $result = mysqli_query($conn, $sql);
     
@@ -167,7 +188,7 @@ if (!isset($_SESSION['username'])) {
                     
                     if($hero_aria_offer_title_photo_name !== '' ){
                         if($not_photo_uploaded_hero_title == 0){
-                            $sql = "UPDATE `page_settings` SET `hero_aria_bold_word` = '$Hero_aria_bold_word', `hero_aria_offer_title` = '$Hero_aria_offer_title', `hero_aria_offer_title_photo` = '$hero_aria_offer_title_photo_name.jpeg' WHERE `page_settings`.`id` = '$id';";
+                            $sql = "UPDATE `page_settings` SET `hero_aria_bold_word` = '$Hero_aria_bold_word', `hero_aria_offer_title` = '$Hero_aria_offer_title', `hero_aria_offer_title_photo` = '$hero_aria_offer_title_photo_name.jpeg', `hero_aria_canvar_offer_canvar_title_1` = '$hero_aria_canvar_offer_canvar_title_1', `hero_aria_canvar_offer_canvar_title_2` = '$hero_aria_canvar_offer_canvar_title_2', `hero_aria_canvar_offer_canvar_title_3` = '$hero_aria_canvar_offer_canvar_title_3', `hero_aria_canvar_offer_canvar_sub_title_1` = '$hero_aria_canvar_offer_canvar_sub_title_1', `hero_aria_canvar_offer_canvar_sub_title_2` = '$hero_aria_canvar_offer_canvar_sub_title_2', `hero_aria_canvar_offer_canvar_sub_title_3` = '$hero_aria_canvar_offer_canvar_sub_title_3' WHERE `page_settings`.`id` = '$id';";
 
                             $result = mysqli_query($conn, $sql);
         
@@ -201,7 +222,7 @@ if (!isset($_SESSION['username'])) {
                     }
                     if($hero_aria_offer_canvas_image2_name !== '' ){
                         if($not_photo_uploaded_hero_canvas2 == 0){
-                            $sql = "UPDATE `page_settings` SET `hero_aria_bold_word` = '$Hero_aria_bold_word', `hero_aria_offer_title` = '$Hero_aria_offer_title', `hero_aria_offer_canvas_img2` = '$hero_aria_offer_canvas_image2_name.jpeg' WHERE `page_settings`.`id` = '$id';";
+                            $sql = "UPDATE `page_settings` SET `hero_aria_bold_word` = '$Hero_aria_bold_word', `hero_aria_offer_title` = '$Hero_aria_offer_title', `hero_aria_offer_canvas_img2` = '$hero_aria_offer_canvas_image2_name.jpeg', `hero_aria_canvar_offer_canvar_title_1` = '$hero_aria_canvar_offer_canvar_title_1', `hero_aria_canvar_offer_canvar_title_2` = '$hero_aria_canvar_offer_canvar_title_2', `hero_aria_canvar_offer_canvar_title_3` = '$hero_aria_canvar_offer_canvar_title_3', `hero_aria_canvar_offer_canvar_sub_title_1` = '$hero_aria_canvar_offer_canvar_sub_title_1', `hero_aria_canvar_offer_canvar_sub_title_2` = '$hero_aria_canvar_offer_canvar_sub_title_2', `hero_aria_canvar_offer_canvar_sub_title_3` = '$hero_aria_canvar_offer_canvar_sub_title_3' WHERE `page_settings`.`id` = '$id';";
 
                             $result = mysqli_query($conn, $sql);
         
@@ -218,7 +239,7 @@ if (!isset($_SESSION['username'])) {
                     }
                     if($hero_aria_offer_canvas_image3_name !== '' ){
                         if($not_photo_uploaded_hero_canvas3 == 0){
-                            $sql = "UPDATE `page_settings` SET `hero_aria_bold_word` = '$Hero_aria_bold_word', `hero_aria_offer_title` = '$Hero_aria_offer_title', `hero_aria_offer_canvas_img3` = '$hero_aria_offer_canvas_image3_name.jpeg' WHERE `page_settings`.`id` = '$id';";
+                            $sql = "UPDATE `page_settings` SET `hero_aria_bold_word` = '$Hero_aria_bold_word', `hero_aria_offer_title` = '$Hero_aria_offer_title', `hero_aria_offer_canvas_img3` = '$hero_aria_offer_canvas_image3_name.jpeg', `hero_aria_canvar_offer_canvar_title_1` = '$hero_aria_canvar_offer_canvar_title_1', `hero_aria_canvar_offer_canvar_title_2` = '$hero_aria_canvar_offer_canvar_title_2', `hero_aria_canvar_offer_canvar_title_3` = '$hero_aria_canvar_offer_canvar_title_3', `hero_aria_canvar_offer_canvar_sub_title_1` = '$hero_aria_canvar_offer_canvar_sub_title_1', `hero_aria_canvar_offer_canvar_sub_title_2` = '$hero_aria_canvar_offer_canvar_sub_title_2', `hero_aria_canvar_offer_canvar_sub_title_3` = '$hero_aria_canvar_offer_canvar_sub_title_3' WHERE `page_settings`.`id` = '$id';";
 
                             $result = mysqli_query($conn, $sql);
         
@@ -236,7 +257,7 @@ if (!isset($_SESSION['username'])) {
                     }
 
                     if($hero_aria_offer_title_photo_name == '' && $hero_aria_offer_canvas_image1_name == '' && $hero_aria_offer_canvas_image2_name == '' && $hero_aria_offer_canvas_image3_name == ''){
-                        $sql = "UPDATE `page_settings` SET `hero_aria_bold_word` = '$Hero_aria_bold_word', `hero_aria_offer_title` = '$Hero_aria_offer_title' WHERE `page_settings`.`id` = '$id';";
+                        $sql = "UPDATE `page_settings` SET `hero_aria_bold_word` = '$Hero_aria_bold_word', `hero_aria_offer_title` = '$Hero_aria_offer_title', `hero_aria_canvar_offer_canvar_title_1` = '$hero_aria_canvar_offer_canvar_title_1', `hero_aria_canvar_offer_canvar_title_2` = '$hero_aria_canvar_offer_canvar_title_2', `hero_aria_canvar_offer_canvar_title_3` = '$hero_aria_canvar_offer_canvar_title_3', `hero_aria_canvar_offer_canvar_sub_title_1` = '$hero_aria_canvar_offer_canvar_sub_title_1', `hero_aria_canvar_offer_canvar_sub_title_2` = '$hero_aria_canvar_offer_canvar_sub_title_2', `hero_aria_canvar_offer_canvar_sub_title_3` = '$hero_aria_canvar_offer_canvar_sub_title_3' WHERE `page_settings`.`id` = '$id';";
 
                         $result = mysqli_query($conn, $sql);
     
@@ -245,9 +266,9 @@ if (!isset($_SESSION['username'])) {
 
                         }
                     }
-                  
+                    // `hero_aria_canvar_offer_canvar_title_1` = '$hero_aria_canvar_offer_canvar_title_1', `hero_aria_canvar_offer_canvar_title_2` = '$hero_aria_canvar_offer_canvar_title_2', `hero_aria_canvar_offer_canvar_title_3` = '$hero_aria_canvar_offer_canvar_title_3', `hero_aria_canvar_offer_canvar_sub_title_1` = '$hero_aria_canvar_offer_canvar_sub_title_1', `hero_aria_canvar_offer_canvar_sub_title_2` = '$hero_aria_canvar_offer_canvar_sub_title_2', `hero_aria_canvar_offer_canvar_sub_title_3` = '$hero_aria_canvar_offer_canvar_sub_title_3'
                 } elseif (mysqli_num_rows($result) == 0) {
-                    $sql = "INSERT INTO `page_settings` (`hero_aria_bold_word`, `hero_aria_offer_title`, `hero_aria_offer_title_photo`, `hero_aria_offer_canvas_img1`, `hero_aria_offer_canvas_img2`, `hero_aria_offer_canvas_img3`, `datetime`) VALUES ('$Hero_aria_bold_word', '$Hero_aria_offer_title', '$hero_aria_offer_title_photo_name', 'hero_aria_offer_canvas_image1_name', 'hero_aria_offer_canvas_image2_name`', 'hero_aria_offer_canvas_image3_name', current_timestamp());";
+                    $sql = "INSERT INTO `page_settings` (`hero_aria_bold_word`, `hero_aria_offer_title`, `hero_aria_offer_title_photo`, `hero_aria_offer_canvas_img1`, `hero_aria_offer_canvas_img2`, `hero_aria_offer_canvas_img3`, `hero_aria_canvar_offer_canvar_title_1`, `hero_aria_canvar_offer_canvar_title_2`, `hero_aria_canvar_offer_canvar_title_3`, `hero_aria_canvar_offer_canvar_sub_title_1`, `hero_aria_canvar_offer_canvar_sub_title_2`, `hero_aria_canvar_offer_canvar_sub_title_3`, `datetime`) VALUES ('$Hero_aria_bold_word', '$Hero_aria_offer_title', '$hero_aria_offer_title_photo_name', 'hero_aria_offer_canvas_image1_name', 'hero_aria_offer_canvas_image2_name`', 'hero_aria_offer_canvas_image3_name', '$hero_aria_canvar_offer_canvar_title_1', '$hero_aria_canvar_offer_canvar_title_2', '$hero_aria_canvar_offer_canvar_title_3', '$hero_aria_canvar_offer_canvar_sub_title_1', '$hero_aria_canvar_offer_canvar_sub_title_2', '$hero_aria_canvar_offer_canvar_sub_title_3', current_timestamp());";
 
                     $result = mysqli_query($conn, $sql);
 
@@ -311,6 +332,36 @@ if (!isset($_SESSION['username'])) {
                 <div class="mb-3">
                     <label for="basic-url" class="form-label">Hero-aria offer canvas image3</label>
                     <input type="file" class="form-control" aria-label="file example" name="hero_aria_offer_canvas_image3">
+                    <div class="invalid-feedback">Example invalid form file feedback</div>
+                </div>
+                <div class="mb-3">
+                    <label for="basic-url" class="form-label">Hero-aria offer canvas image title1</label>
+                    <input type="text" value="<?php echo $hero_aria_canvar_offer_canvar_title_1 ?>" class="form-control" aria-label="file example" name="hero_aria_canvar_offer_canvar_title_1">
+                    <div class="invalid-feedback">Example invalid form file feedback</div>
+                </div>
+                <div class="mb-3">
+                    <label for="basic-url" class="form-label">Hero-aria offer canvas image title2</label>
+                    <input  type="text" value="<?php echo $hero_aria_canvar_offer_canvar_title_2 ?>" class="form-control" aria-label="file example" name="hero_aria_canvar_offer_canvar_title_2">
+                    <div class="invalid-feedback">Example invalid form file feedback</div>
+                </div>
+                <div class="mb-3">
+                    <label for="basic-url" class="form-label">Hero-aria offer canvas image title3</label>
+                    <input  type="text" value="<?php echo $hero_aria_canvar_offer_canvar_title_3 ?>" class="form-control" aria-label="file example" name="hero_aria_canvar_offer_canvar_title_3">
+                    <div class="invalid-feedback">Example invalid form file feedback</div>
+                </div>
+                <div class="mb-3">
+                    <label for="basic-url" class="form-label">Hero-aria offer canvas image sub title1</label>
+                    <input  type="text" value="<?php echo $hero_aria_canvar_offer_canvar_sub_title_1 ?>" class="form-control" aria-label="file example" name="hero_aria_canvar_offer_canvar_sub_title_1">
+                    <div class="invalid-feedback">Example invalid form file feedback</div>
+                </div>
+                <div class="mb-3">
+                    <label for="basic-url" class="form-label">Hero-aria offer canvas image sub title2</label>
+                    <input  type="text" value="<?php echo $hero_aria_canvar_offer_canvar_sub_title_2 ?>" class="form-control" aria-label="file example" name="hero_aria_canvar_offer_canvar_sub_title_2">
+                    <div class="invalid-feedback">Example invalid form file feedback</div>
+                </div>
+                <div class="mb-3">
+                    <label for="basic-url" class="form-label">Hero-aria offer canvas image sub title3</label>
+                    <input  type="text" value="<?php echo $hero_aria_canvar_offer_canvar_sub_title_3 ?>" class="form-control" aria-label="file example" name="hero_aria_canvar_offer_canvar_sub_title_3">
                     <div class="invalid-feedback">Example invalid form file feedback</div>
                 </div>
 

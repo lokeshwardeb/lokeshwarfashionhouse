@@ -194,7 +194,11 @@ if(!isset($_SESSION['cus_username'])){
                 <label for="basic-url" class="form-label">Phone no</label>
                 <div class="input-group">
                     <span class="input-group-text" id="basic-addon3">@</span>
-                    <input type="text" class="form-control" placeholder="Phone no" name="phone_no" id="basic-url" aria-describedby="basic-addon3" value="<?php echo $cus_phone_no ?>">
+                    <input type="text" disabled class="form-control" placeholder="Phone no" name="phone_no" id="basic-url" aria-describedby="basic-addon3" value="<?php echo $_COOKIE['verified_cus_update_phone_no'] ?>">
+                    <input type="hidden" class="form-control" placeholder="Phone no" name="phone_no" id="basic-url" aria-describedby="basic-addon3" value="<?php echo $_COOKIE['verified_cus_update_phone_no'] ?>">
+
+                    <div class="col-12 mt-3"><a href="otp_update_cus.php">Change my mobile no</a></div>
+
                 </div>
                 <div class="form-text">Example help text goes outside the input group.</div>
             </div>

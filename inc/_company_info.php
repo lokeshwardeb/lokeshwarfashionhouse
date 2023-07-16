@@ -29,6 +29,10 @@ if ($result) {
             $website_logo = $row['logo_img_upload'];
             $login_page = $row['login_img'];
             $users_login_upload = $row['users_login_img'];
+            $website_facebook_page = $row['website_facebook_page'];
+            $website_twitter_account = $row['website_twitter_account'];
+            $website_instragram_account = $row['website_instragram_account'];
+            $website_linkedin_account = $row['website_linkedin_account'];   
 
        
             // echo 'the website name is' . $website_name;
@@ -44,6 +48,9 @@ if ($result) {
         $company_name = '';
         $company_phone_no = '';
         $website_facebook_page = '';
+        $website_twitter_account = '';
+        $website_instragram_account = '';
+        $website_linkedin_account = '';
     }
 }
 

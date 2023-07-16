@@ -68,6 +68,9 @@ if (!isset($_SESSION['username'])) {
                     $company_name = $row['company_name'];
                     $company_phone_no = $row['phone_no'];
                     $website_facebook_page = $row['website_facebook_page'];
+                    $website_twitter_account = $row['website_twitter_account'];
+                    $website_instragram_account = $row['website_instragram_account'];
+                    $website_linkedin_account = $row['website_linkedin_account'];
 
                     // echo 'the website name is' . $website_name;
                 }
@@ -82,6 +85,9 @@ if (!isset($_SESSION['username'])) {
                 $company_name = '';
                 $company_phone_no = '';
                 $website_facebook_page = '';
+                $website_twitter_account = '';
+                $website_instragram_account = '';
+                $website_linkedin_account = '';
             }
         }
 
@@ -101,6 +107,9 @@ if (!isset($_SESSION['username'])) {
             $company_name = htmlspecialchars(mysqli_real_escape_string($conn, $_POST['company_name']), ENT_QUOTES);
             $company_phone_no = htmlspecialchars(mysqli_real_escape_string($conn,  $_POST['company_phone_no']), ENT_QUOTES);
             $website_facebook_page = htmlspecialchars(mysqli_real_escape_string($conn, $_POST['website_facebook_page']), ENT_QUOTES);
+            $website_twitter_account = htmlspecialchars(mysqli_real_escape_string($conn, $_POST['website_twitter_account']), ENT_QUOTES);
+            $website_instragram_account = htmlspecialchars(mysqli_real_escape_string($conn, $_POST['website_instragram_account']), ENT_QUOTES);
+            $website_linkedin_account = htmlspecialchars(mysqli_real_escape_string($conn, $_POST['website_linkedin_account']), ENT_QUOTES);
  
 
             // $target_file = $target_dir . basename($_FILES["logo_upload"]["name"]);
@@ -214,7 +223,7 @@ if (!isset($_SESSION['username'])) {
             } else {
 
                 if ($logo_name_main == '') {
-                    $sql = "UPDATE `settings` SET `website_name` = '$website_name', `website_description` = '$website_description', `website_contract_email` = '$website_contract_email',  `website_slogan`= '$website_slogan', `product_currency` = '$product_currency', `authors_name` = '$aurthors_name', `authors_email` = '$authors_email', `company_name` = '$company_name', `phone_no` = '$company_phone_no', `website_facebook_page` = '$website_facebook_page' WHERE `settings`.`id` = $id;;";
+                    $sql = "UPDATE `settings` SET `website_name` = '$website_name', `website_description` = '$website_description', `website_contract_email` = '$website_contract_email',  `website_slogan`= '$website_slogan', `product_currency` = '$product_currency', `authors_name` = '$aurthors_name', `authors_email` = '$authors_email', `company_name` = '$company_name', `phone_no` = '$company_phone_no', `website_facebook_page` = '$website_facebook_page', `website_twitter_account` = '$website_twitter_account', `website_instragram_account` = '$website_instragram_account', `website_linkedin_account` = '$website_linkedin_account' WHERE `settings`.`id` = $id;;";
                     $result = mysqli_query($conn, $sql);
                     if ($result) {
 
@@ -234,7 +243,7 @@ if (!isset($_SESSION['username'])) {
                 } elseif ($logo_name_main !== '') {
                     if ($not_photo_uploaded == 0) {
                         // if the database is not empty then update the table with the new data
-                        $sql = "UPDATE `settings` SET `website_name` = '$website_name', `website_contract_email` =  '$website_contract_email', `website_description` = '$website_description', `website_slogan`= '$website_slogan', `product_currency` = '$product_currency',`logo_img_upload` = '$logo_name', `authors_name` = '$aurthors_name', `authors_email` = '$authors_email', `company_name` = '$company_name', `phone_no` = '$company_phone_no', `website_facebook_page` = '$website_facebook_page' WHERE `settings`.`id` = $id;";
+                        $sql = "UPDATE `settings` SET `website_name` = '$website_name', `website_contract_email` =  '$website_contract_email', `website_description` = '$website_description', `website_slogan`= '$website_slogan', `product_currency` = '$product_currency',`logo_img_upload` = '$logo_name', `authors_name` = '$aurthors_name', `authors_email` = '$authors_email', `company_name` = '$company_name', `phone_no` = '$company_phone_no', `website_facebook_page` = '$website_facebook_page', `website_twitter_account` = '$website_twitter_account', `website_instragram_account` = '$website_instragram_account', `website_linkedin_account` = '$website_linkedin_account' WHERE `settings`.`id` = $id;";
 
                         $result = mysqli_query($conn, $sql);
                         $file_tmp = $logo_tmp;
@@ -275,7 +284,7 @@ if (!isset($_SESSION['username'])) {
 
 
                 if ($login_name_main == '') {
-                    $sql = "UPDATE `settings` SET `website_name` = '$website_name', `website_description` = '$website_description', `website_contract_email` = '$website_contract_email', `website_slogan`= '$website_slogan',`product_currency` = '$product_currency', `authors_name` = '$aurthors_name', `authors_email` = '$authors_email', `company_name` = '$company_name', `phone_no` = '$company_phone_no', `website_facebook_page` = '$website_facebook_page' WHERE `settings`.`id` = $id;;";
+                    $sql = "UPDATE `settings` SET `website_name` = '$website_name', `website_description` = '$website_description', `website_contract_email` = '$website_contract_email', `website_slogan`= '$website_slogan',`product_currency` = '$product_currency', `authors_name` = '$aurthors_name', `authors_email` = '$authors_email', `company_name` = '$company_name', `phone_no` = '$company_phone_no', `website_facebook_page` = '$website_facebook_page', `website_twitter_account` = '$website_twitter_account', `website_instragram_account` = '$website_instragram_account', `website_linkedin_account` = '$website_linkedin_account' WHERE `settings`.`id` = $id;;";
                     $result = mysqli_query($conn, $sql);
                     if ($result) {
                         // echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
@@ -295,7 +304,7 @@ if (!isset($_SESSION['username'])) {
                 }
                 if ($login_name_main !== '') {
                     if ($not_photo_uploaded_login == 0) {
-                        $sql = "UPDATE `settings` SET `website_name` = '$website_name', `website_description` = '$website_description',`website_contract_email` = '$website_contract_email', `website_slogan`= '$website_slogan',`product_currency` = '$product_currency', `login_img` = '$login_name', `authors_name` = '$aurthors_name', `authors_email` = '$authors_email', `company_name` = '$company_name', `phone_no` = '$company_phone_no', `website_facebook_page` = '$website_facebook_page' WHERE `settings`.`id` = $id;";
+                        $sql = "UPDATE `settings` SET `website_name` = '$website_name', `website_description` = '$website_description',`website_contract_email` = '$website_contract_email', `website_slogan`= '$website_slogan',`product_currency` = '$product_currency', `login_img` = '$login_name', `authors_name` = '$aurthors_name', `authors_email` = '$authors_email', `company_name` = '$company_name', `phone_no` = '$company_phone_no', `website_facebook_page` = '$website_facebook_page', `website_twitter_account` = '$website_twitter_account', `website_instragram_account` = '$website_instragram_account', `website_linkedin_account` = '$website_linkedin_account' WHERE `settings`.`id` = $id;";
 
                         $result = mysqli_query($conn, $sql);
                         $file_tmp = $login_tmp;
@@ -355,7 +364,7 @@ if (!isset($_SESSION['username'])) {
 
                 if ($user_login_image_main !== '' && $login_name_main !== '') {
                     if ($not_photo_uploaded_user_login == 0 && $not_photo_uploaded_login == 0) {
-                        $sql = "UPDATE `settings` SET `website_name` = '$website_name', `website_description` = '$website_description',`website_contract_email` = '$website_contract_email', `website_slogan`= '$website_slogan',`product_currency` = '$product_currency', `login_img` = '$login_name', `users_login_img` = '$user_login_image',`authors_name` = '$aurthors_name', `authors_email` = '$authors_email', `company_name` = '$company_name', `phone_no` = '$company_phone_no', `website_facebook_page` = '$website_facebook_page' WHERE `settings`.`id` = $id;";
+                        $sql = "UPDATE `settings` SET `website_name` = '$website_name', `website_description` = '$website_description',`website_contract_email` = '$website_contract_email', `website_slogan`= '$website_slogan',`product_currency` = '$product_currency', `login_img` = '$login_name', `users_login_img` = '$user_login_image',`authors_name` = '$aurthors_name', `authors_email` = '$authors_email', `company_name` = '$company_name', `phone_no` = '$company_phone_no', `website_facebook_page` = '$website_facebook_page', `website_twitter_account` = '$website_twitter_account', `website_instragram_account` = '$website_instragram_account', `website_linkedin_account` = '$website_linkedin_account' WHERE `settings`.`id` = $id;";
 
                         $result = mysqli_query($conn, $sql);
 
@@ -382,7 +391,7 @@ if (!isset($_SESSION['username'])) {
 
                 if ($user_login_image_main !== '' && $login_name_main == '') {
                     if ($not_photo_uploaded_user_login == 0) {
-                        $sql = "UPDATE `settings` SET `website_name` = '$website_name', `website_description` = '$website_description', `website_contract_email` = '$website_contract_email', `website_slogan`= '$website_slogan',`product_currency` = '$product_currency', `users_login_img` = '$user_login_image',`authors_name` = '$aurthors_name', `authors_email` = '$authors_email', `company_name` = '$company_name', `phone_no` = '$company_phone_no', `website_facebook_page` = '$website_facebook_page' WHERE `settings`.`id` = $id;";
+                        $sql = "UPDATE `settings` SET `website_name` = '$website_name', `website_description` = '$website_description', `website_contract_email` = '$website_contract_email', `website_slogan`= '$website_slogan',`product_currency` = '$product_currency', `users_login_img` = '$user_login_image',`authors_name` = '$aurthors_name', `authors_email` = '$authors_email', `company_name` = '$company_name', `phone_no` = '$company_phone_no', `website_facebook_page` = '$website_facebook_page', `website_twitter_account` = '$website_twitter_account', `website_instragram_account` = '$website_instragram_account', `website_linkedin_account` = '$website_linkedin_account' WHERE `settings`.`id` = $id;";
 
                         $result = mysqli_query($conn, $sql);
 
@@ -577,6 +586,30 @@ if (!isset($_SESSION['username'])) {
                 <div class="input-group">
                     <span class="input-group-text" id="basic-addon3">Facebook Page</span>
                     <input type="text" class="form-control" placeholder="Website Facebook Page Name" name="website_facebook_page" id="basic-url" aria-describedby="basic-addon3" value="<?php echo $website_facebook_page ?>">
+                </div>
+                <div class="form-text">Example help text goes outside the input group.</div>
+            </div>
+            <div class="mb-3">
+                <label for="basic-url" class="form-label">Website Twitter account</label>
+                <div class="input-group">
+                    <span class="input-group-text" id="basic-addon3">Twitter account</span>
+                    <input type="text" class="form-control" placeholder="Website Twitter account Name" name="website_twitter_account" id="basic-url" aria-describedby="basic-addon3" value="<?php echo $website_twitter_account ?>">
+                </div>
+                <div class="form-text">Example help text goes outside the input group.</div>
+            </div>
+            <div class="mb-3">
+                <label for="basic-url" class="form-label">Website Instragram account</label>
+                <div class="input-group">
+                    <span class="input-group-text" id="basic-addon3">Instragram account</span>
+                    <input type="text" class="form-control" placeholder="Website Instragram account Name" name="website_instragram_account" id="basic-url" aria-describedby="basic-addon3" value="<?php echo $website_instragram_account ?>">
+                </div>
+                <div class="form-text">Example help text goes outside the input group.</div>
+            </div>
+            <div class="mb-3">
+                <label for="basic-url" class="form-label">Website Linkedin account</label>
+                <div class="input-group">
+                    <span class="input-group-text" id="basic-addon3">Linkedin account</span>
+                    <input type="text" class="form-control" placeholder="Website Linkedin account Name" name="website_linkedin_account" id="basic-url" aria-describedby="basic-addon3" value="<?php echo $website_linkedin_account ?>">
                 </div>
                 <div class="form-text">Example help text goes outside the input group.</div>
             </div>

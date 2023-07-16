@@ -80,11 +80,15 @@
         <div class="container text-center mt-4">
           Find us on
         </div>
+        <!-- $website_facebook_page = '';
+        $website_twitter_account = '';
+        $website_instragram_account = '';
+        $website_linkedin_account = ''; -->
         <div class="social-links mt-4">
-          <a href=""><img src="img/facebook 1 1.png" width="" class="img-fluid mt-4 me-4 pe-4 ms-4 ps-4 mt-4 mb-4 pb-4" alt="" srcset=""></a>
-          <a href=""> <img src="img/twitter 1 1.png" width="" class="img-fluid mt-4 me-4 pe-4 ms-4 ps-4 mt-4 mb-4 pb-4" alt="" srcset=""></a>
-          <a href=""><img src="img/instagram 1 1.png" width="" class="img-fluid mt-4 me-4 pe-4 ms-4 ps-4 mt-4 mb-4 pb-4" alt="" srcset=""></a>
-          <a href=""><img src="img/linkedin 1 1.png" width="" class="img-fluid mt-4 me-4 pe-4 ms-4 ps-4 mt-4 mb-4 pb-4" alt="" srcset=""></a>
+          <a href="<?php echo $website_facebook_page ?>" target="_blank"><img src="img/facebook 1 1.png" width="" class="img-fluid mt-4 me-4 pe-4 ms-4 ps-4 mt-4 mb-4 pb-4" alt="" srcset=""></a>
+          <a href="<?php echo $website_twitter_account ?>" target="_blank"> <img src="img/twitter 1 1.png" width="" class="img-fluid mt-4 me-4 pe-4 ms-4 ps-4 mt-4 mb-4 pb-4" alt="" srcset=""></a>
+          <a href="<?php echo $website_instragram_account ?>" target="_blank"><img src="img/instagram 1 1.png" width="" class="img-fluid mt-4 me-4 pe-4 ms-4 ps-4 mt-4 mb-4 pb-4" alt="" srcset=""></a>
+          <a href="<?php echo $website_linkedin_account ?>" target="_blank"><img src="img/linkedin 1 1.png" width="" class="img-fluid mt-4 me-4 pe-4 ms-4 ps-4 mt-4 mb-4 pb-4" alt="" srcset=""></a>
         </div>
 
 

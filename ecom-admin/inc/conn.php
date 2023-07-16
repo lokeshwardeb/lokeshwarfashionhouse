@@ -1,8 +1,12 @@
 <?php
-$db_hostname = 'sql301.infinityfree.com';
-$db_username = 'epiz_34172411';
-$db_password = 'XsThGKTD9H';
-$db_name = 'epiz_34172411_lokeshwarfashionhouse';
+$db_hostname = 'localhost';
+$db_username = 'root';
+$db_password = '';
+$db_name = 'lokeshwarfashionhouse';
+// $db_hostname = 'sql301.infinityfree.com';
+// $db_username = 'epiz_34172411';
+// $db_password = 'XsThGKTD9H';
+// $db_name = 'epiz_34172411_lokeshwarfashionhouse';
 
 
 $conn = mysqli_connect($db_hostname, $db_username, $db_password, $db_name);

@@ -20,10 +20,10 @@ include("inc/_navbar.php");
               About us
             </div> -->
             <div class="row">
-              <div class="col-6">
+              <div class="col-lg-6 col-md-12 mb-4">
                 <img src="img/lokeshwar_fashion_house 1.png" class="img-fluid" alt="" srcset="">
               </div>
-              <div class="col-6 bg-light custom-round">
+              <div class="col-lg-6 col-md-12 mb-4 bg-light custom-round">
                 <div class="mt-4 ">
                   We are a online fashion store. You will find fashionable and designable clothes on our store. We are a
                   online fashion store. You will find fashionable and designable clothes on our store. We are a online

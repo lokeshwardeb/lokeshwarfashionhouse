@@ -28,6 +28,7 @@ if (isset($_POST['add_cart'])) {
   $product_price = $_POST['product_price'];
   $product_qty = $_POST['product_qty'];
   $product_image = $_POST['product_image'];
+  $product_status = $_POST['product_status'];
 
 
 
@@ -42,23 +43,32 @@ if (isset($_POST['add_cart'])) {
         window.location.href = 'index.php'
         </script>";
     } else {
-      $count = count($_SESSION['cart']);
-      $_SESSION['cart'][$count] =  array(
-        "product_id" => $product_id,
-        "product_name" => $product_name,
-        "product_desc" => $product_desc,
-        "product_price" => $product_price,
-        "product_qty" => $product_qty,
-        "product_image" => $product_image
-      );
-      echo '
-      <script>
-      alert("Item added on the cart")
-      window.location.href = "cart.php";
+      if($_POST['product_status'] == "Out-stock"){
+        echo "<script>
+
+        alert('The Product has been stock out . We are sorry. You can be able to buy this again when it is available in-stock');
+        window.location.href = 'index.php';
+        </script>";
+      }else{
+        $count = count($_SESSION['cart']);
+        $_SESSION['cart'][$count] =  array(
+          "product_id" => $product_id,
+          "product_name" => $product_name,
+          "product_desc" => $product_desc,
+          "product_price" => $product_price,
+          "product_qty" => $product_qty,
+          "product_image" => $product_image
+        );
+        echo '
+        <script>
+        alert("Item added on the cart")
+        window.location.href = "cart.php";
+        
+        </script>
+        
+        ';
+      }
       
-      </script>
-      
-      ';
     }
 
 

@@ -17,8 +17,26 @@ include "inc/_header.php";
 // else{
 
 
+  // if(!isset($_COOKIE['verified_cus_phone_no'])){
+  //   echo '
+  //   <script>
+  //   window.location.href="otp_check_signup.php";
+  //   </script>
+  //   ';
+  // }
 
+  // echo '
+  // <script>
+  // document.cookie = "verified_cus_phone_no=; expires=Thu, 01 Jan 1970 00:00:00 UTC; ";
+  // </script>
+  // ';
 
+  if (!isset($_COOKIE['verified_cus_phone_no'])) {
+    echo '
+    <script>
+    window.location.href="otp_check_signup.php"
+    </script>';
+}
 // include "inc/_navbar.php";
 
 ?>
@@ -394,7 +412,7 @@ include "inc/_header.php";
       <main class="form-signin">
         <form action="<?php $_SERVER['PHP_SELF'] ?>" method="post" enctype="multipart/form-data">
           <img class="mb-4 " src="<?php echo 'ecom-admin/uploaded_img/' . $website_logo ?>" alt="" width="100vw" height="100vh">
-          <h1 class="h3 mb-3 fw-normal">Please sign up</h1>
+          <h1 class="h3 bg-light mb-3 fw-normal">Please sign up</h1>
 
           <div class="form-floating">
             <input type="text" class="form-control" id="floatingInput" placeholder="name@example.com" name="cus_username" required>
@@ -417,8 +435,14 @@ include "inc/_header.php";
             <!-- <span>User photo</span> -->
             <label for="floatingPassword">User photo</label>
           </div>
-          <div class="form-floating">
-            <input type="number" class="form-control" id="floatingPassword" placeholder="Phone no" name="cus_phone_no" required>
+          <div class="form-floating bg-light">
+            <!-- disabled showing phone no -->
+            <input type="number" disabled class="form-control" id="floatingPassword" placeholder="Phone no"  value="<?php echo $_COOKIE['verified_cus_phone_no']; ?>" required>
+            <a href="otp_check_signup.php" >Change my phone no</a>
+
+            <!-- post Phone no in a hidden format -->
+            <input type="hidden" class="form-control" placeholder="Phone no" name="cus_phone_no" value="<?php echo $_COOKIE['verified_cus_phone_no']; ?>" required>
+            
             <label for="floatingPassword">Phone no</label>
           </div>
           <div class="form-floating">
@@ -435,11 +459,11 @@ include "inc/_header.php";
           </div>
           <button class="w-100 btn btn-lg btn-primary" type="submit" name="signup">Sign up</button>
 
-          <div class="form-floating mb-3 mt-4">
+          <div class="form-floating  p-2 mb-3 mt-4">
             <label for="forgotPassword"></label>
-            <span>Forgot you password ?<a href="forgot_pass.php" id="forgotPassword"> Click here</a> to restore your account.</span> <br>
-            <span>Already have a account ?<a href="login.php" id="forgotPassword"> Log in with your account </a> to restore your account.</span>
-            <span><a href="index.php" id="forgotPassword"> <input type="button" value="Go home" class="btn btn-primary"> </a></span>
+            <span class="bg-light">Forgot you password ?<a href="forgot_pass.php" id="forgotPassword"> Click here</a> to restore your account.</span> <br>
+            <span class="bg-light">Already have a account ?<a href="login.php" id="forgotPassword"> Log in with your account </a> to restore your account.</span>
+            <span class="bg-light"><a href="index.php" id="forgotPassword"> <input type="button" value="Go home" class="btn btn-primary"> </a></span>
           </div>
           <!-- <div class="form-floating mb-3 mt-4">
             <label for="forgotPassword"></label>

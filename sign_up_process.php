@@ -122,6 +122,13 @@ window.location.href = "login.php";
               $_SESSION['verify_cus_username'] = '';
               unset($_SESSION['verify_cus_username']);
 
+              
+  echo '
+  <script>
+  document.cookie = "verified_cus_phone_no=; expires=Thu, 01 Jan 1970 00:00:00 UTC; ";
+  </script>
+  ';
+
               $_SESSION['cus_verify_status_check'] = 0;
               
 
