@@ -20,6 +20,18 @@ include "_company_info.php";
   <meta name="author" content="<?php echo $aurthors_name ?>">
   <meta name="generator" content="Hugo 0.88.1">
   <meta name="keywords" content="<?php echo $website_name . ', ' . $keywords ?>">
+
+  <!-- website link preview tags starts here -->
+
+  <meta property="og:title" content="Your Title" />
+  <meta property="og:description" content="Your Description" />
+  <meta property="og:image" content="image url" />
+
+  <!-- website link preview tags ends here -->
+
+
+
+
   <!-- <meta property="og:site_name" content="WordPress.org" /> -->
   <title><?php echo $website_name ?> -- <?php echo ucwords($active_class);?> || <?php echo ucwords($website_slogan);?></title>
 
